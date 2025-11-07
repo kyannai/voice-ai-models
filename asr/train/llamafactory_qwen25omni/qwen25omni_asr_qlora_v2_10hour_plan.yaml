@@ -1,0 +1,61 @@
+### Model
+model_name_or_path: Qwen/Qwen2.5-Omni-7B
+trust_remote_code: true
+
+### Method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+
+### Dataset
+dataset: malaysian_asr
+template: qwen2_omni
+cutoff_len: 2048
+max_samples: 200000  # ✅ 200K samples - optimal for 10 hours (was 10K test, 100K standard)
+overwrite_cache: true
+preprocessing_num_workers: 1
+
+### Output
+output_dir: outputs/qwen25omni-malaysian-asr-qlora-v2-10hour
+logging_steps: 10
+save_steps: 200        # ✅ Every 200 steps (more checkpoints for 10hr run)
+eval_steps: 200        # ✅ Evaluate every 200 steps
+plot_loss: true
+overwrite_output_dir: false
+
+### Train
+per_device_train_batch_size: 8   # ✅ Increased from 4 (better GPU utilization)
+gradient_accumulation_steps: 4   # Effective batch = 32 (same as conservative)
+learning_rate: 5.0e-5            # ✅ Conservative (proven safe)
+num_train_epochs: 1.0            # ✅ Full epoch for 200K samples (~6-8 hours)
+lr_scheduler_type: cosine
+warmup_steps: 100
+bf16: true
+ddp_timeout: 180000000
+
+### Eval
+val_size: 0.1
+per_device_eval_batch_size: 16   # ✅ Faster evaluation
+eval_strategy: steps
+load_best_model_at_end: true
+
+### LoRA (Conservative - proven to work)
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.1
+
+### Quantization (QLoRA - 4-bit)
+quantization_bit: 4
+quantization_type: nf4
+double_quantization: true
+
+### Hardware optimization
+flash_attn: auto
+gradient_checkpointing: true
+
+### Logging
+report_to: none
+logging_dir: outputs/qwen25omni-malaysian-asr-qlora-v2-10hour/logs
+
+

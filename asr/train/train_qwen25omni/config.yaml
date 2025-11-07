@@ -1,0 +1,68 @@
+# Qwen2.5-Omni Fine-tuning Configuration for Malay ASR
+# Optimized for better ASR performance (1.6/3.4 WER on LibriSpeech)
+
+model:
+  name: "Qwen/Qwen2.5-Omni-7B"
+  cache_dir: "./models"
+
+lora:
+  enabled: true
+  r: 16
+  lora_alpha: 32
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+quantization:
+  enabled: true
+  load_in_8bit: false
+  load_in_4bit: true
+
+data:
+  # Update these paths to point to your training data
+  train_json: "../training_data/malaysian-stt/malaysian_context_v2-00000-of-00001_train.json"
+  val_json: "../training_data/malaysian-stt/malaysian_context_v2-00000-of-00001_val.json"
+  # Base directory for resolving audio_path in JSON files
+  audio_base_dir: "../training_data/malaysian-stt"
+  max_audio_length: 30  # seconds
+  sampling_rate: 16000
+
+training:
+  output_dir: "./outputs/qwen25omni-malaysian-stt"
+  num_train_epochs: 3
+  # Optimized for A100-80GB targeting ~50GB GPU usage
+  # Qwen2.5-Omni-7B (4-bit + LoRA + talker disabled) base: ~12GB
+  # With larger batch sizes: ~45-50GB total
+  per_device_train_batch_size: 128  # Increased to utilize more GPU
+  per_device_eval_batch_size: 96    # Increased for faster evaluation
+  gradient_accumulation_steps: 1    # Keep at 1 for fastest training
+  learning_rate: 2.0e-4
+  bf16: true
+  fp16: false
+  gradient_checkpointing: true
+  optim: "paged_adamw_32bit"
+  warmup_steps: 100
+  logging_steps: 10
+  eval_steps: 2000
+  save_steps: 2000  # Must match eval_steps for load_best_model_at_end
+  save_total_limit: 3
+  max_grad_norm: 1.0
+  weight_decay: 0.01
+  # DataLoader optimizations
+  dataloader_num_workers: 4  # Reduced to avoid threading issues
+  dataloader_pin_memory: false  # Disabled to prevent pin_memory crashes
+
+prompt:
+  asr_instruction: "Transcribe this Malay audio accurately, preserving all English words and discourse particles."
+  response_prefix: ""
+
+wandb:
+  enabled: false
+  project: "qwen25omni-malay-asr"
+  run_name: "qwen25omni-malaysian-stt-finetune"
+

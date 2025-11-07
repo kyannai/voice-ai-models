@@ -1,0 +1,38 @@
+# Training outputs
+outputs/
+*.nemo
+*.ckpt
+
+# Data directories
+data/
+*.json
+!example_data.json
+!config.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# TensorBoard
+events.out.tfevents.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

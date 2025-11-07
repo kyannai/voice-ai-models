@@ -1,0 +1,802 @@
+[
+  {
+    "audio_path": "audio/ASR_22052025_0001.wav",
+    "reference": "Setiap pagi, Mak cik Amirah akan pergi ke pasar basah yang terletak di hujung jalan rumahnya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0002.wav",
+    "reference": "Dia memilih sayur-sayuran segar seperti bayam, sawi, dan kangkung, serta ikan kembung dan udang besar untuk dimasak tengah hari nanti."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0003.wav",
+    "reference": "Dalam perjalanan pulang, dia sempat singgah di gerai Pak Abu untuk membeli kuih-muih tradisional seperti karipap dan kuih lapis sebagai sarapan pagi keluarganya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0004.wav",
+    "reference": "Sepanjang perjalanan, suasana pagi dipenuhi dengan bunyi burung berkicau dan bau harum bunga melur yang tumbuh subur di te- tepi jalan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0005.wav",
+    "reference": "Weh Syafiq, kau free tak hujung minggu ini?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0006.wav",
+    "reference": "Free je. Kenapa? Ada plan ke?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0007.wav",
+    "reference": "Aku nak ajak main futsal. Dah lama tak main sama-sama."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0008.wav",
+    "reference": "Lama dah. Rasenye sebelum puasa haritu. Aku pun rindu nak main futsal. Tapi stamina aku teruk sekarang."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0009.wav",
+    "reference": "Takpe lah, main suke-suke je pun. Asalkan turun court, kire okay lah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0010.wav",
+    "reference": "Betul. Tapi kau tau tak, baru-baru ni aku start main badminton dengan abang aku. Dekat dewan MBPJ tu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0011.wav",
+    "reference": "Serius ah? Aku pun suka badminton. Cume tak ramai geng nak main. Kau main single ke double?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0012.wav",
+    "reference": "Biasanye double. Senang nak cover court, tak penat sangat. Tapi kalau dengan abang aku je, main single lah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0013.wav",
+    "reference": "Best jugak tu. Aku suka sebab laju, banyak rally. Tapi kene ade stamina sikit. Kau selalu main bile?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0014.wav",
+    "reference": "Biasanye malam weekend. Dalam pukul 9 camtu. Kau nak join?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0015.wav",
+    "reference": "Boleh gak. Nanti ko ajak la bila dah cukup orang. Nanti aku bawak raket aku."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0016.wav",
+    "reference": "Set. Tapi kalau futsal weekend ni, kita ajak Faiz sekali. Dia pon cakap nak main jugak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0017.wav",
+    "reference": "Faiz confirm on je. Tapi jangan bagi dia jadi striker - asyik nak solo je. Hahaha."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0018.wav",
+    "reference": "Betul tu. Tapi dia punya semangat tu, memang power lah. Kadang tu, terlampau serius pulak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0019.wav",
+    "reference": "Ya tu, kita ni, nak lepas stress je pun. Bukan tournament pun. Tapi takpe lah, janji cukup team."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0020.wav",
+    "reference": "Alright. Nanti kau set tempat dan masa. Aku standby kasut futsal aku."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0021.wav",
+    "reference": "Deal. Lepas ni kita decide dalam group. Lama dah tak rasa penat macam ni."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0022.wav",
+    "reference": "Betul. Rasa puas bila lepas main, badan letih tapi hati lega."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0023.wav",
+    "reference": "China menyatakan sokongan padu kepada sidang kemuncak Majlis Kerjasama ASEAN-China-Teluk akan datang."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0024.wav",
+    "reference": "Ia menekankan kepentingan peningkatan kerjasama dalam kalangan Asia Tenggara, negara-negara Majlis Kerjasama Teluk yang kaya dengan minyak, dan China untuk mengukuhkan perdagangan, ketersambungan serantau dan integrasi ekonomi dalam persekitaran cabaran perdagangan global."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0025.wav",
+    "reference": "Sidang kemuncak ASEAN-GCC-China akan diadakan di sini pada 27 Mei."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0026.wav",
+    "reference": "Timbalan Ketua Pengarah Jabatan Hal Ehwal Asia, Kementerian Luar China Liang Jianjun berkata Beijing melihat sidang kemuncak tiga hala itu sebagai platform yang muncul tepat pada masanya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0027.wav",
+    "reference": "Ia menyatukan hubungan antara ASEAN, GCC dan China dalam bidang merangkumi infrastruktur kepada inovasi digital, keselamatan makanan, tenaga dan daya tahan rantaian bekalan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0028.wav",
+    "reference": "Ini berikutan semua negara perlu mempunyai hak dari segi kuasa, peluang dan tanggungjawab bersama dalam membentuk aturan global."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0029.wav",
+    "reference": "Liang berkata kedua-dua pihak juga sedang berusaha mewujudkan kerjasama pengeluaran serantau peringkat tinggi yang menumpukan ekonomi digital, kecerdasan buatan, teknologi hijau dan pembangunan bakat."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0030.wav",
+    "reference": "Beliau berkata, Malaysia khususnya, mempunyai potensi besar sebagai hab logistik dan pengeluaran serantau berikutan kedudukan strategiknya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0031.wav",
+    "reference": "Farah, ada masa kejap? Saya nak bincang sikit pasal presentation Jumaat ini."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0032.wav",
+    "reference": "Boleh, tak ada masalah. Apa yang Amir nak clarify?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0033.wav",
+    "reference": "Saya tengok dalam slide kita tu, part strategi pemasaran macam tak lengkap. Saya ingat kan Farah yang akan lead bahagian itu, betul tak?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0034.wav",
+    "reference": "Ya, betul. Saya tengah kemas kini data pemasaran terbaru. Saya boleh finalise slide tu esok petang, lepas dapat confirmation dari team insights."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0035.wav",
+    "reference": "Okay, bagus. Kalau macam tu, saya akan fokus pada bahagian bajet dan timeline. Nak pastikan semua clear sebelum kita bentangkan depan klien."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0036.wav",
+    "reference": "Setuju. By the way, awak rasa kita perlu buat rehearsal dulu tak?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0037.wav",
+    "reference": "Saya rasa elok juga. At least sekali. Kita boleh tengok flow dan timing semua okay ke tak. Nak buat hari Khamis lepas lunch?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0038.wav",
+    "reference": "Khamis lepas lunch tu okay. Saya block dalam kalendar."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0039.wav",
+    "reference": "Baiklah. Terima kasih Farah. Memang appreciate sangat ni."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0040.wav",
+    "reference": "Sama-sama, Amir. Kalau ada apa-apa lagi, mesej saya je lah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0041.wav",
+    "reference": "Buah epal antara yang digemari ramai dan paling banyak ditanam di seluruh dunia."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0042.wav",
+    "reference": "Di pasaran, terdapat pelbagai jenis epal. Namun, dua yang paling biasa ditemui ialah epal hijau dan epal merah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0043.wav",
+    "reference": "Walaupun berasal daripada keluarga yang sama, kedua-duanya mempunyai rasa, kandungan nutrien dan manfaat kesihatan tersendiri."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0044.wav",
+    "reference": "Mengamalkan pengambilan epal dalam diet harian memberikan pelbagai manfaat kepada kesihatan tubuh badan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0045.wav",
+    "reference": "Epal merah terkenal dengan rasa manisnya dan tekstur lembut. Ia kaya dengan antioksidan seperti flavonoid dan polifenol yang berfungsi melindungi tubuh daripada kerosakan sel akibat radikal bebas."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0046.wav",
+    "reference": "Epal merah juga mengandungi vitamin C yang tinggi, yang membantu meningkatkan sistem imun badan dan menyokong kesihatan kulit."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0047.wav",
+    "reference": "Malah ia juga mengandungi vitamin K dan A yang masing-masing berfungsi membantu proses pembekuan darah dan mengekalkan penglihatan yang baik."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0048.wav",
+    "reference": "Sebaliknya, epal hijau mempunyai rasa lebih masam dan rangup. Ia juga kaya dengan serat dan rendah gula berbanding epal merah, menjadikannya pilihan lebih baik untuk penghidap diabetes atau individu yang menjaga kadar gula dalam darah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0049.wav",
+    "reference": "Kandungan asid dalam epal hijau membantu meningkatkan kadar metabolisme dan menyokong proses detoksifikasi semula jadi tubuh."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0050.wav",
+    "reference": "Walaupun kedua-dua jenis epal mengandungi serat, epal hijau sering menjadi pilihan dijadikan diet harian, kerana kandungan serat lebih tinggi berbanding epal merah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0051.wav",
+    "reference": "Epal hijau juga membantu melancarkan sistem penghadaman dan memberi rasa kenyang lebih lama, sekali gus sesuai untuk mereka yang ingin mengawal berat badan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0052.wav",
+    "reference": "Walaupun terdapat perbezaan antara kedua-dua jenis epal ini, kedua-duanya memberikan manfaat kesihatan yang tinggi."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0053.wav",
+    "reference": "Pengambilan epal secara konsisten bukan sahaja membantu menjaga kesihatan jantung, malah boleh menurunkan risiko penyakit kronik seperti tekanan darah tinggi, kolesterol tinggi dan masalah pencernaan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0054.wav",
+    "reference": "Epal juga mengandungi air yang tinggi, menjadikannya sesuai untuk membantu penghidratan badan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0055.wav",
+    "reference": "Kedua-dua jenis buah ini terbukti mengandungi banyak nutrien, terutamanya di bahagian kulitnya, tidak kira epal merah atau hijau."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0056.wav",
+    "reference": "Anda tidak disarankan mengupas kulit sebelum memakannya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0057.wav",
+    "reference": "Sama ada manis atau masam, kedua-duanya membawa manfaat besar kepada kesihatan jika dimakan secara sederhana dan berterusan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0058.wav",
+    "reference": "Oleh itu, jadikan epal sebagai sebahagian daripada gaya hidup sihat demi kesejahteraan diri dan keluarga."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0059.wav",
+    "reference": "Kehadirannya di mana-mana majlis dengan mengenakan persalinan bermotifkan batik sentiasa mencuri tumpuan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0060.wav",
+    "reference": "Batik dipakai Wan Zakaria Wan Abu Bakar, kelihatan lebih menarik apabila digayakan dengan selendang atau kerongsang sekali gus, menyerlahkan lagi penampilannya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0061.wav",
+    "reference": "Wan Zakaria berkata, dia mencintai seni batik sejak 15 tahun lalu dan sehingga kini sudah mempunyai lebih 1000 koleksi persalinan bermotifkan batik dengan kira-kira 400 pasang masih dalam keadaan baik."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0062.wav",
+    "reference": "Mungkin bagi orang lain, untuk menampakkan diri mewah adalah menerusi barangan yang dibawa contohnya, beg tangan berjenama tapi saya mengenakan persalinan batik gaya eksklusif."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0063.wav",
+    "reference": "Saya menghargai warisan batik dan berasa gah apabila menggayakannya, ditambah proses pembuatannya rumit malah harganya bukan murah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0064.wav",
+    "reference": "Biasanya, saya akan membeli kain batik dua atau empat meter sebelum dijahit menjadi pakaian dengan pilihan leher cekak musang dilengkapi tiga butang, sama ada daripada kayu atau tempurung kelapa."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0065.wav",
+    "reference": "Bekas guru ini berkata, jika dulu dia membeli fabrik batik ini daripada beberapa kenalan pengusaha batik, kini dia mendapatkannya dari pelajar Universiti Teknologi MARA serta penjara yang turut menghasilkan produk berkenaan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0066.wav",
+    "reference": "Menariknya, pakaian dihasilkan pengasas pusat pendidikan kanak-kanak orang kurang upaya Bizara Care Centre itu dipakainya sekali sahaja untuk sesuatu acara atau majlis."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0067.wav",
+    "reference": "Ia supaya menampakkan ciri eksklusif selain serlahkan penampilannya yang variasi."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0068.wav",
+    "reference": "Jika orang lain menghadiri sesuatu majlis, bermacam fesyen digayakan, saya kekal dengan imej batik."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0069.wav",
+    "reference": "Saya bangga apabila ramai yang tertunggu-tunggu penampilan batik corak pilihan saya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0070.wav",
+    "reference": "Untuk majlis separa rasmi, saya akan memakai batik dari fabrik kapas manakala majlis rasmi, sutera kapas menjadi pilihan dengan motif pelbagai sama ada flora, abstrak atau geometri."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0071.wav",
+    "reference": "Wan Zakaria berkata, hampir 80 peratus koleksi baju batik miliknya adalah buatan Malaysia manakala selebihnya dari Indonesia serta Vietnam."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0072.wav",
+    "reference": "Menurutnya lagi, kain batik dibelinya, ada yang mencecah harga sehingga RM1200 untuk empat meter. Namun, dia tidak menganggap perkara itu membazir kerana baginya nilai warisan batik itu lebih tinggi."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0073.wav",
+    "reference": "Dunia fesyen ikut peredaran tapi tidak bagi batik yang sentiasa hidup."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0074.wav",
+    "reference": "Cuma warisan ini perlu dijaga kerana zaman kini, tidak ramai yang ingin memakainya terutamanya golongan muda."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0075.wav",
+    "reference": "Oleh itu, usaha pemeliharaan warisan ini perlu diteruskan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0076.wav",
+    "reference": "Ada promosi untuk pelanggan baru tak?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0077.wav",
+    "reference": "Tolong batalkan pesanan saya yang nombor 582394."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0078.wav",
+    "reference": "Saya nak tempah teksi ke KLIA pukul 5 pagi esok."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0079.wav",
+    "reference": "Dekat ada restoran halal yang buka 24 jam?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0080.wav",
+    "reference": "Bila barang saya akan sampai? Dah dua hari tak gerak tracking tu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0081.wav",
+    "reference": "Bang nak tanya, kalau saya nak renew, uh, driving license saya, macam mana ya?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0082.wav",
+    "reference": "Nak minta tolong batalkan, uh, appointment saya pada hari isnin ni. Saya tak dapat, uh, saya tak dapat datang lah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0083.wav",
+    "reference": "Dari sini ke MidValley berapa ya?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0084.wav",
+    "reference": "Nak check berapa baki saya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0085.wav",
+    "reference": "Saya nak transfer 200 ringgit ke akaun adik saya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0086.wav",
+    "reference": "Boleh tolong cari slot kosong untuk servis kereta minggu ni?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0087.wav",
+    "reference": "Pejabat pos buka sampai pukul berapa hari ini?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0088.wav",
+    "reference": "Saya nak buat appointment gigi minggu depan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0089.wav",
+    "reference": "Eh, tapi saya nak tukar alamat penghantaran itu ke rumah mak saya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0090.wav",
+    "reference": "Boleh ulang semula bahagian tadi? Saya tak dengar jelas."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0091.wav",
+    "reference": "Okay, lepas tu saya kena buat apa?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0092.wav",
+    "reference": "Oh, so, total semua tu dalam RM80, kan?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0093.wav",
+    "reference": "Tak, bukan tu. Saya maksudkan yang branch dekat Sunway."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0094.wav",
+    "reference": "Jap, saya kena cari kad dulu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0095.wav",
+    "reference": "Okay lah, teruskan je macam tu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0096.wav",
+    "reference": "Tapi kenapa jumlah dia lain dari yang saya tengok semalam?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0097.wav",
+    "reference": "Eh kejap, boleh semak semula nombor akaun tadi?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0098.wav",
+    "reference": "Assalamualaikum semua, selamat datang ke Borak Borak Makan!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0099.wav",
+    "reference": "Hari ni, kita borak pasal satu benda yang semua orang confirm ada pendapat masing-masing, sarapan paling power!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0100.wav",
+    "reference": "Ini topik panas ni."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0101.wav",
+    "reference": "Bagi saya lah, kalau pagi-pagi dapat nasi lemak dengan sambal yang pedas tu, memang syok giler!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0102.wav",
+    "reference": "Hah, awak team nasi lemak eh?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0103.wav",
+    "reference": "Saya pula roti canai banjir. Kuah campur, especially kalau ada dhal, kari ayam sikit. Fuh, memang best!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0104.wav",
+    "reference": "Betul juga. Tapi roti canai tu kadang bergantung kat tukang tebar juga. Ada yang keras sangat, ada yang lembut gila."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0105.wav",
+    "reference": "Kau pernah try roti canai cheese dekat SS15 tu?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0106.wav",
+    "reference": "Pernah! Tapi bagi saya, yang OG tetap yang klasik."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0107.wav",
+    "reference": "Tak payah extra cheese, tak payah Nutella, just roti canai dengan kuah. Simple dan sedap."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0108.wav",
+    "reference": "Tapi orang utara mesti kata makan pulut waktu pagi paling best."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0109.wav",
+    "reference": "Kau pernah makan pulut ikan masin tak?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0110.wav",
+    "reference": "Pernah. Dengan sambal kelapa sikit, fuh, sedap."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0111.wav",
+    "reference": "Tapi saya rasa benda yang best pasal sarapan kat Malaysia ni variety dia."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0112.wav",
+    "reference": "Satu kedai mamak pun boleh ada 20 jenis."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0113.wav",
+    "reference": "Exactly. Ada satu pagi tu, saya order teh tarik, roti bakar dan telur separuh masak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0114.wav",
+    "reference": "Lepas tu, nampak orang makan mee goreng, terus tambah order."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0115.wav",
+    "reference": "Wah, classic!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0116.wav",
+    "reference": "Okay, sebelum kita habiskan, cepat, pilih satu je. Sarapan ideal kau?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0117.wav",
+    "reference": "Alright, nasi lemak, sambal pedas, ayam goreng berempah dan telur mata. Mantap."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0118.wav",
+    "reference": "Perfect choice. Bagi saya pula? Roti canai banjir dan teh o ais limau."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0119.wav",
+    "reference": "Simple je tapi so sedap."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0120.wav",
+    "reference": "Itu dia. Okay kawan-kawan, korang pulak macam mana?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0121.wav",
+    "reference": "DM kami kat Instagram @borakmakan, share korang punya favourite sarapan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0122.wav",
+    "reference": "Jumpa lagi minggu depan untuk episod baru"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0123.wav",
+    "reference": "Kita akhiri episod kali ini dengan pesanan, jangan lupa makan dulu!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0124.wav",
+    "reference": "Farah! Lama tak jumpa. Balik kerja terus ke ni?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0125.wav",
+    "reference": "Baru je keluar dari office. Macam biasa lah, kerja tak habis-habis. Kau pun nampak rushing je."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0126.wav",
+    "reference": "Aku pun baru habis meeting. Rasa macam sepanjang hari menghadap laptop je. Letih otak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0127.wav",
+    "reference": "Faham sangat. Aku pun sekarang banyak kerja last minute. Bos asyik tukar plan. Hari-hari ada je benda baru."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0128.wav",
+    "reference": "Bos kau memang macam tu ke, atau sekarang je sibuk?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0129.wav",
+    "reference": "Sekarang ni memang tengah peak season. Tapi dia memang jenis suka buat benda adhoc kan. Kena sentiasa ready."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0130.wav",
+    "reference": "Aku pulak banyak buat report. Kadang sampai malam baru siap. Nasib baik boleh work from home sekali-sekala."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0131.wav",
+    "reference": "Eh, untunglah boleh work from home. Aku kena masuk office setiap hari. Nak minta satu hari pun susah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0132.wav",
+    "reference": "Kesiannya. Tapi kau still sempat exercise ke? Dulu rajin jogging kan?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0133.wav",
+    "reference": "Sekarang dah jarang. Balik rumah je terus tidur. Tapi, hujung minggu tu, kadang-kadang aku pergi jugaklah taman, jalan-jalan sikit."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0134.wav",
+    "reference": "At least kau keluar juga. Aku ni hujung minggu pun tak larat nak buat apa-apa."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0135.wav",
+    "reference": "Kau memang kuat kerja. Tapi kena jaga diri juga tau. Nanti kau akan burn out."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0136.wav",
+    "reference": "Betul juga. Aku tengah cuba susun balik rutin. Nak cuba tidur awal, bangun awal. Tapi susah lah, kalau kerja lambat siap."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0137.wav",
+    "reference": "Cuba slow-slow. Mungkin mula dengan kurangkan screen time lepas pukul 10 malam ke?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0138.wav",
+    "reference": "Aku try minggu ni. Kau pulak, weekend ni free tak? Jomla kita pergi brunch!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0139.wav",
+    "reference": "Jom lah! Kita plan Sabtu pagi okay tak? Aku pun dah lama sangat nak makan nasi lemak yang dekat TTDI tu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0140.wav",
+    "reference": "Set! Aku block siap-siap, uh, time dalam kalendar. Tak sabarnya nak catch up betul-betul."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0141.wav",
+    "reference": "Samala kita. Itula, boleh borak sikit pasal life, bukan asyik cakap pasal kerja je."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0142.wav",
+    "reference": "Selamat pagi semua. Terima kasih sebab luangkan masa untuk sesi ringkas ini."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0143.wav",
+    "reference": "Saya nak kongsikan sedikit overview tentang prestasi suku pertama kita."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0144.wav",
+    "reference": "Secara keseluruhan, kita berada di landasan yang agak baik."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0145.wav",
+    "reference": "Dari segi revenue, kita capai sekitar 92% daripada target. Sedikit rendah berbanding sasaran asal, tapi masih dalam julat yang boleh diterima memandangkan ada beberapa faktor yang luar jangka."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0146.wav",
+    "reference": "Untuk produk flagship kita, permintaan masih stabil, especially dari pelanggan enterprise."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0147.wav",
+    "reference": "Tetapi untuk segmen SME, ada sedikit penurunan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0148.wav",
+    "reference": "Mungkin sebab kekangan bajet dari pihak klien, jadi kita mungkin perlu kaji semula pendekatan kita di situ."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0149.wav",
+    "reference": "Dari segi operasi pula, average response time untuk customer support improve dari 24 jam ke 18 jam."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0150.wav",
+    "reference": "Jadi itu satu pencapaian yang bagus. Tahniah kepada team support!"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0151.wav",
+    "reference": "Cuma ada satu isu yang saya ingin ketengahkan. Backlog untuk onboarding pelanggan baru agak tinggi."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0152.wav",
+    "reference": "Ini mungkin disebabkan oleh kekurangan kapasiti dari bahagian teknikal."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0153.wav",
+    "reference": "Kita sedang mencari penyelesaian jangka pendek untuk membantu mengurangkan tekanan kepada pasukan perlaksanaan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0154.wav",
+    "reference": "Akhir sekali, saya telah melengkapkan data-data di dalam laporan yang saya akan kongsikan selepas mesyuarat ini."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0155.wav",
+    "reference": "Jika ada sebarang soalan atau pertanyaan lanjut, tuan-tuan dan puan-puan boleh menghubungi saya pada bila-bila masa sahaja. Saya terbuka untuk segala cadangan atau pandangan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0156.wav",
+    "reference": "Sekian saja dari saya buat masa ini. Terima kasih."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0157.wav",
+    "reference": "Sebagai ibu yang tiada langsung pengalaman menguruskan anak, keadaan memang huru-hara ketika itu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0158.wav",
+    "reference": "Selepas sebulan menguruskan sendiri anak, saya akui agak tertekan hingga ada kalanya menangis sendirian."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0159.wav",
+    "reference": "Saya bersyukur keluarga dan rakan memberikan sokongan."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0160.wav",
+    "reference": "Saya juga meminta pertolongan ibu serta adik datang ke rumah untuk membantu menguruskan anak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0161.wav",
+    "reference": "Mengenai kelahiran kembar empat, Noor Azianida berkata, dalam tempoh tiga tahun pertama perkahwinan dia tidak pernah mengandung, walaupun sudah berikhtiar macam-macam."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0162.wav",
+    "reference": "Dia dan suami kemudian membuat keputusan ke Lembaga Penduduk dan Pembangunan Keluarga Negara untuk mendapatkan rawatan sewajarnya."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0163.wav",
+    "reference": "Doktor cadangkan supaya kami menjalani prosedur Intrauterine Insemination atau permanian beradas. Dua minggu selepas menjalani prosedur itu, saya membuat pemeriksaan dan disahkan mengandung."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0164.wav",
+    "reference": "Apa yang mengejutkan, imbasan mendapati ada empat kantung."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0165.wav",
+    "reference": "Pada masa yang sama, saya gembira kerana disahkan mengandung."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0166.wav",
+    "reference": "Sementara itu, tiada apa yang menggembirakan seorang lelaki bergelar suami apabila mendapat berita bakal bergelar seorang bapa."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0167.wav",
+    "reference": "Assalamualaikum Dr. Azlan. Sorry kacau, doktor ada sikit masa tak? Saya nak cakap pasal cadangan topik untuk assignment nanti."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0168.wav",
+    "reference": "Waalaikumussalam Sarah. Boleh boleh. Sila duduk. Awak dah ada idea ke nak tulis apa?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0169.wav",
+    "reference": "Saya tengah consider untuk buat research tentang macamana media sosial mempengaruhi cara anak-anak muda kita menilai current news."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0170.wav",
+    "reference": "Tapi saya tak sure lagi dari sudut mana saya nak buat."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0171.wav",
+    "reference": "Hmm, menarik topik tu. Tapi agak luas juga."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0172.wav",
+    "reference": "Awak nak tengok dari segi psikologi pengguna atau lebih kepada content analysis dan algorithm?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0173.wav",
+    "reference": "Saya lebih tertarik nak tengok dari segi perspektif pengguna."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0174.wav",
+    "reference": "Contohnya, macam mana mereka tapis maklumat dan sama ada mereka sedar tak tentang bias dalam platform yang mereka guna tu."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0175.wav",
+    "reference": "Pendekatan tu bagus. Awak boleh consider untuk buat survey atau, buat beberapa interview."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0176.wav",
+    "reference": "Rakan dan kenalan terdekat mula menghulurkan bantuan tanpa diminta."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0177.wav",
+    "reference": "Ada yang membelikan lampin pakai buang secara berkala, ada yang menyumbangkan susu formula, malah ada juga memberikan pakaian bayi dan barangan keperluan lain."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0178.wav",
+    "reference": "Majikan dan rakan sekerja juga sangat memahami."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0179.wav",
+    "reference": "Mereka banyak membantu memudahkan urusan saya di tempat kerja, terutama ketika saya perlu berulang-alik ke hospital untuk melihat anak di Unit Rawatan Rapi Neonatal."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0180.wav",
+    "reference": "Walaupun begitu, tekanan tetap ada. Ahmad Tuah mengakui pernah sampai ke satu tahap di mana dia hampir berputus asa."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0181.wav",
+    "reference": "Ada satu ketika, saya hampir buat keputusan menjual rumah."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0182.wav",
+    "reference": "Waktu itu saya buntu dan risau tidak mampu menampung kos rawatan serta keperluan harian empat anak serentak."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0183.wav",
+    "reference": "Tetapi, bila tengok wajah si kembar empat di hospital, saya tahu saya perlu kuat."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0184.wav",
+    "reference": "Kami redah cabaran itu bersama."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0185.wav",
+    "reference": "Boleh tolong hantar semula OTP tu? Saya tak terima apa-apa."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0186.wav",
+    "reference": "Saya dah buat pindahan, boleh sahkan kalau dah masuk tak?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0187.wav",
+    "reference": "Kenapa tambang mahal sangat hari ni ek?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0188.wav",
+    "reference": "Boleh tak kalau jemput saya dari Jalan Damai?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0189.wav",
+    "reference": "Macam mana nak buat pemulangan barang eh?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0190.wav",
+    "reference": "Erm. Betul ke saya order saiz M? Macam besar sangat je ni."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0191.wav",
+    "reference": "Saya nak ubah temu janji ke hari Jumaat boleh?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0192.wav",
+    "reference": "Err, nak tanya, stok baru kasut tuh masuk bila ek?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0193.wav",
+    "reference": "Harga asal seratus limu puluh ringgit tu dah termasuk diskaun ke belum?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0194.wav",
+    "reference": "Saya belum terima lagi barang saya. Macam mana nak buat laporan eh?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0195.wav",
+    "reference": "Boleh tak, um, tetapkan temu janji doktor tu pada hari Rabu pukul sepuluh pagi."
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0196.wav",
+    "reference": "Esok kedai bukak pukul berapa eh?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0197.wav",
+    "reference": "Saya dah ada appointment minggu ni ke?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0198.wav",
+    "reference": "Kalau nak pergi KLCC, waktu ni, berapa lama agaknya baru sampai?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0199.wav",
+    "reference": "Saya lupa password akaun saya, macam mana nak reset?"
+  },
+  {
+    "audio_path": "audio/ASR_22052025_0200.wav",
+    "reference": "Saya nak beri maklum balas pasal layanan semalam."
+  }
+]
