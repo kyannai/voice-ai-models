@@ -66,13 +66,13 @@ else
     echo -e "${YELLOW}⚠${NC}  CUDA not available, will train on CPU (very slow!)"
 fi
 
-# Ask for confirmation
-echo -e "\n${BLUE}Ready to start training. Continue? [y/N]${NC}"
-read -r response
-if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    echo -e "${YELLOW}Training cancelled${NC}"
-    exit 0
-fi
+# Skip confirmation - auto-start training
+# echo -e "\n${BLUE}Ready to start training. Continue? [y/N]${NC}"
+# read -r response
+# if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+#     echo -e "${YELLOW}Training cancelled${NC}"
+#     exit 0
+# fi
 
 # Start training
 echo -e "\n${BLUE}========================================${NC}"

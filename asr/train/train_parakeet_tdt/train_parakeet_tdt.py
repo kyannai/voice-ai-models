@@ -233,6 +233,11 @@ def create_nemo_config(config: Dict) -> OmegaConf:
     if max_samples is None:
         max_samples = -1  # None means use all samples
     
+    # Get max_val_samples parameter
+    max_val_samples = config['data'].get('max_val_samples', -1)
+    if max_val_samples is None:
+        max_val_samples = -1  # None means use all validation samples
+    
     # Determine model initialization method
     model_name = config['model']['name']
     init_config = {}
@@ -270,6 +275,7 @@ def create_nemo_config(config: Dict) -> OmegaConf:
                 'pin_memory': bool(config['training'].get('dataloader_pin_memory', True)),
                 'max_duration': float(config['data'].get('max_audio_length', 30.0)),
                 'min_duration': float(config['data'].get('min_audio_length', 0.1)),
+                'max_utts': int(max_val_samples) if max_val_samples > 0 else 0,
                 'use_start_end_token': False,
             },
             'optim': {
@@ -331,6 +337,12 @@ def print_training_info(config: Dict, nemo_config: OmegaConf):
     else:
         max_samples_str = f"{max_samples:,}"
     
+    max_val_samples = config['data'].get('max_val_samples', -1)
+    if max_val_samples is None or max_val_samples <= 0:
+        max_val_samples_str = "All"
+    else:
+        max_val_samples_str = f"{max_val_samples:,}"
+    
     logging.info("\n" + "="*70)
     logging.info("🚀 NVIDIA Parakeet TDT Training Configuration")
     logging.info("="*70)
@@ -338,7 +350,8 @@ def print_training_info(config: Dict, nemo_config: OmegaConf):
     logging.info(f"Output: {config['training']['output_dir']}")
     logging.info(f"Train Manifest: {config['data']['train_manifest']}")
     logging.info(f"Val Manifest: {config['data']['val_manifest']}")
-    logging.info(f"Max Samples: {max_samples_str}")
+    logging.info(f"Max Train Samples: {max_samples_str}")
+    logging.info(f"Max Val Samples: {max_val_samples_str}")
     logging.info(f"\n📊 Training Parameters:")
     logging.info(f"  Epochs: {config['training']['num_train_epochs']}")
     logging.info(f"  Batch Size: {config['training']['per_device_train_batch_size']}")
