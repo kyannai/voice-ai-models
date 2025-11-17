@@ -1,0 +1,174 @@
+[3.839,5.602]	G0489	female,Malaysia	hai Yulaiha
+[9.320,10.611]	G0489	female,Malaysia	sihat walafiat
+[20.229,21.229]	G0489	female,Malaysia	hm
+[24.280,25.309]	G0489	female,Malaysia	ha ah weh
+[36.759,38.810]	G0489	female,Malaysia	ei penyakit apa tu
+[51.880,53.180]	G0489	female,Malaysia	oh penyakit bahaya
+[53.619,55.669]	G0489	female,Malaysia	ah yang ni kan corona virus
+[60.520,62.000]	G0489	female,Malaysia	ya weh
+[63.459,65.000]	G0489	female,Malaysia	dah selamat lah ha ah
+[68.050,69.680]	G0489	female,Malaysia	tapi untunglah kita
+[69.730,74.839]	G0489	female,Malaysia	Malaysia sikit je kan orang yang terkena dengan orang yang mati
+[76.209,77.330]	G0489	female,Malaysia	tak ramai
+[78.309,82.610]	G0489	female,Malaysia	kalau macam negara-negara yang besar-besar tu yang America
+[82.720,84.589]	G0489	female,Malaysia	Russia Itali tu semua
+[84.730,87.440]	G0489	female,Malaysia	kena ramai orang kena en
+[93.309,94.129]	G0489	female,Malaysia	hm
+[99.639,100.669]	G0489	female,Malaysia	ya weh
+[108.760,111.680]	G0489	female,Malaysia	dia orang tak buat ni ke P K P ke
+[127.940,129.080]	G0489	female,Malaysia	selfish
+[129.160,130.940]	G0489	female,Malaysia	pentingkan diri sendiri [UNK]
+[137.529,138.289]	G0489	female,Malaysia	dia
+[149.830,150.860]	G0489	female,Malaysia	ha ah
+[151.990,154.339]	G0489	female,Malaysia	macam mana boleh datang denggi
+[155.289,156.110]	G0489	female,Malaysia	nyamuk
+[158.589,159.470]	G0489	female,Malaysia	ha ah
+[177.429,178.309]	G0489	female,Malaysia	hm
+[184.389,190.160]	G0489	female,Malaysia	aku pun pernah lah kena nyamuk gigit aku selalu tapi jarang ah kena denggi
+[191.380,192.110]	G0489	female,Malaysia	ha ah
+[193.509,194.929]	G0489	female,Malaysia	kau pernah kena denggi
+[197.229,198.949]	G0489	female,Malaysia	habis kau masuk hospital ke
+[205.149,206.089]	G0489	female,Malaysia	oh
+[214.089,214.910]	G0489	female,Malaysia	ha ah
+[216.759,217.580]	G0489	female,Malaysia	hm
+[222.490,223.190]	G0489	female,Malaysia	hm
+[230.559,231.619]	G0489	female,Malaysia	oh ha ah
+[234.309,236.089]	G0489	female,Malaysia	habis kau dapat
+[236.529,239.330]	G0489	female,Malaysia	dapat rawatan dia
+[255.940,257.510]	G0489	female,Malaysia	dia ambik darah kau ke
+[281.019,283.190]	G0489	female,Malaysia	aku pun pernah kenalah dulu kecik
+[283.690,286.399]	G0489	female,Malaysia	aku kena demam panas teruk
+[286.720,288.799]	G0489	female,Malaysia	masa tu aku muntah-muntah
+[289.420,292.609]	G0489	female,Malaysia	aku muntah-muntah sampai aku jadi kurus kurus gila
+[293.679,295.519]	G0489	female,Malaysia	aku muntah je ha
+[295.929,297.500]	G0489	female,Malaysia	tak makan tak apa
+[298.089,300.649]	G0489	female,Malaysia	mak aku pun kasi aku setiap hari makan bubur je
+[301.179,303.049]	G0489	female,Malaysia	nasi aku tak makan langsung weh
+[322.720,323.687]	G0489	female,Malaysia	ya wei
+[323.859,325.399]	G0489	female,Malaysia	lagi-lagi kalau yang
+[325.779,328.970]	G0489	female,Malaysia	ada orang pernah buat jolok tu jolok ke dalam
+[329.289,330.379]	G0489	female,Malaysia	tekak ah
+[334.449,335.540]	G0489	female,Malaysia	um ah
+[339.519,340.730]	G0489	female,Malaysia	sakit gila
+[343.569,345.948]	G0489	female,Malaysia	aku tengok jugalah artis buat
+[346.389,349.160]	G0489	female,Malaysia	yang check [UNK] Corona virus tu
+[349.480,351.349]	G0489	female,Malaysia	dia dia macam
+[351.489,353.448]	G0489	female,Malaysia	betul-betul sakit wei macam nak
+[354.819,356.328]	G0489	female,Malaysia	eh nak apa
+[356.410,358.279]	G0489	female,Malaysia	tekak ni rasa macam nak
+[359.019,360.709]	G0489	female,Malaysia	nak [UNK]
+[374.379,376.398]	G0489	female,Malaysia	seriuslah Yuyu
+[378.670,380.089]	G0489	female,Malaysia	serius lah
+[393.699,394.998]	G0489	female,Malaysia	geli wei
+[404.469,406.008]	G0489	female,Malaysia	ah kahak
+[408.638,409.490]	G0489	female,Malaysia	ah ah
+[427.539,429.019]	G0489	female,Malaysia	kau kan tak suka muntah
+[434.318,435.050]	G0489	female,Malaysia	sebab
+[435.699,439.579]	G0489	female,Malaysia	dia nak ambil belah belah-belah dalam sampai ke perut tu kan
+[440.109,440.870]	G0489	female,Malaysia	sakit doh
+[442.268,444.829]	G0489	female,Malaysia	aku pun paling tak suka
+[445.870,447.589]	G0489	female,Malaysia	aku tak suka ni ambil darah
+[448.180,449.089]	G0489	female,Malaysia	dengan cucuk
+[449.378,450.740]	G0489	female,Malaysia	cucuk darah
+[451.240,453.290]	G0489	female,Malaysia	aku tak suka macam pening
+[459.430,461.089]	G0489	female,Malaysia	pening wei
+[471.249,474.079]	G0489	female,Malaysia	kena cucuk wei
+[477.160,479.058]	G0489	female,Malaysia	aku pernah kena
+[480.758,484.370]	G0489	female,Malaysia	masa aku kena demam tu lah ambil darah banyak kali
+[484.930,487.160]	G0489	female,Malaysia	cucuk darah ambil darah cucuk darah ambil darah
+[510.008,511.100]	G0489	female,Malaysia	kau pengsan
+[529.029,533.570]	G0489	female,Malaysia	hei aku memanglah tak suka darah tapi aku tak adalah sampai pengsan
+[533.678,535.100]	G0489	female,Malaysia	aku just pening je
+[539.919,540.768]	G0489	female,Malaysia	sama ah
+[542.258,543.499]	G0489	female,Malaysia	yang
+[543.548,545.628]	G0489	female,Malaysia	aku pernah ke jugaklah kena
+[545.710,549.018]	G0489	female,Malaysia	yang masa doktor check gigi aku lepas tu kena macam
+[549.249,552.018]	G0489	female,Malaysia	dia kata ada kuman kat dalaman lepas tu dia
+[552.428,555.859]	G0489	female,Malaysia	dia guna laser tu lepas tu [UNK] kat dalam
+[555.939,556.939]	G0489	female,Malaysia	gigi U
+[557.048,558.531]	G0489	female,Malaysia	lepas tu nak buang balik
+[559.960,562.490]	G0489	female,Malaysia	rasa dia mengeliat wei kat dalam mulut aku
+[570.129,571.190]	G0489	female,Malaysia	sakit ah
+[585.340,586.460]	G0489	female,Malaysia	ah ah
+[589.090,590.148]	G0489	female,Malaysia	ya wei
+[610.509,612.440]	G0489	female,Malaysia	tak boleh makan tu tak boleh makan ni
+[615.759,616.518]	G0489	female,Malaysia	um ah
+[618.639,619.730]	G0489	female,Malaysia	aku melalak
+[620.289,621.230]	G0489	female,Malaysia	tu la
+[621.340,624.020]	G0489	female,Malaysia	orang orang tua-tua cakap kena jaga
+[624.369,626.028]	G0489	female,Malaysia	pemakananlah masa muda
+[627.398,629.569]	G0489	female,Malaysia	supaya tak kena darah tinggi
+[630.370,631.249]	G0489	female,Malaysia	ah
+[631.929,632.749]	G0489	female,Malaysia	apa lagi
+[633.009,634.640]	G0489	female,Malaysia	ah dia macam ah penyakit
+[635.679,636.978]	G0489	female,Malaysia	ha obesiti
+[639.189,640.098]	G0489	female,Malaysia	em em
+[644.798,645.770]	G0489	female,Malaysia	hm ya weh
+[646.689,648.470]	G0489	female,Malaysia	dah tu makanan semua sedap
+[648.610,649.760]	G0489	female,Malaysia	nak buat macam mana
+[653.380,655.520]	G0489	female,Malaysia	takkan aku nak halang kan
+[656.649,657.408]	G0489	female,Malaysia	hm
+[666.850,667.789]	G0489	female,Malaysia	ha ah
+[670.270,671.209]	G0489	female,Malaysia	hm
+[676.059,676.939]	G0489	female,Malaysia	ha ah
+[680.380,683.270]	G0489	female,Malaysia	betul juga kan em aku ada sekali kena
+[683.288,684.919]	G0489	female,Malaysia	suhu aku tiga tujuh
+[685.240,686.960]	G0489	female,Malaysia	time tu aku berdebar
+[687.130,688.700]	G0489	female,Malaysia	suhu aku tiga tujuh
+[693.158,695.059]	G0489	female,Malaysia	em time tu aku berdebar la
+[696.218,699.941]	G0489	female,Malaysia	sebab sebab first time suhu aku [UNK] tiga tujuh
+[706.807,709.968]	G0489	female,Malaysia	kau pernah kena ke suhu kau tinggi
+[712.029,713.298]	G0489	female,Malaysia	suhu kau tinggi
+[718.000,719.450]	G0489	female,Malaysia	suhu tinggi
+[723.729,724.548]	G0489	female,Malaysia	ah
+[728.380,729.468]	G0489	female,Malaysia	paling tinggi
+[737.079,737.899]	G0489	female,Malaysia	ha ah
+[742.839,743.839]	G0489	female,Malaysia	wow
+[748.510,749.928]	G0489	female,Malaysia	kau tak kena tahan pula
+[755.858,758.928]	G0489	female,Malaysia	oh maknanya benda tu dah rosaklah
+[770.829,771.740]	G0489	female,Malaysia	tapi kan
+[773.499,775.668]	G0489	female,Malaysia	pasal Covid nineteen ni
+[777.578,779.387]	G0489	female,Malaysia	semua negara kan dia kena kan
+[786.549,787.999]	G0489	female,Malaysia	negara apa eh tak kena
+[790.839,791.990]	G0489	female,Malaysia	semua kena kan
+[797.409,798.319]	G0489	female,Malaysia	ha
+[799.480,801.230]	G0489	female,Malaysia	tapi ada yang menipu tau
+[801.400,802.490]	G0489	female,Malaysia	ada yang menipu
+[803.139,807.139]	G0489	female,Malaysia	ada yang cakap yang sebenarnya negara dia ramai je orang kena
+[807.309,808.219]	G0489	female,Malaysia	tapi
+[808.299,810.529]	G0489	female,Malaysia	dia tipu dia kata sikit hm
+[816.309,817.189]	G0489	female,Malaysia	ha ah
+[817.870,819.169]	G0489	female,Malaysia	ramai je weh
+[825.069,826.010]	G0489	female,Malaysia	virus apa tu
+[832.630,833.630]	G0489	female,Malaysia	nipah
+[836.169,837.710]	G0489	female,Malaysia	oh
+[842.559,843.288]	G0489	female,Malaysia	wow
+[843.788,844.999]	G0489	female,Malaysia	kat Malaysia ke apa
+[850.600,851.510]	G0489	female,Malaysia	ha ah
+[852.699,853.819]	G0489	female,Malaysia	baguslah
+[858.370,859.219]	G0489	female,Malaysia	hm
+[860.139,861.409]	G0489	female,Malaysia	aku baru tahu ni
+[866.049,867.380]	G0489	female,Malaysia	mak kau cerita la
+[872.319,873.500]	G0489	female,Malaysia	bahaya eh
+[873.639,876.440]	G0489	female,Malaysia	pokok [UNK] pokok nipah boleh jadi virus
+[876.698,878.150]	G0489	female,Malaysia	macam mana boleh terjadi
+[889.960,890.839]	G0489	female,Malaysia	pegang
+[890.979,891.799]	G0489	female,Malaysia	ha
+[893.949,895.069]	G0489	female,Malaysia	mungkin
+[895.449,898.009]	G0489	female,Malaysia	ada orang kacau lah pokok nipah tu
+[898.150,899.990]	G0489	female,Malaysia	tu yang menjadi macam tu
+[905.289,906.229]	G0489	female,Malaysia	ha ah
+[908.949,909.829]	G0489	female,Malaysia	ya weh
+[912.370,913.669]	G0489	female,Malaysia	ni mungkin [UNK]
+[914.289,923.030]	G0489	female,Malaysia	ah doktor untunglah doktor kat Malaysia ni jenis macam cepat ah cepat buat sesuatu ha cepat bertindak
+[926.470,927.348]	G0489	female,Malaysia	hm
+[927.580,928.940]	G0489	female,Malaysia	Doktor Nor Hishamq
+[929.859,931.340]	G0489	female,Malaysia	aku suka doh dia
+[939.759,940.850]	G0489	female,Malaysia	memang bagus
+[940.959,942.018]	G0489	female,Malaysia	aku pun suka
+[944.618,946.638]	G0489	female,Malaysia	ah ah ramai orang puji
+[948.279,953.478]	G0489	female,Malaysia	tapi ada je orang tak suka orang cakap eleh Malaysia tu tipu apa semua
+[953.888,955.638]	G0489	female,Malaysia	mesti ada je orang tak suka
+[962.710,964.219]	G0489	female,Malaysia	okey kau pun
+[966.190,967.100]	G0489	female,Malaysia	bye
+[969.788,971.248]	0	none,none	[*]

@@ -27,7 +27,9 @@ def print_summary(df: pd.DataFrame):
     
     print(f"\n📊 Dataset Overview:")
     print(f"  Total samples: {len(df)}")
+    if 'audio_duration' in df.columns:
     print(f"  Total audio duration: {df['audio_duration'].sum():.1f}s ({df['audio_duration'].sum()/60:.1f} min)")
+    if 'total_words' in df.columns:
     print(f"  Total words: {df['total_words'].sum()}")
     
     print(f"\n✅ Perfect Transcriptions (WER = 0%):")
@@ -45,6 +47,11 @@ def print_summary(df: pd.DataFrame):
     print(f"  Mean: {df['cer'].mean():.2f}%")
     print(f"  Median: {df['cer'].median():.2f}%")
     
+    if 'mer' in df.columns:
+        print(f"\n📈 MER Statistics:")
+        print(f"  Mean: {df['mer'].mean():.2f}%")
+        print(f"  Median: {df['mer'].median():.2f}%")
+    
     print(f"\n🎯 Performance Buckets:")
     excellent = df[df['wer'] < 5]
     good = df[(df['wer'] >= 5) & (df['wer'] < 10)]
@@ -56,6 +63,8 @@ def print_summary(df: pd.DataFrame):
     print(f"  WER 10-20% (Fair):     {len(fair):4d} ({len(fair)/len(df)*100:5.1f}%)")
     print(f"  WER >= 20% (Poor):     {len(poor):4d} ({len(poor)/len(df)*100:5.1f}%)")
     
+    # Error breakdown (only if available)
+    if all(col in df.columns for col in ['substitutions', 'insertions', 'deletions']):
     print(f"\n🔍 Error Type Analysis:")
     total_errors = df['substitutions'].sum() + df['insertions'].sum() + df['deletions'].sum()
     if total_errors > 0:
@@ -65,7 +74,9 @@ def print_summary(df: pd.DataFrame):
         print(f"  Deletions:     {df['deletions'].sum():5d} ({df['deletions'].sum()/total_errors*100:5.1f}%)")
     
     print(f"\n⚡ Performance Metrics:")
+    if 'rtf' in df.columns:
     print(f"  Average RTF: {df['rtf'].mean():.3f}")
+    if 'processing_time' in df.columns:
     print(f"  Total processing time: {df['processing_time'].sum():.1f}s ({df['processing_time'].sum()/60:.1f} min)")
     
     print("="*70)
@@ -82,8 +93,19 @@ def show_worst_samples(df: pd.DataFrame, n: int = 10):
     for idx, (_, row) in enumerate(worst.iterrows(), 1):
         audio_file = Path(row['audio_path']).name
         print(f"\n{idx}. {audio_file}")
-        print(f"   WER: {row['wer']:.2f}% | CER: {row['cer']:.2f}% | RTF: {row['rtf']:.3f}")
+        
+        # Build metrics line
+        metrics = [f"WER: {row['wer']:.2f}%", f"CER: {row['cer']:.2f}%"]
+        if 'mer' in row:
+            metrics.append(f"MER: {row['mer']:.2f}%")
+        if 'rtf' in row:
+            metrics.append(f"RTF: {row['rtf']:.3f}")
+        print(f"   {' | '.join(metrics)}")
+        
+        # Show error breakdown if available
+        if all(col in row for col in ['substitutions', 'insertions', 'deletions', 'total_words']):
         print(f"   Errors: {row['substitutions']}S {row['insertions']}I {row['deletions']}D | Words: {row['total_words']}")
+        
         print(f"   REF: {row['reference']}")
         print(f"   HYP: {row['hypothesis']}")
 
@@ -153,6 +175,9 @@ def export_analysis(df: pd.DataFrame, output_dir: Path):
         f.write(f"Mean WER: {df['wer'].mean():.2f}%\n")
         f.write(f"Median WER: {df['wer'].median():.2f}%\n")
         f.write(f"Mean CER: {df['cer'].mean():.2f}%\n")
+        if 'mer' in df.columns:
+            f.write(f"Mean MER: {df['mer'].mean():.2f}%\n")
+        if 'rtf' in df.columns:
         f.write(f"Average RTF: {df['rtf'].mean():.3f}\n")
     print(f"✓ Saved summary: {summary_file}")
 

@@ -1,0 +1,125 @@
+[0.610,1.399]	G0216	male,Malaysia	okey
+[4.119,7.159]	G0216	male,Malaysia	ah khabar baik ah ada apa lagi ya call
+[18.361,19.969]	G0216	male,Malaysia	kesihatan
+[29.649,30.409]	0	none,none	[*]
+[34.119,37.130]	G0216	male,Malaysia	oh tahu tahu ah tahu sebab
+[37.389,42.889]	G0216	male,Malaysia	ah Malaysia ke ah apa ni mewakili tempat kedua dalam
+[43.000,50.990]	G0216	male,Malaysia	[UNK] menjadi tempat pertama di ranking Asia ah ma-masalah kesihatan pasal obesiti
+[51.099,53.240]	G0216	male,Malaysia	kenapa ya dengan kesihatan di Malaysia
+[69.010,70.339]	G0216	male,Malaysia	oh
+[77.620,79.069]	0	none,none	[*]
+[79.665,82.550]	G0216	male,Malaysia	macam ni la ah
+[83.650,85.040]	G0216	male,Malaysia	sekejap macam
+[85.989,133.970]	G0216	male,Malaysia	masalahnya kan dia daripada punca ah pemakanan seorang itu sendiri la dia tak kisah ke dia muda ke dia tua ke dia remaja ke dia tak kisah dia pasal ah ke yala ke apa makanan yang dia ambil setiap hari la jadi itu menyebabkan ah masalah kesihatan di Malaysialah lagi satu di Malaysia ni dia punya makanan semua ah mempunyai banyak banyak-banyak benda macam minyak la macam contohlah rendang ah banyak yang banyak yang mempunyai ah kadar kalori yang tinggi la itu menyebabkan salah satunya ma-masyarakat di Malaysia mempunyai pelbagai penyakit yang dikatakan tadilah macam tu la
+[155.770,156.979]	G0216	male,Malaysia	oh
+[157.119,158.210]	G0216	male,Malaysia	hisap vape
+[213.970,217.399]	G0216	male,Malaysia	oh macam dia oh okey sama-sama sambung sambung
+[225.279,236.449]	G0216	male,Malaysia	Covid ninteen sebab yang satu dunia tu [UNK] yang daripada negara China Wuhan eh tak silap saya la ah itu
+[237.279,241.460]	G0216	male,Malaysia	itu ah yang saya tahu dia berpunca ah daripada
+[242.169,249.500]	G0216	male,Malaysia	pemakanan jugalah tapi saya tidak tahu ah dari mana pemakanan itu boleh berlakunya Covid ninteen la sebab
+[250.089,251.419]	G0216	male,Malaysia	yang saya tahu
+[251.589,255.889]	G0216	male,Malaysia	Covid ninteen ah adalah satu virus yang menyebabkan
+[255.910,259.488]	G0216	male,Malaysia	ah seorang itu mempunyai gejala seperti demam
+[259.690,264.000]	G0216	male,Malaysia	ha demam lepas tu batuk batuk
+[264.000,282.440]	G0216	male,Malaysia	ah dan sakit tekak yang sangat sakitlah yang tu je saya tahulah sebab then ah kita kena jaga ah apa ni masalah ni dengan dia boleh elak tau dengan macam membasuh tangan lepas tu pakai hand [UNK] hand sanitizer
+[282.459,286.790]	G0216	male,Malaysia	setiap ah menyentuh suatu baranglah
+[287.200,300.019]	G0216	male,Malaysia	ah itu adalah pakai face mask lagi ah tu adalah satu puncalah untuk satu cara eh banyak banyak cara untuk ah mengelakkan daripada terkena virus itulah sebab virus tu memang
+[300.579,305.390]	G0216	male,Malaysia	ah kalau terkena pada ah golongan yang dah tua ataupun
+[305.560,316.320]	G0216	male,Malaysia	golongan ah kanak-kanak yang masih bayi tu memang sangat bahaya lah sebab dia boleh menyebabkan kematian di ah di negara tersebut lah kiranya ah
+[316.871,335.959]	G0216	male,Malaysia	negara Malaysia tak perlu kot ah ambik indah pasal benda alah ni sebab ni memang isu terhangat sekarang ni yang paling yang dita- ditakuti oleh seluruh negara seluruh negara yang berada di dunia lah itu lah saya dapat ah ceritakan pasal ah Covid nineteen ni
+[345.610,346.219]	0	none,none	[SYSTEM]
+[354.489,355.219]	0	none,none	[*]
+[355.570,358.579]	G0216	male,Malaysia	eksotik tu ah apa ya eksotik
+[358.777,359.630]	0	none,none	[SYSTEM]
+[366.700,372.169]	G0216	male,Malaysia	oh macam benda yang pelik lah macam kita tak makan tapi dia makan oh macam tu
+[374.948,377.239]	G0216	male,Malaysia	sebagai contoh dia makan apa eh
+[379.058,380.087]	0	none,none	[ENS]
+[385.087,386.087]	0	none,none	[*]
+[386.140,392.269]	G0216	male,Malaysia	tapi sebelum-sebelum ni kan dia orang pun makan kelawar kenapa baru ah benda ni terjadi
+[393.099,393.948]	0	none,none	[ENS]
+[400.570,401.629]	0	none,none	[ENS]
+[407.528,408.320]	0	none,none	[*]
+[409.058,409.849]	0	none,none	[SYSTEM]
+[411.010,412.219]	0	none,none	[*]
+[413.709,415.159]	G0216	male,Malaysia	oh macam air hujan
+[419.739,421.729]	G0216	male,Malaysia	ah tahu tahu tahu sekarang
+[421.808,429.440]	G0216	male,Malaysia	sekarang ah banyak jugalah sebab adik saya pun ah dia main di hujan dia asyik demam je tak tahu lah kenapa
+[429.610,437.179]	G0216	male,Malaysia	ah boleh awak tahu bagitahu lah apa sebab ah adik saya terkena demam tersebut apabila bermain bermandi hujan
+[446.470,447.380]	0	none,none	[SONANT]
+[449.020,449.808]	0	none,none	[SYSTEM]
+[487.750,489.140]	G0216	male,Malaysia	tapi ah
+[489.610,491.690]	G0216	male,Malaysia	okay-okay tapi ah
+[493.089,493.970]	G0216	male,Malaysia	okay-okay
+[494.080,495.948]	G0216	male,Malaysia	okay sambung-sambung antibodi
+[502.990,532.579]	G0216	male,Malaysia	tapi ah macam keluarga saya ni dia mempunyai satu satu pak cik tau pak cik ni dia dulu ah tahu tak hujan panas hujan panas tahu tak ah dia dia [UNK] ah dia masatu kerja then ah orang kampung biasa lah macam kerja ah kat tu lepas tu dia balik dia balik lepas tu hujan panas tau selepas keesokannya
+[532.720,534.110]	G0216	male,Malaysia	dia meninggal dunia
+[535.750,537.470]	G0216	male,Malaysia	kenapa ya boleh saya tahu tak
+[539.890,541.850]	G0216	male,Malaysia	ataupun dia macam mempunyai
+[542.890,543.679]	G0216	male,Malaysia	okay
+[545.408,547.309]	G0216	male,Malaysia	sambung-sambung
+[573.939,575.059]	G0216	male,Malaysia	oh
+[575.079,575.689]	0	none,none	[SYSTEM]
+[576.848,577.400]	0	none,none	[SYSTEM]
+[578.229,578.809]	0	none,none	[ENS]
+[582.848,585.348]	0	none,none	[ENS]
+[586.390,587.030]	0	none,none	[SYSTEM]
+[592.598,593.179]	0	none,none	[ENS]
+[603.520,604.819]	0	none,none	[*]
+[605.169,607.548]	G0216	male,Malaysia	okay okay okay ah
+[608.199,633.469]	G0216	male,Malaysia	okay okay kita berbalik pada topik tadi lah yang pasal ah kadar kesihatan negara tahu tak ah dulu Malaysia ah Malaysia mempunyai pada dua ribu dua dua ribu sebelas Malaysia mempunyai ah jumlah pesakit yang bertambah selepas setahun seramai dua ratus ribu
+[634.598,635.450]	0	none,none	[SONANT]
+[637.239,638.478]	G0216	male,Malaysia	ya
+[639.518,640.819]	G0216	male,Malaysia	ah boleh tak
+[641.259,642.619]	0	none,none	[SONANT]
+[642.999,650.779]	G0216	male,Malaysia	rasanya sebab yang tadilah yang yang diperkatakan tadi ah pemakanan yang tidak seimbang semua tu lah
+[650.889,651.768]	0	none,none	[SONANT]
+[653.649,667.789]	G0216	male,Malaysia	kenapa ek kenapa ek ah dia macam dia tak ambil endah padahal dia dah tahu dah kadar- kadar apa ni kesihatan di Malaysia sangat merosot tapi kenapa dia melakukan jugak ah macam makan benda-benda yang
+[667.960,673.608]	G0216	male,Malaysia	ah mempunyai banyak lemak semua lepas tu tidak bersukan just
+[673.778,674.778]	G0216	male,Malaysia	macam
+[674.949,679.368]	G0216	male,Malaysia	makan tidur makan tidur makan tidurlah bak kata pepatah ah
+[680.498,681.739]	G0216	male,Malaysia	ah apa ni
+[682.049,684.919]	G0216	male,Malaysia	tiada apa-apa lah [UNK]
+[688.330,689.089]	0	none,none	[SYSTEM]
+[690.489,691.248]	0	none,none	[ENS]
+[701.019,702.019]	0	none,none	[SYSTEM]
+[712.959,713.720]	0	none,none	[SYSTEM]
+[716.259,716.840]	0	none,none	[ENS]
+[717.789,718.729]	0	none,none	[ENS]
+[724.238,724.970]	0	none,none	[SONANT]
+[725.080,725.690]	0	none,none	[ENS]
+[729.970,730.909]	0	none,none	[ENS]
+[731.709,733.519]	0	none,none	[ENS]
+[734.259,735.709]	0	none,none	[*]
+[738.039,738.709]	0	none,none	[ENS]
+[743.378,758.748]	G0216	male,Malaysia	ah tapi macam mana ek kita nak membe- ah kerajaan-kerajaan perlulah ambil tindakan sebab rakyat dia sendiri kan kalau tak ada rakyat dia macam mana ah negara nak kembangkan ekonomi macam mana en ah
+[758.830,761.779]	G0216	male,Malaysia	ah kerajaan tu dia nak [UNK]
+[762.190,763.339]	G0216	male,Malaysia	me- apa ni
+[763.690,772.759]	G0216	male,Malaysia	mengelakkan daripada masalah-masalah ni berlakulah macam ah kesihatan kencing manis semua ni sebab dia sangat berbahaya la sebab
+[772.839,783.470]	G0216	male,Malaysia	dia membawa kematian kan then kalau mati kan ah tak ada pekerja-pekerja nanti yang mahir then ekonomi negara merosot macam mana ek kerajaan boleh buat
+[797.320,798.229]	0	none,none	[SONANT]
+[799.058,799.820]	0	none,none	[SYSTEM]
+[814.359,815.449]	0	none,none	[ENS]
+[823.419,824.178]	0	none,none	[SYSTEM]
+[828.100,830.628]	G0216	male,Malaysia	tapi saya rasa bukan kerajaan je kot
+[831.820,857.600]	G0216	male,Malaysia	saya rasa bukan kerajaan-kerajaan je kot saya rasa sekolah pun boleh bendung masalah ni kot dengan macam dia menerapkan tentang makanan di makanan di macam contoh subjek Sains ah menerapkan pasal makanan B M ah terapkan pasal makanan ah ini akan ah menjadi seorang itu lebih ni lah lebih apa ni
+[857.678,858.979]	G0216	male,Malaysia	daripada kecik
+[859.298,861.408]	G0216	male,Malaysia	ah dia lagi lebih pekalah
+[861.759,874.609]	G0216	male,Malaysia	dia kecik dia macam senang dibentuk tau ah sebagai [UNK] ah sebagai peribahasa ah melentur buluh biarlah daripada rebungnya lah jadi saya rasa ah pihak sekolah pun boleh buat dalam ni
+[879.878,881.149]	G0216	male,Malaysia	ibu bapa
+[881.889,887.298]	G0216	male,Malaysia	sebagai contoh ibu bapa macam kena perlu beli makanan-makanan yang sihatlah macam tu lah
+[891.100,892.610]	G0216	male,Malaysia	oh menghadkan makanan
+[895.570,896.450]	0	none,none	[SONANT]
+[904.148,910.549]	G0216	male,Malaysia	tapi ah dia macam kena seimbangkan lah macam dia dah makan benda alah ni mestilah dia kena makan yang benda sihat macam tu lah
+[911.860,914.179]	G0216	male,Malaysia	oh begitu
+[918.070,919.190]	G0216	male,Malaysia	makanan eh
+[923.950,924.889]	0	none,none	[SONANT]
+[925.778,930.919]	G0216	male,Malaysia	okay ada apa-apa lagi tak nak tanya saya ah pasal ah kesihatan ni
+[941.289,942.139]	0	none,none	[SONANT]
+[946.690,958.700]	G0216	male,Malaysia	okay ah kamu juga begitu ya sebab kita tak nak negara kita terjejas kan kita nak macam negara kita hidup dengan [UNK] dengan aman dengan sihat ah mempunyai
+[958.748,959.808]	G0216	male,Malaysia	apa ini
+[960.308,968.088]	G0216	male,Malaysia	mempunyai rakyat ra-rakyat yang mempunyai kesihatan yang kuatlah tak ada lah macam lembik je kan okay
+[968.378,971.658]	G0216	male,Malaysia	itu saja ah saya
+[971.918,973.248]	G0216	male,Malaysia	ah pergi dulu ye
+[973.538,974.689]	G0216	male,Malaysia	assalamualaikum
+[978.488,980.029]	G0216	male,Malaysia	sama-sama
+[980.439,981.200]	G0216	male,Malaysia	bye

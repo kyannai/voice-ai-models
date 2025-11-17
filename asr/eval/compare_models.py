@@ -25,34 +25,30 @@ def load_results(results_path: str) -> Dict:
 def compare_overall_metrics(results1: Dict, results2: Dict, name1: str, name2: str) -> str:
     """Generate overall metrics comparison"""
     
-    wer1 = results1['wer']['wer']
-    wer2 = results2['wer']['wer']
+    wer1 = results1['wer']
+    wer2 = results2['wer']
     cer1 = results1['cer']
     cer2 = results2['cer']
+    mer1 = results1.get('mer', 0)
+    mer2 = results2.get('mer', 0)
     
     wer_diff = wer2 - wer1
     cer_diff = cer2 - cer1
+    mer_diff = mer2 - mer1
     
     wer_winner = "✅" if wer1 < wer2 else ("❌" if wer1 > wer2 else "➖")
     cer_winner = "✅" if cer1 < cer2 else ("❌" if cer1 > cer2 else "➖")
+    mer_winner = "✅" if mer1 < mer2 else ("❌" if mer1 > mer2 else "➖")
     
     report = f"""
 ## 📊 Overall Metrics Comparison
 
 | Metric | {name1} | {name2} | Difference | Winner |
 |--------|---------|---------|------------|--------|
-| **WER** | {wer1:.2f}% | {wer2:.2f}% | {wer_diff:+.2f}% | {name1} {wer_winner} |
-| **CER** | {cer1:.2f}% | {cer2:.2f}% | {cer_diff:+.2f}% | {name1} {cer_winner} |
+| **WER** | {wer1:.4f} | {wer2:.4f} | {wer_diff:+.4f} | {name1} {wer_winner} |
+| **CER** | {cer1:.4f} | {cer2:.4f} | {cer_diff:+.4f} | {name1} {cer_winner} |
+| **MER** | {mer1:.4f} | {mer2:.4f} | {mer_diff:+.4f} | {name1} {mer_winner} |
 | **Samples** | {results1['num_samples']} | {results2['num_samples']} | - | - |
-
-### Error Breakdown
-
-| Error Type | {name1} | {name2} | Difference |
-|------------|---------|---------|------------|
-| Substitutions | {results1['wer']['substitutions']} | {results2['wer']['substitutions']} | {results2['wer']['substitutions'] - results1['wer']['substitutions']:+d} |
-| Insertions | {results1['wer']['insertions']} | {results2['wer']['insertions']} | {results2['wer']['insertions'] - results1['wer']['insertions']:+d} |
-| Deletions | {results1['wer']['deletions']} | {results2['wer']['deletions']} | {results2['wer']['deletions'] - results1['wer']['deletions']:+d} |
-| Hits | {results1['wer']['hits']} | {results2['wer']['hits']} | {results2['wer']['hits'] - results1['wer']['hits']:+d} |
 
 """
     return report
@@ -247,7 +243,7 @@ def main():
     print(f"  - Total samples: {len(predictions1)}")
     print(f"  - Regressions ({args.name2} worse): {len(regressions)}")
     print(f"  - Improvements ({args.name2} better): {len(improvements)}")
-    print(f"  - WER difference: {results2['wer']['wer'] - results1['wer']['wer']:+.2f}%")
+    print(f"  - WER difference: {results2['wer'] - results1['wer']:+.4f}")
     print(f"\n✅ Done!")
 
 

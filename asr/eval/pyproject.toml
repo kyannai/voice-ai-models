@@ -1,0 +1,218 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asr-eval"
+version = "1.0.0"
+description = "Unified ASR evaluation toolkit for Whisper, Qwen Audio, and Parakeet models"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "YTL AI Team"}
+]
+keywords = ["asr", "speech-recognition", "evaluation", "whisper", "qwen", "parakeet"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+
+dependencies = [
+    # Core ML Frameworks
+    # Note: torch, torchaudio, torchvision should be installed separately with CUDA support
+    # uv pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu118
+    "transformers>=4.35.0,<4.46.0",
+    
+    # Audio Processing
+    "librosa>=0.10.1,<0.11.0",
+    "soundfile>=0.12.1,<0.13.0",
+    
+    # Data Processing
+    "numpy>=1.24.0,<2.0",  # NumPy 2.x has breaking changes
+    "pandas>=2.0.0,<2.3.0",
+    
+    # Evaluation Metrics
+    "jiwer>=3.0.0,<3.1.0",
+    "scikit-learn>=1.3.0,<1.6.0",
+    
+    # Utilities
+    "tqdm>=4.65.0,<5.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+    
+    # Dataset Loading
+    "datasets>=2.14.0,<3.0.0",
+]
+
+[project.optional-dependencies]
+# FunASR / Qwen models
+qwen = [
+    "funasr>=1.0.0,<1.2.0",
+    "modelscope>=1.11.0,<1.19.0",
+    "onnxruntime>=1.14.0,<1.20.0",
+    "accelerate>=0.25.0,<0.35.0",
+    "peft>=0.7.0,<0.14.0",
+    "pillow>=9.5.0,<11.0.0",
+]
+
+# NVIDIA Parakeet / NeMo
+# Note: nemo_toolkit must be installed separately due to strict transformers version conflicts
+# Install manually: uv pip install git+https://github.com/NVIDIA/NeMo.git@main#egg=nemo_toolkit[asr]
+parakeet = [
+    "omegaconf>=2.3.0,<2.4.0",
+    "lightning>=2.0.0,<2.2.0",
+    "nvidia-nvjitlink>=12.0",
+]
+
+# All model frameworks
+# Note: nemo_toolkit NOT included due to transformers version conflicts
+all = [
+    "funasr>=1.0.0,<1.2.0",
+    "modelscope>=1.11.0,<1.19.0",
+    "onnxruntime>=1.14.0,<1.20.0",
+    "accelerate>=0.25.0,<0.35.0",
+    "peft>=0.7.0,<0.14.0",
+    "pillow>=9.5.0,<11.0.0",
+    "omegaconf>=2.3.0,<2.4.0",
+    "lightning>=2.0.0,<2.2.0",
+    "nvidia-nvjitlink>=12.0",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "ipython>=8.0.0",
+    "jupyter>=1.0.0",
+]
+
+[project.scripts]
+# CLI entry points
+asr-evaluate = "evaluate:main"
+asr-batch-eval = "batch_evaluate:main"
+asr-analyze = "analyze_comparison:main"
+
+[project.urls]
+Homepage = "https://github.com/ytl/voice-ai"
+Documentation = "https://github.com/ytl/voice-ai/tree/main/asr/eval"
+Repository = "https://github.com/ytl/voice-ai"
+Issues = "https://github.com/ytl/voice-ai/issues"
+
+[tool.setuptools]
+packages = ["transcribe", "calculate_metrics"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml", "*.json", "*.md"]
+
+# If you build a distribution, include these files automatically
+[tool.setuptools.exclude-package-data]
+"*" = ["outputs/*", ".venv/*", "test_data/*", "__pycache__/*"]
+
+# ==========================================
+# Tool Configurations
+# ==========================================
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | outputs
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "outputs",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+exclude = [
+    'outputs/',
+    '.venv/',
+    'build/',
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=.",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/tests/*",
+    "*/.venv/*",
+    "*/outputs/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+

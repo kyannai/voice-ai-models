@@ -1,0 +1,155 @@
+[0.730,2.599]	G0369	female,Malaysia	hai Syakirah
+[5.139,7.519]	G0369	female,Malaysia	macam mana kau sekarang sihat
+[11.050,13.069]	G0369	female,Malaysia	Alhamdulillah
+[19.400,23.090]	G0369	female,Malaysia	tapikan sekarangkan kan sekarangkan banyak penyakitkan
+[24.940,31.850]	G0369	female,Malaysia	kalau kau tengok berita semalam tak silap aku tiga ke dua penyakit yang
+[31.989,49.580]	G0369	female,Malaysia	tersebar sekarang ada yang penyakit daripada kutu Denggi aku tak taulah ada dari-daripada ber-berita kutu dia kat kulit aku tak tau sebab apa dia ma-macam aku dia macam penyakit bahaya jugalah
+[55.119,64.848]	G0369	female,Malaysia	ush tu tak ada tak ada vaksin dia tu tu kalau ada vaksin dia semua orang dah selamat tapi ramai yang dah meninggal sebab
+[64.930,66.319]	G0369	female,Malaysia	Corona
+[69.339,70.309]	G0369	female,Malaysia	um um
+[75.279,76.190]	G0369	female,Malaysia	betul
+[87.678,93.650]	G0369	female,Malaysia	betul lagi-lagi kau kalau kau tengok sekarang dekat Amerika Sya-Syarikat dia
+[93.819,96.769]	G0369	female,Malaysia	ya Allah hampir keseluruhan
+[96.879,98.629]	G0369	female,Malaysia	penduduk situ kena
+[100.449,109.980]	G0369	female,Malaysia	dia orang punya mat ah Corona tu meningkat je setiap masa
+[109.980,119.959]	G0369	female,Malaysia	dia orang buat tapi biasalah pernah ke dengar cakap lagi-lagi dia punya perdana menteri sekarang
+[121.930,123.110]	G0369	female,Malaysia	apa ni
+[123.730,126.529]	G0369	female,Malaysia	tak macam fikirkan diri sendiri tau
+[128.949,129.889]	G0369	female,Malaysia	ya
+[136.929,138.080]	G0369	female,Malaysia	tapi
+[139.750,149.240]	G0369	female,Malaysia	dalam ah Corona Virus ni kan dalam masalah Corona Virus kita ada ada juga yang baru Denggi kan
+[150.880,152.539]	G0369	female,Malaysia	Denggi ni
+[153.669,154.940]	G0369	female,Malaysia	nyamuk
+[155.229,167.660]	G0369	female,Malaysia	kan kan setiap tahun mesti ada tapi kali ni dia macam extreme tau dia macam lagi bahaya sebab sekarang nyamuk kalau kau tengok nyamuk sekarangkan dia gigit sekali terus gatal
+[167.770,172.309]	G0369	female,Malaysia	dia kat ada satu nyamuk ni yang buat Denggi nilah dia gigitkan
+[172.479,173.750]	G0369	female,Malaysia	memang kita
+[174.250,176.449]	G0369	female,Malaysia	macam lemah
+[178.779,180.410]	G0369	female,Malaysia	sebab tu aku sekarang
+[180.429,182.449]	G0369	female,Malaysia	memang jaga-jaga gila
+[189.699,192.169]	G0369	female,Malaysia	kan aku pernah kena sekali
+[194.649,195.529]	G0369	female,Malaysia	um um
+[198.639,204.210]	G0369	female,Malaysia	masuk masa tu darjah dua tak silap aku aku kena ruam ruam Denggi
+[204.220,211.699]	G0369	female,Malaysia	pas tu [UNK] kena tu lepas balik sekolah tau sebab aku rasa memang rasa lemah masa tu puasa
+[211.929,213.440]	G0369	female,Malaysia	dahlah puasa
+[213.490,215.419]	G0369	female,Malaysia	lepas balik sekolah
+[215.710,218.270]	G0369	female,Malaysia	memang lemahkan lepas tu kan
+[218.289,228.470]	G0369	female,Malaysia	kan ada sofa sofa kat depan rumah aku aku baring situkan sekali bangun-bangun je banyak bintik-bintik mak aku dah hantar pergi pergi hospital dah masa tu
+[240.399,241.279]	G0369	female,Malaysia	dapat
+[241.750,248.240]	G0369	female,Malaysia	tapi memang sakit ah sebab masa tu ya kan kan kena cucuk da-darahkan
+[249.490,254.089]	G0369	female,Malaysia	dia cucuk darah kat dua-dua belah tangan tau dekat lima kali dia cucuk
+[254.139,262.100]	G0369	female,Malaysia	tak dapat sekali ah ah sekali masa ah dekat siku
+[262.239,264.529]	G0369	female,Malaysia	baru dia dapat darah aku
+[265.089,268.279]	G0369	female,Malaysia	ni macam baru dapat tempat yang boleh salurkan ni
+[269.619,275.750]	G0369	female,Malaysia	sakit wei aku menangis tapi kita kena jagalah kesihatan kita semua
+[277.000,278.899]	G0369	female,Malaysia	kau tak kena macam-macam
+[285.790,287.959]	G0369	female,Malaysia	ish demam panas bahaya
+[292.690,294.109]	G0369	female,Malaysia	sumpahlah
+[297.820,298.670]	G0369	female,Malaysia	wau
+[303.850,305.779]	G0369	female,Malaysia	yalah dah muntahkan
+[306.250,314.480]	G0369	female,Malaysia	sakit wei kalau muntah aku walaupun aku tak suka muntahkan tapi bila rasa nak muntah kan aku rasa macam sakit gila kat tekak
+[316.358,322.069]	G0369	female,Malaysia	kalau perasan memang sakitlah memang pedih tekak kita sebenarnya kalau nak nak muntah
+[329.799,330.948]	G0369	female,Malaysia	em em
+[331.329,337.771]	G0369	female,Malaysia	yang untuk check Corona virus tu kan kena cucuk dalam tekak kan sakit weh ah
+[358.435,367.429]	G0369	female,Malaysia	ya ya sakit sakit aku tahu aku paling tak suka muntahlah dalam banyak-banyak benda aku paling tak suka muntah
+[367.959,371.209]	G0369	female,Malaysia	setiap kali kalau aku nak muntah mesti aku akan telan balik
+[376.449,377.209]	G0369	female,Malaysia	em
+[379.927,381.529]	G0369	female,Malaysia	ya aku telan balik
+[382.480,389.299]	G0369	female,Malaysia	aku tak tahu kenapakan memang kalau telan balik rasa memang pelik kan rasa tak sedapkan sebab
+[389.410,392.898]	G0369	female,Malaysia	apa yang kita makan tu kita telan balikkan tapi
+[393.398,396.410]	G0369	female,Malaysia	memang aku memang aku tak suka muntah
+[398.498,400.248]	G0369	female,Malaysia	sebab aku pernah muntah
+[400.449,402.799]	G0369	female,Malaysia	bukan muntah tau dia macam kahak tau
+[404.350,407.449]	G0369	female,Malaysia	kan kahak kahak kan susah nak keluarkan
+[408.188,409.008]	G0369	female,Malaysia	so
+[409.568,425.600]	G0369	female,Malaysia	pernah sekali ni aku nak keluarkan kahak tu kan sampai aku punya perut sakit gila mak aku pun mak aku pegang perut aku memang sakit ah nak keluarkan kahak je [UNK] tak boleh [UNK] daripada tu terus aku tak
+[425.600,428.388]	G0369	female,Malaysia	tak tak suka muntah
+[428.678,429.529]	G0369	female,Malaysia	em em
+[450.550,452.869]	G0369	female,Malaysia	oh ya ambil darah
+[453.399,457.759]	G0369	female,Malaysia	ambil darah tak payah [UNK] tak payah ceritalah memang sakitlah
+[458.528,463.188]	G0369	female,Malaysia	ya kalau kita kalau kita dapat nurse yang baik
+[463.360,464.659]	G0369	female,Malaysia	dia akan macam
+[464.709,476.058]	G0369	female,Malaysia	okey okey slow slow slow slow tapi kalau kita dapat nurse yang garangkan terus cucuk weh aku macam sakit weh aku pernah kena aku pernah kena
+[491.679,492.619]	G0369	female,Malaysia	tapi kan
+[495.188,497.959]	G0369	female,Malaysia	[UNK] um kalau kita ambil darahkan
+[498.338,500.838]	G0369	female,Malaysia	kita rasa macam
+[501.448,502.849]	G0369	female,Malaysia	pe- ah peningkan
+[503.289,507.948]	G0369	female,Malaysia	kalau perasan kalau kita nak kalau aku kalau ambil darahkan mesti aku akan pengsan
+[509.769,513.759]	G0369	female,Malaysia	aku ah aku akan macam terus tak sedar
+[513.769,527.388]	G0369	female,Malaysia	sebab aku tak suka tengok darah sebab tu lah kalau aku [UNK] kalau aku terfikir nak nak buat sesuatu tu macam buat dekat aku punya tangan ke apa kan aku mesti fikir banyak kali sebab aku tak suka darah
+[536.739,538.220]	G0369	female,Malaysia	[UNK] tak suka doh
+[550.840,552.950]	G0369	female,Malaysia	wau
+[563.289,564.319]	G0369	female,Malaysia	wau
+[567.340,568.459]	G0369	female,Malaysia	sakit eh
+[572.378,573.408]	G0369	female,Malaysia	tapikan
+[574.028,577.759]	G0369	female,Malaysia	ah macam yang Cikgu Salina cakap tadikan
+[578.319,581.658]	G0369	female,Malaysia	yang dia cakap kau ada yang kau yang
+[581.710,584.779]	G0369	female,Malaysia	yang kolestrol dalam badan dia tinggi tu
+[585.460,587.569]	G0369	female,Malaysia	sebenar- sebenarnya tu bahaya juga tau
+[588.309,609.408]	G0369	female,Malaysia	[UNK] kita mungkin kita ah ketawakan dengar dia cakap macam tu tapi sebenarnya tu bahaya aku pernahlah nampak orang yang kena kolestrol tinggikan dia memang dia punya darah tinggi semua tinggi memang dia kena pantang je setiap masa
+[611.559,614.509]	G0369	female,Malaysia	tak boleh makan tu tak boleh makan ni eh sakitlah
+[615.460,617.779]	G0369	female,Malaysia	siapa dia nak macam tu aku pun tak nak
+[626.589,627.709]	G0369	female,Malaysia	betul
+[633.370,634.970]	G0369	female,Malaysia	obesiti
+[635.470,647.449]	G0369	female,Malaysia	oh obesiti kan sekarang terkenal bukan terkenal apa sebab ya lah dah ramai orang makan ramai orang makan banyak benda lepas tu kena obesiti
+[648.249,649.339]	G0369	female,Malaysia	betul
+[649.569,650.808]	G0369	female,Malaysia	betul
+[652.569,654.140]	G0369	female,Malaysia	tapi kita kena jagalah
+[655.538,656.480]	G0369	female,Malaysia	hm em
+[657.069,658.640]	G0369	female,Malaysia	sekarang ni kan
+[658.718,664.370]	G0369	female,Malaysia	kesihatan kita memang [UNK] kita kena jaga kita pergi sekolah kita kena
+[664.390,666.439]	G0369	female,Malaysia	check suhu
+[667.959,682.098]	G0369	female,Malaysia	sebab kesihatan kan keselamatan kita sebab kita tak tahu pun er macam mana virus tersebar [UNK] kawan kita kena ke tak kita tak tahu kan [UNK]
+[684.400,685.728]	G0369	female,Malaysia	apa dia
+[689.048,690.618]	G0369	female,Malaysia	oh
+[695.710,697.879]	G0369	female,Malaysia	siapa tak berdebar aku pun berdebar
+[708.098,708.860]	G0369	female,Malaysia	hm
+[709.900,710.900]	G0369	female,Malaysia	apa benda
+[714.548,715.400]	G0369	female,Malaysia	tinggi
+[719.348,721.579]	G0369	female,Malaysia	suhu pernah sekali
+[723.010,726.679]	G0369	female,Malaysia	tiga enam point sembilan
+[728.140,742.069]	G0369	female,Malaysia	[UNK] ah paling tinggi [UNK] ah pernah check suhu satu masa tu kat sekolah aku datang lambat kan Cikgu Fadhli Fadhli Cikgu Fadhli check suhu tiga puluh lapan point satu
+[743.257,747.470]	G0369	female,Malaysia	tapi tu mungkin rosak kot dia punya temperature kan
+[749.860,755.419]	G0369	female,Malaysia	tak aku buat lagi satu kan baru dapat suhu betul yang tiga puluh enam point empat
+[755.979,758.000]	G0369	female,Malaysia	seram weh
+[758.470,759.530]	G0369	female,Malaysia	ha ah
+[770.169,771.410]	G0369	female,Malaysia	tapi
+[771.490,772.220]	G0369	female,Malaysia	hm
+[779.530,784.939]	G0369	female,Malaysia	ya ya tak macam satu je negara kita semua kena
+[786.069,787.548]	G0369	female,Malaysia	pernah kan
+[787.990,789.649]	G0369	female,Malaysia	tak ada semua kena
+[789.970,796.490]	G0369	female,Malaysia	semua kena tapi tapi ada yang baik ada yang ma- macam merebak
+[796.929,798.140]	G0369	female,Malaysia	dia macam tu lah
+[798.579,800.270]	G0369	female,Malaysia	tapi ada satu
+[801.039,801.919]	G0369	female,Malaysia	betul
+[802.720,803.509]	G0369	female,Malaysia	betul
+[804.309,805.339]	G0369	female,Malaysia	dia [UNK]
+[806.949,808.729]	G0369	female,Malaysia	tapi dia tipu
+[809.679,817.099]	G0369	female,Malaysia	ha dia kata dia kata apa ni virus tu makin makin sikit kan tapi sebenarnya ramai yang kena
+[817.449,831.240]	G0369	female,Malaysia	ada [UNK] ada satu virus ni kita punya kita Malaysia je kena masa tu sembilan belas masa tu sembilan belas berapa entah kan ah Nipah virus
+[832.199,851.179]	G0369	female,Malaysia	[UNK] ah Nipah daripada pokok nipah masa [UNK] masa tu ramai memang ramai sangat-sangat yang meninggal sebab virus tu sebab kita tak kat Malaysia kita tak kita tak jumpa vaksin tu sekali sekali jumpa vaksin tu kan terus selamatkan
+[852.250,857.479]	G0369	female,Malaysia	Nipah Virus bahaya weh dekat dua ratus lebih orang meninggal
+[861.280,864.860]	G0369	female,Malaysia	aku sebenarnya aku dah lama tahu tu pun daripada mak aku
+[865.539,866.599]	G0369	female,Malaysia	tapi
+[866.649,867.559]	G0369	female,Malaysia	hm em
+[875.799,876.887]	G0369	female,Malaysia	ya
+[877.720,882.200]	G0369	female,Malaysia	aku pun aku pun tak tau macam mana tapi
+[882.549,888.170]	G0369	female,Malaysia	entahlah mungkin ada [UNK] ada sautu yang dekat pokok nipah tu kita tak boleh nak
+[888.700,892.099]	G0369	female,Malaysia	er pegang or ah ataupun
+[892.959,894.649]	G0369	female,Malaysia	sentuh ke kan
+[897.637,904.884]	G0369	female,Malaysia	mungkin ada orang buat macam kajian ke dekat pokok nipah tu sampai
+[906.190,907.250]	G0369	female,Malaysia	kita tak tau
+[919.630,920.929]	G0369	female,Malaysia	bertindaklah
+[923.319,926.329]	G0369	female,Malaysia	nak lagi yang kita ada sekarang doktor tu
+[926.348,927.950]	G0369	female,Malaysia	Doktor Noor Hisham tu
+[928.689,938.689]	G0369	female,Malaysia	memang memang [UNK] memang semua tabik ah kat dia sampai luar negara pun cakap cara dia ah kawal Covid ni
+[938.708,939.830]	G0369	female,Malaysia	memang bagus
+[941.468,943.729]	G0369	female,Malaysia	kitakan Malaysiakan kena puji
+[944.229,947.298]	G0369	female,Malaysia	sebab kawal co- Covid tu
+[950.018,950.839]	G0369	female,Malaysia	kan
+[953.108,954.679]	G0369	female,Malaysia	saya sebenarnya betul
+[955.298,958.098]	G0369	female,Malaysia	betul biasalah duniakan
+[958.179,959.809]	G0369	female,Malaysia	so
+[960.038,961.669]	G0369	female,Malaysia	jagalah kesihatan
+[961.989,963.228]	G0369	female,Malaysia	jagalah diri
+[963.878,965.209]	G0369	female,Malaysia	okey
+[966.849,969.228]	G0369	female,Malaysia	bye bye jaga diri bye bye

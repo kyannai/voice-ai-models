@@ -1,0 +1,108 @@
+[2.950,4.099]	G0598	female,Malaysia	hai
+[9.640,11.539]	G0598	female,Malaysia	um bila je
+[15.430,16.158]	G0598	female,Malaysia	je
+[24.280,26.030]	G0598	female,Malaysia	um tahu
+[36.340,37.189]	G0598	female,Malaysia	ah
+[69.669,70.879]	G0598	female,Malaysia	um hm
+[104.980,106.220]	G0598	female,Malaysia	tak ada lagi
+[220.960,221.929]	G0598	female,Malaysia	um
+[299.380,300.440]	G0598	female,Malaysia	um hm um
+[301.899,304.640]	G0598	female,Malaysia	kalau aku tahu pasal
+[306.518,308.929]	G0598	female,Malaysia	pasal beraya ni aku tahu macam
+[309.128,312.500]	G0598	female,Malaysia	orang Islam la pasal tudung
+[312.759,314.628]	G0598	female,Malaysia	pakaian tudung dia lah
+[317.259,318.679]	G0598	female,Malaysia	um sebab
+[320.589,322.549]	G0598	female,Malaysia	[UNK] pada dua ribu tiga belas
+[322.990,328.310]	G0598	female,Malaysia	ah kebanyakkan wanita Melayu Malaysia pakai tudung
+[328.777,330.438]	G0598	female,Malaysia	kegunaan tudung ni
+[330.549,335.930]	G0598	female,Malaysia	tak biasa sebelum [UNK] Iran semasa sembilan belas tujuh puluh sembilan
+[336.518,340.820]	G0598	female,Malaysia	dan tempat tempat yang mempunyai wanita di tudung
+[341.049,343.789]	G0598	female,Malaysia	cenderung menjadi kawasan pendalaman
+[344.709,349.759]	G0598	female,Malaysia	penggunaan tudung semakin meningkat selepas tahun sembilan belas tujuh puluh an
+[349.839,352.099]	G0598	female,Malaysia	ketika konsert [UNK]
+[352.180,355.700]	G0598	female,Malaysia	agama di kalangan orang Melayu dan Singapura meningkat
+[356.289,362.450]	G0598	female,Malaysia	beberapa ulama dan tokoh agama Kelantan pada sembilan belas enam puluh an
+[362.527,366.349]	G0598	female,Malaysia	percaya bahawa hijab bukan satu mandatori
+[366.579,373.610]	G0598	female,Malaysia	menjelang dua ribu lima belas ulama Malaysia percaya pandangan sebelum ini tidak bercirikan Islam
+[373.750,376.760]	G0598	female,Malaysia	pada tahun sama Malaysia mempunyai
+[376.808,379.760]	G0598	female,Malaysia	industri fesyen berkaitan tudung
+[380.260,382.549]	G0598	female,Malaysia	masyarakat Melayu Malaysia mempunyai
+[382.690,386.479]	G0598	female,Malaysia	reaksi negatif terhadap wanita Muslim yang tidak memakai tudung
+[388.028,389.479]	G0598	female,Malaysia	ha so tu je lah pasal
+[389.979,392.719]	G0598	female,Malaysia	pasal tudung yang pasal budaya tudung yang aku tahu
+[393.370,395.510]	G0598	female,Malaysia	selain daripada tu banyak lah lagi
+[395.558,397.070]	G0598	female,Malaysia	macam sukan
+[404.049,405.080]	G0598	female,Malaysia	dia orang
+[405.399,411.169]	G0598	female,Malaysia	ha dia orang kebanyakkan tak pakai tudung yang macam India dia macam suka sari atas kepala dia
+[412.360,415.640]	G0598	female,Malaysia	um macam Cina dia suka macam
+[416.289,421.698]	G0598	female,Malaysia	sepit sepit macam cucuk cucuk dia simpul je rambut dia
+[442.690,443.808]	G0598	female,Malaysia	Zapin
+[446.229,447.140]	G0598	female,Malaysia	um um
+[469.837,472.460]	G0598	female,Malaysia	ha aku pernah lah masuk
+[472.568,474.350]	G0598	female,Malaysia	tak ah dekat sekolah aku
+[474.520,478.279]	G0598	female,Malaysia	masuk kelab budaya so aku memang
+[479.020,481.850]	G0598	female,Malaysia	ha ada pengalaman Zapin la dekat sekolah
+[486.159,487.490]	G0598	female,Malaysia	so memang
+[487.869,491.360]	G0598	female,Malaysia	um boleh lah sebab aku memang minat menari
+[491.409,494.839]	G0598	female,Malaysia	so zapin je yang ada so memang aku masuk zapin ah
+[495.339,498.020]	G0598	female,Malaysia	dia punya tarian tu memang
+[498.068,499.759]	G0598	female,Malaysia	kena lembut
+[500.390,502.698]	G0598	female,Malaysia	lepas tu ada step step yang
+[502.750,505.460]	G0598	female,Malaysia	susah yang kena laju so memang kau kena
+[505.720,506.659]	G0598	female,Malaysia	cepat pick up
+[515.979,516.710]	G0598	female,Malaysia	hm
+[519.369,520.130]	G0598	female,Malaysia	hm
+[537.759,538.759]	G0598	female,Malaysia	um
+[590.949,591.919]	G0598	female,Malaysia	um hm
+[607.419,609.409]	G0598	female,Malaysia	kalau aku aku suka
+[610.689,611.960]	G0598	female,Malaysia	macam
+[613.088,620.058]	G0598	female,Malaysia	Sarawak sebab aku suka pakaian dia kalau dalam tarian aku suka tengok pakaian dia sebab
+[620.739,622.008]	G0598	female,Malaysia	sebab cantik
+[625.298,626.029]	G0598	female,Malaysia	um hm
+[652.358,653.268]	G0598	female,Malaysia	ha ah
+[668.320,669.648]	G0598	female,Malaysia	ke
+[669.939,672.079]	G0598	female,Malaysia	lagu Melayu kot sebab
+[672.820,678.168]	G0598	female,Malaysia	aku tak dwi bahasa selain daripada Melayu kalau English boleh lah
+[697.628,698.719]	G0598	female,Malaysia	um hm
+[779.978,780.678]	G0598	female,Malaysia	um
+[825.219,827.898]	G0598	female,Malaysia	kau pernah pergi macam
+[829.118,835.308]	G0598	female,Malaysia	ha Warisan Budaya buat persembahan dekat muzium muzium tu ke kau pernah
+[842.529,843.710]	G0598	female,Malaysia	um
+[844.840,846.379]	G0598	female,Malaysia	aku kalau
+[846.519,847.909]	G0598	female,Malaysia	macam tengok tengok
+[848.079,851.928]	G0598	female,Malaysia	karya-karya tu pernah la macam lawatan daripada sekolah ke
+[856.178,856.999]	G0598	female,Malaysia	um hm
+[865.779,868.249]	G0598	female,Malaysia	macam seni seni
+[868.928,871.190]	G0598	female,Malaysia	tu sejarah sejarah
+[871.749,875.239]	G0598	female,Malaysia	daripada ha ne-negeri [UNK]
+[875.859,878.479]	G0598	female,Malaysia	seni seni budaya ha macam tu
+[880.509,882.648]	G0598	female,Malaysia	ha karya-karya
+[884.648,885.558]	G0598	female,Malaysia	um hm
+[887.590,888.379]	G0598	female,Malaysia	hm
+[890.710,895.729]	G0598	female,Malaysia	ha pasal budaya juga kan ada macam kita macam
+[896.169,900.229]	G0598	female,Malaysia	macam seni mempertahankan diri macam silat
+[900.398,904.249]	G0598	female,Malaysia	lepas tu wushu macam aku aku pernah masuk
+[904.840,905.779]	G0598	female,Malaysia	silat
+[906.909,911.298]	G0598	female,Malaysia	silat ah ada lah nama silat kelab dia tu aku pernah masuk
+[911.319,913.909]	G0598	female,Malaysia	ha ya lah orang kata kalau umur sekarang ni
+[914.048,916.249]	G0598	female,Malaysia	untuk mempertahan kan diri
+[916.329,918.230]	G0598	female,Malaysia	time tu umur aku
+[919.089,920.328]	G0598	female,Malaysia	sepuluh tahun
+[921.428,922.758]	G0598	female,Malaysia	aku masuk
+[923.773,928.279]	G0598	female,Malaysia	silat tu daripada umur sepuluh tahun sampi aku tingkatan satu
+[929.500,930.829]	G0598	female,Malaysia	so banyak
+[931.119,932.659]	G0598	female,Malaysia	so banyak lah
+[932.829,936.767]	G0598	female,Malaysia	ah [UNK] pergerakan-pergerakan silat tu yang kau kadang
+[936.969,939.138]	G0598	female,Malaysia	ah aku silat kalau ada
+[939.370,941.028]	G0598	female,Malaysia	majlis perkahwinan
+[941.229,946.009]	G0598	female,Malaysia	dia orang akan panggil kumpulan silat kita orang untuk buat persembahan
+[946.059,946.969]	G0598	female,Malaysia	ataupun
+[947.110,948.289]	G0598	female,Malaysia	dari
+[948.429,952.369]	G0598	female,Malaysia	ataupun program-program dekat sekolah ah kita orang ada buat
+[952.689,955.729]	G0598	female,Malaysia	persembahan silat lah kita buat yang basic punya
+[995.589,997.069]	G0598	female,Malaysia	kira duty
+[1074.518,1077.228]	G0598	female,Malaysia	hm um so banyaklah tentang budaya ni
+[1077.398,1082.690]	G0598	female,Malaysia	yang aku tau lepas tu pernah aku masuk macam silat ah apa semua tu
+[1083.548,1085.809]	G0598	female,Malaysia	tarian yang aku pernah
+[1086.069,1087.098]	G0598	female,Malaysia	join lah
+[1094.440,1096.548]	G0598	female,Malaysia	itu je bye

@@ -75,7 +75,8 @@ training:
   dataloader_pin_memory: true
   
   # Resume from checkpoint
-  resume_from_checkpoint: false
+  resume_from_checkpoint: true
+  # checkpoint_path: "./outputs/parakeet-tdt-malay-asr/parakeet-tdt-malay-finetuning/2025-11-08_17-42-54/checkpoints/parakeet-tdt--epoch=00-step=23062-val_wer=0.2095-last.ckpt"
   
   # Hardware
   num_gpus: 1  # Multi-GPU not fully tested yet

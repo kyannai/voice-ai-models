@@ -1,0 +1,142 @@
+[1.000,1.487]	G0626	female,Malaysia	hai
+[1.870,3.140]	G0626	female,Malaysia	hai Athira
+[5.289,8.449]	G0626	female,Malaysia	di sekolah biasanya kau buat apa je
+[19.690,22.190]	G0626	female,Malaysia	aku kalau cuti biasanya
+[22.540,24.020]	G0626	female,Malaysia	aku pergi rumah
+[24.579,27.290]	G0626	female,Malaysia	nenek ataupun nenek-nenek saudara aku
+[28.000,31.010]	G0626	female,Malaysia	kalau dah terlampau bosan duduk rumah lah macam tu je
+[34.509,35.240]	G0626	female,Malaysia	kau pula
+[61.240,63.529]	G0626	female,Malaysia	kau pergi bercuti kat mana biasanya
+[70.089,71.269]	G0626	female,Malaysia	pulau apa tu
+[80.529,82.790]	G0626	female,Malaysia	Johor ada ke aku baru tau
+[88.520,90.830]	G0626	female,Malaysia	oh aku baru tau weh
+[96.409,98.269]	G0626	female,Malaysia	aku biasanya pergi
+[98.550,100.125]	G0626	female,Malaysia	ah ha rumah
+[101.290,104.089]	G0626	female,Malaysia	rumah nenek saudara aku yang dekat Segamat tu je
+[105.160,106.459]	G0626	female,Malaysia	cuti situ je
+[110.319,117.800]	G0626	female,Malaysia	ah pergi juga tapi lambat sikit lah tunggu macam cuti tu seminggu ke dua minggu ke baru bercuti jauh-jauh
+[124.449,127.730]	G0626	female,Malaysia	beberapa tahun yang lepas aku pergi Thailand
+[127.750,129.169]	G0626	female,Malaysia	bercuti dekat sana
+[149.559,151.460]	G0626	female,Malaysia	kau selalu pergi
+[151.600,153.740]	G0626	female,Malaysia	pantai Klebang yang kat Melaka tu ke
+[166.118,166.910]	G0626	female,Malaysia	ya
+[174.520,175.429]	G0626	female,Malaysia	dekat nya
+[175.479,178.460]	G0626	female,Malaysia	best lah kalau begitu kalau kau cuti selalu pergi sana
+[189.399,195.050]	G0626	female,Malaysia	kalau aku kalau bercuti tak selalu lah pergi pantai macam tu sebab
+[195.339,197.149]	G0626	female,Malaysia	pernah lemas kan tu
+[197.830,199.970]	G0626	female,Malaysia	tak nak lah pergi tu semua
+[200.199,202.460]	G0626	female,Malaysia	just cuti-cuti jalan gitu je
+[205.779,210.949]	G0626	female,Malaysia	ah biasanya kalau cuti seminggu gitu kalau pergi jalan jauh tidur hotel
+[218.679,223.070]	G0626	female,Malaysia	contoh hotel yang aku pernah pergi ah dekat
+[224.410,225.529]	G0626	female,Malaysia	Melaka
+[226.119,228.410]	G0626	female,Malaysia	tapi tak sure lah hotel apa sebab dah lama kan
+[230.740,231.710]	G0626	female,Malaysia	hm tu lah
+[233.320,234.440]	G0626	female,Malaysia	lagi apa
+[235.149,238.070]	G0626	female,Malaysia	kalau macam pergi ramai-ramai family
+[238.149,242.330]	G0626	female,Malaysia	kalau terlampau ramai tu kita orang tak tidur hotel tapi kita orang sewa homestay
+[266.649,268.309]	G0626	female,Malaysia	best lah kalau gitu
+[269.920,271.130]	G0626	female,Malaysia	ya kalau aku
+[271.660,274.130]	G0626	female,Malaysia	kalau aku selalu tidur
+[274.420,275.660]	G0626	female,Malaysia	tiga hari je
+[281.529,287.359]	G0626	female,Malaysia	kalau ah kita orang dia tak ikut satu malam tapi dia cuma ikut berapa hari macam
+[288.100,294.079]	G0626	female,Malaysia	dia ada tetapkan macam tiga hari limit macam tu lepas tu lima hari dengan tujuh hari
+[298.630,304.790]	G0626	female,Malaysia	tak berapa dia boleh [UNK] dia boleh [UNK] lagi lah dengan owner tu
+[315.609,317.329]	G0626	female,Malaysia	selain Melaka ah
+[318.729,323.239]	G0626	female,Malaysia	sebab kan dah lama tak pergi Port Dickson aku teringin nak bercuti dekat Port Dickson
+[327.909,329.930]	G0626	female,Malaysia	sebab Port Dickson dia punya
+[330.430,332.419]	G0626	female,Malaysia	pantai tu macam tenang je
+[334.058,335.207]	G0626	female,Malaysia	best je pergi
+[342.250,343.277]	G0626	female,Malaysia	Terengganu
+[343.957,346.068]	G0626	female,Malaysia	maksud engkau pergi Terengganu untuk
+[346.089,347.750]	G0626	female,Malaysia	bercuti best ke
+[353.469,355.159]	G0626	female,Malaysia	semata mata jumpa penyu
+[361.510,362.808]	G0626	female,Malaysia	hm
+[366.669,368.989]	G0626	female,Malaysia	Terengganu pantai apa yang ada dekat situ
+[390.940,395.899]	G0626	female,Malaysia	Teluk Ketapang dekat mana bahagian mana daerah means macam daerah mana dekat Terengganu tu
+[400.419,401.359]	G0626	female,Malaysia	oh
+[401.709,403.159]	G0626	female,Malaysia	sebab aku pun
+[403.990,407.209]	G0626	female,Malaysia	dah lama tak pergi dan jarang bercuti
+[416.200,416.929]	G0626	female,Malaysia	um
+[417.248,417.980]	G0626	female,Malaysia	kan
+[418.027,420.049]	G0626	female,Malaysia	ha um aku nak tanya
+[420.639,426.020]	G0626	female,Malaysia	tempat yang kau teringin paling teringin dekat luar negara lah tempat mana yang kau nak bercuti
+[430.089,431.359]	G0626	female,Malaysia	sama lah
+[444.248,445.190]	G0626	female,Malaysia	oh
+[445.299,446.960]	G0626	female,Malaysia	okey okey lagi satu
+[447.219,448.100]	G0626	female,Malaysia	ha
+[448.570,456.499]	G0626	female,Malaysia	bercuti dekat Korea ni kita ada tunggu masa dia kan musim sejuk musim tu semua kau paling teringin nak pergi musim apa
+[462.999,463.999]	G0626	female,Malaysia	wow
+[467.679,468.499]	G0626	female,Malaysia	lagi
+[468.729,469.969]	G0626	female,Malaysia	tempat apa lagi yang kau
+[470.109,473.630]	G0626	female,Malaysia	nak sangat pergi dengan family atau pun kawan kawan
+[481.388,482.570]	G0626	female,Malaysia	dekat mana tu
+[487.330,489.198]	G0626	female,Malaysia	oh dekat bandar Korea lah
+[492.338,493.639]	0	none,none	[ENS]
+[495.999,504.259]	G0626	female,Malaysia	um ada satu tempat dekat Korea pulau tu kan dia jauh kena naik kapal terbang daripada dalam Korea juga apa nama pulau tu
+[531.460,533.240]	G0626	female,Malaysia	ah um macam tu
+[534.158,539.449]	G0626	female,Malaysia	dekat Korea ada satu tempat yang kita boleh pakai dia punya baju kan yang Hanbok tu
+[549.548,555.079]	G0626	female,Malaysia	um baju tu semua kita sewa kan untuk bayar pinjam je
+[563.380,565.069]	G0626	female,Malaysia	okey okey um
+[566.319,570.169]	G0626	female,Malaysia	kau tak terngin nak pergi macam negara negara
+[571.210,573.530]	G0626	female,Malaysia	orang orang Inggeris ke macam
+[574.030,575.210]	G0626	female,Malaysia	U K ke
+[583.628,584.809]	G0626	female,Malaysia	nak jumpa kangaroo
+[590.229,593.358]	G0626	female,Malaysia	tapi kalau aku paling best dekat Jepun ah
+[597.309,599.839]	G0626	female,Malaysia	dekat Jepun kan ada Disneyland
+[603.460,605.569]	G0626	female,Malaysia	ha Disneyland tu paling best lah
+[609.309,610.280]	G0626	female,Malaysia	sebab
+[610.449,616.370]	G0626	female,Malaysia	tak pernah lagi pergi Disneyland tu so aku nak try tengok lah Disneyland tu macam mana semua
+[617.079,618.530]	G0626	female,Malaysia	sebab tempat tu besar
+[626.829,629.030]	G0626	female,Malaysia	Afrika apa yang ada dekat sana
+[644.259,645.380]	G0626	female,Malaysia	hm
+[646.480,648.558]	G0626	female,Malaysia	tapi dekat dalam Malaysia ni
+[650.918,654.108]	G0626	female,Malaysia	yang aku tidak pernah lagi pergi dekat
+[655.569,656.539]	G0626	female,Malaysia	Pahang
+[662.980,664.428]	G0626	female,Malaysia	kat mana tu Pahang
+[669.280,672.860]	G0626	female,Malaysia	erm tapi dekat Pahang pun best juga sebab ada Cameron Highland kan
+[677.980,678.739]	G0626	female,Malaysia	ha
+[698.110,699.319]	G0626	female,Malaysia	ladang teh
+[702.489,704.030]	G0626	female,Malaysia	oh ladang teh
+[705.610,710.058]	G0626	female,Malaysia	so rumah rumah nenek engkau tu dekat je lah dengan ladang ladang tu semua
+[722.470,723.558]	G0626	female,Malaysia	sana sejuk
+[723.610,727.159]	G0626	female,Malaysia	ah berapa darjah celcius biasanya kalau malam tu
+[727.720,729.890]	G0626	female,Malaysia	best tak kalau tidur ke apa ke
+[736.179,738.439]	G0626	female,Malaysia	em best lah kalau macam tu
+[741.039,744.409]	G0626	female,Malaysia	lagi apa lagi tempat yang engkau nak cadangkan dekat aku untuk pergi
+[759.429,763.009]	G0626	female,Malaysia	Sarawak dia ada satu yang sungai buaya tu kan
+[770.559,773.030]	G0626	female,Malaysia	oh okey okey ah
+[773.229,775.880]	G0626	female,Malaysia	kalau Sabah pula apa yang engkau
+[776.618,777.829]	G0626	female,Malaysia	ni um
+[778.149,780.140]	G0626	female,Malaysia	sebab apa kau suruh aku pergi Sabah
+[792.397,793.548]	G0626	female,Malaysia	rumah panjang
+[795.458,796.970]	G0626	female,Malaysia	oh okey okey
+[797.740,798.439]	G0626	female,Malaysia	erm
+[798.819,802.309]	G0626	female,Malaysia	kalau aku nak suruh engkau pergi
+[802.509,803.539]	G0626	female,Malaysia	Indon
+[805.929,806.839]	G0626	female,Malaysia	ya
+[807.160,811.220]	G0626	female,Malaysia	sebab Indon dia punya tempat dia menarik
+[818.380,819.500]	G0626	female,Malaysia	ha sebab
+[820.000,825.770]	G0626	female,Malaysia	dia punya lagi satu kalau engkau nak tukar duit Malaysia ke duit Indon sangat murah
+[827.439,829.759]	G0626	female,Malaysia	sebab itu engkau boleh pergi bercuti dekat situ
+[829.899,832.399]	G0626	female,Malaysia	lagi satu erm
+[832.720,834.530]	G0626	female,Malaysia	banyak tempat yang engkau boleh pergi
+[838.599,840.110]	G0626	female,Malaysia	erm Surabaya
+[846.729,848.179]	G0626	female,Malaysia	hm ya lah tu
+[848.319,850.130]	G0626	female,Malaysia	aku pun tak [UNK] tak sure sangat
+[855.669,858.979]	G0626	female,Malaysia	ha itu saja lah yang aku cadangkan kau pergi dekat
+[859.000,860.030]	G0626	female,Malaysia	Indon itu
+[862.449,866.569]	G0626	female,Malaysia	erm tempat lain kalau engkau hendak pergi boleh juga tapi aku tidak sure dekat mana
+[872.410,874.189]	G0626	female,Malaysia	boleh lah engkau boleh pergi situ lah
+[878.020,882.890]	G0626	female,Malaysia	erm kau hendak aku suggestkan dekat dalam Malaysia ataupun luar Malaysia
+[886.178,888.708]	G0626	female,Malaysia	dalam Malaysia engkau pergi Perak
+[894.549,896.989]	G0626	female,Malaysia	sebab dekat Perak itu dia ada
+[897.220,903.530]	G0626	female,Malaysia	zoo zoo Perak tu dia agak besar dan dalam tu macam macam haiwan yang ada tak macam dekat zoo Johor ni
+[906.819,910.940]	G0626	female,Malaysia	ah dia lagi luas and then kalau engkau penat engkau boleh naik [UNK]
+[911.170,915.319]	G0626	female,Malaysia	kereta dia macam keretapi dia akan bawa kau orang pusing dekat dalam satu zoo tu
+[920.530,922.280]	G0626	female,Malaysia	erm dia macam Zoo Negara
+[922.420,926.599]	G0626	female,Malaysia	lagi best la tempat dia pun ada jual banyak barang makanan semua
+[931.839,935.720]	G0626	female,Malaysia	erm tempat lain dah tak sure dah sebab
+[935.888,939.290]	G0626	female,Malaysia	tak banyak sangat yang best dekat Malaysia ni engkau pula suggest kan
+[948.909,952.189]	G0626	female,Malaysia	Paris oh best juga kota cinta kan tu
+[963.759,968.779]	G0626	female,Malaysia	um memang lah memang akan sinonim pun tapi lagi better kalau pergi dengan kawan-kawan lagi best
+[975.640,976.309]	G0626	female,Malaysia	bye

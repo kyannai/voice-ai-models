@@ -6,7 +6,7 @@ Automatically detects model family and routes to the appropriate transcriber.
 Supports: Whisper, Qwen2.5-Omni, Qwen3-Omni, Qwen2-Audio, Parakeet (NeMo), Paraformer, and more.
 
 Usage:
-    python evaluate.py --model nvidia/parakeet-tdt-0.6b-v3 --test-data test_data/malaya-test/malaya-malay-test-set.json --audio-dir test_data/malaya-test --device auto
+    python evaluate.py --model nvidia/parakeet-tdt-0.6b-v3 --test-dataset meso-malaya-test --device auto
 """
 
 import argparse
@@ -16,6 +16,8 @@ import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime
+
+from datasets_config import list_datasets, get_dataset_config
 
 
 def detect_model_family(model_name: str) -> tuple:
@@ -130,8 +132,8 @@ class UnifiedEvaluator:
         else:
             model_name = self.args.model.split("/")[-1]
         
-        # Extract dataset name
-        dataset_name = Path(self.args.test_data).stem
+        # Use dataset name directly from argument
+        dataset_name = self.args.test_dataset
         
         # Build directory name
         name_parts = [
@@ -181,12 +183,23 @@ class UnifiedEvaluator:
     
     def save_config(self):
         """Save evaluation configuration for reproducibility"""
+        # Get dataset configuration
+        dataset_config = get_dataset_config(self.args.test_dataset)
+        
+        # Convert Path objects to strings for JSON serialization
+        dataset_config_serializable = {}
+        for key, value in dataset_config.items():
+            if isinstance(value, Path):
+                dataset_config_serializable[key] = str(value)
+            else:
+                dataset_config_serializable[key] = value
+        
         config = {
             "model": self.args.model,
             "model_family": self.model_family,
             "hub": self.args.hub,
-            "test_data": str(Path(self.args.test_data).absolute()),
-            "audio_dir": str(Path(self.args.audio_dir).absolute()) if self.args.audio_dir else None,
+            "test_dataset": self.args.test_dataset,
+            "dataset_config": dataset_config_serializable,
             "device": self.args.device,
             "max_samples": self.args.max_samples,
             "language": self.args.language,
@@ -221,14 +234,10 @@ class UnifiedEvaluator:
             sys.executable,
             str(script_path),
             "--model", self.args.model,
-            "--test-data", self.args.test_data,
+            "--test-dataset", self.args.test_dataset,
             "--output-dir", str(self.output_dir),
             "--device", self.args.device,
         ]
-        
-        # Add audio directory
-        if self.args.audio_dir:
-            cmd.extend(["--audio-dir", self.args.audio_dir])
         
         # Add hub/source (only for models that support it: Whisper, Paraformer)
         if self.model_family in ["Whisper", "Paraformer", "FunASR"]:
@@ -314,19 +323,15 @@ class UnifiedEvaluator:
                 self.logger.info(f"Samples: {results.get('num_samples', 'N/A')}")
                 self.logger.info("")
                 
-                # Extract WER (stored as dict with breakdown)
-                wer_value = results.get('wer', {})
-                if isinstance(wer_value, dict):
-                    wer = wer_value.get('wer', wer_value.get('overall', 0))
-                else:
-                    wer = wer_value
-                
-                # Extract CER (stored as simple float)
+                # Extract metrics (stored as simple floats)
+                wer = results.get('wer', 0)
                 cer = results.get('cer', 0)
+                mer = results.get('mer', 0)
                 
                 # Print metrics
-                self.logger.info(f"WER: {wer:.2f}%")
-                self.logger.info(f"CER: {cer:.2f}%")
+                self.logger.info(f"WER: {wer:.4f}")
+                self.logger.info(f"CER: {cer:.4f}")
+                self.logger.info(f"MER: {mer:.4f}")
                 
             except Exception as e:
                 self.logger.warning(f"Could not load results: {e}")
@@ -374,18 +379,32 @@ class UnifiedEvaluator:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Unified ASR Evaluation - Automatic model family detection"
+        description="Unified ASR Evaluation - Automatic model family detection",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=f"""
+Available datasets:
+  {', '.join(list_datasets())}
+
+Examples:
+  # Evaluate Whisper on meso-malaya-test
+  python evaluate.py --model openai/whisper-large-v3-turbo --test-dataset meso-malaya-test
+
+  # Evaluate Parakeet on ytl-malay-test
+  python evaluate.py --model nvidia/parakeet-tdt-0.6b-v3 --test-dataset ytl-malay-test
+
+  # Evaluate on SEACrowd dataset
+  python evaluate.py --model openai/whisper-large-v3-turbo --test-dataset seacrowd-asr-malcsc
+"""
     )
     
     # Required arguments
     parser.add_argument("--model", required=True, 
                        help="Model name or path (auto-detects family)")
-    parser.add_argument("--test-data", required=True, 
-                       help="Path to test data JSON/CSV")
+    parser.add_argument("--test-dataset", required=True, 
+                       choices=list_datasets(),
+                       help="Test dataset name from registry")
     
     # Optional arguments
-    parser.add_argument("--audio-dir", 
-                       help="Base directory for audio files")
     parser.add_argument("--device", default="auto", 
                        choices=["auto", "cuda", "mps", "cpu"],
                        help="Device (default: auto)")

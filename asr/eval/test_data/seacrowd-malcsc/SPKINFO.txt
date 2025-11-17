@@ -1,0 +1,11 @@
+CHANNEL	SPEAKER_ID	GENDER	AGE	REGION,CITY	DEVICE
+C0	G0216	M	19	Malaysia,Johor,Johor Bahru	iPhone 6s
+C0	G0369	F	19	Malaysia,Johor,Johor Bahru	HUAWEI DRA-LX9
+C0	G0489	F	19	Malaysia,Johor,Johor Bahru	iPhone 6s
+C0	G0712	M	19	Malaysia,Johor,Johor Bahru	HUAWEI DRA-LX9
+C0	G0397	F	24	Malaysia,Johor,Johor Bahru	Xiaomi Redmi Note 4
+C0	G0474	M	19	Malaysia,Johor,Johor Bahru	HUAWEI LDN-LX2
+C0	G0521	F	19	Malaysia,Johor,Johor Bahru	iPhone 6s
+C0	G0591	M	19	Malaysia,Johor,Johor Bahru	HUAWEI DRA-LX9
+C0	G0598	F	19	Malaysia,Johor,Johor Bahru	HUAWEI CDY-NX9B
+C0	G0626	F	19	Malaysia,Johor,Johor Bahru	iPhone 6s

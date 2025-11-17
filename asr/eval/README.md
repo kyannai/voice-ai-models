@@ -6,10 +6,13 @@ Comprehensive evaluation tools for ASR (Automatic Speech Recognition) models on 
 
 ```
 eval/
-├── evaluate.py               ← Main entry point (unified interface)
-├── test_installation.py      ← Test all dependencies
-├── requirements.txt          ← ALL dependencies (consolidated)
-├── setup_env.sh              ← Interactive setup script
+├── evaluate.py               ← Main evaluation script
+├── batch_evaluate.py         ← Multi-model comparison
+├── analyze_comparison.py     ← Analysis tools
+├── run_batch_eval.sh         ← Quick start (3-model comparison)
+├── requirements.txt          ← Dependencies
+├── setup_env.sh              ← Interactive setup
+├── pyproject.toml            ← Modern packaging config
 ├── README.md                 ← This file (complete documentation)
 ├── outputs/                  ← All evaluation outputs (auto-generated)
 ├── calculate_metrics/        ← Shared evaluation scripts
@@ -59,10 +62,12 @@ uv pip install -r requirements.txt
 
 **Verify installation:**
 ```bash
-python test_installation.py
-```
+# Test imports
+python -c "import torch; import transformers; import jiwer; print('✓ All dependencies OK')"
 
-This tests all dependencies and confirms everything is ready.
+# Or run a quick evaluation
+./run_batch_eval.sh
+```
 
 **What gets installed:**
 - **Core**: torch, torchaudio, librosa, numpy, pandas
@@ -73,66 +78,82 @@ This tests all dependencies and confirms everything is ready.
 
 ### 2. Run Evaluation (Unified Interface)
 
-**NEW: Single command for evaluation + metrics!**
+**NEW: Predefined Dataset Registry!**
+
+Use predefined datasets by name instead of specifying paths:
 
 ```bash
-# Whisper evaluation
+# Whisper evaluation on meso-malaya-test
 python evaluate.py \
-  --framework whisper \
   --model mesolitica/Malaysian-whisper-large-v3-turbo-v3 \
-  --test-data test_data/ytl-malay-test/asr_ground_truths.json \
-  --audio-dir test_data/ytl-malay-test \
+  --test-dataset meso-malaya-test \
   --device auto
 
-# Paraformer evaluation
+# Parakeet evaluation on ytl-malay-test
 python evaluate.py \
-  --framework funasr \
-  --model paraformer-multilingual \
-  --test-data test_data/ytl-malay-test/asr_ground_truths.json \
-  --audio-dir test_data/ytl-malay-test \
+  --model nvidia/parakeet-tdt-0.6b-v3 \
+  --test-dataset ytl-malay-test \
   --device cuda
 
-# Qwen2-Audio evaluation
+# Whisper on SEACrowd dataset (auto-downloads from HuggingFace)
 python evaluate.py \
-  --framework qwen2audio \
-  --model Qwen/Qwen2-Audio-7B-Instruct \
-  --test-data test_data/ytl-malay-test/asr_ground_truths.json \
-  --audio-dir test_data/ytl-malay-test \
-  --device cuda \
-  --hub hf \
-  --asr-prompt "Transcribe this Malay audio accurately."
+  --model openai/whisper-large-v3-turbo \
+  --test-dataset seacrowd-asr-malcsc \
+  --device cuda
 ```
 
+**Available Datasets:**
+- `meso-malaya-test`: Malaya Malay test set (~5000 samples, local)
+- `ytl-malay-test`: YTL internal Malay test set (~800 samples, local)
+- `seacrowd-asr-malcsc`: SEACrowd Malaysian conversational speech (20 samples, local)
+
 **Features:**
+- ✅ Automatic model family detection
+- ✅ Predefined dataset registry
 - ✅ Automatic transcription + metrics calculation
 - ✅ Organized outputs with timestamps
 - ✅ Complete logging to file
-- ✅ Standardized output format
 - ✅ All results in `outputs/` directory
 
-### 3. Prepare Test Data
+### 3. Batch Evaluation (Compare Multiple Models)
 
-Create a CSV or JSON file with your test data containing:
-- `audio_path`: Path to audio file
-- `text`: Reference transcription (ground truth)
+```bash
+# Compare all models on default dataset
+./run_batch_eval.sh
 
-**CSV format:**
-```csv
-audio_path,text
-audio/sample1.wav,Can you tolong check the system lah
-audio/sample2.wav,Selamat pagi, saya nak buat appointment
+# Compare models on different dataset
+./run_batch_eval.sh --test-dataset ytl-malay-test
+
+# Compare specific models only
+python batch_evaluate.py \
+  --test-dataset meso-malaya-test \
+  --models whisper-large-v3-turbo parakeet-tdt-0.6b
 ```
 
-**JSON format:**
+### 4. Adding Custom Test Data
+
+To add your own dataset to the registry, edit `datasets_config.py`:
+
+```python
+"my-custom-dataset": {
+    "type": "local",
+    "description": "My custom test dataset",
+    "test_data": EVAL_DIR / "test_data/my-dataset/test.json",
+    "audio_dir": EVAL_DIR / "test_data/my-dataset/audio",
+    "language": "ms",
+}
+```
+
+**JSON format for test data:**
 ```json
 [
   {
     "audio_path": "audio/sample1.wav",
-    "text": "Can you tolong check the system lah"
+    "reference": "Can you tolong check the system lah"
   },
   {
     "audio_path": "audio/sample2.wav",
-    "text": "Selamat pagi, saya nak buat appointment"
+    "reference": "Selamat pagi, saya nak buat appointment"
   }
 ]
 ```
@@ -159,22 +180,22 @@ ls outputs/
 
 ### Main Entry Point: `evaluate.py`
 
-The `evaluate.py` script provides a single, unified interface for all ASR frameworks.
+The `evaluate.py` script provides a single, unified interface for all ASR models with automatic model family detection.
 
 **Key Features:**
+- **Auto-Detection**: Automatically detects model family (Whisper, Parakeet, Qwen, etc.)
+- **Dataset Registry**: Use predefined datasets by name
 - **Single Command**: Run transcription + metrics in one go
 - **Auto-naming**: Output directories automatically named with parameters
 - **Full Logging**: Complete log saved to `evaluation.log` in each run
 - **Organized Outputs**: All results in `outputs/` with timestamp
-- **Framework Agnostic**: Same interface for Whisper, FunASR, Qwen2-Audio
 
 **Basic Usage:**
 
 ```bash
 python evaluate.py \
-  --framework <framework> \
   --model <model-id-or-path> \
-  --test-data <test-data-file> \
+  --test-dataset <dataset-name> \
   --device <device>
 ```
 
@@ -182,18 +203,14 @@ python evaluate.py \
 
 | Argument | Required | Description | Example |
 |----------|----------|-------------|---------|
-| `--framework` | ✅ | ASR framework | `whisper`, `funasr`, `qwen2audio` |
-| `--model` | ✅ | Model ID or path | `mesolitica/whisper-small-malaysian-v2` |
-| `--test-data` | ✅ | Test data file | `test_data/ytl-malay-test/asr_ground_truths.json` |
-| `--model-source` | | Model source | `hf` (default), `local` |
-| `--audio-dir` | | Audio base directory | `test_data/ytl-malay-test` |
+| `--model` | ✅ | Model ID or path (auto-detects family) | `openai/whisper-large-v3-turbo` |
+| `--test-dataset` | ✅ | Dataset name from registry | `meso-malaya-test` |
 | `--device` | | Device | `auto` (default), `cuda`, `mps`, `cpu` |
+| `--hub` | | Model hub | `hf` (default), `ms`, `local` |
 | `--name` | | Custom run name | `baseline_experiment` |
+| `--max-samples` | | Limit samples for testing | `10` |
 | `--language` | | Language (Whisper) | `ms` (default), `en`, `auto` |
-| `--hub` | | Model hub (FunASR) | `hf` (default), `ms` |
-| `--asr-prompt` | | Prompt (Qwen2-Audio) | Custom transcription prompt |
-| `--workers` | | Worker threads | `4` (for FunASR) |
-| `--streaming` | | Enable streaming | Future feature |
+| `--asr-prompt` | | Prompt (Qwen models) | Custom transcription prompt |
 
 **Output Directory Naming:**
 
@@ -1081,7 +1098,7 @@ python analyze_results.py \
 
 ```bash
 # Test your installation first
-python test_installation.py
+python -c "import torch; import transformers; import jiwer; print('✓ OK')"
 
 # If installation fails, try upgrading pip
 pip install --upgrade pip

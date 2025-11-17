@@ -16,6 +16,7 @@ from tqdm import tqdm
 
 from utils import (
     load_test_data,
+    load_dataset_by_name,
     validate_samples,
     save_predictions
 )
@@ -79,7 +80,7 @@ class ParakeetTranscriber:
         logger.info("Loading model through NeMo ASRModel...")
         
         # Check if model is a local .nemo file or HuggingFace model name
-        model_path = Path(model_name)
+        model_path = Path(model_name).expanduser()  # Expand ~ to home directory
         if model_path.exists() and (model_path.is_file() and model_path.suffix == '.nemo'):
             # Load from local .nemo file (fine-tuned model)
             logger.info(f"Loading from local .nemo file: {model_name}")
@@ -189,24 +190,25 @@ def main():
     parser = argparse.ArgumentParser(description="Transcribe audio using NVIDIA Parakeet models")
     parser.add_argument("--model", default="nvidia/parakeet-tdt-0.6b-v3", 
                        help="Parakeet model name or path (default: nvidia/parakeet-tdt-0.6b-v3)")
-    parser.add_argument("--test-data", required=True, help="Path to test data JSON/CSV")
+    parser.add_argument("--test-dataset", help="Dataset name from registry (e.g., meso-malaya-test)")
     parser.add_argument("--output-dir", required=True, help="Output directory")
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
-    parser.add_argument("--audio-dir", help="Base directory for audio files")
     parser.add_argument("--batch-size", type=int, default=1, help="Batch size for inference")
     parser.add_argument("--max-samples", type=int, help="Limit number of samples")
     
     args = parser.parse_args()
     
-    # Load test data
-    logger.info(f"Loading test data from {args.test_data}")
-    test_data = load_test_data(args.test_data, args.audio_dir)
-    test_data = validate_samples(test_data)
+    # Validate that test dataset is provided
+    if not args.test_dataset:
+        parser.error("--test-dataset is required")
     
-    # Limit samples if requested
-    if args.max_samples and args.max_samples < len(test_data):
-        logger.info(f"Limiting to first {args.max_samples} samples (--max-samples)")
-        test_data = test_data[:args.max_samples]
+    # Load test data using dataset name
+    logger.info(f"Loading dataset: {args.test_dataset}")
+    test_data = load_dataset_by_name(
+        args.test_dataset,
+        max_samples=args.max_samples,
+        validate=True
+    )
     
     logger.info(f"Loaded {len(test_data)} test samples")
     

@@ -29,6 +29,7 @@ from peft import PeftModel
 
 from utils import (
     load_test_data,
+    load_dataset_by_name,
     validate_samples,
     clean_qwen_output,
     save_predictions
@@ -71,6 +72,7 @@ class Qwen25OmniTranscriber:
         device: str = "auto",
         asr_prompt: str = "Transcribe the audio into text.",
         base_model: str = None,
+        chunk_length_s: int = 30,
     ):
         """
         Initialize Qwen2.5-Omni transcriber
@@ -80,9 +82,11 @@ class Qwen25OmniTranscriber:
             device: Device to run on ('cuda', 'cpu', or 'auto')
             asr_prompt: Prompt for ASR task
             base_model: Base model name (required if model_name is a LoRA checkpoint)
+            chunk_length_s: Length of audio chunks in seconds (default: 30)
         """
         self.model_name = model_name
         self.asr_prompt = asr_prompt
+        self.chunk_length_s = chunk_length_s
         self.lock = Lock()  # Thread lock for model access
         
         logger.info(f"Loading Qwen2.5-Omni model: {model_name}")
@@ -177,19 +181,19 @@ class Qwen25OmniTranscriber:
             self.processor = Qwen2_5OmniProcessor.from_pretrained(base_model)
         else:
             # Load regular model or merged checkpoint
-        if use_flash_attn:
-            self.model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
-                model_name,
-                torch_dtype="auto",  # Official code uses "auto"
-                device_map="auto",    # Official code uses "auto"
-                attn_implementation="flash_attention_2",
-            )
-        else:
-            self.model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
-                model_name,
-                torch_dtype="auto",  # Official code uses "auto"
-                device_map="auto",    # Official code uses "auto"
-            )
+            if use_flash_attn:
+                self.model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
+                    model_name,
+                    torch_dtype="auto",  # Official code uses "auto"
+                    device_map="auto",    # Official code uses "auto"
+                    attn_implementation="flash_attention_2",
+                )
+            else:
+                self.model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
+                    model_name,
+                    torch_dtype="auto",  # Official code uses "auto"
+                    device_map="auto",    # Official code uses "auto"
+                )
             
             # Load processor
             self.processor = Qwen2_5OmniProcessor.from_pretrained(model_name)
@@ -212,26 +216,21 @@ class Qwen25OmniTranscriber:
         
         logger.info("✓ Qwen2.5-Omni model loaded and optimized for inference!")
         logger.info(f"  Memory optimization: Talker disabled (~2GB saved)")
+        logger.info(f"  Chunking: {self.chunk_length_s}s chunks for long audio")
         if is_lora_checkpoint:
             logger.info(f"  LoRA checkpoint: Merged for faster inference")
     
-    def transcribe(self, audio_path: Union[str, Path]) -> Dict:
+    def _transcribe_chunk(self, audio_array, audio_path: str = "audio.wav") -> str:
         """
-        Transcribe a single audio file
+        Transcribe a single audio chunk
         
         Args:
-            audio_path: Path to audio file
+            audio_array: Audio array (numpy array from librosa)
+            audio_path: Path to audio file (for conversation format)
             
         Returns:
-            Dictionary with transcription and timing info
+            Transcription text
         """
-        # Load audio
-        audio_array, sr = librosa.load(str(audio_path), sr=16000)
-        audio_duration = len(audio_array) / sr
-        
-        # Start timing
-        start_time = time.time()
-        
         with self.lock:  # Thread-safe model access
             try:
                 # Prepare conversation format
@@ -253,7 +252,6 @@ class Qwen25OmniTranscriber:
                 )
                 
                 # Process inputs (following official code exactly)
-                # Official code: inputs = processor(text=text, audio=audios, images=images, videos=videos, ...)
                 inputs = self.processor(
                     text=text,
                     audio=[audio_array],  # List format as per official docs
@@ -266,19 +264,21 @@ class Qwen25OmniTranscriber:
                 # Store input_ids length BEFORE moving to device
                 input_ids_length = inputs["input_ids"].shape[1]
                 
-                # Move to device and dtype (following official code)
-                # Official: inputs = inputs.to(model.device).to(model.dtype)
+                # Move to device
                 inputs = inputs.to(self.model.device)
                 
-                # Generate (following official sample code)
+                # Estimate max_new_tokens based on audio length (roughly 3 tokens per second)
+                audio_duration = len(audio_array) / 16000  # sr=16000
+                max_new_tokens = max(128, int(audio_duration * 3))
+                
+                # Generate
                 with torch.no_grad():
-                    # Official code: text_ids, audio = model.generate(**inputs, use_audio_in_video=USE_AUDIO_IN_VIDEO)
-                    # Since we disabled talker, the model returns only text_ids (no audio tuple)
                     output = self.model.generate(
                         **inputs,
-                        max_new_tokens=128,
+                        max_new_tokens=max_new_tokens,
                         min_new_tokens=1,
                         do_sample=False,
+                        temperature=0.0,
                         num_beams=1,
                         use_cache=True,
                         pad_token_id=self.processor.tokenizer.pad_token_id,
@@ -287,24 +287,18 @@ class Qwen25OmniTranscriber:
                     
                     # Handle both cases: with talker (tuple) or without talker (single value)
                     if isinstance(output, tuple):
-                        # Official behavior with talker enabled: (text_ids, audio)
                         text_ids, audio_output = output
                     else:
-                        # Behavior with talker disabled: just text_ids
                         text_ids = output
                 
-                # Decode (official code: processor.batch_decode(text_ids, ...))
-                # Note: Official code passes text_ids directly, not text_ids.sequences
-                # But checking the shape, text_ids should be the token tensor directly
+                # Decode
                 if hasattr(text_ids, 'sequences'):
-                    # If it's a GenerateDecoderOnlyOutput
                     result = self.processor.batch_decode(
                         text_ids.sequences[:, input_ids_length:],
                         skip_special_tokens=True,
                         clean_up_tokenization_spaces=False
                     )[0]
                 else:
-                    # If it's already a tensor (more likely based on official code)
                     result = self.processor.batch_decode(
                         text_ids[:, input_ids_length:],
                         skip_special_tokens=True,
@@ -313,10 +307,48 @@ class Qwen25OmniTranscriber:
                 
                 # Clean output
                 transcription = clean_qwen_output(result)
+                return transcription.strip()
                 
             except Exception as e:
-                logger.error(f"Error transcribing {audio_path}: {e}")
-                raise
+                logger.error(f"Error transcribing chunk: {e}")
+                return ""
+    
+    def transcribe(self, audio_path: Union[str, Path]) -> Dict:
+        """
+        Transcribe a single audio file (with chunking for long audio)
+        
+        Args:
+            audio_path: Path to audio file
+            
+        Returns:
+            Dictionary with transcription and timing info
+        """
+        # Load audio
+        audio_array, sr = librosa.load(str(audio_path), sr=16000)
+        audio_duration = len(audio_array) / sr
+        
+        # Start timing
+        start_time = time.time()
+        
+        # Check if we need to chunk
+        if audio_duration > self.chunk_length_s:
+            # Chunk the audio
+            logger.info(f"Audio is {audio_duration:.1f}s, chunking into {self.chunk_length_s}s segments...")
+            
+            chunk_samples = self.chunk_length_s * sr
+            transcriptions = []
+            
+            for i in range(0, len(audio_array), chunk_samples):
+                chunk = audio_array[i:i + chunk_samples]
+                chunk_transcription = self._transcribe_chunk(chunk, str(audio_path))
+                if chunk_transcription:
+                    transcriptions.append(chunk_transcription)
+            
+            # Concatenate all chunks
+            transcription = " ".join(transcriptions)
+        else:
+            # Transcribe directly
+            transcription = self._transcribe_chunk(audio_array, str(audio_path))
         
         processing_time = time.time() - start_time
         rtf = processing_time / audio_duration if audio_duration > 0 else 0
@@ -332,26 +364,25 @@ class Qwen25OmniTranscriber:
 def main():
     parser = argparse.ArgumentParser(description="Transcribe audio using Qwen2.5-Omni")
     parser.add_argument("--model", required=True, help="Qwen2.5-Omni model name or path to checkpoint")
-    parser.add_argument("--test-data", required=True, help="Path to test data JSON/CSV")
+    parser.add_argument("--test-dataset", required=True, help="Dataset name from registry (e.g., meso-malaya-test, seacrowd-asr-malcsc)")
     parser.add_argument("--output-dir", required=True, help="Output directory")
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
-    parser.add_argument("--audio-dir", help="Base directory for audio files")
     parser.add_argument("--asr-prompt", default="Transcribe the audio into text.", 
                        help="ASR prompt")
     parser.add_argument("--max-samples", type=int, help="Limit number of samples")
     parser.add_argument("--base-model", help="Base model name (only needed for LoRA checkpoints if auto-detection fails)")
+    parser.add_argument("--chunk-length", type=int, default=30,
+                       help="Chunk length in seconds for long audio (default: 30)")
     
     args = parser.parse_args()
     
-    # Load test data
-    logger.info(f"Loading test data from {args.test_data}")
-    test_data = load_test_data(args.test_data, args.audio_dir)
-    test_data = validate_samples(test_data)
-    
-    # Limit samples if requested
-    if args.max_samples and args.max_samples < len(test_data):
-        logger.info(f"Limiting to first {args.max_samples} samples (--max-samples)")
-        test_data = test_data[:args.max_samples]
+    # Load test data using dataset name
+    logger.info(f"Loading dataset: {args.test_dataset}")
+    test_data = load_dataset_by_name(
+        args.test_dataset,
+        max_samples=args.max_samples,
+        validate=True
+    )
     
     logger.info(f"Loaded {len(test_data)} test samples")
     
@@ -360,7 +391,8 @@ def main():
         model_name=args.model,
         device=args.device,
         asr_prompt=args.asr_prompt,
-        base_model=args.base_model
+        base_model=args.base_model,
+        chunk_length_s=args.chunk_length
     )
     
     # Transcribe all samples

@@ -1,0 +1,766 @@
+audio_path,reference,hypothesis,audio_duration,processing_time,rtf,index
+test_data/malaya-test/malay-test/0.wav,tangan aku disentuh lembut,Tangan aku disentuh lembut.,2.06875,0.696413516998291,0.33663493268799566,0
+test_data/malaya-test/malay-test/1.wav,kenapa tidak kita mengusir obummer,Kenapa tidak kita mengusir Obamer,2.9425625,0.3577423095703125,0.12157509299133408,1
+test_data/malaya-test/malay-test/2.wav,sama kalau kekasih kau ikut jantan lain kan saving duit hantaran 20k kau tu,"Sama kalau kau kasih kau ikut jantan lain, kan saving duit hantaran 20k kau tu.",5.074,0.672797441482544,0.13259705192797477,2
+test_data/malaya-test/malay-test/3.wav,laki laki bernama andra itu segera mengalihkan pandangannya ke libra kemudian,lelaki-lelaki bernama anda itu segera mengalihkan pandangannya ke libra kemudian,4.300625,0.5292432308197021,0.12306193421181855,3
+test_data/malaya-test/malay-test/4.wav,kenapa saya berurusan dengan atheis internet biasanya meninggalkan keputusan yang tidak baik,Kenapa saya berurusan dengan etis internet biasanya meninggalkan keputusan yang tidak baik?,6.58725,0.4920082092285156,0.07469098777616086,4
+test_data/malaya-test/malay-test/5.wav,dan perlukan duit untuk operation dalam kadar segera,dan perlukan duit untuk operation dalam kadar segera,3.72325,0.526451587677002,0.14139571279849644,5
+test_data/malaya-test/malay-test/6.wav,tokong adalah bukti bahawa umno tidak ada belas kasihan,Tokong adalah bukti bahawa UMNO tidak ada belas kasihan.,4.642625,0.5133388042449951,0.11057080945477939,6
+test_data/malaya-test/malay-test/7.wav,ditengah tengah nikmatnya aku menyantap makanan bangdik tiba tiba si chef,Di tengah-tengah nikmatnya aku menyantap Makanan bangdik tiba-tiba si Jeff,5.500125,0.5131428241729736,0.09329657492747413,7
+test_data/malaya-test/malay-test/8.wav,kenapa lelaki lebih bijak daripada gadis dalam setiap aspek,Kenapa lelaki lebih bijak daripada gadis dalam setiap aspek?,4.5288125,0.41073036193847656,0.09069272837823968,8
+test_data/malaya-test/malay-test/9.wav,waktu siang buka siaran yang anak kau suka,Waktu siang buka siaran yang anak kau suka.,3.2524375,0.43080663681030273,0.13245654583994396,9
+test_data/malaya-test/malay-test/10.wav,kenapa doktor ezor alaris dapat membunuh seseorang dan berjalan kaki,Kenapa Dr. Azor Alaris dapat membunuh seseorang dan berjalan kaki?,5.387125,0.6382787227630615,0.11848225589030541,10
+test_data/malaya-test/malay-test/11.wav,gue eh sorry maksudnya aku boleh ketawa gak,Kuih. Eh sorry. Maksudnya aku boleh ketawa ke?,3.1538125,0.47621750831604004,0.15099740657253405,11
+test_data/malaya-test/malay-test/12.wav,sekiranya saya memanggil polis pada anak gay saya,"Sekiranya saya memanggil polis pada anak gay saya,",4.2468125,0.3831660747528076,0.09022439176507266,12
+test_data/malaya-test/malay-test/13.wav,boleh diubah dengan menambah,boleh diubah dengan menambah,2.5309375,0.34192585945129395,0.1350984998449365,13
+test_data/malaya-test/malay-test/14.wav,menunggu peserta negara lain yang belum tiba serta proses,menunggu peserta negara lain yang belum tiba serta proses,3.957375,0.4062168598175049,0.10264805832591171,14
+test_data/malaya-test/malay-test/15.wav,sebut perkataan acuan,Sebut perkataan acuan,3.08825,0.3505091667175293,0.11349766590060044,15
+test_data/malaya-test/malay-test/16.wav,adakah untuk menyedut rokok untuk bertaubat walaupun ateis anda,Adakah untuk menyedut rokok untuk bertawabat walaupun etis anda?,4.8189375,0.5628511905670166,0.11679985278228171,16
+test_data/malaya-test/malay-test/17.wav,c tudung rambut sama seperti di sektor swasta,Tudung rambut sama seperti di sektor swasta.,3.654875,0.3807394504547119,0.1041730429781352,17
+test_data/malaya-test/malay-test/18.wav,sebelum ini menteri hal ehwal ekonomi datuk seri mohamed azmin ali,"Sebelum ini, Menteri Hal Ehwal Ekonomi, Datuk Seri Muhammad Azmin Ali berkata,",6.8258125,0.5336551666259766,0.0781819258331483,18
+test_data/malaya-test/malay-test/19.wav,bagaimana orang yahudi cuba mengiklankan akal komuniti mereka,Bagaimana orang Yahudi cuba mengiklankan akal komuniti mereka?,5.283,0.492678165435791,0.093257271519173,19
+test_data/malaya-test/malay-test/20.wav,akan demokrat membuat kita menjadi rejim komunis,Akan Demokrat membuat kita menjadi rejim komunis?,4.0,0.41611719131469727,0.10402929782867432,20
+test_data/malaya-test/malay-test/21.wav,kenapa bengalis begitu bijak daripada kumpulan lain,Kenapa Bengalis begitu bijak daripada kumpulan lain?,3.9774375,0.5043575763702393,0.1268046515803804,21
+test_data/malaya-test/malay-test/22.wav,kenapa tidak akan membatalkan rekodnya terutamanya pulangan cukai,Kenapa tidak akan membatalkan rekodnya terutamanya pulangan cukai?,4.7113125,0.4336116313934326,0.09203627044341309,22
+test_data/malaya-test/malay-test/23.wav,kenapa orang di utah kasar dan sombong dan mementingkan diri sendiri,Kenapa orang diutah kasar dan sombong dan mementingkan diri sendiri?,5.2903125,0.5220685005187988,0.09868386801702146,23
+test_data/malaya-test/malay-test/24.wav,kategori negara eropah kategori,Kategori Negara Eropah Kategori,4.922625,0.38132691383361816,0.07746414033846132,24
+test_data/malaya-test/malay-test/25.wav,tolong sebut dermaga,Tolong sebut dermaga,3.460125,0.3766298294067383,0.10884861945933695,25
+test_data/malaya-test/malay-test/26.wav,serta menafikan menjadikannya sebagai asas bagi filem terbitan mereka,serta menafikan menjadikannya sebagai asas bagi filem terbitan mereka.,4.7320625,0.4967081546783447,0.10496652457112407,26
+test_data/malaya-test/malay-test/27.wav,kota kinabalu naib presiden warisan junz wong berkata tidak,"Kota Kinabalu, naik presiden warisan Jun Wong berkata tidak",4.9950625,0.4975309371948242,0.09960454692905728,27
+test_data/malaya-test/malay-test/28.wav,mengapa orang amerika afrika sama ada mangsa atau penjenayah,Mengapa orang Amerika Afrika sama ada mangsa atau penjenayah?,5.0814375,0.3827247619628906,0.07531820709452604,28
+test_data/malaya-test/malay-test/29.wav,katanya kementeriannya juga sudah melakukan siasatan berhubung perkara,"Katanya, Kementeriannya juga sudah melakukan siasatan berhubung perkara",5.34625,0.47711634635925293,0.08924317911793367,29
+test_data/malaya-test/malay-test/30.wav,ayah saya cikgu sekolah menengah,"Ayah saya, Cikgu Sekolah Mendengar.",2.00825,0.38775038719177246,0.19307874377780282,30
+test_data/malaya-test/malay-test/31.wav,dia menundukkan kepala mencari dibawah meja yasmin melihat sebuah gantungan,Dia menundukkan kepala mencari di bawah meja. Yasmin melihat sebuah gantungan.,4.9885,0.5960714817047119,0.11948912131997833,31
+test_data/malaya-test/malay-test/32.wav,aku call tanya ustaz ustaz tanya sampai part ayat mana anak menangis kuat,Aku call tanya ustaz. Ustaz tanya sampai part ayah mana anak menangis kuat.,5.5829375,0.5413126945495605,0.09695840129852082,32
+test_data/malaya-test/malay-test/33.wav,dan kajian mendalam oleh pasukan teknikal akan berterusan,Dan kajian mendalam oleh pasukan teknikal akan berterusan berikutnya.,4.259875,0.5672342777252197,0.1331574935239226,33
+test_data/malaya-test/malay-test/34.wav,yasmin sampai dikelas lalu membuka pintu dengan kencang segera dia berlari,Yasmin sampai di kelas lalu membuka pintu dengan kencang segera dia berlari.,5.001625,0.5836679935455322,0.11669567261550641,34
+test_data/malaya-test/malay-test/35.wav,dan mesti naik atas,Dan mesti naik atas.,6.548,0.3416554927825928,0.0521770758678364,35
+test_data/malaya-test/malay-test/36.wav,prada juga bekerja sama dengan the humane society,Prada juga bekerja sama dengan The Human Society,3.9403125,0.36911797523498535,0.09367733529637189,36
+test_data/malaya-test/malay-test/37.wav,yang jernih serta tenang,Yang jenis serta tenang.,4.922625,0.35477638244628906,0.07207056853737367,37
+test_data/malaya-test/malay-test/38.wav,dalam kenyataan yang dikeluarkan pejabat menteri pelancongan seni dan budaya hari,"Dalam kenyataan yang dikeluarkan Pejabat Menteri Pelancongan, Seni dan Budaya Hari Pembelajaran",7.6754375,0.6070764064788818,0.07909339454316211,38
+test_data/malaya-test/malay-test/39.wav,yas tunggu libra berteriak sekencang mungkin tapi yasmin tak mendengar,"Yas, tunggu. Libra berteriak sekencang mungkin. Tapi Yasmin tak mendengar.",5.4566875,0.4657456874847412,0.08535319046303114,39
+test_data/malaya-test/malay-test/40.wav,adakah orang bertemu sehingga kehilangan keperawanan mereka di sini,Adakah orang bertemu sehingga kehilangan keperawanan mereka di sini?,4.9100625,0.647010326385498,0.13177231988095833,40
+test_data/malaya-test/malay-test/41.wav,sudah setengah habis dimakan olehku membuat bangdik menggelengkan kepala,Sudah setengah habis dimakan oleh Ku membuat Bangdik menggelengkan kepala,4.1375625,0.7102522850036621,0.17165959064150987,41
+test_data/malaya-test/malay-test/42.wav,melihat gambar keseluruhannya adakah orang kulit hitam yang paling tidak terkawal,"Melihat gambar keseluruhannya, adakah orang kulit hitam yang paling tidak terkawal?",5.953,0.519911527633667,0.08733605369287199,42
+test_data/malaya-test/malay-test/43.wav,membuat rambutnya kadang terlihat berwarna kemerahan,Membuat rambutnya kadang terlihat berwarna kemerahan.,3.8074375,0.5810787677764893,0.15261675806273622,43
+test_data/malaya-test/malay-test/44.wav,sebut perkataan aktinoterapi,Sebut perkataan aktinoterapi,4.017,0.4744558334350586,0.1181119824334226,44
+test_data/malaya-test/malay-test/45.wav,peletakan jawatan presiden abdelaziz bouteflika,Perletakan jawatan Presiden Abdelaziz Butiflika,5.46725,0.5532381534576416,0.10119130338975565,45
+test_data/malaya-test/malay-test/46.wav,bagaimana saya boleh merayu dengan ibu balu saya,Bagaimana saya boleh merayu dengan ibu balu saya?,4.098875,0.493755578994751,0.12046124338867398,46
+test_data/malaya-test/malay-test/47.wav,mengikuti 2 jam pelajaran bersama pak dadi rasanya libra ingin cepat cepat,"Mengikuti 2 jam pelajaran bersama Pak Dadi, rasanya Libra ingin cepat-cepat",4.6346875,0.5282466411590576,0.11397675488564388,47
+test_data/malaya-test/malay-test/48.wav,adakah orang kulit putih mempunyai rasa identiti dan budaya yang paling rendah,Adakah orang kulit putih mempunyai rasa identiti dan budaya yang paling rendah?,5.7545,0.5558443069458008,0.096592980614441,48
+test_data/malaya-test/malay-test/49.wav,kenapa lgbt orang peduli tentang label begitu banyak,Kenapa LGBT orang peduli tentang label begitu banyak?,4.457,0.3822355270385742,0.08576071955094777,49
+test_data/malaya-test/malay-test/50.wav,keadaan kini terkawal dan semua pihak berkuasa berkaitan telah dimaklumkan,Keduaan kini terkawat dan semua pihak berkuasa berkaitan telah dimaklumkan.,6.12875,0.5999147891998291,0.09788534190492826,50
+test_data/malaya-test/malay-test/51.wav,yasmin terdiam melihat sekeliling sambil mengingat ingat kembali kapan,Yasmin terdiam melihat sekeliling sambil mengingat-ingat kembali kapan.,4.8109375,0.6747927665710449,0.14026221844932407,51
+test_data/malaya-test/malay-test/52.wav,manakala china terdapat radio,Manakala China terdapat radio,3.72675,0.3787107467651367,0.10161957382843945,52
+test_data/malaya-test/malay-test/53.wav,bayangkan sudah lah ibu tunggal anak2 lelaki pulak makin bermasalah ketika itu,"Bayangkan, sudahlah ibu tunggal. Anak dua lelaki pula makin bermasalah ketika itu.",7.442625,0.6374976634979248,0.08565494882490046,53
+test_data/malaya-test/malay-test/54.wav,sayangnya rasulullah pada kita,Sayangnya Rasulullah kepada kita.,1.665,0.4536263942718506,0.2724482848479583,54
+test_data/malaya-test/malay-test/55.wav,libra dan gisel yang baru datang dengan nafas ngos ngosan menatap,"Libra dan gisa yang baru datang dengan nafas ngos, ngosan menatap",4.603125,0.711963415145874,0.15466958102286468,55
+test_data/malaya-test/malay-test/56.wav,hari jumaat lepas kerja siap siap untuk nak naik bas ke shah alam,Hari Jumat lepas kerja siap-siap untuk nak naik bas ke syahlam.,4.1823125,0.6103603839874268,0.14593849311533433,56
+test_data/malaya-test/malay-test/57.wav,rafflesia merupakan genus sejenis,Reflecia merupakan jenis sejenis.,5.8978125,0.39942288398742676,0.06772390339425453,57
+test_data/malaya-test/malay-test/58.wav,adakah orang orang kulit putih di amerika menganggap mereka istimewa,Adakah orang-orang kulit putih di Amerika menganggap mereka istimewa?,5.0406875,0.4538917541503906,0.09004560472165565,58
+test_data/malaya-test/malay-test/59.wav,apa yang aku kurang dan kawan aku lebih,Apa yang kurang dan kawan aku lebih.,2.8815625,0.34461164474487305,0.11959193831293718,59
+test_data/malaya-test/malay-test/60.wav,kegirangan seraya mengayun ayunkan kunci motornya,Kegilangan seraya mengayunkan kunci motonya,3.6206875,0.39951086044311523,0.11034116046831306,60
+test_data/malaya-test/malay-test/61.wav,pelajaran fisika dan daffa sudah mewajari hal ini libra sudah mulai resah,Pelajaran fizikal dan daffal sudah mewajari hari ini. Libra sudah mulai resah.,5.6895,0.5711469650268555,0.10038614377833825,61
+test_data/malaya-test/malay-test/62.wav,adalah cina indonesian atau slogan,Adalah China Indonesian atau slogan...,3.0993125,0.3062262535095215,0.09880457472730533,62
+test_data/malaya-test/malay-test/63.wav,baru baru ini kesatuan perkhidmatan perguruan kebangsaan semenanjung malaysia nutp,"Baru-baru ini, Kesatuan Perkhidmatan Perguruan Kebangsaan Semenanjung Malaysia NUTP",8.02525,0.5524609088897705,0.06884033629977515,63
+test_data/malaya-test/malay-test/64.wav,mengapa bahasa sepanyol masih tidak baik di bahasa inggeris,Mengapa bahasa Sepanyol masih tidak baik di bahasa Inggeris?,4.6459375,0.48479175567626953,0.1043474553147281,64
+test_data/malaya-test/malay-test/65.wav,bagaimana anda bengkok dan mengisap asshole anda sendiri,Bagaimana anda bengkok dan mengisap eshole anda sendiri?,4.534375,0.4133791923522949,0.09116563856149854,65
+test_data/malaya-test/malay-test/66.wav,assalamualaikum sapa pernah kena tindih,"Assalamualaikum, siapa pernah kena tindir?",2.5843125,0.40775418281555176,0.15778052492318625,66
+test_data/malaya-test/malay-test/67.wav,tolong sebut pengertian,Tolong sebut pengertian.,3.627875,0.4405214786529541,0.12142686246162122,67
+test_data/malaya-test/malay-test/68.wav,ujarnya dengan nafas yang masih ngos ngosan,Urjanya dengan nafas yang masih ngos-ngosan.,3.053875,0.42752861976623535,0.13999545487822368,68
+test_data/malaya-test/malay-test/69.wav,malangnya adrian mendakwa pihak pengurusan tempat itu tidak bersetuju dan berikan,Malangnya Adrian mendakwa pihak pengurusan tempat itu tidak bersetuju dan berikan,5.3449375,0.5471603870391846,0.10236983819533615,69
+test_data/malaya-test/malay-test/70.wav,libra s pov,Libres POV,2.3120625,0.3525419235229492,0.15247940897919032,70
+test_data/malaya-test/malay-test/71.wav,kenapa gadis gadis putih membenci lelaki india,Kenapa gadis-gadis putih membenci lelaki India?,3.818875,0.44754862785339355,0.11719384055602594,71
+test_data/malaya-test/malay-test/72.wav,bagaimana perogol di india adalah muslim,Bagaimana perogol di India adalah Muslim?,3.4675,0.4739229679107666,0.13667569370173516,72
+test_data/malaya-test/malay-test/73.wav,dan memasukkan ke dalam tempatnya lalu segera mengemasi barangnya kedalam tas,dan memasukkan ke dalam tempatnya lalu segera mengemasi barangnya ke dalam tas,5.7289375,0.744011640548706,0.1298690447484732,73
+test_data/malaya-test/malay-test/74.wav,terus membenarkan kemasukan perkataan,Terus membenarkan kemasukan perkataan.,4.8529375,0.4212911128997803,0.08681156781841519,74
+test_data/malaya-test/malay-test/75.wav,ya kamu juga harusnya ngaca dong kamu udah makan berapa kali makanya abang,Ya kamu juga harusnya ngaca dong Kamu udah makan beberapa kali makanya abang,4.749125,0.5029618740081787,0.10590621935791934,75
+test_data/malaya-test/malay-test/76.wav,paham dah,Paham dah?,1.3940625,0.30074381828308105,0.21573194765878936,76
+test_data/malaya-test/malay-test/77.wav,tolong sebut kemaluan,Tolong sebut kemaluan.,2.6133125,0.44446468353271484,0.1700771276044158,77
+test_data/malaya-test/malay-test/78.wav,mempunyai tuhan meletakkan jeweh sebagai penguasa dunia moden,"Mempunyai Tuhan meletakkan Jowih sebagai penguasa dunia modern,",4.801125,0.6284999847412109,0.13090681553619432,78
+test_data/malaya-test/malay-test/79.wav,kembali andraku yang dulu,Kembali andraku yang dulu.,3.069625,0.4195551872253418,0.13667962282863275,79
+test_data/malaya-test/malay-test/80.wav,mengapa manaphy pergi ke restoran di pokemon,Mengapa Manafey pergi ke restoran di Pokemon?,3.644875,0.41532158851623535,0.1139467302764115,80
+test_data/malaya-test/malay-test/81.wav,dan dokumen perjalanan bangladesh,dan dokumen perjalanan Bangladesh,3.2655625,0.450162410736084,0.13785141479793572,81
+test_data/malaya-test/malay-test/82.wav,adakah ia baik untuk seorang wanita berumur 12 tahun,Adakah ia baik untuk seorang wanita berumur dua belas tahun,4.8516875,0.4341390132904053,0.08948206439314266,82
+test_data/malaya-test/malay-test/83.wav,adakah anda menggunakan sos pasta untuk cabai anda,Adakah anda menggunakan sos pasta untuk cabai anda?,4.1351875,0.44346070289611816,0.10724077273306669,83
+test_data/malaya-test/malay-test/84.wav,dakwah jugak tu tanpa kita sedar,dakwah juga tu tanpa kita sedar,3.0775,0.4452037811279297,0.14466410434701207,84
+test_data/malaya-test/malay-test/85.wav,perut karet gumamnya,"Perut karit, gumamnya.",2.0095625,0.41603708267211914,0.20702868543382907,85
+test_data/malaya-test/malay-test/86.wav,lipat yas cepet banget parah gisel duduk di sebuah kursi sambil mengatur,"Lipat yes, cepat banget barah. Ya saya duduk di sebuah kursi sambil mengatur.",4.8609375,0.6200850009918213,0.1275648989504229,86
+test_data/malaya-test/malay-test/87.wav,kenapa ada orang yang bertanya soalan mengenai orang bodoh seperti itu,Kenapa ada orang yang bertanya soalan mengenai orang bodoh seperti itu?,5.486125,0.48453569412231445,0.0883202067255694,87
+test_data/malaya-test/malay-test/88.wav,bank yang terletak negara,Bank yang terletak negara,4.0866875,0.3528625965118408,0.08634440399757526,88
+test_data/malaya-test/malay-test/89.wav,kuno asia tenggara masih,kuno Asia Tenggara Masih,2.2639375,0.3886244297027588,0.17165863885498553,89
+test_data/malaya-test/malay-test/90.wav,adakah serbaneka orang yang paling indah di dunia,Adakah Serbanika orang yang paling indah di dunia?,3.7500625,0.4695155620574951,0.12520206318094568,90
+test_data/malaya-test/malay-test/91.wav,antara foto aditya pradana putra,Antara foto adik dia Pradhanaputra,4.270375,0.41207337379455566,0.09649582853837325,91
+test_data/malaya-test/malay-test/92.wav,oleh huruf iaitu dan,oleh huruf iaitu dan,2.287125,0.32402944564819336,0.141675442159127,92
+test_data/malaya-test/malay-test/93.wav,malah malaysia juga terlibat,malah Malaysia juga terlibat,3.366875,0.3345174789428711,0.09935547917367622,93
+test_data/malaya-test/malay-test/94.wav,ah itu mah kamunya aja yang emang rakus,"Ah itu mah, kamu ni ajar yang emar aku",3.533875,0.43948888778686523,0.1243645821617531,94
+test_data/malaya-test/malay-test/95.wav,the fight,DeFi.,2.3751875,0.2817237377166748,0.11861115710514425,95
+test_data/malaya-test/malay-test/96.wav,senjata jerman buat seketika,Senjata Jerman buat seketika?,8.4055625,0.393829345703125,0.04685341947110916,96
+test_data/malaya-test/malay-test/97.wav,bumi bulan selari gerhana,Bumi bulan selari gerhana,3.761625,0.4337172508239746,0.1153005019968696,97
+test_data/malaya-test/malay-test/98.wav,tolong sebut pseudoelectoral,Tolong sebut pseudo-elektoral.,3.9480625,0.3672933578491211,0.09303129265281923,98
+test_data/malaya-test/malay-test/99.wav,kenapa indian utara mahu india yang tidak bercakap dan hindu,Kenapa Indian Utara mahu India yang tidak bercakap dan Hindu?,4.96275,0.46782541275024414,0.09426737448999933,99
+test_data/malaya-test/malay-test/100.wav,dirinya terakhir menyimpan kunci motornya oh iya aku lupa iya bener di,"Dirinya terakhir menyimpan kunci motonya. Oh iya, aku lupa ia benar di...",4.1665,0.499340295791626,0.11984646484858417,100
+test_data/malaya-test/malay-test/101.wav,kenapa jews dan israelis mengejek iranian bukan agama lebih,Kenapa Jews dan Israelis mengejek Iranian bukan agama lebih?,5.0,0.38123178482055664,0.07624635696411133,101
+test_data/malaya-test/malay-test/102.wav,memindahkan tasnya ke dadanya lalu membukanya yasmin panik segera,Memindahkan tasnya ke dadanya lalu membukanya. Yasmin Penik. Segera.,4.693875,0.5630428791046143,0.11995267856613442,102
+test_data/malaya-test/malay-test/103.wav,aku libra terdiam menatap andra,"Aku, Libra terdiam menatap Andra.",3.4339375,0.5192129611968994,0.15120046919808514,103
+test_data/malaya-test/malay-test/104.wav,ketika dia panik dia akan menangis selama kurang lebih 15 menit menurut,"Ketika dia panik, dia akan menangis selama kurang lebih 15 menit menurut",4.2414375,0.5106608867645264,0.12039806946690276,104
+test_data/malaya-test/malay-test/105.wav,apa apa sekatan namun,Apa-apa sekatan namun.,5.874625,0.35862183570861816,0.0610459111362203,105
+test_data/malaya-test/malay-test/106.wav,mengapa nabi mohammad menggunakan rogol sebagai senjata untuk menyebarkan islam,Mengapa Nabi Muhammad menggunakan rogol sebagai senjata untuk menyebarkan Islam?,5.919,0.46017026901245117,0.07774459689347038,106
+test_data/malaya-test/malay-test/107.wav,hospital tanah merah,Hospital Tanah Merah,3.21825,0.3942751884460449,0.12251229346571738,107
+test_data/malaya-test/malay-test/108.wav,sebut perkataan abstrak,Sebut perkataan abstrak.,2.948875,0.33766674995422363,0.11450697298265393,108
+test_data/malaya-test/malay-test/109.wav,sistem suria terikat pasang,Sistem surya terikat pasang.,3.9938125,0.3872334957122803,0.09695835638560404,109
+test_data/malaya-test/malay-test/110.wav,sekeliling trx seperti pasar baharu untuk peniaga dan pembinaan jalan,Sekeliling TRX seperti pasar baru untuk peniaga dan pembinaan jalan,5.6526875,0.4758591651916504,0.0841828183835831,110
+test_data/malaya-test/malay-test/111.wav,kenapa media tidak memanggil donald trump kerana sakit mental,Kenapa media tidak memanggil Donald Trump kerana sakit mental?,4.626375,0.4726579189300537,0.10216593313988893,111
+test_data/malaya-test/malay-test/112.wav,dimanakah saya boleh bertemu wanita muda seksi yang mati,Di manakah saya boleh bertemu wanita muda seksi yang mati?,4.539125,0.4360189437866211,0.0960579282982119,112
+test_data/malaya-test/malay-test/113.wav,aku rasa maksud dia bukan solat,Aku rasa maksud dia bukan solat.,2.6435,0.37274169921875,0.14100310165263855,113
+test_data/malaya-test/malay-test/114.wav,sebut perkataan ahadiat,Sebut perkaitan ahliat,2.205875,0.3674631118774414,0.16658383266388233,114
+test_data/malaya-test/malay-test/115.wav,ppfftt kamu sehat kan,Kamu sihat kan?,2.0700625,0.34660863876342773,0.16743873132498546,115
+test_data/malaya-test/malay-test/116.wav,tumbuh tumbuhan lain rafflesia,Tumbuhan-tumbuhan lain reflisya.,4.226,0.5139787197113037,0.12162298147451579,116
+test_data/malaya-test/malay-test/117.wav,adakah benar turunan menikmati kualiti hidup yang lebih tinggi berbanding dengan orang eropah,Adakah benar turunan menikmati kualiti hidup yang lebih tinggi berbanding dengan orang Eropah?,6.2598125,0.5549585819244385,0.0886541860358339,117
+test_data/malaya-test/malay-test/118.wav,kemudian pergi klinik lain pula sebab kami pindah ke tempat lain,Kemudian pergi ke klinik lain pula sebab kami pindah ke tempat lain.,3.3813125,0.4871952533721924,0.14408465747315352,118
+test_data/malaya-test/malay-test/119.wav,sebut perkataan ampe,Semuk perkataan Ampe,1.92725,0.3267941474914551,0.16956500064415883,119
+test_data/malaya-test/malay-test/120.wav,kenapa aku perlu diam,Kenapa aku perlu diam?,1.6663125,0.3812892436981201,0.22882217093019472,120
+test_data/malaya-test/malay-test/121.wav,dalam gelak kecil itu sesuatu yang harus penulis,"Dalam gelak kecil itu, sesuatu yang harus penulis",3.5680625,0.4250650405883789,0.11913049185331785,121
+test_data/malaya-test/malay-test/122.wav,sementara abad menyaksikan para,Sementara abad menyaksikan para,3.924125,0.40104150772094727,0.10219896351949728,122
+test_data/malaya-test/malay-test/123.wav,mengeluarkan hp nya muka abang terlihat berseri seri,"Mengulakan HPnya, muka abang terlihat berseri-seri.",3.190625,0.5006206035614014,0.15690361717889173,123
+test_data/malaya-test/malay-test/124.wav,melaka pada zaman itu,Melaka pada zaman itu,6.8034375,0.40672874450683594,0.0597828295632665,124
+test_data/malaya-test/malay-test/125.wav,berapa ramai evolusionis yang diperlukan untuk mengubah dunia cahaya,Berapa ramai evolusionis yang diperlukan untuk mengubah dunia cahaya,5.2496875,0.4916398525238037,0.0936512606748123,125
+test_data/malaya-test/malay-test/126.wav,iyaa siap bos sahut libra seraya menyimpan kelima jari kanannya disamping,"Ya, siap pos. Sahut Libra seraya menyimpan kelima jari kanannya di samping.",5.9328125,0.5321521759033203,0.08969644260682776,126
+test_data/malaya-test/malay-test/127.wav,itu andra batin libra,"Itu Andra, Batin Libra.",2.6921875,0.38375210762023926,0.142542860636653,127
+test_data/malaya-test/malay-test/128.wav,ok tu lupakan,"Ok, itu lupakan.",1.3085625,0.405306339263916,0.30973403201139876,128
+test_data/malaya-test/malay-test/129.wav,tidak bumi algeria yang,Tidak bumi Algeria yang...,3.552625,0.3493964672088623,0.09834881734178595,129
+test_data/malaya-test/malay-test/130.wav,kenapa foto nirbhaya masih belum diturunkan,Kenapa foto Nirbaya masih belum diturunkan?,3.526,0.4406321048736572,0.12496656405946037,130
+test_data/malaya-test/malay-test/131.wav,kenapa pembenci muslihat membuat kebohongan tanpa satu bukti,Kenapa pembenci muslihat membuat kebohongan tanpa satu bukti?,4.725,0.5184335708618164,0.1097213906585855,131
+test_data/malaya-test/malay-test/132.wav,sebut perkataan almukhalis,Sebut perkataan Al-Mukalis,1.9388125,0.42415308952331543,0.21876952491451104,132
+test_data/malaya-test/malay-test/133.wav,adakah stephen menjajakan manusia sebenar atau robot yang mewakili tangki pemikir,Adakah Stephen menjajakan manusia sebenar atau robot yang mewakili tangki pemikir?,6.34675,0.6587250232696533,0.1037893446676887,133
+test_data/malaya-test/malay-test/134.wav,bisnes berjalan macan biasa,Bisnes berjalan macam biasa.,2.2910625,0.48833322525024414,0.21314705524194308,134
+test_data/malaya-test/malay-test/135.wav,bagaimanapun istilah melayu adalah,"Bagaimanapun, istilah Melayu adalah",3.1346875,0.4844071865081787,0.15453125279894048,135
+test_data/malaya-test/malay-test/136.wav,adakah anda liberal bodoh benar benar percaya,Adakah anda liberal bodoh benar-benar percaya?,3.75,0.42105603218078613,0.11228160858154297,136
+test_data/malaya-test/malay-test/137.wav,bagaimana wanita lebih hipokrit daripada lelaki dalam situasi pertuturan,Bagaimana wanita lebih hipokrit daripada lelaki dalam situasi pertuturan,5.8874375,0.49674439430236816,0.08437361658656557,137
+test_data/malaya-test/malay-test/138.wav,dunia haiwan liar alat,Dunia Haiwan Dia Alat,6.1300625,0.3472938537597656,0.05665421090890437,138
+test_data/malaya-test/malay-test/139.wav,libra terus memperhatikan laki laki itu tak lama kemudian laki laki itu,Libra terus memahatikan laki-laki itu. Tak lama kemudian laki-laki itu,4.4124375,0.6545381546020508,0.14833935995740466,139
+test_data/malaya-test/malay-test/140.wav,mengapa anda melihat beberapa orang hitam yang janggal sosial,Mengapa anda melihat beberapa orang hitam yang janggal sosial?,4.8390625,0.4357728958129883,0.09005316542470536,140
+test_data/malaya-test/malay-test/141.wav,bolehkah anda menghuraikan fantasi seks anda dengan ibu anda,Bolehkah anda menghuraikan fantasi seks anda dengan ibu anda?,4.7714375,0.5431203842163086,0.11382741243415817,141
+test_data/malaya-test/malay-test/142.wav,selain bekas menteri besar kedah itu yang turut menyampaikan,Selain bekas Menteri Besar Kedah itu yang turut menyampaikan,5.725,0.47101712226867676,0.08227373314736712,142
+test_data/malaya-test/malay-test/143.wav,apakah jalan kerjaya untuk diktator jahat di sub saharan africa,Apakah jalan kerjaya untuk diktator jahat di sob saharan Afrika?,5.4045,0.5327858924865723,0.09858190257869781,143
+test_data/malaya-test/malay-test/144.wav,tolong sebut pengenalan semula,Tolong sebut pengenalan semula.,3.9038125,0.35795068740844727,0.09169259215406664,144
+test_data/malaya-test/malay-test/145.wav,sejarah kehidupan bumi baru,Sejarah kehidupan bumi baru,5.2476875,0.4316287040710449,0.08225122095609637,145
+test_data/malaya-test/malay-test/146.wav,kenapa ada daya tarik dengan nasi jerman di sini,Kenapa ada daya tarik dengan nasi Jerman di sini?,3.8859375,0.5285329818725586,0.1360117042213259,146
+test_data/malaya-test/malay-test/147.wav,adakah anda percaya bahawa donald trump adalah kedatangan kedua jesus christ,Adakah anda percaya bahawa Donald Trump adalah kedatangan kedua Jesus Christ?,5.6719375,0.5044989585876465,0.08894649466564934,147
+test_data/malaya-test/malay-test/148.wav,sebagai wakil ketua dpr ri,Sebagai Wakil Ketua DPR RI,4.7583125,0.40697455406188965,0.08552917742621774,148
+test_data/malaya-test/malay-test/149.wav,sampingan faktor kemegahan juga,Sampingan faktor kemegahan juga.,3.66875,0.3906712532043457,0.10648620189556271,149
+test_data/malaya-test/malay-test/150.wav,saudara lebih pintar daripada saudara perempuan,Saudara lebih pintar daripada saudara perempuan...,3.8839375,0.5615050792694092,0.1445710903611114,150
+test_data/malaya-test/malay-test/151.wav,jangan terlalu enak jadi aku nambah terus,"Jangan terlalu enak, jadi aku nambah terus.",2.8868125,0.39626193046569824,0.13726625143326704,151
+test_data/malaya-test/malay-test/152.wav,akak memang malu sangat nak mintak,Akad memang malu sangat nak minta.,2.0621875,0.42136311531066895,0.20432822685166552,152
+test_data/malaya-test/malay-test/153.wav,dipercayai untuk menentukan usia,Dipercayai untuk menentukan usia.,3.947375,0.43494606018066406,0.11018615160218222,153
+test_data/malaya-test/malay-test/154.wav,selepas lebih kurang tiga,Selepas lebih kurang 3.,3.8545,0.4209177494049072,0.10920164727069846,154
+test_data/malaya-test/malay-test/155.wav,mengapa wanita afrika kolar putih sukar bekerja dengan tidak bersifat perkauman atau stereotaip,Mengapa wanita Afrika kolor putih sukar bekerja dengan tidak bersifat perkauman atau stereotaip?,7.4156875,0.6711351871490479,0.09050208590222389,155
+test_data/malaya-test/malay-test/156.wav,dika keluar lagi dari kamar dika tanpa berkomentar apapun libra hanya,"Dika keluar lagi dari kamar Dika tanpa berkomentar apa pun, Libra hanya",5.233125,0.5130288600921631,0.09803489503731767,156
+test_data/malaya-test/malay-test/157.wav,kenapa india selatan perlu membayar dan mensubsidi kemalasan india utara,Kenapa India Selatan perlu membayar dan mensubsidi kemalasan India Utara?,5.833375,0.4883913993835449,0.08372364186830863,157
+test_data/malaya-test/malay-test/158.wav,kenapa gadis gadis singapura jadi orang kulit putih,Kenapa gadis-gadis Singapura jadi orang kulit putih?,4.0,0.4944765567779541,0.12361913919448853,158
+test_data/malaya-test/malay-test/159.wav,bagaimana saya menggalakkan isteri saya melakukan lebih banyak kerja rumah,Bagaimana saya menggalakkan isteri saya melakukan lebih banyak kerja rumah?,5.4894375,0.5547239780426025,0.10105297273948424,159
+test_data/malaya-test/malay-test/160.wav,hidupnya bebas tanpa tanggungjawab bak pelajar universiti yg tgh cuti sem,Hidupnya bebas tanpa tanggungjawab bak pelajar universiti yang tengah cuti SEM,4.7965,0.6116390228271484,0.12751777813554643,160
+test_data/malaya-test/malay-test/161.wav,apabila anda mengatakan pembohongan ianya cukup untuk mengepit,"Apabila anda mengatakan pembohongan, ianya cukup untuk mengepit,",4.673625,0.5190329551696777,0.1110557554723962,161
+test_data/malaya-test/malay-test/162.wav,bandung 2017,Bandung 2017,2.7803125,0.33199191093444824,0.1194081280195835,162
+test_data/malaya-test/malay-test/163.wav,sebagaimana haiwan mamalia yang,Sebagaimana haiwan mamalia yang...,3.657125,0.4187467098236084,0.11450161255729797,163
+test_data/malaya-test/malay-test/164.wav,tempat duduk di barisan ujung paling depan meskipun resikonya akan selalu,tempat duduk di barisan ujung paling depan meskipun resikonya akan selalu,5.233125,0.5276546478271484,0.10082974280705093,164
+test_data/malaya-test/malay-test/165.wav,selepas program itu dihebahkan waktu siarannya oleh pengacaranya,"Selepas program itu dihebahkan waktu usiarannya oleh pengacaranya,",4.46375,0.561621904373169,0.12581840478816442,165
+test_data/malaya-test/malay-test/166.wav,tolong sebut vindresser,Tolong sebut Windresser.,4.2981875,0.4619138240814209,0.10746711819375514,166
+test_data/malaya-test/malay-test/167.wav,kenapa anda memutuskan untuk berkahwin dengan anak saudara anda,Kenapa anda memutuskan untuk berkahwin dengan anak saudara anda?,4.907,0.5443964004516602,0.11094281647680052,167
+test_data/malaya-test/malay-test/168.wav,sebut perkataan pengedar,Sebut perkataan pengedar.,3.058125,0.3867228031158447,0.12645748722365657,168
+test_data/malaya-test/malay-test/169.wav,sorang ini lah yang menjadi kaki dan tangan kepada ibu,Seorang inilah yang menjadi kaki dan tangan kepada ibu.,3.7666875,0.4261503219604492,0.1131366278621333,169
+test_data/malaya-test/malay-test/170.wav,adakah anda mudah merompak sebuah bank di india dan kemudian lari ke luar negara,Adakah anda mudah merompak sebuah bank di India dan kemudian lari ke luar negara?,6.41575,0.5137193202972412,0.08007159261150157,170
+test_data/malaya-test/malay-test/171.wav,yang berkongsi video nyanyian mereka sebagai tanda menyukai lagu,Yang berkongsi video nyanyian mereka sebagai tanda menyakai lagu,4.784625,0.44004011154174805,0.09196961340580465,171
+test_data/malaya-test/malay-test/172.wav,tidak dinafikan impak lagu isabella sangat besar dalam kerjaya saya,Tidak dinafikan impak lagu Isabella sangat besar dalam kejayaan saya.,5.4133125,0.5280647277832031,0.09754927833617644,172
+test_data/malaya-test/malay-test/173.wav,tas lalu berlari sekencang mungkin menuju kelas libra dan gisel mengikuti,Tak selalu berlari sekencang mungkin menuju kelas. Libra dan Gisel mengikuti.,5.087125,0.6126949787139893,0.12044032311256146,173
+test_data/malaya-test/malay-test/174.wav,dia tetap berlari,Dia tetap berlari.,2.0595625,0.3330564498901367,0.1617122325203225,174
+test_data/malaya-test/malay-test/175.wav,tolong sebut secara fizikal,Tolong sebut secara fizikal.,3.957875,0.33661389350891113,0.08504914720877015,175
+test_data/malaya-test/malay-test/176.wav,hentaman komet ketiadaan udara,Hentaman Komet Ketiadaan Udara,4.0866875,0.43389177322387695,0.10617199705724427,176
+test_data/malaya-test/malay-test/177.wav,kenapa pokoknya begitu jelek dan gemuk,Kenapa pokoknya begitu jelek dan gemuk?,3.0183125,0.3852112293243408,0.1276247006644742,177
+test_data/malaya-test/malay-test/178.wav,adakah roy adams pernah menyentuh anda dengan tidak sesuai,Adakah Roy Adams pernah menyentuh anda dengan tidak sesuai?,4.27025,0.48018670082092285,0.11244931814786555,178
+test_data/malaya-test/malay-test/179.wav,setiap tahun populasi penyu,Setiap tahun populasi penyu,2.7283125,0.4013381004333496,0.14710122115166413,179
+test_data/malaya-test/malay-test/180.wav,untuk beredar frasa bahasa,"Untuk beredar frasa bahasa,",3.7848125,0.4417545795440674,0.11671769197128454,180
+test_data/malaya-test/malay-test/181.wav,kenapa kebanyakan polis dan bekas polis,Kenapa kebanyakan polis dan bekas polis?,3.0865625,0.4366171360015869,0.1414574096593174,181
+test_data/malaya-test/malay-test/182.wav,kejadian ini bukanlah kejadian yang aneh,Kejadian ini bukanlah kejadian yang aneh,2.3975625,0.40565919876098633,0.1691965063521749,182
+test_data/malaya-test/malay-test/183.wav,penasaran mereka pun menghampiri kerumunan itu,"Penasaran, mereka pun menghampiri kerumunan itu.",3.44975,0.511199951171875,0.14818463690756578,183
+test_data/malaya-test/malay-test/184.wav,daripada bulan akan tetapi,"Daripada bulan akan tetapi,",4.1795625,0.42816781997680664,0.1024432150438728,184
+test_data/malaya-test/malay-test/185.wav,patutkah izzul ditendang di pantat telanjangnya,Patutkah Izzul ditendang di pantat telanjangnya?,3.696125,0.42006778717041016,0.113650860609533,185
+test_data/malaya-test/malay-test/186.wav,mengapa rohingya muslim tidak berpendidikan,Mengapa Rohingya Muslim tidak berpendidikan?,3.585,0.3964250087738037,0.11057880300524511,186
+test_data/malaya-test/malay-test/187.wav,mengapa liberal membenci negara negara putih yang tinggal putih,Mengapa Liberal membenci negara-negara putih yang tinggal putih?,4.9085625,0.42458105087280273,0.08649804313845504,187
+test_data/malaya-test/malay-test/188.wav,kata yang dipinjam daripada,Kata yang dipinjam daripada,4.3885625,0.3818666934967041,0.08701407203308695,188
+test_data/malaya-test/malay-test/189.wav,sosial dan ekonomi cerita,Sosial dan ekonomi cerita.,6.2925625,0.3937265872955322,0.06257015123735875,189
+test_data/malaya-test/malay-test/190.wav,kenapa melakukan pelanggaran seksual chelsea clinton,Kenapa melakukan pelanggaran seksual Chelsea Clinton?,3.8351875,0.4579348564147949,0.11940351193124063,190
+test_data/malaya-test/malay-test/191.wav,tolong sebut rumah ikan,Tolong sebut rumah ikan.,4.82775,0.4120357036590576,0.08534735718690023,191
+test_data/malaya-test/malay-test/192.wav,sebut perkataan tidak dapat diskriminasi,Sebut perkataan tidak dapat diskriminasi.,4.93875,0.3687305450439453,0.07466070261583302,192
+test_data/malaya-test/malay-test/193.wav,kenapa orang british begitu terobsesi dengan senjata amerika,Kenapa orang British begitu terobsesi dengan senjata Amerika?,4.7300625,0.4732036590576172,0.10004173497868521,193
+test_data/malaya-test/malay-test/194.wav,kenapa tidak orang putih kembali ke eropah dan bukannya memberitahu orang lain ke mana,Kenapa tidak orang putih kembali ke Eropah dan bukannya memberitahu orang lain ke mana?,6.2295625,0.5483753681182861,0.08802791016516587,194
+test_data/malaya-test/malay-test/195.wav,masakan abangku sayang ini ini cuma tumis tahu yang makanan rumah doang udah,Masakan abang kuyus sayang ini Ini cuma tumis tahu yang masakan rumah doang udhah,5.07925,0.5135245323181152,0.10110243290212438,195
+test_data/malaya-test/malay-test/196.wav,menurut beberapa teori penutur,"Menurut beberapa teori penutur,",3.25075,0.4000058174133301,0.12305031682329619,196
+test_data/malaya-test/malay-test/197.wav,ibu perak satu percubaan,Ibu perak satu percubaan.,4.20275,0.37462878227233887,0.08913896431439863,197
+test_data/malaya-test/malay-test/198.wav,tahulah kita sama keluarga kita tapi orang dari keluarga lain,Tahulah kita sama keluarga kita tapi orang dari keluarga lain,3.9836875,0.5061883926391602,0.1270652862804023,198
+test_data/malaya-test/malay-test/199.wav,kenapa schlong saya begitu besar,Kenapa shlong saya begitu besar?,2.84225,0.44437217712402344,0.15634521140787175,199
+test_data/malaya-test/malay-test/200.wav,tangis membuat libra dan gisel semakin panik ya yasmin memang agak cengeng,"Tangis. Membuat Libra dan Giselle semakin panik. Ya, Yasmin memang agak cengeng.",4.9043125,0.6377575397491455,0.13004015134621735,200
+test_data/malaya-test/malay-test/201.wav,karena tau laki laki itu adalah kakak kelas,Kerana tau laki-laki itu adalah kakak kelas.,2.786875,0.3896822929382324,0.13982768977375462,201
+test_data/malaya-test/malay-test/202.wav,seperti sekarang libra sedang duduk di tempat gisel karena sekarang,"Seperti sekarang, Libra sedang duduk di tempat Gizelle kerana sekarang",4.2165,0.497844934463501,0.11807065918735941,202
+test_data/malaya-test/malay-test/203.wav,tidak pernah menjanjikan pembersihan etnik,"tidak pernah menjanjikan pembersihan etnik,",3.098625,0.38332676887512207,0.12370866719113222,203
+test_data/malaya-test/malay-test/204.wav,bagaimana membiarkan pendatang tanpa izin ke dalam menyelesaikan sesuatu,Bagaimana membiarkan pendatang tanpa izin ke dalam menyelesaikan sesuatu?,5.5585,0.5051009654998779,0.0908700126832559,204
+test_data/malaya-test/malay-test/205.wav,assalamualaikum reader semua,"Assalamualaikum, reader semua",2.379125,0.4517862796783447,0.1898959826315745,205
+test_data/malaya-test/malay-test/206.wav,adakah ia buruk bahawa iq saya ialah 249,Adakah ia buruk bahawa IQ saya ialah 249?,5.7376875,0.47657084465026855,0.08305974221326425,206
+test_data/malaya-test/malay-test/207.wav,sakit li,Sakit Li,1.4571875,0.34549379348754883,0.23709631978557927,207
+test_data/malaya-test/malay-test/208.wav,aku cakap kawan facebook kirim salam,"Aku cakap, kawan Facebook kirim salam.",2.902625,0.44869399070739746,0.1545821422703234,208
+test_data/malaya-test/malay-test/209.wav,di kawasan perbatasan sehingga roda perekonomian di kawasan tersebut bisa,Di kawasan perbatasan sehingga roda perekonomian di kawasan tersebut bisa berlaku.,6.8955,0.735741376876831,0.10669877120974999,209
+test_data/malaya-test/malay-test/210.wav,keluar dari ruangan maut itu sesekali libra melepas kacamatanya dan,keluar dari ruangan maut itu sesekali berlepas kecamatannya dan,4.914875,0.4482131004333496,0.09119521868477827,210
+test_data/malaya-test/malay-test/211.wav,kenapa quora menyokong islamis dan pengguna pengganas,Kenapa Quora menyokong Islamis dan pengguna pengganas?,4.214375,0.5016164779663086,0.11902511712087997,211
+test_data/malaya-test/malay-test/212.wav,mengapa orang asing begitu rasis mereka selalu mendarat di usa,Mengapa orang asing begitu resis mereka selalu mendarat di USA?,5.60025,0.4313538074493408,0.07702402704331786,212
+test_data/malaya-test/malay-test/213.wav,eh ke tempat biasa dulu kan gisel mengingatkan,"Eh, ke tempat biasa dulu kan? Giselle mengingatkan.",4.062625,0.49795961380004883,0.12257090275377346,213
+test_data/malaya-test/malay-test/214.wav,sebut perkataan adang,Sebut perkataan Adam,2.0665625,0.39458441734313965,0.19093756774505474,214
+test_data/malaya-test/malay-test/215.wav,seorang kawan dan penasihat,Seorang kawan dan penasihat.,4.7600625,0.3941199779510498,0.08279722754712775,215
+test_data/malaya-test/malay-test/216.wav,kali ini aku nak cuba kerja lain pula,Kali ini aku nak cuba kerja lain pula.,2.6750625,0.3809812068939209,0.14241955352217786,216
+test_data/malaya-test/malay-test/217.wav,mengapa pelancong australia di bali tidak bersikap diri,Mengapa pelancong Australia di Bali tidak bersikap diri?,4.276375,0.5227763652801514,0.12224754968405516,217
+test_data/malaya-test/malay-test/218.wav,adakah kebanyakan orang yang tidak mempunyai kehidupan yang menggunakan quora,Adakah kebanyakan orang yang tidak mempunyai kehidupan yang menggunakan Korak?,5.2649375,0.5152976512908936,0.09787346028151209,218
+test_data/malaya-test/malay-test/219.wav,itu tetapi mengatasi amerika,Itu tetapi mengatasi Amerika,4.0634375,0.3771789073944092,0.09282261813905325,219
+test_data/malaya-test/malay-test/220.wav,pasti si abang lagi chat sama kak dea gumamku dalam hati,Pasti si abang lagi chat sama Kak Dia. Gumamuku dalam hati.,4.3085625,0.4493391513824463,0.10428980695590381,220
+test_data/malaya-test/malay-test/221.wav,mengapa merogol seorang gadis seperti jenayah khas,Mengapa merogol seorang gadis seperti jenayah khas?,3.95225,0.504286527633667,0.1275947947709955,221
+test_data/malaya-test/malay-test/222.wav,tolong sebut tidak memalukan,Tolong sebut tidak memalukan.,3.9716875,0.36522483825683594,0.091957093365688,222
+test_data/malaya-test/malay-test/223.wav,kawan macam nilah yang akan jadi musuh di akhirat nanti,Kawan macam inilah yang akan menjadi musuh di akhirat nanti.,3.1275,0.42012929916381836,0.13433390860553746,223
+test_data/malaya-test/malay-test/224.wav,beliau berkata sukar menguasai kitab arab merentas pelbagai,"Beliau berkata, sukar mengusai kitab Arab merentas pelbagai kemuruan.",6.3260625,0.525808572769165,0.08311782768019839,224
+test_data/malaya-test/malay-test/225.wav,seperti alga hijau tidak,"Seperti Alga hijau, tidak.",2.4380625,0.3638143539428711,0.14922273483262677,225
+test_data/malaya-test/malay-test/226.wav,sebut perkataan aduan,Sebut perkataan aduan,2.890875,0.4134399890899658,0.14301551920784047,226
+test_data/malaya-test/malay-test/227.wav,tolong sebut berfaedah,Tolong sebut berfaedah,3.4958125,0.3791630268096924,0.10846206048227483,227
+test_data/malaya-test/malay-test/228.wav,kenapa saya dibenarkan menjadi gemuk,Kenapa saya dibenarkan menjadi gemuk?,2.8506875,0.40288448333740234,0.1413288841156396,228
+test_data/malaya-test/malay-test/229.wav,mungkin akta anti pencatutan perlu dipinda sekiranya ia sukar untuk dikuatkuasakan,Mungkin akta anti pencatutan perlu dipindah sekiranya ia sukar untuk dikuatkuasakan.,7.437375,0.749321699142456,0.10075082931040266,229
+test_data/malaya-test/malay-test/230.wav,sebut perkataan amangkurat,Semua perkataan aman kurat.,1.98525,0.35271143913269043,0.17766600636327437,230
+test_data/malaya-test/malay-test/231.wav,sebut perkataan mengaku,Sebut perkataan mengaku,2.2755,0.359464168548584,0.15797150892049394,231
+test_data/malaya-test/malay-test/232.wav,kawasan pentadbiran dengan daripadanya,Kawasan pentadbiran dengan daripadanya,4.20275,0.46637773513793945,0.11096965918456712,232
+test_data/malaya-test/malay-test/233.wav,shht ah bang malu aku,"Bang, malu aku",2.7381875,0.32019686698913574,0.11693752417945658,233
+test_data/malaya-test/malay-test/234.wav,ahli geologi sedar akan,Ahli Geologi sedarakan,4.1795625,0.37947964668273926,0.09079410744132652,234
+test_data/malaya-test/malay-test/235.wav,belajar bersyukur,"Pelajar, ibu syukur.",1.665,0.4319949150085449,0.2594564054105375,235
+test_data/malaya-test/malay-test/236.wav,nipis dasar laut iaitu,Nipis dasar laut iaitu,4.133125,0.3834104537963867,0.09276526932923315,236
+test_data/malaya-test/malay-test/237.wav,sebut perkataan altar,Sebut perkataan altar,2.29875,0.3432590961456299,0.14932423975883843,237
+test_data/malaya-test/malay-test/238.wav,anda berencana pindah ke suatu kota,Anda berencana pindah ke suatu kota?,4.7346875,0.5121510028839111,0.10816996958804803,238
+test_data/malaya-test/malay-test/239.wav,penting fardhu tu,penting fardutu,1.687375,0.3709869384765625,0.21986039764519594,239
+test_data/malaya-test/malay-test/240.wav,saintis perancis mencapai kejayaan,saintis perancis mencapai kejayaan,4.1563125,0.42073774337768555,0.1012286115102475,240
+test_data/malaya-test/malay-test/241.wav,mengapa ramai orang rusia mengatakan bahawa ukrainian adalah nazis,Mengapa ramai orang Rusia mengatakan bahawa Ukrainian adalah nazis?,5.3303125,0.4409620761871338,0.08272724651455872,241
+test_data/malaya-test/malay-test/242.wav,parti buruhnya penggal kedua,Parti buruhnya penggal kedua.,3.738375,0.37192630767822266,0.09948876388222762,242
+test_data/malaya-test/malay-test/243.wav,lain dengan bahasa malaysia,lain dengan bahasa Malaysia,2.4264375,0.4236481189727783,0.17459675716880338,243
+test_data/malaya-test/malay-test/244.wav,menteri kewangan lim guan eng hari ini mengumumkan harga runcit,Menteri Keuangan Lim Guan Eng hari ini mengumumkan harga runcit,5.354125,0.4789443016052246,0.08945332834127419,244
+test_data/malaya-test/malay-test/245.wav,mangsa pedofilia abang kandung aku sendiri,Mangsa pedofilia abang kandung aku sendiri.,3.402375,0.4286839962005615,0.1259955167201033,245
+test_data/malaya-test/malay-test/246.wav,ipa 3 arahnya tepat mengenai punggung salah satu siswi dikelas tersebut,IPA 3 arahnya tepat mengenai punggung salah satu siswi di kelas tersebut.,6.4141875,0.4698977470397949,0.07325912238140761,246
+test_data/malaya-test/malay-test/247.wav,agar bisa segera keluar dari ruangan maut pak dadi mulai keluar kelas,Agar bisa segera keluar dari ruangan maut Pak Dari mulai keluar kelas,4.980625,0.4314086437225342,0.08661737105735409,247
+test_data/malaya-test/malay-test/248.wav,separuh daripada buta europe sebelum gelas,"separuh daripada buta Europe sebelum gelas,",3.4973125,0.4531211853027344,0.1295626814311659,248
+test_data/malaya-test/malay-test/249.wav,isu lgbt persetubuhan haram dan anak luar nikah sepatutnya,"Isu LGBT, persetubuhan haram dan anak luar nikah sepatutnya",6.055125,0.5472800731658936,0.09038295215472736,249
+test_data/malaya-test/malay-test/250.wav,adakah anda tahu jesus membenci agama,Adakah anda tahu Jesus membenci agama?,3.4070625,0.47683215141296387,0.13995403706652398,250
+test_data/malaya-test/malay-test/251.wav,nya tanpa daffa karena daffa punya geng nya sendiri dengan anak laki laki,Tanpa Dafa Karena Dafa punya gengnya sendiri Dengan anak laki-laki,6.6771875,0.5254600048065186,0.07869481047319977,251
+test_data/malaya-test/malay-test/252.wav,justifikasi bagi menggelar diri,Justifikasi bagi menggelar diri,4.0866875,0.37061238288879395,0.09068772273113468,252
+test_data/malaya-test/malay-test/253.wav,terserempak dengan seekor badak,Terserumpak dengan seekor badak?,3.4133125,0.41469454765319824,0.121493284793935,253
+test_data/malaya-test/malay-test/254.wav,dan hanipa maidin kini menduduki jawatan menteri dan,dan Hanifah Maidin kini menduduki jawatan menteri dan,4.048125,0.4106466770172119,0.10144120475953977,254
+test_data/malaya-test/malay-test/255.wav,oleh orang orang dari,oleh orang-orang dari,2.8444375,0.34268689155578613,0.12047615444381748,255
+test_data/malaya-test/malay-test/256.wav,sebarang makluman hebahan yang mendakwa berlakunya lagi gangguan,Sebarang makluman hebahan yang mendakwa berlakunya lagi gangguan,4.391375,0.48668456077575684,0.110827374290685,256
+test_data/malaya-test/malay-test/257.wav,kenapa bukan persaudaraan muslim yang diharamkan di eropah,Kenapa bukan persaudaraan Muslim yang diharamkan di Eropah?,4.4809375,0.5050623416900635,0.11271354302309808,257
+test_data/malaya-test/malay-test/258.wav,yee ketemuu teriak yasmin girang sambil mengangkat kunci motornya setinggi,"Yeay, ketemu! Teriak Yasmin girang sambil mengangkat kunci motonya setinggi.",5.7065625,0.6029362678527832,0.10565664843814172,258
+test_data/malaya-test/malay-test/259.wav,mengapa orang india mengambil pil tanpa ubat,Mengapa orang India mengambil pil tanpa ubat?,3.6141875,0.42407703399658203,0.11733675521720499,259
+test_data/malaya-test/malay-test/260.wav,adakah nasionalisme cina menjijikkan anda,Adakah nasionalism China menjijikkan anda?,3.4728125,0.48196983337402344,0.13878371877952625,260
+test_data/malaya-test/malay-test/261.wav,setelah kalah dalam perang,Setelah kalah dalam perang.,3.8080625,0.3748743534088135,0.09844227961300883,261
+test_data/malaya-test/malay-test/262.wav,kenapa hanya di amerika kita mempunyai ucapan bebas,Kenapa hanya di Amerika kita mempunyai ucapan bebas?,4.3345625,0.4345417022705078,0.10025041795348616,262
+test_data/malaya-test/malay-test/263.wav,menyelar bekas menteri besar selangor tan sri muhammad muhammad taib,"Menyelar bekas Menteri Besar Selangor, Tan Sri Muhammad Muhammad Taib",6.0840625,0.5729889869689941,0.09417868192001548,263
+test_data/malaya-test/malay-test/264.wav,tolong sebut penyataan,Tolong sebut pernyataan.,3.7136875,0.5072026252746582,0.13657654966247382,264
+test_data/malaya-test/malay-test/265.wav,kelima diluluskan melalui pungutan,"Kelima, diluluskan melalui penghutan.",6.94275,0.4565606117248535,0.06576077371716589,265
+test_data/malaya-test/malay-test/266.wav,adakah orang berfikir truf seperti beruang teddy atau cicak hewan peliharaan,Adakah orang berfikir truf seperti beruang teddy atau cicak hewan peliharaan?,5.9004375,0.508073091506958,0.08610769820152456,266
+test_data/malaya-test/malay-test/267.wav,saya tahu dia mengharapkan saya bermurah hati mahu menaja pakaian sekolahnya,Saya tahu dia mengharapkan saya bermurah hati mahu menaja pakaian sekolahnya,4.517625,0.6561365127563477,0.14523926017682912,267
+test_data/malaya-test/malay-test/268.wav,plankton kepada ikan besar,Plankton kepada ikan besar.,4.7368125,0.39238953590393066,0.08283830865248111,268
+test_data/malaya-test/malay-test/269.wav,saya tidak akan terlibat dalam apa apa cara sama ada siasatan,Saya tidak akan terlibat dalam apa-apa cara sama ada siasatan,4.501875,0.4149918556213379,0.09218200319230052,269
+test_data/malaya-test/malay-test/270.wav,tolong sebut memecahkan,Tolong sebut memencahkan.,4.1309375,0.5027282238006592,0.12169833695151747,270
+test_data/malaya-test/malay-test/271.wav,adakah demokrat menyedari bahawa robert e lee bukan asian,Adakah Demokrat menyedari bahawa Robert E. Lee bukan Asian,4.715375,0.4199337959289551,0.08905628840313974,271
+test_data/malaya-test/malay-test/272.wav,dah lah suami aku tu bukan calon pilihan,Dalam suami aku tu bukan calon pilihan.,2.3094375,0.4487800598144531,0.1943244014243525,272
+test_data/malaya-test/malay-test/273.wav,tolong sebut komisar,Tolong sebut komisar.,2.810875,0.3773193359375,0.13423554442566818,273
+test_data/malaya-test/malay-test/274.wav,bagaimana ramai orang mengalami kemurungan pada masa kini,Bagaimana ramai orang mengalami kemurungan pada masa kini?,4.3451875,0.5698127746582031,0.13113652164796183,274
+test_data/malaya-test/malay-test/275.wav,pembangunan luar bandar rina harun dan ketua setiausaha negara datuk seri,Pembangunan Luar Bandar Rina Harun dan Ketua Setiausaha Negara Datuk Seri,7.810875,0.5313601493835449,0.0680282489968851,275
+test_data/malaya-test/malay-test/276.wav,45 ahli belia yang dilantik itu menjadi penyambung legasi,45 ahli belia yang dilantik itu menjadi penyambung legasi,5.0305625,0.48543334007263184,0.09649683113421845,276
+test_data/malaya-test/malay-test/277.wav,bisa dibilang siswa yang paling benci fisika,Bisa dibilang siswa yang paling benci fizikal,2.898625,0.4485297203063965,0.15473878832425597,277
+test_data/malaya-test/malay-test/278.wav,bolehkah saya membeli rumpai secara sah di stockton dan di mana,Bolehkah saya membeli rumpai secara sah di Stockton dan di mana?,5.1249375,0.4647555351257324,0.09068511276981084,278
+test_data/malaya-test/malay-test/279.wav,akhirnya yang ditunggu bel pulang sekolah berbunyi libra melepas kacamatanya,Akhirnya yang ditunggu bel pulang sekolah berbunyi. Libra melepas kecamatannya.,7.4136875,0.607745885848999,0.08197619414751418,279
+test_data/malaya-test/malay-test/280.wav,sebab aku tersalah cinta,Sebab aku tersalah cinta.,1.92275,0.3365020751953125,0.17501083094282277,280
+test_data/malaya-test/malay-test/281.wav,ppfftt andra menahan ketawa sambil menutup mulutnya,Andra menahan ketawa sambil menutup mulutnya.,3.76275,0.4732494354248047,0.1257722238854042,281
+test_data/malaya-test/malay-test/282.wav,lelaki hitam seperti wanita hitam,Lelaki hitam seperti wanita hitam,3.03,0.38443541526794434,0.12687637467588922,282
+test_data/malaya-test/malay-test/283.wav,berbunyi libra akan segera keluar dari ruangan maut,"Berbunyi, Libra akan segera keluar dari ruangan maut.",4.0415625,0.44664597511291504,0.11051319263599536,283
+test_data/malaya-test/malay-test/284.wav,bagaimana kita akan mengeluarkan virus yang dipanggil islam,Bagaimana kita akan mengeluarkan virus yang dipanggil Islam?,4.586125,0.46663761138916016,0.10174986756557228,284
+test_data/malaya-test/malay-test/285.wav,apabila obama ditangkap bolehkah dia dibunuh kerana kejahatannya,"Apabila Obama ditangkap, bolehkah dia dibunuh kerana kejahatannya?",5.216875,0.5482330322265625,0.10508839721606565,285
+test_data/malaya-test/malay-test/286.wav,sebut perkataan adilkan,Sebut perkataan adilkan,2.4264375,0.38527393341064453,0.15878172564125165,286
+test_data/malaya-test/malay-test/287.wav,sebut perkataan revolvable,"Sebut perkataan, revolvable.",3.01675,0.43434858322143555,0.14397897844416527,287
+test_data/malaya-test/malay-test/288.wav,kita perlu masa yang sesuai untuk kita menilai secara,Kita perlu masa yang sesuai untuk kita menilai secara berikut.,4.4808125,0.45714545249938965,0.10202289261141582,288
+test_data/malaya-test/malay-test/289.wav,aku emang rakus kalau udah makan masakan bangdik gila abang cuma belajar,"Aku imar aku sekali udah makan masakan bang dik. Gila, abang cuma belajar.",4.6505,0.48961567878723145,0.1052823736775038,289
+test_data/malaya-test/malay-test/290.wav,boleh fuckers quora sila tutup fuck tentang iq,Boleh fuckers quora sila tutup fuck tentang IQ?,4.2869375,0.4517056941986084,0.10536792155206565,290
+test_data/malaya-test/malay-test/291.wav,felda engineering services sdn,Felda Engineering Services SDN,3.68775,0.3626234531402588,0.09833189699417227,291
+test_data/malaya-test/malay-test/292.wav,melaka yang mana bahasa,Melaka yang mana bahasa,4.04025,0.3580019474029541,0.08860886019502606,292
+test_data/malaya-test/malay-test/293.wav,libra segera berlari menuju andra hh akhirnya aku ketemu kamu juga,Libra segera melalui menuju Andra Akhirnya aku ketemu kamu juga,5.4790625,0.5016884803771973,0.09156465734369652,293
+test_data/malaya-test/malay-test/294.wav,cuba mengekalkan status ekonomi,Cuba mengekalkan status ekonomi.,5.1315625,0.3443634510040283,0.06710693887174292,294
+test_data/malaya-test/malay-test/295.wav,kita pon fikir takpelah at least dia pakai tudung,Kita pun fikir takpelah at least dia pakai tudung,3.1564375,0.3928508758544922,0.12446021055525167,295
+test_data/malaya-test/malay-test/296.wav,kripton pada tahun biro,Krypton pada tahun biru,3.6223125,0.39340829849243164,0.10860694611313398,296
+test_data/malaya-test/malay-test/297.wav,meter nanometer per laksa,nanometer pelaksa,6.7105625,0.36905574798583984,0.05499624628871869,297
+test_data/malaya-test/malay-test/298.wav,berapa ramai wanita seperti seks doggystyle,Berapa ramai wanita seperti seks doggy style?,3.676375,0.5345902442932129,0.14541232716826027,298
+test_data/malaya-test/malay-test/299.wav,aku terdiam menatap piring didepanku sedetik kemudian menatap abangku dengan,Aku terdiam menetap piring di depanku sedetik kemudian menetap abangku dengan,4.373,0.6422443389892578,0.1468658447265625,299
+test_data/malaya-test/malay-test/300.wav,pilih kelas jenis kereta yang sesuai,Pilih kelas jenis kereta yang sesuai.,2.6421875,0.4529135227203369,0.1714161174104173,300
+test_data/malaya-test/malay-test/301.wav,kenapa ada orang amerika ingin diktator sosialis pemerintah dengan pemerintah,Kenapa ada orang Amerika ingin diktator sosialis pemerintah dengan pemerintah?,5.9090625,0.7296154499053955,0.12347397745503547,301
+test_data/malaya-test/malay-test/302.wav,libra menjalani lika liku pelajaran sma ya masing masing jumlah siswa laki,"Libra menjalani liku-liku pelajaran SMA. Ya, masing-masing jumlah siswa lelaki.",6.50625,0.7643344402313232,0.11747695527090464,302
+test_data/malaya-test/malay-test/303.wav,tolong sebut jarum,Tolong sebut jarum.,3.0700625,0.48503684997558594,0.15798924288205402,303
+test_data/malaya-test/malay-test/304.wav,betul tidak,Betul tidak?,1.6834375,0.2948496341705322,0.17514736019040342,304
+test_data/malaya-test/malay-test/305.wav,kelihatan selepas 72 jam daripada aktiviti tersebut atau selepas,Kelihatan selepas 72 jam daripada aktiviti tersebut atau selepas.,5.0503125,0.5016100406646729,0.0993225747247666,305
+test_data/malaya-test/malay-test/306.wav,hidrogen bergabung dengan satu,hidrogen bergabung dengan satu,2.08975,0.3265724182128906,0.15627343855144904,306
+test_data/malaya-test/malay-test/307.wav,sebut perkataan almarhum,Sebut perkataan Al-Marqum,2.124625,0.3385951519012451,0.15936701860386898,307
+test_data/malaya-test/malay-test/308.wav,dan sejarah dan juga,dan sejarah dan juga,4.713625,0.4238755702972412,0.08992560296952795,308
+test_data/malaya-test/malay-test/309.wav,saya perlu mengambil peperiksaan lanjut,Saya perlu mengambil peperiksaan lanjut,2.710875,0.43050360679626465,0.15880614443538144,309
+test_data/malaya-test/malay-test/310.wav,bersamaan dengan kilometer dengan,bersamaan dengan kilometer dengan,3.9009375,0.3892831802368164,0.09979221154833073,310
+test_data/malaya-test/malay-test/311.wav,kenapa tiba tiba orang sedang melepak gadis delhi selatan,Kenapa tiba-tiba orang sedang melepak gadis Delhi Selatan?,4.607875,0.49926090240478516,0.10834948916903892,311
+test_data/malaya-test/malay-test/312.wav,ditemukan beberapa bahagian dunia,Ditemukan beberapa bahagian dunia.,4.41175,0.48331451416015625,0.10955165504848559,312
+test_data/malaya-test/malay-test/313.wav,studi ini juga mendapati sebanyak 43 persen anak yang datang,Studi ini juga mendapati sebanyak 43% anak yang datang.,5.263375,0.518599271774292,0.09852979728297756,313
+test_data/malaya-test/malay-test/314.wav,bukit palembang pada masihi,Bukit Palembang pada masa,2.67025,0.39208531379699707,0.14683468356782964,314
+test_data/malaya-test/malay-test/315.wav,bagaimana stalin memulakan proses stalinisme,Bagaimana Stalin memulakan proses Stalinism...,3.674375,0.38088464736938477,0.10365971011924062,315
+test_data/malaya-test/malay-test/316.wav,dengan jelas wajah laki laki itu,dengan jelas wajah lelaki itu,2.9301875,0.4006922245025635,0.13674627459934338,316
+test_data/malaya-test/malay-test/317.wav,bolehkah saya mendapatkan seorang gadis di delhi,Bolehkah saya mendapatkan seorang gadis di Delhi?,3.84875,0.50333571434021,0.13077900989677427,317
+test_data/malaya-test/malay-test/318.wav,may berharap perjanjian itu akan selesai sebelum 22 mei,Mei berharap perjanjian itu akan selesai sebelum 22 Mei.,6.1800625,0.45359015464782715,0.07339572288270986,318
+test_data/malaya-test/malay-test/319.wav,sampai lah aku jumpa doktor tu dan doktor tu pun terus masukkan aku dekat wad,Sampailah aku jumpa Dr. Tu dan Dr. Tu pun terus masukkan aku dekat Watt.,4.587375,0.5130460262298584,0.1118386934204983,319
+test_data/malaya-test/malay-test/320.wav,masak dari mama aja udah mantap gini apalagi abang belajar sama chef juna,Masak dari Mama Aja sudah mantap gini apalagi Abang belajar sama Chef Juna,5.379125,0.5505940914154053,0.1023575565571362,320
+test_data/malaya-test/malay-test/321.wav,memang salah aku,memang selagu,1.6295,0.3322279453277588,0.2038833662643503,321
+test_data/malaya-test/malay-test/322.wav,musnah panjang meter piawai,Musnah panjang meter piyawai.,5.270875,0.3995509147644043,0.07580352688394323,322
+test_data/malaya-test/malay-test/323.wav,tolong sebut tidak sopan,Tolong sebut tidak sopan.,3.1295625,0.38830065727233887,0.12407506073847027,323
+test_data/malaya-test/malay-test/324.wav,adakah donald trump tahu dia adalah seorang asshole,Adakah Donald Trump tahu dia adalah seorang asshole?,4.131625,0.4623892307281494,0.11191461730630187,324
+test_data/malaya-test/malay-test/325.wav,berbalik kearah libra,Berbalik ke arah Libra.,2.03325,0.364778995513916,0.17940685873056242,325
+test_data/malaya-test/malay-test/326.wav,rakyat etnik cina menguasai segala galanya di malaysia,Rakyat etnik China menguasai segala-galanya di Malaysia,4.45075,0.46776700019836426,0.10509846659515008,326
+test_data/malaya-test/malay-test/327.wav,pertama acara a reveal,Pertama acara review...,4.2956875,0.384627103805542,0.08953796192240288,327
+test_data/malaya-test/malay-test/328.wav,tak seindah khabar dari rupa,Tak seindah kabar dari rupa.,2.43175,0.45853376388549805,0.18856122705273898,328
+test_data/malaya-test/malay-test/329.wav,yasmin dengan wajah yang senang karena yasmin tidak jadi menangis,Yasmin dengan wajah yang senang kerana Yasmin tidak jadi menangis.,3.937625,0.42605161666870117,0.10820015026029679,329
+test_data/malaya-test/malay-test/330.wav,mengeluarkan semua benda yang ada didalam tasnya duh gimana nih aku takut,Mengeluarkan semua benda yang ada di dalam tasnya. Duh gimana ni? Aku takut.,5.6145,0.600393533706665,0.10693624253391487,330
+test_data/malaya-test/malay-test/331.wav,ya sehat lah emang kenapa,"Ya, sihat. Lah, emang kenapa?",2.52775,0.4039733409881592,0.15981538561493785,331
+test_data/malaya-test/malay-test/332.wav,hah ketawa kamu mau ketawain apa libra memiringkan alisnya,Hah ketawa? Kamu ketawain apa? Libra memiringkan alisnya,4.782,0.4629347324371338,0.0968077650433153,332
+test_data/malaya-test/malay-test/333.wav,sezaman dengan dinosaur penyu,Sezaman dengan dinosaur penyu,3.2275625,0.3728170394897461,0.1155104012671315,333
+test_data/malaya-test/malay-test/334.wav,orang melayu yang rata,Orang Melayu yang rata,3.065,0.36267662048339844,0.11832842430127193,334
+test_data/malaya-test/malay-test/335.wav,kenapa amerika hitam tidak mempunyai nilai borjuasi tradisional,Kenapa Amerika Hitam tidak mempunyai nilai borjuasi tradisional?,5.315875,0.6079275608062744,0.11436077048581361,335
+test_data/malaya-test/malay-test/336.wav,haruskah marxists diharamkan daripada quora kerana kebodohan mereka,Haruskah Marxis diharamkan daripada quora kerana kebodohan mereka?,5.0703125,0.5395646095275879,0.10641644070806047,336
+test_data/malaya-test/malay-test/337.wav,qubbat sakhrah telah dibina,Kubat sakrah telah dibina.,3.529375,0.49140167236328125,0.13923192416880645,337
+test_data/malaya-test/malay-test/338.wav,tolong sebut dynamostatik,Tolong sebut Dynamo Static.,3.0214375,0.3585684299468994,0.11867477978508553,338
+test_data/malaya-test/malay-test/339.wav,biasa ada yang berantem jawab laki laki itu dengan santai seolah olah,Biasa ada yang berantem Jauh lelaki-lelaki itu dengan santai Seolah-olah,4.7201875,0.5789289474487305,0.12264956581676692,339
+test_data/malaya-test/malay-test/340.wav,then dia mintak diri sebab ada hal lain katanya,Then dia minta diri sebab ada hal lain katanya,3.41025,0.420029878616333,0.12316688765232256,340
+test_data/malaya-test/malay-test/341.wav,bagaimana lelaki putih menjimatkan wanita coklat dari lelaki coklat,Bagaimana lelaki putih menjimatkan wanita coklat dari lelaki coklat?,5.25575,0.6040072441101074,0.11492313068736287,341
+test_data/malaya-test/malay-test/342.wav,walaupun isteri aku macamtu,Walaupun istri aku macam tu,2.1450625,0.4151644706726074,0.19354423037678736,342
+test_data/malaya-test/malay-test/343.wav,adakah wanita melakukannya dengan gaya anjing pada abad ke 18,Adakah wanita melakukannya dengan gaya anjing pada abad ke-18?,5.4153125,0.5284614562988281,0.09758651163692365,343
+test_data/malaya-test/malay-test/344.wav,tempatan yang menutur bahasa,Tempatan yang menutur bahasa.,8.382375,0.5054993629455566,0.060305028460973964,344
+test_data/malaya-test/malay-test/345.wav,adakah orang islam menghormati buddhism,Adakah orang Islam menghormati Buddhism?,3.0565,0.4819636344909668,0.15768481416357494,345
+test_data/malaya-test/malay-test/346.wav,unsur asas dengan mengalirkan,Unsur asas dengan mengalihkan,2.87925,0.4855837821960449,0.16864939904351653,346
+test_data/malaya-test/malay-test/347.wav,mereka berjalan menyusuri koridor kelas 12 atau biasa disebut jalan pintas,Mereka berjalan menyusuri koridor kelas 12 atau biasa disebut jalan pintas.,4.6373125,0.560652494430542,0.12090030474127891,347
+test_data/malaya-test/malay-test/348.wav,apakah tulisan rumah putih yang perlu donald trump tawarkan tarian ribut,Apakah tulisan rumah putih yang perlu Donald Trump tawarkan tarian ribut?,5.16475,0.43656420707702637,0.08452765517731282,348
+test_data/malaya-test/malay-test/349.wav,dengan nada kesal,Dengan nada kesal,1.6913125,0.3393745422363281,0.20065750252323455,349
+test_data/malaya-test/malay-test/350.wav,apabila para saintis pertama,Apabila para saintis pertama,2.9256875,0.3226449489593506,0.11028004493280659,350
+test_data/malaya-test/malay-test/351.wav,bible orang barat sebelum,Bible orang Barat sebelum,4.1563125,0.2889094352722168,0.06951099929858902,351
+test_data/malaya-test/malay-test/352.wav,bahagian hadapan cangkerangnya terdiri,bahagian hadapan cankrangnya terdiri,3.6803125,0.361710786819458,0.0982826286679346,352
+test_data/malaya-test/malay-test/353.wav,tapi ini langsung tiada jawapan,Tapi ini langsung tiada jawapan.,1.8346875,0.3956258296966553,0.21563663005097886,353
+test_data/malaya-test/malay-test/354.wav,aku ni seorang perempuan dan baru 19 tahun,Aku ni seorang perempuan dan baru 19 tahun,2.51725,0.4406611919403076,0.17505658633044296,354
+test_data/malaya-test/malay-test/355.wav,bagaimana anda akan menghentikan feminisme,Bagaimana anda akan menghentikan feminism,3.5100625,0.4084451198577881,0.11636405900401718,355
+test_data/malaya-test/malay-test/356.wav,mengapa tidak media mengkritik muslim untuk merawat wanita seperti objek,Mengapa tidak media mengkritik Muslim untuk merawat wanita seperti objek,5.32575,0.38932299613952637,0.07310200368765457,356
+test_data/malaya-test/malay-test/357.wav,ya sorry aku cuma persiapan aja buat besok hehe,"Ya sorry, aku cuma persiapan aje buat besok, hehe.",3.53125,0.4660029411315918,0.13196543465673397,357
+test_data/malaya-test/malay-test/358.wav,penelitian itu berdasar pada data lebih dari 27 ribu,"Penelitian itu berdasarkan pada data lebih dari 27,000.",5.05425,0.5351965427398682,0.10589039773257519,358
+test_data/malaya-test/malay-test/359.wav,duh duh mulai deh jangan bikin kita tambah panik dong yas protes libra,"Duh, duh Mulai deh Jangan bikin kita tawar panik dong Yes Protes liberal",5.8315625,0.5339205265045166,0.09155702721260667,359
+test_data/malaya-test/malay-test/360.wav,bagaimana saya memalukan teman lelaki saya kerana batang kecilnya,Bagaimana saya memalukan teman lelaki saya kerana batang kecilnya?,5.3274375,0.5367097854614258,0.1007444546203359,360
+test_data/malaya-test/malay-test/361.wav,digunakan untuk menegaskan bahawa,digunakan untuk meregaskan bahawa,2.7166875,0.41411662101745605,0.15243439704325804,361
+test_data/malaya-test/malay-test/362.wav,dari kejauhan karena sudah tertinggal jauh oleh yasmin,"Dari kejauhan, kalian sudah tertinggal jauh oleh Yasmin.",3.2353125,0.4790205955505371,0.1480600701015859,362
+test_data/malaya-test/malay-test/363.wav,kenapa chloe kim pada pasukan olympic kita ketika dia asian,Kenapa Chloe Kim pada pasukan Olimpik kita ketika dia Asian?,4.907875,0.4325134754180908,0.08812642445418656,363
+test_data/malaya-test/malay-test/364.wav,bagaimana saya boleh membantah wanita,Bagaimana saya boleh membantah wanita?,3.2690625,0.40030622482299805,0.12245291266930444,364
+test_data/malaya-test/malay-test/365.wav,sebut perkataan acan,Sebut perkataan acan,2.4496875,0.3923492431640625,0.16016297718140068,365
+test_data/malaya-test/malay-test/366.wav,apa yang berlaku kepada suara suara waras di kalangan hindus,Apa yang berlaku kepada suara-suara waras di kalangan Hindus?,4.6354375,0.47284626960754395,0.1020068266711705,366
+test_data/malaya-test/malay-test/367.wav,dan kesuburan terus meningkat,Dan kesuburan terus meningkat.,4.8529375,0.3696284294128418,0.07616591588349154,367
+test_data/malaya-test/malay-test/368.wav,kenapa hollywood dipenuhi dengan pedofilia,Kenapa Hollywood dipenuhi dengan pedofilia?,3.247875,0.5206799507141113,0.1603140363203976,368
+test_data/malaya-test/malay-test/369.wav,tak tahu nak cakap ape,Tak tahu nak cakap apa,2.2608125,0.3705308437347412,0.16389277913791667,369
+test_data/malaya-test/malay-test/370.wav,sebut perkataan ajal,Sebut perkataan ajan,1.9388125,0.39860963821411133,0.2055947329688205,370
+test_data/malaya-test/malay-test/371.wav,sebut perkataan ambisi,Sebut perkataan ambisi,1.7414375,0.37485194206237793,0.2152543183791425,371
+test_data/malaya-test/malay-test/372.wav,entah apa yang sedang mereka lakukan hal itu membuat libra gisel dan yasmin,"Entah apa yang sedang mereka lakukan Hal itu membuat Libra, Gisel dan Yasmin",4.340125,0.6012518405914307,0.1385333004444413,372
+test_data/malaya-test/malay-test/373.wav,itu ujian hidup berkeluarga,Itu ujian hidup berkeluarga.,2.3501875,0.39826369285583496,0.16946039107766292,373
+test_data/malaya-test/malay-test/374.wav,turun dari kamarnya dan langsung otomatis menghampiriku lalu menatap piring,Turun dari kamarnya dan langsung otomatis memaham piringku lalu menetap piring,4.3598125,0.5452461242675781,0.12506182875240118,374
+test_data/malaya-test/malay-test/375.wav,korban merupakan anak pertama dari 3 bersaudara pasangan,Korban merupakan anak pertama dari tiga bersaudara pasangan,5.6329375,0.47145700454711914,0.08369647356234987,375
+test_data/malaya-test/malay-test/376.wav,pada ampaian baju fail,pada empayan baju file,4.237625,0.3820819854736328,0.09016418051942604,376
+test_data/malaya-test/malay-test/377.wav,ramai pendakian yang bermula,ramai pendakian yang bermula,3.6223125,0.4127035140991211,0.11393371336656379,377
+test_data/malaya-test/malay-test/378.wav,apa yang begitu besar tentang singapore,Apa yang begitu besar tentang Singapura?,2.9475625,0.46457362174987793,0.1576128145713205,378
+test_data/malaya-test/malay-test/379.wav,dipulihkan namun dengan batasan,Dipulihkan namun dengan patasan.,5.3173125,0.3588573932647705,0.06748849033506504,379
+test_data/malaya-test/malay-test/380.wav,ketinggalan di meja gak siapa tau masih ada diatas meja gisel mencoba,Ketinggalan di meja tak? Siapa tahu masih ada di atas meja Giselle mencoba,4.8964375,0.6755805015563965,0.13797388439174327,380
+test_data/malaya-test/malay-test/381.wav,saiz kaki diameter inci,Saiz kaki diameter inci.,4.7368125,0.3986685276031494,0.08416388185159311,381
+test_data/malaya-test/malay-test/382.wav,menyebut orang yeu tetapi,menyebut orang you tetapi,3.541,0.38329100608825684,0.1082437181836365,382
+test_data/malaya-test/malay-test/383.wav,daripada semua masalah dengan gereja mormon yang paling mengecewakan,"Daripada semua masalah dengan gereja Mormon yang paling mengecewakan,",5.174375,0.5723178386688232,0.11060617730041275,383
+test_data/malaya-test/malay-test/384.wav,dengan cara resapan sahaja,dengan cara resapan sahaja,3.157875,0.4277687072753906,0.13546093726806493,384
+test_data/malaya-test/malay-test/385.wav,bagaimana saya membuat anak perempuan gay saya lesbian,Bagaimana saya membuat anak perempuan gay saya lesbian,4.4795,0.4406449794769287,0.09836923305657523,385
+test_data/malaya-test/malay-test/386.wav,ada apa kamu cari aku tanya andra dengan heran,Ada apa kamu cari aku? Tanya Andra dengan Heran.,3.195875,0.4164614677429199,0.13031218922608673,386
+test_data/malaya-test/malay-test/387.wav,dia tak maki maki kau,Dia tak maki-maki kau,1.854375,0.41657352447509766,0.22464362627575202,387
+test_data/malaya-test/malay-test/388.wav,bagaimana eksperimen saintifik dilakukan pada iss dalam ketiadaan saintis di atas kapal,Bagaimana eksperimen saintifik dilakukan pada ISS dalam ketiadaan saintis di atas kapal?,6.8598125,0.5204982757568359,0.07587645810389657,388
+test_data/malaya-test/malay-test/389.wav,kenapa menamatkan setiap ayat dengan x,Kenapa menamatkan setiap ayat dengan X?,3.243625,0.45420336723327637,0.14002955558465494,389
+test_data/malaya-test/malay-test/390.wav,sebut perkataan tersenarai,"Sebut perkataan, terus cenarai.",3.7545,0.4204099178314209,0.11197494149192193,390
+test_data/malaya-test/malay-test/391.wav,bolehkah amerika berjaya mengebom moscow,Bolehkah Amerika berjaya mengebum Moskow?,3.4861875,0.551079511642456,0.1580751212154986,391
+test_data/malaya-test/malay-test/392.wav,iaitu paus odontoceti paus,"Yaitu paus odontoceti, paus odontoceti.",6.2925625,0.5426392555236816,0.0862350203948998,392
+test_data/malaya-test/malay-test/393.wav,bagaimana padan donald menjadi gumpalan semacam itu,Bagaimana Padan Donald menjadi gumpalan semacam itu?,3.9450625,0.49695277214050293,0.1259682887509394,393
+test_data/malaya-test/malay-test/394.wav,orang tua juga mesti mencari solusi untuk menangani,Orang tua juga mesti mencari solusi untuk menangani,3.9560625,0.3951685428619385,0.09988935788095828,394
+test_data/malaya-test/malay-test/395.wav,boleh ibu biarkan anak lelaki bersetubuh dengannya,Boleh ibu biarkan anak lelaki bersetubuh dengannya?,3.9975,0.4890265464782715,0.12233309480382026,395
+test_data/malaya-test/malay-test/396.wav,menjalani penggantungan perlawanan,menjalani penggantungan perlawanan,2.5290625,0.3746371269226074,0.1481328068889588,396
+test_data/malaya-test/malay-test/397.wav,budaya cocorico french culture,Budaya Kuku Riku French Culture,6.4086875,0.33516454696655273,0.05229846937716229,397
+test_data/malaya-test/malay-test/398.wav,di kompleks kota darul naim di sini hari ini,"Di kompleks kota Darul Naim di sini hari ini,",3.56675,0.4086143970489502,0.11456210753457635,398
+test_data/malaya-test/malay-test/399.wav,ilegal di malaysia,Ilegal di Malaysia,2.0569375,0.4309678077697754,0.20951915542877475,399
+test_data/malaya-test/malay-test/400.wav,hehe sorry deh kalau aku bikin kalian cape abisnya aku panik banget,Hehehe sorry deh kalau aku bikin kalian capek. Apisnya aku penik banget.,4.668875,0.5216324329376221,0.11172550837998921,400
+test_data/malaya-test/malay-test/401.wav,adakah india di usa tippers buruk,Adakah India di USA tipers buruk?,3.0845,0.36292195320129395,0.1176598972933357,401
+test_data/malaya-test/malay-test/402.wav,kenapa yas tanya libra heran melihat yasmin memasang muka bingung,Kenapa Yas? Tanya Libra heran melihat Yasmin memasang muka bingung.,5.4264375,0.5835590362548828,0.10753999032604408,402
+test_data/malaya-test/malay-test/403.wav,letih sangat,Letih sangat.,2.066125,0.3620431423187256,0.17522809235584758,403
+test_data/malaya-test/malay-test/404.wav,kayaknya udah cukup aku deskripsiin masakan abangku,Kayaknya udah cukup aku deskripsiin masakan abangku,2.943375,0.41369009017944336,0.14054956985754222,404
+test_data/malaya-test/malay-test/405.wav,adakah mereka enggan mengambil wang itu,Adakah mereka enggan mengambil wang itu?,2.9658125,0.3826558589935303,0.12902226927478735,405
+test_data/malaya-test/malay-test/406.wav,saat itu dia meminta tamunya untuk menggunakan pakaian putih,Saat itu dia meminta tamunya untuk menggunakan pakaian putih,3.9955,0.5025217533111572,0.1257719317510092,406
+test_data/malaya-test/malay-test/407.wav,adakah ahli alam sekitar ahli saudara baru,Adakah ahli alam sekitar ahli saudara baru?,3.6,0.4721951484680176,0.13116531901889378,407
+test_data/malaya-test/malay-test/408.wav,pernahkah anda melakukan hubungan seks dengan ahli keluarga,Pernahkah anda melakukan hubungan seks dengan ahli keluarga?,4.559625,0.5125625133514404,0.11241330446066079,408
+test_data/malaya-test/malay-test/409.wav,mengulas lanjut mengenai tindakannya meletakkan jawatan sebagai anggota jawatankuasa,Mengulas lanjut mengenai tindakannya meletakkan jawatan sebagai anggota jawatan kuasa.,6.0761875,0.5422992706298828,0.08924992367827406,409
+test_data/malaya-test/malay-test/410.wav,kamu kenapa,Kamu kenapa?,1.541375,0.3274388313293457,0.21243294547358413,410
+test_data/malaya-test/malay-test/411.wav,mengapa kita harus membunuh semua manusia,Mengapa kita harus membunuh semua manusia?,3.4209375,0.4394233226776123,0.12845114027298432,411
+test_data/malaya-test/malay-test/412.wav,sebut perkataan shemaka,Sebut perkataan semaka,2.0316875,0.26504993438720703,0.13045802289338643,412
+test_data/malaya-test/malay-test/413.wav,sementara empat ion bergabung,sementara 4 Aeon bergabung,3.1114375,0.2975952625274658,0.09564558585138407,413
+test_data/malaya-test/malay-test/414.wav,kepada jutawan american leonard,Kepada jutawan Amerika Leonard.,4.24925,0.3424830436706543,0.0805984688287708,414
+test_data/malaya-test/malay-test/415.wav,bagaimana boleh 15 juta penyamun hujat tidak menjadi bangsa atau agama,Bagaimana boleh 15 juta penyamun hujat tidak menjadi bangsa atau agama?,6.1110625,0.49227356910705566,0.08055449753738497,415
+test_data/malaya-test/malay-test/416.wav,bolehkah anjing asin mengiktiraf sindiran dalam hubungan,Bolehkah anjing asin mengiktiraf sindiran dalam hubungan?,4.4130625,0.3976418972015381,0.09010565728483068,416
+test_data/malaya-test/malay-test/417.wav,mengapa lelaki lebih berjaya daripada wanita,Mengapa lelaki lebih berjaya daripada wanita?,3.94675,0.38195013999938965,0.09677586368515605,417
+test_data/malaya-test/malay-test/418.wav,susah nak puaskan hati semua orang,Susah nak puaskan hati semua orang.,2.0766875,0.3103659152984619,0.1494523924752578,418
+test_data/malaya-test/malay-test/419.wav,ke pejabat bahagian penguatkuasa jabatan imigresen dan seterusnya,ke pejabat bahagian penguatkuasa Jabatan Immigration dan seterusnya,4.4624375,0.4211266040802002,0.09437142908560628,419
+test_data/malaya-test/malay-test/420.wav,membaca quran dengan baik,Membaca Quran dengan baik.,8.196625,0.3219625949859619,0.03927989812709035,420
+test_data/malaya-test/malay-test/421.wav,menangis sendirian menyesal atas sikap sendiri,Menangis sendirian menyesal atas sikap sendiri,3.5799375,0.34655189514160156,0.09680389535895571,421
+test_data/malaya-test/malay-test/422.wav,pantulan cahaya pembiasan cahaya,"Pantulan cahaya, pembiasan cahaya.",5.387,0.3511688709259033,0.0651882069660114,422
+test_data/malaya-test/malay-test/423.wav,tolong sebut coalition,Tolong sebut koalisyen.,3.584375,0.3311948776245117,0.09239961712279315,423
+test_data/malaya-test/malay-test/424.wav,adakah ia ok kerana seorang lelaki berusia 37 tahun,Adakah ia ok kerana seorang lelaki berusia 37 tahun,5.4910625,0.35593128204345703,0.06482011123411126,424
+test_data/malaya-test/malay-test/425.wav,aku whatsapp isteri aku yang aku nak bunuh diri,Aku whatsapp isteri aku yang aku nak bunuh diri.,3.3734375,0.3534519672393799,0.10477501576341043,425
+test_data/malaya-test/malay-test/426.wav,sambil menatap yasmin,sambil menatap Yasmin,1.950375,0.31128549575805664,0.15960289470386804,426
+test_data/malaya-test/malay-test/427.wav,kenapa gadis putih terobsesi dengan muslim dan lelaki etnik,Kenapa gadis putih terobsesi dengan Muslim dan lelaki etnik?,4.6161875,0.3859851360321045,0.08361556718224823,427
+test_data/malaya-test/malay-test/428.wav,mengapa begitu banyak atheis merasakan keperluan untuk menghina ahli sihir,Mengapa begitu banyak etis merasakan keperluan untuk menghina ahli sihir?,5.628125,0.4041483402252197,0.07180870009554154,428
+test_data/malaya-test/malay-test/429.wav,teguh lihat juga perhubungan,Teguh lihat juga perhubungan.,4.899375,0.36409473419189453,0.07431452668797439,429
+test_data/malaya-test/malay-test/430.wav,mengapa kita tidak membunuh orang yang mencuba dan merentas sempadan secara haram,Mengapa kita tidak membunuh orang yang mencuba dan merentas sempadan secara haram?,5.83125,0.46131062507629395,0.07911007503987892,430
+test_data/malaya-test/malay-test/431.wav,sumber cahaya dan cahaya,Sumber cahaya dan cahaya.,4.8529375,0.3079569339752197,0.06345784052962143,431
+test_data/malaya-test/malay-test/432.wav,bahasa dunia selepas bahasa,Bahasa Dunia Selepas Bahasa,3.1695,0.2994232177734375,0.09447017440398722,432
+test_data/malaya-test/malay-test/433.wav,sini few things lah kita kena take note bagi yang masih muda dan ada niat nak kahwin muda,Sini few things lah kita kena take note bagi yang masih muda dan ada niat nak kahwin muda.,6.0721875,0.458803653717041,0.07555821583523911,433
+test_data/malaya-test/malay-test/434.wav,mengapa lelaki perlu berkahwin,Mengapa lelaki perlu berkahwin?,2.6,0.3450174331665039,0.13269901275634766,434
+test_data/malaya-test/malay-test/435.wav,tetapi ketika pelajaran fisika libra akan bertukar tempat duduk dengan gisel,"Tetapi ketika pelajaran fizikal, Libra akan bertukar tempat duduk dengan gisel.",5.7236875,0.4452962875366211,0.07779884690361259,435
+test_data/malaya-test/malay-test/436.wav,pula oleh mantle silika,Pula oleh menthol silica.,5.1548125,0.29447269439697266,0.0571257818585977,436
+test_data/malaya-test/malay-test/437.wav,bagaimana perasaan anda tentang keadaan psikologi komuniti hitam,Bagaimana perasaan anda tentang keadaan psikologi komuniti hitam,5.002625,0.41113996505737305,0.08218484596734175,437
+test_data/malaya-test/malay-test/438.wav,isyarat agar kedua temannya berhenti berjalan libra dan gisel pun berhenti,"Isyarat agar kedua temannya berhenti berjalan, Libra dan Giselle pun berhenti",5.2975625,0.4372234344482422,0.08253294500031708,438
+test_data/malaya-test/malay-test/439.wav,darjah kesasteriaan dengan gelaran,Darjah kesastriaan dengan gelaran,5.4334375,0.3759033679962158,0.06918334258859439,439
+test_data/malaya-test/malay-test/440.wav,yang mengetahui kewujudan gunung,yang mengetahui kewujudan gunung,5.270875,0.4364640712738037,0.08280675813291032,440
+test_data/malaya-test/malay-test/441.wav,pemerhatian jarak jauh melalui,Pemerhatian jarak jauh melalui,4.04025,0.44648027420043945,0.11050808098519632,441
+test_data/malaya-test/malay-test/442.wav,ku li namun tidak diketahui tujuannya,Kuli namun tidak diketahui tujuannya.,3.487875,0.44058680534362793,0.12631955140124804,442
+test_data/malaya-test/malay-test/443.wav,kenapa buddhist begitu kejam kepada muslim di arakan,Kenapa Buddhis begitu kejam kepada Muslim diarahkan?,4.0,0.36370015144348145,0.09092503786087036,443
+test_data/malaya-test/malay-test/444.wav,bahasa melayu penerbit usm,Bahasa Melayu Penerbit USM,3.541,0.35952019691467285,0.10153069667175173,444
+test_data/malaya-test/malay-test/445.wav,kamu terakhir nyimpen dimana yas tanya gisel sambil mencari di saku tas,"Kamu terakhir nyimpen di mana, Yas? Tanya Giselle sambil mencari di saku tas.",6.0945625,0.5268831253051758,0.08645134499895206,445
+test_data/malaya-test/malay-test/446.wav,beliau turut mendakwa ditipu oleh sindiket teksi palsu ketika penjelajahan,Beliau turut mendakwa ditipu oleh Sindiket Teksi Palsu ketika penjelajahan,5.738125,0.6164820194244385,0.10743614323920068,446
+test_data/malaya-test/malay-test/447.wav,patutkah semua dibunuh,Patutkah semua dibunuh?,2.1019375,0.34951257705688477,0.16628114635039565,447
+test_data/malaya-test/malay-test/448.wav,di kamar dengan dua tempat tidur,D kamar dengan dua tempat tidur,4.6373125,0.3534543514251709,0.07621965339303118,448
+test_data/malaya-test/malay-test/449.wav,akhir abad dan awal,"Akhir, abad dan awal.",3.08825,0.3984794616699219,0.12903083029868756,449
+test_data/malaya-test/malay-test/450.wav,kepalanya tepat sejajar dengan bahu laki laki itu,kepalanya tepat sejajar dengan bahu lelaki itu,2.89075,0.5495634078979492,0.19011101198579924,450
+test_data/malaya-test/malay-test/451.wav,bilang kamu perut karet juga,Bilang kamu perut karik juga.,2.3068125,0.34096336364746094,0.14780714238693476,451
+test_data/malaya-test/malay-test/452.wav,kronologi pembentukan istilah bahasa,Kronologi Pembetukan Istilah Bahasa,3.8776875,0.41604018211364746,0.10729079692823298,452
+test_data/malaya-test/malay-test/453.wav,katanya pada hari penamaan calon sabtu ini kertas,"Katanya pada hari penamaan calon Sabtu ini, kertas berkaitan.",4.9214375,0.49122142791748047,0.09981259091829989,453
+test_data/malaya-test/malay-test/454.wav,ada apa kamu cari aku tanya andra dengan heran,Ada apa kamu cari aku? Tanya anda dengan neheran.,3.284,0.45415282249450684,0.13829257688626884,454
+test_data/malaya-test/malay-test/455.wav,kenapa indian selatan jadi tidak selamat,Kenapa Indian Selatan jadi tidak selamat?,3.200375,0.386322021484375,0.1207114858366207,455
+test_data/malaya-test/malay-test/456.wav,mengapa orang membenci bumi bumi tetapi melindungi pedofilia,Mengapa orang membenci bumi-bumi tetapi melindungi pedofilia?,5.0445625,0.4281899929046631,0.08488149228097841,456
+test_data/malaya-test/malay-test/457.wav,sudah saya baca waduh saya juga tahu jangan jangan semangat bung karno,"Sudah saya baca, waduh saya juga tahu jangan-jangan semangat bungkarno.",6.1800625,0.5645217895507812,0.09134564408544109,457
+test_data/malaya-test/malay-test/458.wav,justeru adalah menjadi kewajipan kepada setiap wanita muslim untuk memakai,Gestru adalah menjadi kewajipan kepada setiap wanita muslim untuk memakan,4.7780625,0.5134353637695312,0.1074568119963963,458
+test_data/malaya-test/malay-test/459.wav,tolong sebut mesaticephalous,Tolong sabut mesatis sephalus.,4.6109375,0.3890390396118164,0.08437308890259657,459
+test_data/malaya-test/malay-test/460.wav,lain rafflesia tidak mempunyai,"Lain, privilegia tidak mempunyai",4.109875,0.49350857734680176,0.12007873167597598,460
+test_data/malaya-test/malay-test/461.wav,aku just angguk masa tu sebab pukul 5 pagi wei,Aku just anggut masa tu sebab pukul 5 pagi weh.,4.1046875,0.5204095840454102,0.12678421537459555,461
+test_data/malaya-test/malay-test/462.wav,kenapa orang orang yang lebih besar itu biasanya kurang,Kenapa orang-orang yang lebih besar itu biasanya kurang?,4.1825625,0.5397872924804688,0.12905659926910087,462
+test_data/malaya-test/malay-test/463.wav,adakah ateis menyedari bahawa ia sebenarnya kurang pintar untuk tidak percaya kepada tuhan,Adakah Aethys menyedari bahawa ia sebenarnya kurang pintar untuk tidak percaya kepada Tuhan?,6.870875,0.5360419750213623,0.07801655175234047,463
+test_data/malaya-test/malay-test/464.wav,di samping radiasi dan bahan kimia yang menjadi penyebab kanker,"Di samping radiasi dan bahan kimia yang menjadi penyebab kanser,",4.96875,0.4608418941497803,0.09274805416850923,464
+test_data/malaya-test/malay-test/465.wav,menggelengkan kepala melihat kelakuan abangnya itu,menggelingkan kepala melihat kelakuan abang itu,3.291875,0.43754148483276367,0.13291558301356024,465
+test_data/malaya-test/malay-test/466.wav,bagaimana jika orang putih adalah orang asing,Bagaimana jika orang putih adalah orang asing?,3.8045625,0.40215277671813965,0.10570276522415906,466
+test_data/malaya-test/malay-test/467.wav,ilmu tinggi setanding dengan bahasa jepun jerman korea cina sepanyol,"Ilmu tinggi setanding dengan bahasa Jepun, Jerman, Korea, China, Sepanyol.",7.9503125,0.5785362720489502,0.07276899770278844,467
+test_data/malaya-test/malay-test/468.wav,piawai dan bahasa indonesia,DIY dan Bahasa Indonesia,2.67025,0.3404717445373535,0.1275055685937098,468
+test_data/malaya-test/malay-test/469.wav,adakah prageru propaganda sayap kanan,Adakah prageru propaganda sayap kanan?,3.07625,0.36711740493774414,0.1193392620683443,469
+test_data/malaya-test/malay-test/470.wav,adakah wanita pernah merasa bersalah terhadap bekerja di luar rumah,Adakah wanita pernah merasa bersalah terhadap bekerja di luar rumah?,5.0144375,0.5168540477752686,0.10307318573125472,470
+test_data/malaya-test/malay-test/471.wav,cina dalam kajian kong,China dalam gajian Kong,6.3854375,0.3977525234222412,0.06229056715726075,471
+test_data/malaya-test/malay-test/472.wav,di mana anda boleh membenarkan tidak lurus,di mana anda boleh membenarkan tidak lurus,3.4,0.4363105297088623,0.1283266263849595,472
+test_data/malaya-test/malay-test/473.wav,mahkamah tinggi setelah tiada bantahan daripada pihak pendakwaan,Mahkamah Tinggi setelah tiada bantahan daripada pihak pendakwaan,6.38,0.4558897018432617,0.0714560661196335,473
+test_data/malaya-test/malay-test/474.wav,adalah tandas sebuah kolam renang,Adalah tandas sebuah kolam renang,2.420625,0.5249011516571045,0.21684529890301246,474
+test_data/malaya-test/malay-test/475.wav,ini udah piring ketiga aku makan masakan bangdik yang super mantap sorry,Ini udah piring ketiga aku makan masakan bangdik yang super mantap. Sorry.,4.2861875,0.5222744941711426,0.12185059430347894,475
+test_data/malaya-test/malay-test/476.wav,sebut perkataan akuk,Sebut perkataan akuk.,2.020125,0.43636655807495117,0.21600968161621242,476
+test_data/malaya-test/malay-test/477.wav,kepanjangan hari yang halus,Kempanjangan hari yang hayus,3.2971875,0.38869810104370117,0.11788777588283988,477
+test_data/malaya-test/malay-test/478.wav,kunci berbentuk kepala baymax didalamnya dan ternyata itu adalah kunci,kunci berbentuk kepala baymax di dalamnya dan ternyata itu adalah kunci,4.854375,0.472545862197876,0.09734432593235504,478
+test_data/malaya-test/malay-test/479.wav,sebut perkataan adipos,Sebut perkataan Adipos,2.3451875,0.33017396926879883,0.14078787699013354,479
+test_data/malaya-test/malay-test/480.wav,dugaan besar,Dugaan besar.,1.904375,0.343656063079834,0.18045608825984064,480
+test_data/malaya-test/malay-test/481.wav,namun gaya hidup yang cenderung jadi lebih konsumtif,"Namun, gaya hidup yang cenderung jadi lebih konsumtif.",3.9258125,0.5714583396911621,0.1455643487026347,481
+test_data/malaya-test/malay-test/482.wav,liputan salji bertahan sehingga,Liputan sawji bertahan sehingga,4.04025,0.4518711566925049,0.11184237527195219,482
+test_data/malaya-test/malay-test/483.wav,dia ni kakak pada mak aku,Dia ni kakak pada mak aku.,1.7018125,0.34733057022094727,0.20409449937695678,483
+test_data/malaya-test/malay-test/484.wav,aku cuba banyak benda sebelum aku dapat kerja stabil sekarang,Aku cuma banyak benda sebelum aku dapat kerja status sekarang,3.478625,0.40706419944763184,0.11701870694531082,484
+test_data/malaya-test/malay-test/485.wav,akan menjadi lebih kuat dengan kulit yang lebih gelap,akan menjadi lebih kuat dengan kulit yang lebih gelap,3.597375,0.40889620780944824,0.11366516079348087,485
+test_data/malaya-test/malay-test/486.wav,kenapa pekerja di google begitu bodoh,Kenapa pekerja di Google begitu bodoh?,3.3204375,0.41485023498535156,0.12493842603131411,486
+test_data/malaya-test/malay-test/487.wav,dipadam beliau mengakui hubungan dengan wanita dikenali sebagai,"Di Padam, beliau mengakui hubungan dengan wanita dikenali sebagai",4.910875,0.44377899169921875,0.09036658267604424,487
+test_data/malaya-test/malay-test/488.wav,mengapa obama begitu lalai dengan ekonomi america,Mengapa Obama begitu lalai dengan ekonomi Amerika?,4.1325625,0.3986644744873047,0.09646907324143428,488
+test_data/malaya-test/malay-test/489.wav,yang merupakan orang yang terbunuh oleh modi,"yang merupakan orang yang terbunuh oleh Modi,",3.2584375,0.45075345039367676,0.13833423240239434,489
+test_data/malaya-test/malay-test/490.wav,titik di jakarta,Titik di Jakarta,2.1608125,0.34281492233276367,0.15865093446690245,490
+test_data/malaya-test/malay-test/491.wav,udah ga cape kita caw yuk,"Udah agak capek, kita ciao yuk.",2.6040625,0.465817928314209,0.17888123972224515,491
+test_data/malaya-test/malay-test/492.wav,pada tahun mencetuskan perbahasan,Pada tahun mencetuskan perbahasan,3.738375,0.48725175857543945,0.13033784962060774,492
+test_data/malaya-test/malay-test/493.wav,tapi bila aku whatsapp balas lambat seketul seketul pulak tu,"Tapi bila aku whatsapp, balas lambat seketul seketul pula tu",4.24275,0.48369717597961426,0.11400558033813311,493
+test_data/malaya-test/malay-test/494.wav,adakah sasaran lembut hindus,Adakah sasaran lembut Hindus?,2.4,0.3435945510864258,0.14316439628601074,494
+test_data/malaya-test/malay-test/495.wav,britain yang unggul pada,Britain yang unggul pada,3.2971875,0.3723111152648926,0.11291778683041002,495
+test_data/malaya-test/malay-test/496.wav,kasus bullying agar tidak berdampak traumatis pada anak,Kes bullying agar tidak berdampak traumatis pada anak,3.8798125,0.40146946907043457,0.10347651312284668,496
+test_data/malaya-test/malay-test/497.wav,jadi murid paling bodoh dalam pelajaran fisika meskipun sebelumnya dia sangat,Jadi murid paling bodoh dalam pelajaran fizikal meskipun sebelumnya dia sangat...,4.974,0.5037376880645752,0.1012741632618768,497
+test_data/malaya-test/malay-test/498.wav,aku lupa aku nyimpen kunci motor dimana yasmin menatap jalan kemudian,Aku lupa aku nyimpen kunci motor di mana Yasmin menatap jalan kemudian,5.6171875,0.5686149597167969,0.10122769797461753,498
+test_data/malaya-test/malay-test/499.wav,adalah libra salah satu siswi di kelas 11 ipa 3 yang selalu ingin dapat,"adalah Libra, salah satu siswi di kelas 11 IPA 3 yang selalu ingin dapat",5.9130625,0.4601566791534424,0.07782036451558602,499
+test_data/malaya-test/malay-test/500.wav,hh syukurlah udah ketemu ujar libra seraya mengelap keringat di,"Syukurlah, udah ketemu Ujah Libra Seraya mengelap keringat di",5.3449375,0.47515249252319336,0.08889767046353551,500
+test_data/malaya-test/malay-test/501.wav,tapi ada sebab sebab yang saya tak boleh nak explain kenapa saya masih bertahan,Tapi ada sebab-sebab yang saya tak boleh nak explain kenapa saya masih bertahan.,4.733375,0.51004958152771,0.10775600528749782,501
+test_data/malaya-test/malay-test/502.wav,mengingatkan yasmin,Mengingatkan Yasmin.,1.7070625,0.37668895721435547,0.22066500623987434,502
+test_data/malaya-test/malay-test/503.wav,sebut perkataan absah,Sebut perkataan absah,3.157875,0.32228875160217285,0.10205874254116228,503
+test_data/malaya-test/malay-test/504.wav,wong menyifatkan hantaran facebook itu sebagai satu cara,Wong menyifatkan hantaran Facebook itu sebagai satu cara.,4.1849375,0.5237622261047363,0.1251541333902206,504
+test_data/malaya-test/malay-test/505.wav,melayu moden tidak mungkin,Melayu modern tidak mungkin.,4.0866875,0.4439737796783447,0.1086390333683074,505
+test_data/malaya-test/malay-test/506.wav,terletak antara selarian dan,Terletak antara selarian dan selarian.,4.6671875,0.525317907333374,0.11255556099543335,506
+test_data/malaya-test/malay-test/507.wav,sepanyol juta pada tahun,Sepanyol juta pada tahun.,3.7151875,0.34526824951171875,0.09293427303782616,507
+test_data/malaya-test/malay-test/508.wav,seputar banyak hal yang membuat mereka tertawa,Seputar banyak hal yang membuat mereka terkaitawa,3.619375,0.4060695171356201,0.1121932701462601,508
+test_data/malaya-test/malay-test/509.wav,baru 2 langkah dari gedung sekolah tiba tiba yasmin yang berada ditengah,"Baru dua langkah dari gedung sekolah, tiba-tiba Yasmin yang berada di tengah",3.9508125,0.6294751167297363,0.15932801587767992,509
+test_data/malaya-test/malay-test/510.wav,mulut puaka mencarut carut tu normal bagi dia,Mulut puaka mencarut-carut tu normal bagi dia,2.968375,0.40864109992980957,0.13766491765016536,510
+test_data/malaya-test/malay-test/511.wav,adakah orang cina yang umumnya dikenali sebagai kejam,Adakah orang Cina yang umumnya dikenali sebagai kejam?,4.0378125,0.4644508361816406,0.11502535993972988,511
+test_data/malaya-test/malay-test/512.wav,tolong sebut pembasmian,Tolong sebut pembasmian.,3.0829375,0.4830162525177002,0.1566740332937986,512
+test_data/malaya-test/malay-test/513.wav,berapa ramai orang di uk berani meminta referendum kedua mengenai brexit,Berapa ramai orang di UK berani meminta referendum kedua mengenai Brexit?,5.8721875,0.5257148742675781,0.08952624116099463,513
+test_data/malaya-test/malay-test/514.wav,bangunan dan tempat permainan,Bangunan dan tempat permainan,6.3158125,0.3973238468170166,0.06290937972224739,514
+test_data/malaya-test/malay-test/515.wav,kendati demikian muncul kekhawatiran bahwa dia mungkin menjadi,Kendati demikian muncul kekhawatiran bahawa dia mungkin menjadi,5.4725,0.47150301933288574,0.08615861477074202,515
+test_data/malaya-test/malay-test/516.wav,bahagian yang lebih mudah,Bahagian yang lebih mudah.,2.2713125,0.38125157356262207,0.16785518221848472,516
+test_data/malaya-test/malay-test/517.wav,mengapa orang amerika putih takut kepada mexicans,Mengapa orang Amerika Putih takut kepada Meksikans?,4.1978125,0.4461495876312256,0.10628144721357267,517
+test_data/malaya-test/malay-test/518.wav,selepas kahwin kami sentiasa ada projek bersama,"Selepas kahwin, kami sentiasa ada projek bersama.",3.1814375,0.4523615837097168,0.14218779520569452,518
+test_data/malaya-test/malay-test/519.wav,sebut perkataan tepung,Sebut perkataan tepung.,3.8864375,0.3598766326904297,0.0925980754072154,519
+test_data/malaya-test/malay-test/520.wav,kenapa anda menjual kemaluan anda,Kenapa anda menjual kemaluan anda?,3.041,0.4324526786804199,0.14220739187123313,520
+test_data/malaya-test/malay-test/521.wav,kuali periuk berisi minyak awak tinggal macam tu je,Kuali periuk berisi minyak awak tinggal macam tu je,2.8815625,0.5021646022796631,0.174268162595697,521
+test_data/malaya-test/malay-test/522.wav,saya tak salahkan dorang,Saya tak salahkan mereka,1.84125,0.32053256034851074,0.17408421471745322,522
+test_data/malaya-test/malay-test/523.wav,wanita adalah spesies berbahaya di bumi,Wanita adalah spesies berbahaya di bumi,3.238125,0.3539261817932129,0.10929972801952144,523
+test_data/malaya-test/malay-test/524.wav,banyak dipengaruhi oleh penjajah,Banyak dipengaruhi oleh penjajah.,4.1795625,0.4320969581604004,0.10338329864917688,524
+test_data/malaya-test/malay-test/525.wav,tolong sebut dipimpin,Tolong sebut dipimpin.,3.17075,0.4583618640899658,0.14455944621618413,525
+test_data/malaya-test/malay-test/526.wav,eropah dan amat kuat,Eropah dan amat kuat.,3.9705625,0.3198738098144531,0.0805613335174684,526
+test_data/malaya-test/malay-test/527.wav,kenapa muslim begitu mudah untuk radicalise berbanding dengan agama lain,Kenapa Muslim begitu mudah untuk radicalise berbanding dengan agama lain?,5.2726875,0.4630887508392334,0.08782783937778095,527
+test_data/malaya-test/malay-test/528.wav,juga senarai pokok rujukan,juga senarai pokok rujukan,4.1563125,0.5045015811920166,0.121382013790353,528
+test_data/malaya-test/malay-test/529.wav,aku libra terdiam menatap andra,"Aku, Libra Tidiam Menatap Andra.",3.0565,0.39231181144714355,0.12835328364048537,529
+test_data/malaya-test/malay-test/530.wav,kenapa tuhan mencipta lawannya sendiri dia begitu bosan,Kenapa Tuhan mencipta lawannya sendiri dia begitu bosan?,4.6050625,0.5744681358337402,0.1247470877612932,530
+test_data/malaya-test/malay-test/531.wav,jawa telah menyebabkan unsur,Jawa telah menyebabkan unsur,4.6671875,0.4728834629058838,0.10132086249071498,531
+test_data/malaya-test/malay-test/532.wav,sebut perkataan ambasador,Sebuah perkataan ambasador,2.3335625,0.44227004051208496,0.18952568894644345,532
+test_data/malaya-test/malay-test/533.wav,sambil menyelam minum air,sambil menyelam minum air,1.9885625,0.4232199192047119,0.21282706437676055,533
+test_data/malaya-test/malay-test/534.wav,aku ingin sekali syurga buat ibu ayah aku,Aku ingin sekali syurga buat ibu ayahku,4.4598125,0.39646387100219727,0.08889698188033629,534
+test_data/malaya-test/malay-test/535.wav,tolong sebut manucaptor,Tolong sebut menu chapter.,3.03725,0.36609697341918945,0.1205356731975272,535
+test_data/malaya-test/malay-test/536.wav,bengkulu melayu riau johor,Bengkulu Melayu Riau Johor,2.1594375,0.4184739589691162,0.19378840969887584,536
+test_data/malaya-test/malay-test/537.wav,tolong sebut biperforate,Tolong sabut by perforate.,3.3984375,0.4358220100402832,0.12824187881645116,537
+test_data/malaya-test/malay-test/538.wav,libra tiba tiba saja,Libra tiba-tiba saja.,2.341,0.34167051315307617,0.14595066772878093,538
+test_data/malaya-test/malay-test/539.wav,robinson berbangsa melayu iaitu,Robinson berbangsa Melayu iaitu,4.04025,0.3856804370880127,0.09545954757453441,539
+test_data/malaya-test/malay-test/540.wav,sis macam terpanggil pulak untuk share pendapat,Sis macam terpanggil pula untuk share pendapat.,3.240625,0.402179479598999,0.12410552890229477,540
+test_data/malaya-test/malay-test/541.wav,khas bersama pentadbiran kerajaan negeri yang turut dihadiri,khas bersama pentadbiran kerajaan negeri yang turut dihadiri,4.4755625,0.5393574237823486,0.12051165049808793,541
+test_data/malaya-test/malay-test/542.wav,spontan aku memukul punggung bangdik sehingga dia berteriak aduh duh,"Semuatan aku memukul punggung bangdik sehingga dia bertariak. Aduh, aduh.",4.1809375,0.732487678527832,0.17519699314515752,542
+test_data/malaya-test/malay-test/543.wav,adakah ada,Adakah ada...,1.2805,0.3435509204864502,0.26829435414795016,543
+test_data/malaya-test/malay-test/544.wav,berkata dengan pelan kamu,Berkata dengan pelan Kamu,2.5790625,0.4231569766998291,0.1640739519495278,544
+test_data/malaya-test/malay-test/545.wav,mengapa amerika sebuah negara yang dibina oleh orang kulit hitam untuk orang kulit putih,Mengapa Amerika sebuah negara yang dibina oleh orang kulit hitam untuk orang kulit putih?,6.75375,0.5596137046813965,0.08285970085972925,545
+test_data/malaya-test/malay-test/546.wav,laki yang duduk dengan satu perempuan yaitu libra dan daffa,Lelaki yang duduk dengan satu perempuan iaitu Libra dan Dafa,4.52425,0.4450705051422119,0.09837442783714691,546
+test_data/malaya-test/malay-test/547.wav,bagaimana mungkin retard seperti truf boleh dipilih,Bagaimana mungkin retard seperti truth boleh dipilih?,4.2994375,0.3865494728088379,0.08990698732307142,547
+test_data/malaya-test/malay-test/548.wav,wanita pertama yang sebenar melania trump atau ivanka,Wanita pertama yang sebenar Melania Trump atau Ivanka?,4.368125,0.37393689155578613,0.08560581291876632,548
+test_data/malaya-test/malay-test/549.wav,bahasa brunei kategori bahasa,Bahasa berunik kategori bahasa.,2.4845,0.43299198150634766,0.17427731193654564,549
+test_data/malaya-test/malay-test/550.wav,apakah beberapa kisah kehidupan sebenar adik perempuan saudara,Apakah beberapa kisah kehidupan sebenar adik perempuan saudara?,4.92625,0.6678268909454346,0.13556496136928387,550
+test_data/malaya-test/malay-test/551.wav,sebut perkataan akrab,Sebut perkataan akrab,2.2406875,0.30709147453308105,0.13705234421715703,551
+test_data/malaya-test/malay-test/552.wav,united kingdom uk model kepada sistem parlimen westminster yang mula mula membentuk,United Kingdom model kepada sistem parlimen Westminster yang mula-mula membentuk,8.1501875,0.4899728298187256,0.06011798253950914,552
+test_data/malaya-test/malay-test/553.wav,kenapa membosankan orang biasa membenci weirdos,Kenapa membosankan orang biasa membenci weirdos?,4.03825,0.38977789878845215,0.09652148796841507,553
+test_data/malaya-test/malay-test/554.wav,tersebut yakni peraturan ppdb bisa disesuaikan dengan perkembangan,tersebut yakni peraturan PPDB bisa disesuaikan dengan perkembangan,6.4680625,0.4592783451080322,0.07100709758262728,554
+test_data/malaya-test/malay-test/555.wav,kenapa tak sedemikian sememangnya lemah,Kenapa tak sedemikian sememangnya lemah?,3.27375,0.476438045501709,0.14553281267711615,555
+test_data/malaya-test/malay-test/556.wav,riau yang merupakan bahasa,Riau yang merupakan bahasa,2.9256875,0.35983872413635254,0.12299287744721626,556
+test_data/malaya-test/malay-test/557.wav,tak apalah tun dr mahathir punya kepakaran di dalam politik di,"Tak apalah Tun, Dr. Mahathir punya kepakaran di dalam politik di Malaysia.",6.5180625,0.5320923328399658,0.08163351192781072,557
+test_data/malaya-test/malay-test/558.wav,dan andorra dan sepanyol,dan Andorra dan Sepanyol,3.9938125,0.33280229568481445,0.08332947420160923,558
+test_data/malaya-test/malay-test/559.wav,bolehkah seorang kanak kanak mempunyai hubungan seks dengan kucing,Bolehkah seorang kanak-kanak mempunyai hubungan seks dengan kucing?,4.642375,0.48912930488586426,0.10536186863100551,559
+test_data/malaya-test/malay-test/560.wav,abang pun menarik sebuah kursi yang ada disekeliling meja makan lalu,Abang pun menarik sebuah kursi yang ada di sekeliling meja makan lalu,3.8193125,0.6698620319366455,0.17538811813294813,560
+test_data/malaya-test/malay-test/561.wav,menempelkan kepalanya diatas meja untung saja 5 menit lagi bel pulang akan,Menempelkan kepalanya di atas meja Untung saja 5 minit lagi berpulang akan,6.145875,0.5793313980102539,0.09426345280537822,561
+test_data/malaya-test/malay-test/562.wav,ketua pegawai eksekutif kumpulan kapten izham ismail berkata operasi dan,Ketua Pegawai Eksekutif Kumpulan Kapten Izham Ismail berkata operasi dan,6.02225,0.5612750053405762,0.09320021675297044,562
+test_data/malaya-test/malay-test/563.wav,disediakan secara langsung oleh,Disediakan secara langsung oleh,3.7151875,0.35730433464050293,0.0961739709343076,563
+test_data/malaya-test/malay-test/564.wav,memanfaatkan alam sungai sebagai wahananya,Memanfaatkan alam sungai sebagai wahananya.,5.252875,0.512195348739624,0.09750762177657454,564
+test_data/malaya-test/malay-test/565.wav,terkena panas jika sudah siang hari bersama pasangan sebangkunya daffa,"Terkena panas jika sudah siang hari. Bersama pasangan sebangkunya, daffa.",5.42775,0.6027481555938721,0.1110493584991704,565
+test_data/malaya-test/malay-test/566.wav,terbaharu pelancongan mesir,Terbaharu Pelancongan Mesir,3.039375,0.3803520202636719,0.12514152424879188,566
+test_data/malaya-test/malay-test/567.wav,tolong sebut menyeru,Tolong sebut menyeru.,3.5484375,0.36868715286254883,0.10390126720917273,567
+test_data/malaya-test/malay-test/568.wav,kerajaan meningkat serta kejatuhan harga saham dan bagaimana mahu mengekang kenaikan,Kerajaan meningkat serta kejatuhan harga saham dan bagaimana mahu mengekang kenaikan,6.885,0.6035680770874023,0.08766420872729155,568
+test_data/malaya-test/malay-test/569.wav,udah nanya pr buat besok lagi sih ujar yasmin salah satu teman dekat libra,Udah nanya PR buat besok lagi sih Ujar Yasmin Salah satu teman dekat Libra,6.1971875,0.5761222839355469,0.09296512069959911,569
+test_data/malaya-test/malay-test/570.wav,pakatan harapan mampu menang di kedah perak johor,"Pakatan Harapan mampu menang di Kedah, Perak, Johor",5.8394375,0.5659210681915283,0.09691362707307481,570
+test_data/malaya-test/malay-test/571.wav,kenapa sikh tidak termasuk pakistan punjab dalam peta khalistan mereka yang dicadangkan,Kenapa Sikh tidak termasuk Pakistan Punjab dalam peta Khalistan mereka yang dicadangkan?,6.1925,0.5284080505371094,0.08533032709521346,571
+test_data/malaya-test/malay-test/572.wav,tolong sebut mentakrifkan,Tolong sebut mentakrifkan.,4.1229375,0.46293210983276367,0.11228210707360073,572
+test_data/malaya-test/malay-test/573.wav,sebut perkataan aguh lagah,Sebut perkataan Agul Lagah,2.948875,0.5301203727722168,0.1797703777787179,573
+test_data/malaya-test/malay-test/574.wav,petang tu mak bawa aku jumpa uncle man,"Pertama tu, Mak bawa aku jumpa Uncle Man.",2.9144375,0.40885496139526367,0.1402860625404606,574
+test_data/malaya-test/malay-test/575.wav,sebut perkataan ambang,Semua perkataan ambang,1.8459375,0.3396272659301758,0.18398632994355213,575
+test_data/malaya-test/malay-test/576.wav,sebut perkataan alot,Sebut perkataan a lot.,2.3335625,0.3684365749359131,0.15788588260906364,576
+test_data/malaya-test/malay-test/577.wav,teman dekatnya yang duduk dibelakang bangkunya jangan tanya kenapa alasannya,Teman dekatnya yang duduk di belakang bangkunya. Jangan tanya kenapa. Alasannya...,5.6250625,0.5982513427734375,0.10635461255291608,577
+test_data/malaya-test/malay-test/578.wav,alis seperti orang yang sedang hormat,Alis seperti orang yang sedang hormat.,2.5080625,0.39702391624450684,0.15829905205492562,578
+test_data/malaya-test/malay-test/579.wav,kak ini ada apa tanya libra kepada laki laki itu dengan panggilan kak,Kak ini ada apa ya? Tanya Libra kepada lelaki-lelaki itu dengan panggilan Kak.,4.270375,0.6401901245117188,0.14991426385545037,579
+test_data/malaya-test/malay-test/580.wav,tampil meneroka bidang baharu bagi membantu masyarakat dan persekitaran,Tampil meneroka bidang baru bagi membantu masyarakat dan persekitaran,4.905625,0.5100278854370117,0.10396797256965458,580
+test_data/malaya-test/malay-test/581.wav,tengah antara libra dan gisel berhenti sambil membuka kedua tangannya memberi,tengah antara Libra dan Giselle berhenti sambil membuka kedua tangannya memberi,5.1003125,0.601630449295044,0.11795952685154958,581
+test_data/malaya-test/malay-test/582.wav,asing seperti sanskrit inggeris,asing seperti Sanskrit Inggris.,4.133125,0.33359766006469727,0.08071317951058758,582
+test_data/malaya-test/malay-test/583.wav,melaksana menyelia dan mengurus,melaksana menyelih dan mengurus,3.2275625,0.4560248851776123,0.14129079922623103,583
+test_data/malaya-test/malay-test/584.wav,enak gimana abang bikin restoran,"Enak, bagaimana abang membuat restoran?",2.0240625,0.38198280334472656,0.18872085389889223,584
+test_data/malaya-test/malay-test/585.wav,apa yang berlaku jika anda makan bayi mati untuk keseronokan,Apa yang berlaku jika anda makan bayi mati untuk keseronokan?,5.3644375,0.532280683517456,0.09922395097667855,585
+test_data/malaya-test/malay-test/586.wav,libra berdiri tepat dibelakang seorang laki laki yang bertubuh tinggi,Libra berdiri tepat di belakang seorang laki-laki yang bertubuh tinggi,4.3190625,0.5762209892272949,0.1334134408166807,586
+test_data/malaya-test/malay-test/587.wav,yang paling kesian orang tu mak mertua aku sendiri sebab dia jaga anak aku,Yang paling kesian orang tu mak mutua aku sendiri sebab dia jaga anak aku.,4.106,0.535435676574707,0.13040323345706456,587
+test_data/malaya-test/malay-test/588.wav,mengapa selebriti tidak dipelajarinya,Mengapa selebriti tidak dipelajarinya?,3.148125,0.496229887008667,0.1576271231315996,588
+test_data/malaya-test/malay-test/589.wav,spontan libra berdiri lalu memanggil andra,"Spontan, Libra berdiri lalu memanggil Andra.",3.284,0.5760822296142578,0.17542089817730142,589
+test_data/malaya-test/malay-test/590.wav,tertuju pada gerombolan laki laki di koridor kelas 12 ipa 6 sedang berkumpul,Terutuju pada gerombolan laki-laki di koridor kelas 12 IPA 6 sedang berkumpul,6.332625,0.7891330718994141,0.12461389580141159,590
+test_data/malaya-test/malay-test/591.wav,cerita ni berkenaan dengan pengorbanan mama pada opah,Cerita ni berkenaan dengan pengobanan mama pada opah.,3.3734375,0.4701874256134033,0.1393793202374146,591
+test_data/malaya-test/malay-test/592.wav,sebut perkataan adika,Sebut perkataan adhika,3.2855625,0.4355800151824951,0.13257395504803063,592
+test_data/malaya-test/malay-test/593.wav,nasib baik baru habis final,Nasib baik baru habis final.,2.327875,0.4435606002807617,0.19054313495387926,593
+test_data/malaya-test/malay-test/594.wav,kenapa masyarakat hari ini memuji menggalakkan dan menyokong mangsa,"Kenapa masyarakat hari ini memuji, menggalakkan dan menyokong mangsa?",5.0128125,0.5036983489990234,0.10048218420278505,594
+test_data/malaya-test/malay-test/595.wav,diikuti siswa siswi kelas 11 ipa 3 dibelakangnya termasuk libra dan geng,Diikuti siswa-siswi kelas 11 IPA 3 di belakangnya termasuk Libra dan geng,6.2945,0.6259191036224365,0.09943905053974685,595
+test_data/malaya-test/malay-test/596.wav,kerana sayang gamaknya,Kerana sayang gamaknya.,3.0130625,0.38239002227783203,0.12691075020111,596
+test_data/malaya-test/malay-test/597.wav,adakah cina yang mampu untuk blowjob,Adakah China yang mampu untuk blowjob?,3.0,0.4829866886138916,0.1609955628712972,597
+test_data/malaya-test/malay-test/598.wav,gila cape banget kecepatan lari kamu kalau lagi panik nambah dua kali,"Kila, capit banget. Kecepatan lari kamu kalau lagi panik nambah dua kali.",5.384375,0.5490586757659912,0.10197259213297573,598
+test_data/malaya-test/malay-test/599.wav,asli iaitu bulan permukaan,asli iaitu bulan permukaan,4.0634375,0.4274907112121582,0.10520420486648514,599
+test_data/malaya-test/malay-test/600.wav,dan madura golongan kalimantan,Dan Madura golongan Kalimantan.,9.6826875,0.3542337417602539,0.036584237770789764,600
+test_data/malaya-test/malay-test/601.wav,jika tidak diuruskan dengan sempurna,Jika tidak diuruskan dengan sempurna.,3.0433125,0.428450345993042,0.14078420996629232,601
+test_data/malaya-test/malay-test/602.wav,motor yang dia cari kunci motor dengan gantungan berbentuk kepala baymax,"Motor yang dicari, kunci motor dengan gantungan berbentuk kepala BMAX",4.1020625,0.4519081115722656,0.11016607171935232,602
+test_data/malaya-test/malay-test/603.wav,setiap hari,setiap hari,1.23625,0.38875293731689453,0.31446142553439393,603
+test_data/malaya-test/malay-test/604.wav,kenapa kristian merujuk semua orang bukan kristian sebagai penyembah iblis,Kenapa Kristian merujuk semua orang bukan Kristian sebagai penyembah iblis?,5.3515625,0.6017091274261475,0.11243615811758668,604
+test_data/malaya-test/malay-test/605.wav,berapa ramai orang tahu bahawa cina sebenarnya berasal dari egypt,Berapa ramai orang tahu bahawa China sebenarnya berasal dari Egypt,4.9629375,0.468719482421875,0.09444396235533392,605
+test_data/malaya-test/malay-test/606.wav,parents buat hal,Parents buat hal.,1.632125,0.29636073112487793,0.1815796774909262,606
+test_data/malaya-test/malay-test/607.wav,sumpah aku lupa duh gimana ya mata yasmin mulai berkaca kaca menahan,Sumpah aku lupa. Duh gimana ya? Mata Yasmin mulai berkaca-kaca menahan.,5.8775625,0.6824188232421875,0.1161057535742389,607
+test_data/malaya-test/malay-test/608.wav,aku ada dua orang sahabat baik,Aku ada dua orang sahabat baik.,1.995125,0.45505762100219727,0.22808476712095596,608
+test_data/malaya-test/malay-test/609.wav,jarak tersebut menyebabkan biro,jarak tersebut menyebabkan biru,3.9009375,0.41538095474243164,0.10648234039700243,609
+test_data/malaya-test/malay-test/610.wav,kenapa tidak ada masalah dengan ucapan bebas,Kenapa tidak ada masalah dengan ucapan bebas?,3.60775,0.4386577606201172,0.12158762680898544,610
+test_data/malaya-test/malay-test/611.wav,canada adalah berbahaya seperti pakistan,Kanada adalah berbahaya seperti Pakistan,3.338875,0.32512664794921875,0.09737610660753061,611
+test_data/malaya-test/malay-test/612.wav,bergigi dan mempunyai struktur,bergigi dan mempunyai struktur,3.947375,0.37949442863464355,0.0961384283567291,612
+test_data/malaya-test/malay-test/613.wav,mak ayah tak boleh di beli,Mak ayah tak boleh dibeli,1.9793125,0.4123709201812744,0.20834048195081595,613
+test_data/malaya-test/malay-test/614.wav,antaranya cecair mandian lengkap serta losyen muka dan badan,Antaranya cercai mandian lengkap serta lotion muka dan badan.,5.9630625,0.4515411853790283,0.07572303415887864,614
+test_data/malaya-test/malay-test/615.wav,berakhir dengan kekalahan perancis,Berakhir dengan kekalahan Perancis.,5.7585,0.5290567874908447,0.09187406225420591,615
+test_data/malaya-test/malay-test/616.wav,terdapat badge nama di dada kanannya bertuliskan libra ardea ya dia,"Terdapat bitch nama di dada kanannya bertulis Libra Arte. Ya, dia.",7.3781875,0.6292233467102051,0.08528156091319244,616
+test_data/malaya-test/malay-test/617.wav,sebut perkataan acum,Sebut perkataan Acum,2.948875,0.3451070785522461,0.11703008047212787,617
+test_data/malaya-test/malay-test/618.wav,juga negeri selangor dan,juga negeri selangor dan,3.8776875,0.31055641174316406,0.08008804519269902,618
+test_data/malaya-test/malay-test/619.wav,menuju mejanya semoga ada semoga ada,menuju mejanya semoga ada semoga ada,3.512875,0.37629079818725586,0.1071176168201988,619
+test_data/malaya-test/malay-test/620.wav,adakah kanak kanak berbahaya akan dihilangkan,Adakah kanak-kanak berbahaya akan dihilangkan?,3.4468125,0.4688544273376465,0.13602550975361918,620
+test_data/malaya-test/malay-test/621.wav,sebab tu mak aku,"Sebab tu, mak aku...",1.9740625,0.32469606399536133,0.1644811468711661,621
+test_data/malaya-test/malay-test/622.wav,myanmar bagi menghentikan pembunuhan beramai ramai serta pembersihan etnik,Nyamar bagi menghentikan pembunuhan beramai-ramai serta pembersihan etnik,5.5566875,0.4871039390563965,0.0876608481323444,622
+test_data/malaya-test/malay-test/623.wav,adakah air membuat katak gay,Adakah air membuat katak G?,2.5778125,0.37296247482299805,0.1446817698428408,623
+test_data/malaya-test/malay-test/624.wav,yang mana milenium,Yang mana milenium,1.7676875,0.3534977436065674,0.1999775093768369,624
+test_data/malaya-test/malay-test/625.wav,adalah pak dadi guru fisika paling aneh yang pernah libra temukan semenjak,"Adalah Pak Dadi, guru fizikal paling aneh yang pernah Libra temukan semenjak",4.9095625,0.5311212539672852,0.1081809741636419,625
+test_data/malaya-test/malay-test/626.wav,ganti nama sedia ada,ganti nama sedia ada,2.38,0.33481383323669434,0.14067808119188838,626
+test_data/malaya-test/malay-test/627.wav,sebut perkataan agihnya,Sebut perkataan agihnya,2.8211875,0.35299062728881836,0.12512129282042345,627
+test_data/malaya-test/malay-test/628.wav,kenapa perempuan menjadi gemuk selepas perkahwinan,Kenapa perempuan menjadi gemuk selepas perkahwinan?,3.8065,0.47101879119873047,0.12374065183205844,628
+test_data/malaya-test/malay-test/629.wav,kenapa lelaki brazil menyembah gadis gadis kanak kanak perempuan banyak,Kenapa lelaki Brazil menyembah gadis-gadis kanak-kanak perempuan banyak?,5.2508125,0.5568342208862305,0.10604724904692948,629
+test_data/malaya-test/malay-test/630.wav,tolong sebut bersubsidi,Tolong sebut bersubsidi.,3.5428125,0.3923966884613037,0.11075852545436816,630
+test_data/malaya-test/malay-test/631.wav,kata vishal shah kepala produk instagram,"Kata Vishal Shah, kepala produk Instagram.",3.9481875,0.3484776020050049,0.0882626780022491,631
+test_data/malaya-test/malay-test/632.wav,sebut perkataan tukang masak,Sebut perkataan tukang masa.,4.56925,0.48003196716308594,0.10505705907163887,632
+test_data/malaya-test/malay-test/633.wav,26 4,26.4,2.635625,0.299405574798584,0.11359945925485757,633
+test_data/malaya-test/malay-test/634.wav,sebut perkataan secara tidak langsung,Sebut perkataan secara tidak langsung.,4.249375,0.44255614280700684,0.10414617274469937,634
+test_data/malaya-test/malay-test/635.wav,mengapa feminis begitu gila dan menyerang,Mengapa feminis begitu gila dan menyerang?,3.4,0.36312365531921387,0.10680107509388644,635
+test_data/malaya-test/malay-test/636.wav,kini didominasi ahli upm,Kini didor minasi ahli UPF.,5.2476875,0.3749070167541504,0.07144232897903131,636
+test_data/malaya-test/malay-test/637.wav,lembaga eksekutif mom di sini hari ini,Lembaga Eksekutif MOM di sini hari ini.,4.5281875,0.39768266677856445,0.08782380737956733,637
+test_data/malaya-test/malay-test/638.wav,pejabat taman negara kuala,Pejabat Taman Negara Kuala,4.8761875,0.37998080253601074,0.07792579808221294,638
+test_data/malaya-test/malay-test/639.wav,tolong sebut seriocomical,Tolong sebut seriokomikal.,4.46275,0.4996001720428467,0.11194894897604542,639
+test_data/malaya-test/malay-test/640.wav,apa yang berlaku apabila kanak kanak melakukan hubungan seks,Apa yang berlaku apabila kanak-kanak melakukan hubungan seks?,4.6125,0.5468292236328125,0.11855376122120596,640
+test_data/malaya-test/malay-test/641.wav,assalamualaikum thanks admin kalau confession ni disiarkan,Assalamualaikum. Thanks admin kalau kompensi ini disiarkan.,4.5913125,0.6544144153594971,0.142533189661888,641
+test_data/malaya-test/malay-test/642.wav,adalah pakistanis dan kashmiris bosan dengan laporan rahsia undian massa dari india,Adalah Pakistanis dan Kashmiris bosan dengan laporan rahsia undian massa dari India?,6.548625,0.5717179775238037,0.08730351448186507,642
+test_data/malaya-test/malay-test/643.wav,kalah pada pilihan raya,Kalah pada pilihan raya.,3.181125,0.3400571346282959,0.10689838803199996,643
+test_data/malaya-test/malay-test/644.wav,mengapa liberal berfikir bahawa semua orang mahu menjadi sama,Mengapa liberal berfikir bahawa semua orang mahu menjadi sama,4.9378125,0.42855358123779297,0.0867901689741749,644
+test_data/malaya-test/malay-test/645.wav,bagaimana anda bercakap mak cik,Bagaimana anda bercakap makcik?,2.8526875,0.5203242301940918,0.1823979073046353,645
+test_data/malaya-test/malay-test/646.wav,apa perempuan yang lebih baik hubungan bijak,Apa perempuan yang lebih baik hubungan bijak?,3.3958125,0.4069812297821045,0.11984796857367847,646
+test_data/malaya-test/malay-test/647.wav,aku ingat sangat walaupun masa tu rasanya aku baru darjah 6,Aku ingat sangat walaupun masa tu rasanya aku baru darjah 6,3.718,0.3950526714324951,0.10625408053590508,647
+test_data/malaya-test/malay-test/648.wav,tolong sebut ketinggian,Tolong sebut ketinggian.,3.46975,0.35674071311950684,0.10281452932329616,648
+test_data/malaya-test/malay-test/649.wav,apa antara kandungan notis yang telah dihantar kepada,Apa antara kandungan notis yang telah dihantar kepada...,3.9889375,0.4098083972930908,0.10273622920717379,649
+test_data/malaya-test/malay-test/650.wav,bagaimana saya boleh membuat anak perempuan saya mendapat pengguguran,Bagaimana saya boleh membuat anak perempuan saya mendapat pengguguran?,5.300125,0.4882476329803467,0.09212002225991776,650
+test_data/malaya-test/malay-test/651.wav,adakah kiat yang tersisa dalam penyiasatan mereka mengenai trump presiden,Adakah kiat yang tersisa dalam penyiasatan mereka mengenai Trump Presiden?,5.6301875,0.5281639099121094,0.09380929319176481,651
+test_data/malaya-test/malay-test/652.wav,berlaku antara bahasa melayu,berlaku antara bahasa Melayu,3.9705625,0.3712120056152344,0.09349103700426183,652
+test_data/malaya-test/malay-test/653.wav,kita masih teruskan gerakan mencari zahir walaupun sudah lebih,Kita masih teruskan gerakan menjadi zahir walaupun sudah lebih.,5.6198125,0.5182092189788818,0.09221112252034776,653
+test_data/malaya-test/malay-test/654.wav,adakah warga singapura tahu apa yang orang kulit hitam itu,Adakah warga Singapura tahu apa yang orang kulit hitam itu?,4.48,0.4635486602783203,0.10347068309783934,654
+test_data/malaya-test/malay-test/655.wav,sebut perkataan akronim,Sebut perkataan akronim.,2.0665625,0.37836623191833496,0.18308966310882685,655
+test_data/malaya-test/malay-test/656.wav,mengapa orang mengatakan wanita bersemangat bebas adalah cangkul,Mengapa orang mengatakan wanita bersemangat bebas adalah cangkul?,4.834,0.4584925174713135,0.09484743845083027,656
+test_data/malaya-test/malay-test/657.wav,dia tnya kenapa tak de,Dia tanya kenapa tak ada?,2.1634375,0.47110939025878906,0.21775964882682722,657
+test_data/malaya-test/malay-test/658.wav,kenapa tidak kita secara jelas mengutuk penciptaan sebagai penipuan,Kenapa tidak kita secara jelas mengutuk penciptaan sebagai penipuan?,4.9408125,0.47948431968688965,0.09704564172125327,658
+test_data/malaya-test/malay-test/659.wav,yang berlainan seperti melalui,Yang berlainan seperti melalui,4.527875,0.4045088291168213,0.08933745501296332,659
+test_data/malaya-test/malay-test/660.wav,haruskah kita meminta pla untuk nuke dunia jika ada china buruk barat,Haruskah kita meminta PLA untuk nuke dunia jika ada China buruk barat?,6.153875,0.4665718078613281,0.07581756338263747,660
+test_data/malaya-test/malay-test/661.wav,kenapa orang orang muslim tidak menonjol melawan spanyol,Kenapa orang-orang Muslim tidak menonjol melawan Sepanyol?,4.191,0.47638607025146484,0.11366883088796585,661
+test_data/malaya-test/malay-test/662.wav,elizabeth ii pemerintah rasmi di bekas koloni british,Elizabeth I.I. Pemerintah rasmi di bekas koloni British Air Force.,6.32475,0.5461204051971436,0.08634655997425093,662
+test_data/malaya-test/malay-test/663.wav,hmm menyesal tulis tajuk guna nombor roman kena google nak tengok bentuk nombor 8 macam mana,"Hmm, menyesal tulis tajuk guna nombor roman. Kena google nak tengok bentuk nombor 8 macam mana.",6.7153125,0.6250710487365723,0.0930814535789023,663
+test_data/malaya-test/malay-test/664.wav,ismail sabri yaakob wee ka siong mustapa mohamed,"Ismail Sabri Yaqub, Wi Ka Siong, Mustafa Muhammad",5.0305625,0.41857099533081055,0.08320560480678066,664
+test_data/malaya-test/malay-test/665.wav,adakah purata lelaki russian seksual,Adakah purata lelaki Rosian seksual?,3.10875,0.4385395050048828,0.14106618576755378,665
+test_data/malaya-test/malay-test/666.wav,menyukai fisika tetapi setalah bertemu pak dadi semua berubah kini libra,"Menyukai fizikal tetapi setelah bertemu Pak Dadi semua berubah, kini Libertlah",6.2931875,0.5116636753082275,0.08130437481931493,666
+test_data/malaya-test/malay-test/667.wav,dengan terburu buru yasmin memasukkan kembali isi tasnya menutup resleting,"Jangan terburu-buru, Yasmin memasukkan kembali isi tasnya menutus resleting",5.75525,0.523686408996582,0.09099281681883185,667
+test_data/malaya-test/malay-test/668.wav,di manakah saya boleh mencari budak mati di bawah air,Di manakah saya boleh mencari budak mati di bawah air?,4.29675,0.4139561653137207,0.09634169204950735,668
+test_data/malaya-test/malay-test/669.wav,haruskah saya mengusir gypsies mongolia turks dari kirkuk kembali ke mongolia,Haruskah saya mengusir gypsis Mongolia Turks dari Kirkuk kembali ke Mongolia?,6.0,0.5151314735412598,0.08585524559020996,669
+test_data/malaya-test/malay-test/670.wav,analisis genealogi dalam kitab,Analisis genealogi dalam kita.,4.1563125,0.3338441848754883,0.0803222050496656,670
+test_data/malaya-test/malay-test/671.wav,yang masih menggeledah tas yasmin,Yang masih menggelidah cita siamin.,2.9525625,0.4254570007324219,0.1440975426370896,671
+test_data/malaya-test/malay-test/672.wav,kayaknya malah si chef juna yang minta diguruin sama bangdik,Kayaknya malah si Chef Junat yang minta diguruin sama Bang Dik.,3.881125,0.41739749908447266,0.10754549237256535,672
+test_data/malaya-test/malay-test/673.wav,sebut perkataan boleh berubah,Sebut perkataan boleh berubah.,3.12725,0.3199799060821533,0.10231989961856369,673
+test_data/malaya-test/malay-test/674.wav,who are you,Who are you?,1.6308125,0.3183708190917969,0.19522220923116354,674
+test_data/malaya-test/malay-test/675.wav,yasmin cuma cengengesan melihat kedua temannya yang kelelahan kalau kalian,Yasmin cuba cengang-cengang melihat kudutemannya yang kelelahan. Kalau kalian,6.17875,0.5252325534820557,0.08500628015084859,675
+test_data/malaya-test/malay-test/676.wav,tolong sebut tidak sabar,Tolong sebut tidak sabar.,3.8644375,0.33487629890441895,0.08665589724362703,676
+test_data/malaya-test/malay-test/677.wav,kenapa linda sarsour membenci jews,Kenapa Linda Sarsar membenci Zeus?,3.0738125,0.35123133659362793,0.11426569987389534,677
+test_data/malaya-test/malay-test/678.wav,adakah benar bahawa kebanyakan pengganas adalah muslim,Adakah benar bahawa kebanyakan pengganas adalah Muslim?,4.154875,0.5622482299804688,0.13532253797778965,678
+test_data/malaya-test/malay-test/679.wav,lain seperti andra menemukan libra yang lain atau aku akan mendapatkan,Lain seperti Andra menumpukan Libra yang lain atau aku akan mendapatkan,6.478625,0.4728236198425293,0.07298209417006375,679
+test_data/malaya-test/malay-test/680.wav,penelitian libra,Penelitian Ibrah,1.4874375,0.3699381351470947,0.24870835591216084,680
+test_data/malaya-test/malay-test/681.wav,sendiri melalui bunyi berirama,sendiri melalui bunyi berirama,8.5216875,0.33742380142211914,0.03959589006544996,681
+test_data/malaya-test/malay-test/682.wav,juga gaharu tukasnya,juga gaharu tukasnya.,3.8955625,0.34845781326293945,0.08944993521806914,682
+test_data/malaya-test/malay-test/683.wav,ketika mereka berada didepan ruang kelas 12 ipa 5 tatapan mereka langsung,"Ketika mereka berada di depan ruang kelas 12 IPA 5, tetapan mereka langsung.",5.2318125,0.5859813690185547,0.11200351102386691,683
+test_data/malaya-test/malay-test/684.wav,ini,ini,1.1744375,0.2683258056640625,0.22847176257916024,684
+test_data/malaya-test/malay-test/685.wav,setahun yang lalu ketika baru 1 bulan semenjak libra sma libra sudah merasa,"Setahun yang lalu, ketika baru satu bulan semenjak Libra SMA, Libra sudah merasa",5.7763125,0.5804064273834229,0.10048044100512617,685
+test_data/malaya-test/malay-test/686.wav,sebut perkataan aksesori,Semua perkataan aksesori,2.391625,0.4147918224334717,0.17343514239626684,686
+test_data/malaya-test/malay-test/687.wav,sebut perkataan agresor,Sebut perkataan agresor.,2.589,0.3555333614349365,0.13732458919850773,687
+test_data/malaya-test/malay-test/688.wav,bagaimana saya memecahkan kaki anda,Bagaimana saya memecahkan kaki anda,3.139625,0.504807710647583,0.16078598897880575,688
+test_data/malaya-test/malay-test/689.wav,please li kita baru aja sepuluh langkah keluar dari kelas masa kamu,"Please, Lee, kita baru ajar 10 langkah keluar dari kelas. Masa kamu.",4.9371875,0.4695863723754883,0.09511212048873742,689
+test_data/malaya-test/malay-test/690.wav,satu elemen utama teori ini adalah peranan elit politik,Satu elemen utama teori ini adalah peranan elit politik.,5.3356875,0.4025444984436035,0.07544379209682042,690
+test_data/malaya-test/malay-test/691.wav,adakah ibu mempunyai hubungan seks dengan anak lelaki,Adakah ibu mempunyai hubungan seks dengan anak lelaki?,4.2094375,0.5465950965881348,0.12984991381583283,691
+test_data/malaya-test/malay-test/692.wav,yasmin meraba raba permukaan meja tidak melihat kenampakan kunci motornya,Yasmin meraba-raba permukaan meja tidak melihat kenampakan kunci motonya.,5.2449375,0.5082449913024902,0.09690201099679267,692
+test_data/malaya-test/malay-test/693.wav,ini mau ganti baju abangku sayangg,Ini mau ganti baju abangku sayang.,2.8539375,0.41893720626831055,0.1467927052601224,693
+test_data/malaya-test/malay-test/694.wav,daikin malaysia sdn bhd ooi cheng suan pada majlis menandatangani,"Daikin Malaysia SDN, PhD, Oi Cheng Suan pada Majlis Menandatangani",8.072625,0.5815660953521729,0.07204175783616516,694
+test_data/malaya-test/malay-test/695.wav,aku takut segala galanya,Aku takut segala-galanya.,2.0621875,0.42969417572021484,0.2083681409766158,695
+test_data/malaya-test/malay-test/696.wav,kenapa indian benci atau tidak percaya nris tentang cintanya kepada india,Kenapa Indian benci atau tidak percaya Anne Rees tentang cintanya kepada India?,6.04725,0.5039188861846924,0.08333025527052666,696
+test_data/malaya-test/malay-test/697.wav,di samping itu kelembapan pelaburan awam juga mempengaruhi momentum,"Di samping itu, kelembapan pelaburan awam juga mempengaruhi momentum",5.0174375,0.5113420486450195,0.10191298818271669,697
+test_data/malaya-test/malay-test/698.wav,perkataan kami korang kau,Perkataan kami korang kau,2.7399375,0.39787840843200684,0.14521441034038435,698
+test_data/malaya-test/malay-test/699.wav,akankah muhajirs dapat mencemarkan lagi pakistan,Akankah Muhajir dapat mencemarkan lagi Pakistan?,3.7998125,0.43346595764160156,0.11407561758418384,699
+test_data/malaya-test/malay-test/700.wav,mengapa orang ajmer begitu banyak buta huruf dan ke belakang,Mengapa orang Ajmir begitu banyak buta huruf dan kebelakang,4.621625,0.4407832622528076,0.09537408644206478,700
+test_data/malaya-test/malay-test/701.wav,adakah orang islam menyembunyikan agama mereka,Adakah orang Islam menyembunyikan agama mereka?,3.6699375,0.44398975372314453,0.12098019481888847,701
+test_data/malaya-test/malay-test/702.wav,ialah pinjaman kata bahasa,Ialah pinjaman kata bahasa.,6.0139375,0.4323465824127197,0.07189076747350961,702
+test_data/malaya-test/malay-test/703.wav,zaman kemuncaknya antara tahun,Zaman kemuncaknya antara tahun.,4.690375,0.3319211006164551,0.07076643138692643,703
+test_data/malaya-test/malay-test/704.wav,kedua churchill terkenal dengan,Kedua Churchill tekenal dengan,3.8776875,0.44654011726379395,0.11515629283272413,704
+test_data/malaya-test/malay-test/705.wav,kenapa justin trudeau seperti kemaluan wanita,Kenapa Justin Trudeau seperti kemaluan wanita?,3.6913125,0.4743988513946533,0.1285176617787449,705
+test_data/malaya-test/malay-test/706.wav,raja salman kagum dengan keharmonian pelbagai kaum yang diamalkan di malaysia,Raja Salman kagum dengan kerharmonian pelbagai kaum yang diamalkan di Malaysia.,5.3106875,0.7073225975036621,0.13318851796564232,706
+test_data/malaya-test/malay-test/707.wav,perkhemahan slot kerohanian dan aktiviti lasak,Perkemahan slot kerohanian dan aktiviti lasak,3.881125,0.46369481086730957,0.11947433047565063,707
+test_data/malaya-test/malay-test/708.wav,sebut perkataan hapus,Sebut perkataan HAPUS,2.56,0.4570658206939697,0.17854133620858192,708
+test_data/malaya-test/malay-test/709.wav,mempersiapkan ahli waris di dalam formulir asuransi yang akan kamu isi,Mempersiapkan ahli waris di dalam formulir asuransi yang akan kamu isi,6.80875,0.47351813316345215,0.06954553084831315,709
+test_data/malaya-test/malay-test/710.wav,besok ada pr gak tanya libra membuka pembicaraan sambil berjalan,"Besok ada PR Gak, tanya Libra membuka pembicaraan sambil berjalan.",5.9880625,0.4785442352294922,0.07991637282167516,710
+test_data/malaya-test/malay-test/711.wav,adakah anjing jantan dani alves neymar,Adakah anjing jantan Dani Alves Neymar?,3.2753125,0.4334988594055176,0.13235343479607445,711
+test_data/malaya-test/malay-test/712.wav,haha gak deng mungkin aku terlalu hiperbola tapi bener kalian harus coba,Haha gadik Mungkin aku terlalu hyperbole lah Tapi benar kalian harus cuba,4.6820625,0.47026658058166504,0.1004400476460246,712
+test_data/malaya-test/malay-test/713.wav,sebut perkataan ambilan,Sebut perkataan ambilan,2.0316875,0.45333003997802734,0.22312980710765182,713
+test_data/malaya-test/malay-test/714.wav,menubuhkan badan bertindak bagi mengambil langkah wajar agar ahli,Menubuhkan badan bertindak bagi mengambil langkah wajar agar ahli.,6.5325,0.5815286636352539,0.08902084403142042,714
+test_data/malaya-test/malay-test/715.wav,adakah buruk bahawa saya mencuri 7k barangan dari kedai runcit,Adakah buruk bahawa saya mencuri 7K barangan dari kedai runcit?,5.4775625,0.4854862689971924,0.08863180821710247,715
+test_data/malaya-test/malay-test/716.wav,apa yang suka menjadi gay di madras iit,Apa yang suka menjadi gay di madras IIT?,3.9483125,0.37425756454467773,0.09478924592333503,716
+test_data/malaya-test/malay-test/717.wav,kota paris memainkan peranan,Kota Paris memainkan peranan.,3.8080625,0.45595359802246094,0.11973374859852245,717
+test_data/malaya-test/malay-test/718.wav,saat menerima gaji pertama,Saat menerima gaji pertama,2.416,0.385638952255249,0.15961877162882823,718
+test_data/malaya-test/malay-test/719.wav,bilakah orang inggeris meminta maaf atas penindasan mereka terhadap orang irak,Bilakah orang Inggeris meminta maaf atas penindasan mereka terhadap orang Irak?,5.545625,0.538327693939209,0.09707250200639404,719
+test_data/malaya-test/malay-test/720.wav,bagaimana untuk seorang wanita sepanyol tinggal di amerika,Bagaimana untuk seorang wanita Sepanyol tinggal di Amerika?,4.8454375,0.4369029998779297,0.09016791566869445,720
+test_data/malaya-test/malay-test/721.wav,kenapa begitu banyak orang india cina yang dimanjakan sombong kenakalan,Kenapa begitu banyak orang India-Cina yang dimanjakan sombong kenakalan?,5.4578125,0.5281012058258057,0.09676059883438752,721
+test_data/malaya-test/malay-test/722.wav,adakah sebahagian besar india mempunyai integriti atau kejujuran,Adakah sebahagian besar India mempunyai integriti atau kejujuran?,5.1015625,0.543637752532959,0.10656298977675153,722
+test_data/malaya-test/malay-test/723.wav,cimochelys berenang laut silam,Cimu Celis berenang laut silam,4.7716875,0.3714299201965332,0.07784036993129438,723
+test_data/malaya-test/malay-test/724.wav,apa yang salah dengan mengatakan daging babi bagus di islam,Apa yang salah dengan mengatakan daging babi bagus di Islam?,4.549875,0.4233224391937256,0.09304045478034574,724
+test_data/malaya-test/malay-test/725.wav,sebut perkataan ampere,Sebut perkataan ampere,2.3451875,0.3454296588897705,0.14729298143102437,725
+test_data/malaya-test/malay-test/726.wav,batu persegi menjadikannya negara,Batu persegi menjadikannya negara,5.4101875,0.4101600646972656,0.07581254156113178,726
+test_data/malaya-test/malay-test/727.wav,pendidikan tinggi nasional ptptn sentiasa mendapat tempat dalam negara kita,"Pendidikan Tinggi Nasional, PTPTN, sentiasa mendapat tempat dalam negara kita.",8.183125,0.7067317962646484,0.08636453631890609,727
+test_data/malaya-test/malay-test/728.wav,cukup serba serbi,Cukup serba-serbi.,1.4493125,0.4215519428253174,0.2908633871751726,728
+test_data/malaya-test/malay-test/729.wav,pada april,Pada April,1.651875,0.35368824005126953,0.21411319866894865,729
+test_data/malaya-test/malay-test/730.wav,dikebumikan atas permintaannya tanah,Dikubumikan atas permintaannya tanah.,5.0386875,0.40601086616516113,0.08057869557601283,730
+test_data/malaya-test/malay-test/731.wav,kerajaan negeri yang ditetapkan sultan johor untuk melantik menteri besar yang,Kerajaan negeri yang ditetapkan Sultan Johor untuk melantik Menteri Besar yang,6.16825,0.4805443286895752,0.07790610443635962,731
+test_data/malaya-test/malay-test/732.wav,kenapa african americans seperti tingkap kereta gelap,Kenapa African Americans seperti tingkap kereta gelap?,4.3388125,0.5340304374694824,0.12308216533198482,732
+test_data/malaya-test/malay-test/733.wav,yang dipungut melalui dewan bandaraya kuala lumpur dbkl,yang dipungut melalui Dewan Bandaraya Kuala Lumpur di BKL.,4.8030625,0.5239400863647461,0.10908458642059021,733
+test_data/malaya-test/malay-test/734.wav,melayu telah dipinjam daripada,Melayu telah dipinjam daripada,4.78325,0.43450427055358887,0.09083871228842082,734
+test_data/malaya-test/malay-test/735.wav,laki dan perempuan dikelas libra memanglah ganjil jadi pasti ada satu laki,Laki dan perempuan di kelas Libra memanglah ganjil jadi pasti ada satu laki yang,5.183125,0.6121110916137695,0.11809691867623673,735
+test_data/malaya-test/malay-test/736.wav,ya abisnya abang bilang aku perut karet mulu kalau lagi makan,"Ya, habisnya abang bilang aku perut karin mulu kalau lagi makan.",3.4918125,0.4539787769317627,0.13001235803232924,736
+test_data/malaya-test/malay-test/737.wav,measures mentakrifkan semula meter,Measures mentakrifkan semula meter.,8.26625,0.4936866760253906,0.0597231726629839,737
+test_data/malaya-test/malay-test/738.wav,pihak,piha,2.1779375,0.26773786544799805,0.1229318405362863,738
+test_data/malaya-test/malay-test/739.wav,sebut perkataan alau,Sebuah keadaan alau,1.9736875,0.3379361629486084,0.17122070385945515,739
+test_data/malaya-test/malay-test/740.wav,ini,ini,1.4650625,0.27750587463378906,0.18941572433516596,740
+test_data/malaya-test/malay-test/741.wav,membuatnya sesekali bergeser untuk menghindari panas rambut ikal hitam,Membuatnya sesekali bergeser untuk menghindari panas rambut ikal hitam.,5.843375,0.5123167037963867,0.08767479475412526,741
+test_data/malaya-test/malay-test/742.wav,kurangnya hujan iklim alp,Kurangnya hujan iklim out.,5.085125,0.3701317310333252,0.07278714506198475,742
+test_data/malaya-test/malay-test/743.wav,phuket kochi dari rm399 bali dari rm629 nanjing dari rm589,"Phuket, Kochi dari RM359, Bali dari RM629, Nanjing dari RM589.",12.399625,0.528301477432251,0.042606246352793004,743
+test_data/malaya-test/malay-test/744.wav,daratan ini berbeza dengan,Daratan ini berbeza dengan,4.5510625,0.43575119972229004,0.09574713590997488,744
+test_data/malaya-test/malay-test/745.wav,isu selingkuh tak selamanya membuat bahtera rumah tangga goyah,Isu selingkuh tak selamanya membuat bahtira rumah tangga goyang.,4.547875,0.525972843170166,0.11565244057283149,745
+test_data/malaya-test/malay-test/746.wav,kecoklatan yang terurai sampai punggung sesekali tersorot sinar matahari,Kecualatan yang terurai sampai punggung sesekali tersorot sinar matahari,6.4601875,0.5313172340393066,0.08224486271324272,746
+test_data/malaya-test/malay-test/747.wav,libra dan gisel saling bertatapan kemudian mengangguk tanda mengiyakan ajakan,Di bulan Anggisa saling bertatapan kemudian mengangguk tanda mengiakan ajakan.,4.47425,0.5763833522796631,0.12882233944899438,747
+test_data/malaya-test/malay-test/748.wav,bila demam anak perlukan perhatian lebih ibu bapa lah yg kna jaga,"Bila demam, anak perlukan perhatian lebih Ibu berpapalah yang kena jaga",4.658375,0.5492780208587646,0.11791193728687892,748
+test_data/malaya-test/malay-test/749.wav,guterres mengharapkan peralihan kuasa yang aman dan demokratik di algeria selepas,Guterres mengharapkan peralihan kuasa yang aman dan demokratik di Algeria selepas,5.5593125,0.5340948104858398,0.09607209713176582,749
+test_data/malaya-test/malay-test/750.wav,sebut perkataan advertensi,Sebut perkataan advertensi,3.1230625,0.4744582176208496,0.15192082054741127,750
+test_data/malaya-test/malay-test/751.wav,mengapa kuota dipenuhi feminis,Mengapa kuota dipenuhi feminis?,2.8740625,0.5249700546264648,0.18265784220992579,751
+test_data/malaya-test/malay-test/752.wav,ketika sampan yang dinaikinya,Ketika sampan yang dinaikinya.,3.83125,0.37248659133911133,0.0972232538568643,752
+test_data/malaya-test/malay-test/753.wav,datuk seri dr wan salim mohd,Datuk Seri Dr. Wan Salim Muhammad,3.6075625,0.37672972679138184,0.1044277754831363,753
+test_data/malaya-test/malay-test/754.wav,melayu proto kemudian pada,Melayu protoh kemudian pada,4.8529375,0.40235114097595215,0.08290878276836496,754
+test_data/malaya-test/malay-test/755.wav,yang menembak sheriff,Yang menembak syarif?,1.7320625,0.3490288257598877,0.20151052618475815,755
+test_data/malaya-test/malay-test/756.wav,adakah anda akan berkahwin dengan kambing saya,Adakah anda akan berkahwin dengan kambing saya?,3.473,0.4727051258087158,0.1361085879092185,756
+test_data/malaya-test/malay-test/757.wav,pasang surut planet utama,Pasang surut planet utama.,5.4566875,0.35566115379333496,0.06517894854585954,757
+test_data/malaya-test/malay-test/758.wav,mungkin wajahnya berubah menjadi wajah yang sumbringah yasmin berjoget joget,Mungkin wajahnya berubah menjadi wajah yang super ringah Yasmin berjoget-joget,4.5005625,0.6294198036193848,0.1398535857727528,758
+test_data/malaya-test/malay-test/759.wav,tu janji aku pada diri aku,Tu janji aku pada diri aku.,1.950375,0.47447729110717773,0.2432749041118645,759
+test_data/malaya-test/malay-test/760.wav,tidak hairanlah kebanyakan kediaman penduduk yang dibina di sekitar sungai berhampiran,Tidak hairanlah kebanyakan kediaman penduduk yang dibina di sekitar sungai berhampiran.,5.6434375,0.5499057769775391,0.09744163499242067,760
+test_data/malaya-test/malay-test/761.wav,yasmin libra ikut mencari di tempat pensil dan pouch milik yasmin,YASMIN Libra ikut mencari di tempat pencil dan pouch milik YASMIN,4.884625,0.5734200477600098,0.117392849555495,761
+test_data/malaya-test/malay-test/762.wav,mempunyai kadar jenayah di bangalore meningkat kerana biharis,Mempunyai kadar jenayah di Bangalore meningkat kerana Biharis,4.3630625,0.5207462310791016,0.1193533741675948,762
+test_data/malaya-test/malay-test/763.wav,semenjak ianya ditubuhkan lebih 20 tahun yang lalu,semenjak ianya ditubuhkan lebih 20 tahun yang lalu.,4.3624375,0.5071604251861572,0.11625620428628655,763
+test_data/malaya-test/malay-test/764.wav,saji tempat bangdik menaruh tumis tahu buatannya itu piring saji yang isinya,Saji tempat bangdik menarutumis buatannya itu piring saji yang isinya,4.69125,0.4566314220428467,0.09733683390201901,764

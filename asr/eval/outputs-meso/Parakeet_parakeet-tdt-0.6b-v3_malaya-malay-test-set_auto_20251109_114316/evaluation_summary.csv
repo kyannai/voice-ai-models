@@ -1,0 +1,2 @@
+model,num_samples,wer,cer,mer,avg_rtf,total_audio_duration,total_processing_time
+nvidia/parakeet-tdt-0.6b-v3,765,0.9518,0.463,0.8739,0.030449773887743663,3195.8927500000027,97.31421160697937

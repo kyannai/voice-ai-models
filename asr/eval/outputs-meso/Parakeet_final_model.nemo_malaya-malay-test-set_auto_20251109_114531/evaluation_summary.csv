@@ -1,0 +1,2 @@
+model,num_samples,wer,cer,mer,avg_rtf,total_audio_duration,total_processing_time
+../train/train_parakeet_tdt/outputs.bak/parakeet-tdt-malay-asr/final_model.nemo,765,0.1744,0.0426,0.1713,0.029954764125661535,3195.8927500000027,95.73221349716187

@@ -1,91 +1,71 @@
-# ASR Evaluation - Consolidated Requirements
-# All dependencies for evaluation frameworks in one place
-# Updated: 2025-11-06 - Pinned stable versions
-
-# ==========================================
-# CORE DEPENDENCIES (Required for all)
-# ==========================================
-
-# Core ML Frameworks
-# IMPORTANT: For NeMo models, use PyTorch 2.1.2 with CUDA 11.8
-# Install with: uv pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu118
-
-# Note: PyTorch is installed separately via index-url (see above)
-# torch==2.1.2+cu118
-# torchaudio==2.1.2+cu118
-# torchvision==0.16.2+cu118
-
-transformers>=4.35.0,<4.46.0
-
-# Audio Processing
-librosa>=0.10.1,<0.11.0
-soundfile>=0.12.1,<0.13.0
-
-# Data Processing
-numpy>=1.24.0,<2.0  # NumPy 2.x has breaking changes
-pandas>=2.0.0,<2.3.0
-
-# Evaluation Metrics
-jiwer>=3.0.0,<3.1.0
-scikit-learn>=1.3.0,<1.6.0
-
-# Utilities
-tqdm>=4.65.0,<5.0.0
-python-dotenv>=1.0.0
-
-# ==========================================
-# FUNASR / QWEN FRAMEWORK
-# ==========================================
-# For Qwen2-Audio, Qwen2.5-Omni, Qwen3-Omni, Paraformer
-funasr>=1.0.0,<1.2.0
-modelscope>=1.11.0,<1.19.0
-onnxruntime>=1.14.0,<1.20.0
-accelerate>=0.25.0,<0.35.0
-peft>=0.7.0,<0.14.0  # Required for LoRA checkpoint evaluation
-
-# Multimodal support (Qwen2.5-Omni, Qwen3-Omni)
-pillow>=9.5.0,<11.0.0
-# torchvision installed with PyTorch (see above)
-
-# ==========================================
-# NVIDIA PARAKEET / NEMO FRAMEWORK
-# ==========================================
-# Install NeMo AFTER PyTorch to avoid version conflicts
-# uv pip install git+https://github.com/NVIDIA/NeMo.git@main#egg=nemo_toolkit[asr]
-omegaconf>=2.3.0,<2.4.0
-lightning>=2.0.0,<2.2.0  # PyTorch Lightning (NeMo dependency)
-nvidia-nvjitlink>=12.0  # Required for CUDA JIT compilation
-
-# ==========================================
-# OPTIONAL: Additional Tools
-# ==========================================
-# faster-whisper>=1.0.0  # Faster Whisper inference with CTranslate2
-# openai-whisper>=20231117  # Original OpenAI Whisper
-# ctranslate2>=4.0.0  # For faster-whisper backend
-
-# ==========================================
-# INSTALLATION NOTES
-# ==========================================
-# This file consolidates all dependencies from:
-# - calculate_metrics/
-# - transcribe/whisper/
-# - transcribe/funasr/
-# - transcribe/parakeet/ (NeMo-based)
+# ASR Evaluation - Simplified Requirements
 # 
-# Quick Installation:
-#   pip install -r requirements.txt
+# This project uses pyproject.toml as the source of truth.
+# For modern installation, use:
+#   uv pip install -e .
+#   uv pip install -e ".[all]"
 #
-# Or use interactive setup:
-#   bash setup_env.sh
+# See INSTALL.md for detailed instructions.
+
+# ==========================================
+# PYTORCH (Install first with CUDA support)
+# ==========================================
+# Run this command BEFORE installing other dependencies:
 #
-# Supported Models:
-# - Whisper (all variants via transformers)
-# - Qwen2-Audio, Qwen2.5-Omni, Qwen3-Omni
-# - Parakeet TDT 0.6B (NVIDIA NeMo)
-# - Paraformer and other FunASR models
+#   uv pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 \
+#     --index-url https://download.pytorch.org/whl/cu118
 #
-# GPU Acceleration:
-# - Ensure CUDA is installed for GPU support
-# - torch and torchaudio will auto-detect CUDA
-# - For optimal performance with NeMo, use PyTorch with CUDA 11.8+
-#
+# For other CUDA versions or CPU-only, see INSTALL.md
+
+# ==========================================
+# BASE DEPENDENCIES (Whisper support)
+# ==========================================
+# Install base package (equivalent to: uv pip install -e .)
+-e .
+
+# ==========================================
+# OPTIONAL: Install specific model support
+# ==========================================
+# Uncomment the line you need:
+
+# For Qwen models (Qwen2-Audio, Qwen2.5-Omni):
+# -e ".[qwen]"
+
+# For Parakeet models (includes NeMo toolkit):
+# -e ".[parakeet]"
+
+# For all models:
+# -e ".[all]"
+
+# For development tools:
+# -e ".[dev]"
+
+# ==========================================
+# LEGACY: Direct dependencies (deprecated)
+# ==========================================
+# If you can't use pyproject.toml, uncomment below:
+# (Not recommended - use pyproject.toml instead)
+
+# transformers>=4.35.0,<4.46.0
+# librosa>=0.10.1,<0.11.0
+# soundfile>=0.12.1,<0.13.0
+# numpy>=1.24.0,<2.0
+# pandas>=2.0.0,<2.3.0
+# jiwer>=3.0.0,<3.1.0
+# scikit-learn>=1.3.0,<1.6.0
+# tqdm>=4.65.0,<5.0.0
+# python-dotenv>=1.0.0,<2.0.0
+
+# Qwen models:
+# funasr>=1.0.0,<1.2.0
+# modelscope>=1.11.0,<1.19.0
+# onnxruntime>=1.14.0,<1.20.0
+# accelerate>=0.25.0,<0.35.0
+# peft>=0.7.0,<0.14.0
+# pillow>=9.5.0,<11.0.0
+
+# Parakeet models:
+# omegaconf>=2.3.0,<2.4.0
+# lightning>=2.0.0,<2.2.0
+# nvidia-nvjitlink>=12.0
+# nemo_toolkit[asr] @ git+https://github.com/NVIDIA/NeMo.git@main

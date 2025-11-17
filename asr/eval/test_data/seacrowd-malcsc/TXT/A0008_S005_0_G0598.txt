@@ -1,0 +1,54 @@
+[4.449,5.630]	G0598	female,Malaysia	hello Umi
+[8.890,10.609]	G0598	female,Malaysia	um hm um kau sihat
+[16.209,17.180]	G0598	female,Malaysia	kenapa
+[37.630,38.930]	G0598	female,Malaysia	kau pergilah
+[40.029,41.270]	G0598	female,Malaysia	klinik ke
+[41.380,42.080]	G0598	female,Malaysia	check
+[43.195,44.509]	G0598	female,Malaysia	tau sikit
+[52.750,54.259]	G0598	female,Malaysia	kau stress kenapa
+[77.680,79.879]	G0598	female,Malaysia	so apa yang kau tau pasal stress ni
+[128.380,131.149]	G0598	female,Malaysia	aku tengok juga kes dia pasal kesihatan ni
+[131.860,134.929]	G0598	female,Malaysia	tentang kemurungan
+[139.449,144.800]	G0598	female,Malaysia	kemurungan ni macam penyakit mental yang menyebabkan perasaan macam mood lah
+[145.000,146.389]	G0598	female,Malaysia	mood seseorang
+[147.130,148.610]	G0598	female,Malaysia	um menjadi
+[148.960,150.350]	G0598	female,Malaysia	semakin menurun
+[151.449,153.470]	G0598	female,Malaysia	macam boleh menjejaskan
+[153.699,155.570]	G0598	female,Malaysia	kehidupan harian
+[157.149,161.928]	G0598	female,Malaysia	termasuklah fikiran perasaan tingkahlaku ah macam tu lah
+[163.178,165.710]	G0598	female,Malaysia	kiranya tak dapat kawal
+[166.388,170.089]	G0598	female,Malaysia	dia boleh mendorong kepada tindakan membunuh diri
+[174.520,179.869]	G0598	female,Malaysia	so kenapa seseorang boleh mengalami [UNK] ni en sebab-sebab dia macam
+[180.759,184.039]	G0598	female,Malaysia	kemurungan boleh berlaku di dalam family
+[184.630,185.479]	G0598	female,Malaysia	atau
+[185.500,192.229]	G0598	female,Malaysia	peristiwa atau kejadian yang menyebabkan seorang tertekan contoh macam
+[192.910,195.169]	G0598	female,Malaysia	kematian ahli keluarga
+[195.369,196.910]	G0598	female,Malaysia	gagal exam
+[196.990,198.410]	G0598	female,Malaysia	penceraian ibu bapa
+[212.199,213.229]	G0598	female,Malaysia	um ada
+[225.369,229.610]	G0598	female,Malaysia	kalau aku jadi nenek aku time tu sakit aku bagi dia macam
+[229.929,232.490]	G0598	female,Malaysia	makan bubur ke
+[233.470,236.029]	G0598	female,Malaysia	so makan makan yang tawar
+[410.859,414.079]	G0598	female,Malaysia	dia macam tadi lah aku cakap macam kau
+[414.609,416.899]	G0598	female,Malaysia	terlalu banyak masalah lepas tu
+[417.159,421.549]	G0598	female,Malaysia	kau pendam so dia menyeksa diri kau macam tu lah
+[426.429,427.250]	G0598	female,Malaysia	um hm
+[430.839,437.929]	G0598	female,Malaysia	so kalau cakap pasal kesihatan ni kan biasa nya kalau dekat sekolah kan [UNK] macam mesti satu
+[437.948,440.119]	G0598	female,Malaysia	satu tahun sekolah tu mesti macam ada
+[440.709,444.109]	G0598	female,Malaysia	ha nurse nurse datang lepas tu bagi inject kan
+[446.041,448.250]	G0598	female,Malaysia	itu macam kau
+[448.359,449.808]	G0598	female,Malaysia	macam apa orang cakap
+[449.979,454.219]	G0598	female,Malaysia	tu untuk hormon lah kalau biasa kalau
+[454.419,458.808]	G0598	female,Malaysia	tingkatan tiga kena inject tapi untuk perempuan je
+[464.140,465.140]	G0598	female,Malaysia	um hm
+[469.839,470.779]	G0598	female,Malaysia	ha ah
+[609.459,610.610]	G0598	female,Malaysia	um hm
+[611.860,616.010]	G0598	female,Malaysia	pernah macam jiran aku lah dia ada seorang lah macam tu
+[617.530,619.189]	G0598	female,Malaysia	tapi kadang kadang dia macam
+[619.239,622.370]	G0598	female,Malaysia	ganas sikit dia suka kejar kejar orang
+[626.650,631.489]	G0598	female,Malaysia	um tiba-tiba dia macam tiba-tiba datang peluk tak nak lepas
+[631.569,632.629]	G0598	female,Malaysia	tarik tarik
+[963.759,964.730]	G0598	female,Malaysia	ganas
+[1014.100,1016.660]	G0598	female,Malaysia	um pasal kesihatan
+[1026.367,1027.367]	G0598	female,Malaysia	K
+[1030.838,1031.720]	G0598	female,Malaysia	bye

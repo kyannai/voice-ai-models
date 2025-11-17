@@ -6,13 +6,44 @@ Contains common functionality for data loading, output cleaning, and result savi
 
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 import logging
 
 import pandas as pd
 
+# Add parent directory to path to import dataset_loader
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 logger = logging.getLogger(__name__)
+
+
+def load_dataset_by_name(
+    dataset_name: str,
+    max_samples: Optional[int] = None,
+    validate: bool = True
+) -> List[Dict]:
+    """
+    Load a dataset by name from the dataset registry
+    
+    Args:
+        dataset_name: Name of the dataset (from datasets_config.py)
+        max_samples: Optional limit on number of samples
+        validate: Whether to validate samples
+        
+    Returns:
+        List of dictionaries with 'audio_path' and 'reference' keys
+    """
+    try:
+        from dataset_loader import load_dataset
+    except ImportError:
+        raise ImportError(
+            "Could not import dataset_loader. "
+            "Make sure dataset_loader.py is in the parent directory."
+        )
+    
+    return load_dataset(dataset_name, max_samples=max_samples, validate=validate)
 
 
 def load_test_data(test_data_path: Union[str, Path], audio_dir: Optional[Union[str, Path]] = None) -> List[Dict]:
@@ -93,11 +124,14 @@ def clean_qwen_output(text: str) -> str:
     Clean Qwen Audio model output by removing common preambles.
     
     Qwen Audio models (Qwen2-Audio, Qwen3-Omni) sometimes add preambles like:
+    - "The audio says: '...'"
     - "The original content of this audio is: '...'"
     - "The transcription of the audio is: '...'"
-    - "The audio content is: '...'"
     
-    This function strips these preambles and returns only the actual transcription.
+    Strategy:
+    1. First try to extract content within quotes (most reliable)
+    2. If no quotes, try to match and remove known preamble patterns
+    3. Otherwise return the original text
     
     Args:
         text: Raw output from Qwen Audio model
@@ -108,36 +142,49 @@ def clean_qwen_output(text: str) -> str:
     if not text:
         return text
     
-    # Patterns to remove (in order of specificity)
+    cleaned = text.strip()
+    
+    # Strategy 1: Extract content within quotes (single or double)
+    # This handles most cases like: "The original content of this audio is 'actual text'."
+    # Try to find content between quotes, preferring the longest match
+    quote_pattern = r"['\"](.+?)['\"]"
+    quote_matches = re.findall(quote_pattern, cleaned, flags=re.DOTALL)
+    
+    if quote_matches:
+        # If we found quoted content, use the longest one (usually the actual transcription)
+        # This handles cases where there might be multiple quoted sections
+        longest_match = max(quote_matches, key=len)
+        if len(longest_match) > 10:  # Reasonable length for transcription
+            return longest_match.strip()
+    
+    # Strategy 2: Try to match specific preamble patterns
+    # This handles cases without quotes or with incomplete quotes
     patterns = [
-        # Full preambles with quotes
-        r"^The original content of this audio is:\s*['\"](.+?)['\"]\.?\s*$",
-        r"^The transcription of (?:the )?audio is:\s*['\"](.+?)['\"]\.?\s*$",
-        r"^The audio content is:\s*['\"](.+?)['\"]\.?\s*$",
-        r"^(?:The )?transcription:\s*['\"](.+?)['\"]\.?\s*$",
-        r"^Audio transcription:\s*['\"](.+?)['\"]\.?\s*$",
-        
-        # Preambles without quotes
+        # Preambles with text after (no quotes)
+        r"^The audio says:\s*(.+)$",
+        r"^The audio transcription is:\s*(.+)$",
         r"^The original content of this audio is:\s*(.+)$",
         r"^The transcription of (?:the )?audio is:\s*(.+)$",
         r"^The audio content is:\s*(.+)$",
         r"^(?:The )?transcription:\s*(.+)$",
         r"^Audio transcription:\s*(.+)$",
-        
-        # Just quotes
-        r"^['\"](.+?)['\"]\.?\s*$",
     ]
     
-    cleaned = text.strip()
     for pattern in patterns:
         match = re.match(pattern, cleaned, flags=re.IGNORECASE | re.DOTALL)
         if match:
             # Extract the captured group (the actual transcription)
             cleaned = match.group(1).strip()
-            break
+            # Remove any remaining quotes
+            cleaned = re.sub(r"^['\"]|['\"]\.?$", "", cleaned).strip()
+            return cleaned
     
-    # Remove any remaining leading/trailing quotes
-    cleaned = re.sub(r"^['\"]|['\"]$", "", cleaned).strip()
+    # Strategy 3: If text is entirely wrapped in quotes, remove them
+    if (cleaned.startswith("'") and cleaned.endswith("'")) or \
+       (cleaned.startswith('"') and cleaned.endswith('"')):
+        cleaned = cleaned[1:-1].strip()
+        # Also remove trailing period after closing quote if present
+        cleaned = re.sub(r"^['\"]|['\"]\.?$", "", cleaned).strip()
     
     return cleaned
 

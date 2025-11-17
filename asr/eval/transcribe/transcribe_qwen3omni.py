@@ -154,6 +154,7 @@ class Qwen3OmniTranscriber:
                         max_new_tokens=128,
                         min_new_tokens=1,
                         do_sample=False,
+                        temperature=0.0,
                         num_beams=1,
                         use_cache=True,
                         pad_token_id=self.processor.tokenizer.pad_token_id,

@@ -504,7 +504,16 @@ def train(config_path: str):
         logging.info(f"  tensorboard --logdir {output_dir}")
         logging.info("="*70 + "\n")
         
-        trainer.fit(asr_model)
+        # Check if explicit checkpoint path is provided
+        checkpoint_path = config['training'].get('checkpoint_path')
+        if checkpoint_path and Path(checkpoint_path).exists():
+            logging.info(f"Resuming from checkpoint: {checkpoint_path}")
+            trainer.fit(asr_model, ckpt_path=checkpoint_path)
+        else:
+            if checkpoint_path:
+                logging.warning(f"Checkpoint path specified but not found: {checkpoint_path}")
+                logging.warning("Starting from scratch or using auto-resume")
+            trainer.fit(asr_model)
         
         # Step 7: Save final model
         logging.info("\n" + "="*70)

@@ -22,6 +22,7 @@ from transformers import (
 
 from utils import (
     load_test_data,
+    load_dataset_by_name,
     validate_samples,
     clean_qwen_output,
     save_predictions
@@ -43,6 +44,7 @@ class Qwen2AudioTranscriber:
         model_name: str,
         device: str = "auto",
         asr_prompt: str = "Transcribe this audio accurately.",
+        chunk_length_s: int = 30,
     ):
         """
         Initialize Qwen2-Audio transcriber
@@ -51,9 +53,11 @@ class Qwen2AudioTranscriber:
             model_name: HuggingFace model name or path to LoRA checkpoint
             device: Device to run on ('cuda', 'cpu', or 'auto')
             asr_prompt: Prompt for ASR task
+            chunk_length_s: Length of audio chunks in seconds (default: 30)
         """
         self.model_name = model_name
         self.asr_prompt = asr_prompt
+        self.chunk_length_s = chunk_length_s
         self.lock = Lock()  # Thread lock for model access
         
         # Detect if this is a LoRA checkpoint
@@ -130,7 +134,7 @@ class Qwen2AudioTranscriber:
         # Force greedy decoding (override generation config)
         self.model.generation_config.do_sample = False
         self.model.generation_config.num_beams = 1
-        self.model.generation_config.temperature = None
+        self.model.generation_config.temperature = 0.0
         self.model.generation_config.top_p = None
         self.model.generation_config.top_k = None
         
@@ -141,24 +145,19 @@ class Qwen2AudioTranscriber:
         
         model_type = "LoRA checkpoint" if self.is_lora else "Full model"
         logger.info(f"Qwen2-Audio {model_type} loaded and optimized for inference!")
+        logger.info(f"  Chunking: {self.chunk_length_s}s chunks for long audio")
     
-    def transcribe(self, audio_path: Union[str, Path]) -> Dict:
+    def _transcribe_chunk(self, audio_array, audio_path: str = "audio.wav") -> str:
         """
-        Transcribe a single audio file
+        Transcribe a single audio chunk
         
         Args:
-            audio_path: Path to audio file
+            audio_array: Audio array (numpy array from librosa)
+            audio_path: Path to audio file (for conversation format)
             
         Returns:
-            Dictionary with transcription and timing info
+            Transcription text
         """
-        # Load audio
-        audio_array, sr = librosa.load(str(audio_path), sr=16000)
-        audio_duration = len(audio_array) / sr
-        
-        # Start timing
-        start_time = time.time()
-        
         with self.lock:  # Thread-safe model access
             try:
                 # Prepare conversation format
@@ -183,19 +182,29 @@ class Qwen2AudioTranscriber:
                 inputs = self.processor(
                     text=text,
                     audio=audio_array,
-                    sampling_rate=sr,
+                    sampling_rate=16000,
                     return_tensors="pt",
                     padding=True
                 )
+                
+                # Store input_ids length BEFORE moving to device
+                input_ids_length = inputs["input_ids"].shape[1]
+                
+                # Move to device
                 inputs = inputs.to(self.device)
+                
+                # Estimate max_new_tokens based on audio length (roughly 3 tokens per second)
+                audio_duration = len(audio_array) / 16000
+                max_new_tokens = max(128, int(audio_duration * 3))
                 
                 # Generate
                 with torch.no_grad():
                     generate_ids = self.model.generate(
                         **inputs,
-                        max_new_tokens=128,
+                        max_new_tokens=max_new_tokens,
                         min_new_tokens=1,
                         do_sample=False,
+                        temperature=0.0,
                         num_beams=1,
                         use_cache=True,
                         pad_token_id=self.processor.tokenizer.pad_token_id,
@@ -203,7 +212,7 @@ class Qwen2AudioTranscriber:
                     )
                 
                 # Remove input tokens
-                generate_ids = generate_ids[:, inputs["input_ids"].shape[1]:]
+                generate_ids = generate_ids[:, input_ids_length:]
                 
                 # Decode
                 result = self.processor.batch_decode(
@@ -214,10 +223,48 @@ class Qwen2AudioTranscriber:
                 
                 # Clean output
                 transcription = clean_qwen_output(result)
+                return transcription.strip()
                 
             except Exception as e:
-                logger.error(f"Error transcribing {audio_path}: {e}")
-                raise
+                logger.error(f"Error transcribing chunk: {e}")
+                return ""
+    
+    def transcribe(self, audio_path: Union[str, Path]) -> Dict:
+        """
+        Transcribe a single audio file (with chunking for long audio)
+        
+        Args:
+            audio_path: Path to audio file
+            
+        Returns:
+            Dictionary with transcription and timing info
+        """
+        # Load audio
+        audio_array, sr = librosa.load(str(audio_path), sr=16000)
+        audio_duration = len(audio_array) / sr
+        
+        # Start timing
+        start_time = time.time()
+        
+        # Check if we need to chunk
+        if audio_duration > self.chunk_length_s:
+            # Chunk the audio
+            logger.info(f"Audio is {audio_duration:.1f}s, chunking into {self.chunk_length_s}s segments...")
+            
+            chunk_samples = self.chunk_length_s * sr
+            transcriptions = []
+            
+            for i in range(0, len(audio_array), chunk_samples):
+                chunk = audio_array[i:i + chunk_samples]
+                chunk_transcription = self._transcribe_chunk(chunk, str(audio_path))
+                if chunk_transcription:
+                    transcriptions.append(chunk_transcription)
+            
+            # Concatenate all chunks
+            transcription = " ".join(transcriptions)
+        else:
+            # Transcribe directly
+            transcription = self._transcribe_chunk(audio_array, str(audio_path))
         
         processing_time = time.time() - start_time
         rtf = processing_time / audio_duration if audio_duration > 0 else 0
@@ -234,26 +281,25 @@ def main():
     parser = argparse.ArgumentParser(description="Transcribe audio using Qwen2-Audio")
     parser.add_argument("--model", required=True, 
                        help="Qwen2-Audio model name or path to LoRA checkpoint")
-    parser.add_argument("--test-data", required=True, help="Path to test data JSON/CSV")
+    parser.add_argument("--test-dataset", required=True, help="Dataset name from registry (e.g., meso-malaya-test, seacrowd-asr-malcsc)")
     parser.add_argument("--output-dir", required=True, help="Output directory")
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
-    parser.add_argument("--audio-dir", help="Base directory for audio files")
     parser.add_argument("--asr-prompt", 
-                       default="Transcribe this Malay audio accurately, preserving all English words and discourse particles.",
+                       default="Transcribe this audio accurately.",
                        help="ASR prompt")
     parser.add_argument("--max-samples", type=int, help="Limit number of samples")
+    parser.add_argument("--chunk-length", type=int, default=30,
+                       help="Chunk length in seconds for long audio (default: 30)")
     
     args = parser.parse_args()
     
-    # Load test data
-    logger.info(f"Loading test data from {args.test_data}")
-    test_data = load_test_data(args.test_data, args.audio_dir)
-    test_data = validate_samples(test_data)
-    
-    # Limit samples if requested
-    if args.max_samples and args.max_samples < len(test_data):
-        logger.info(f"Limiting to first {args.max_samples} samples (--max-samples)")
-        test_data = test_data[:args.max_samples]
+    # Load test data using dataset name
+    logger.info(f"Loading dataset: {args.test_dataset}")
+    test_data = load_dataset_by_name(
+        args.test_dataset,
+        max_samples=args.max_samples,
+        validate=True
+    )
     
     logger.info(f"Loaded {len(test_data)} test samples")
     
@@ -261,7 +307,8 @@ def main():
     transcriber = Qwen2AudioTranscriber(
         model_name=args.model,
         device=args.device,
-        asr_prompt=args.asr_prompt
+        asr_prompt=args.asr_prompt,
+        chunk_length_s=args.chunk_length
     )
     
     # Transcribe all samples

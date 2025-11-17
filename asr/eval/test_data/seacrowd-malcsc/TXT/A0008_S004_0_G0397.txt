@@ -1,0 +1,191 @@
+[2.470,3.380]	G0397	female,Malaysia	hai
+[7.420,8.600]	G0397	female,Malaysia	Ina buat apa tu
+[14.170,15.979]	G0397	female,Malaysia	oh Ina
+[18.250,24.139]	G0397	female,Malaysia	kau tahu tak yang dekat Malaysia ni sebenarnya ada macam-macam budaya dekat Malaysia ni
+[28.059,30.586]	G0397	female,Malaysia	contohnya macam Melayu
+[31.600,32.508]	G0397	female,Malaysia	budaya
+[32.830,35.930]	G0397	female,Malaysia	orang Melayu budaya orang Cina budaya orang India
+[36.880,38.360]	G0397	female,Malaysia	so jadinya
+[40.900,43.130]	G0397	female,Malaysia	budaya orang Melayu ni
+[43.299,47.720]	G0397	female,Malaysia	orang Melayu ni menyumbang lebih separuh penduduk Malaysia
+[47.799,50.967]	G0397	female,Malaysia	dekat Malaysia ni memang ramai orang Melayu la daripada
+[51.138,51.778]	G0397	female,Malaysia	ha
+[52.659,54.500]	G0397	female,Malaysia	daripada kaum-kaum lain
+[56.500,61.639]	G0397	female,Malaysia	jadi orang Melayu ni memainkan peranan dominan secara politik
+[61.869,65.360]	G0397	female,Malaysia	dan dimasukkan ke dalam kumpulan yang dikenal
+[66.339,69.019]	G0397	female,Malaysia	pasti sebagai bumiputera
+[70.239,72.757]	G0397	female,Malaysia	ba-bahasa bahasa ibunda
+[73.132,75.430]	G0397	female,Malaysia	ha orang Melayu ialah Bahasa Melayu
+[75.940,80.720]	G0397	female,Malaysia	adalah ba-Bahasa Melayu ni adalah bahasa kebangsaan dekat Malaysia
+[83.769,90.050]	G0397	female,Malaysia	dengan dengan definisi per-perlembagaan Malaysia semua orang Melayu adalah orang islam
+[90.339,96.036]	G0397	female,Malaysia	orang asal penduduk terawal Ma-Malaysia membentuk hanya
+[96.121,100.533]	G0397	female,Malaysia	kosong point lima pera-peratus daripada jumlah penduduk di Malaysia
+[101.080,103.610]	G0397	female,Malaysia	dan pada tahun dua ribu
+[103.779,107.839]	G0397	female,Malaysia	masa tu kita tak kita tak lahir lagi lah em em
+[109.360,110.419]	G0397	female,Malaysia	tetapi
+[110.860,117.529]	G0397	female,Malaysia	ha majoriti yang mewakili ha mewakili di ha Malaysia timur
+[117.879,124.546]	G0397	female,Malaysia	iaitu di Sarawak kebanyakan kumpulan orang bukan islam diklasifikasikan sebagai Orang Dayak
+[124.674,128.116]	G0397	female,Malaysia	ha so ada budaya kalau ada dekat Sarawak tu ada budaya Dayak
+[128.949,134.059]	G0397	female,Malaysia	dan mereka membentuk kira-kira empah puluh peratus penduduk di negara ini
+[134.350,139.520]	G0397	female,Malaysia	ramai suku telah memeluk agama Islam eh agama Kristian
+[140.649,142.130]	G0397	female,Malaysia	seribu eh
+[142.149,147.562]	G0397	female,Malaysia	seratus empat puluh ribu orang asli terdiri daripada beberapa komuniti
+[147.584,151.339]	G0397	female,Malaysia	et-etnik yang berbeza di Semenanjung Malaysia
+[151.809,154.039]	G0397	female,Malaysia	kalau macam orang Cina ni
+[155.259,162.918]	G0397	female,Malaysia	dia telah menetap di Malaysia selama berabad-abad dan membentuk kumpulan etnik kedua terbesar
+[163.178,170.869]	G0397	female,Malaysia	orang Cina pertama yang menetap di Malaysia di di negeri-negeri selat terutamanya di dalam dan di sekitar Melaka
+[170.889,177.740]	G0397	female,Malaysia	secara beransur-ansur menerima unsur-unsur budaya Malaysia dan berkahwin dengan masyarakat Malaysia
+[177.880,182.509]	G0397	female,Malaysia	dan dengan ini sebuah kumpulan etnik baru yang dipanggil muncul
+[182.830,186.320]	G0397	female,Malaysia	muncul Peranakan orang-orang Cina telah meng
+[186.460,192.696]	G0397	female,Malaysia	mengadaptasi tradisi Melayu sambil mengekalkan unsur-unsur budaya Cina seperti
+[193.300,196.070]	G0397	female,Malaysia	ha agama Buddha agama
+[196.929,197.839]	G0397	female,Malaysia	tau
+[197.889,198.800]	0	none,none	[*]
+[198.820,200.059]	G0397	female,Malaysia	Taoisme
+[201.250,205.100]	G0397	female,Malaysia	yang sebahagian besarnya yang sebahagian besarnya
+[206.229,207.289]	G0397	female,Malaysia	pelbagai
+[207.460,214.190]	G0397	female,Malaysia	kepelbagaian Cina yang lebih biasa yang diturut dituturkan di Semenanjung Malaysia adalah
+[214.330,216.500]	G0397	female,Malaysia	Kantonis Mandarin
+[216.699,219.649]	G0397	female,Malaysia	Hokkien Hakka Hainan
+[219.820,221.360]	G0397	female,Malaysia	dan Fuzhou
+[221.979,224.330]	G0397	female,Malaysia	kalau macam masyarakat India pula
+[225.220,230.630]	G0397	female,Malaysia	em di Malaysia adalah yang terkecil masyarakat in- India dekat Malaysia ni
+[230.770,234.772]	G0397	female,Malaysia	dia macam tak ramai sangat la dia ada tiga kumpulan etnik
+[234.837,239.152]	G0397	female,Malaysia	utama yang menyumbang kira-kira sepuluh peratus daripada penduduk negara ini
+[239.710,243.740]	G0397	female,Malaysia	mereka bercakap pelbagai bahasa Asia Selatan
+[243.850,246.979]	G0397	female,Malaysia	Tamil Malayali dan orang
+[247.029,254.389]	G0397	female,Malaysia	telugu membentuk lebih daripada lapan puluh lima peratus daripada penduduk asal India di ne- negara ini
+[255.820,260.838]	G0397	female,Malaysia	pendatang India ke Malaysia membawa mereka budaya Hindu dan Sikh
+[261.220,262.160]	G0397	female,Malaysia	ini
+[262.269,263.329]	G0397	female,Malaysia	termasuk
+[263.380,266.119]	G0397	female,Malaysia	termasuk kuil-kuil dan Gurdha
+[266.321,268.579]	G0397	female,Malaysia	Gurd-Gurdwara
+[268.899,276.649]	G0397	female,Malaysia	masakan dan pakaian tradisi Hindu tetap kuat di Malaysia India di masyarakat India Malaysia
+[277.329,284.079]	G0397	female,Malaysia	masyarakat India yang mengamalkan amalan budaya Melayu yang yang wujud di Melaka walaupun mereka tu
+[284.138,285.766]	G0397	female,Malaysia	tetap Hindu
+[286.414,291.311]	G0397	female,Malaysia	bercakap bahasa Melayu dan berpakaian dan bertindak sebagai orang Melayu
+[292.029,294.230]	G0397	female,Malaysia	kalau macam kau pula kau tahu
+[294.279,297.260]	G0397	female,Malaysia	hm apa lagi tentang
+[298.000,299.179]	G0397	female,Malaysia	budaya ni
+[315.790,318.260]	G0397	female,Malaysia	oh ni untuk masyarakat Melayu lah
+[323.742,324.412]	G0397	female,Malaysia	hm
+[329.559,330.260]	G0397	female,Malaysia	hm
+[399.310,404.568]	G0397	female,Malaysia	kalau pakaian orang India ke orang Cina ke macam mana pula
+[424.929,427.760]	G0397	female,Malaysia	kalau macam aku pula aku
+[429.159,431.957]	G0397	female,Malaysia	aku minat tapi aku tak pandai
+[432.099,435.318]	G0397	female,Malaysia	ah minat ah da-dalam
+[435.760,443.089]	G0397	female,Malaysia	bidang seni iaitu joget ah macam menari macam kalau orang Melayu orang Melayu dia ada
+[443.859,448.639]	G0397	female,Malaysia	ah joget Melayu ke Zapin ke kan Kuda Kepang ke
+[450.278,451.159]	G0397	female,Malaysia	so
+[453.371,454.273]	G0397	female,Malaysia	erm
+[455.859,459.890]	G0397	female,Malaysia	kalau macam orang Cina pula dia ada Tarian Kipas
+[460.298,464.899]	G0397	female,Malaysia	dia ada ada Tarian Naga kalau orang India dia ada tarian
+[466.510,467.929]	G0397	female,Malaysia	tarian
+[511.778,513.829]	G0397	female,Malaysia	selain daripada Zapin
+[513.848,515.239]	G0397	female,Malaysia	yang aku tahu
+[516.818,519.709]	G0397	female,Malaysia	ada Tarian Kuda Kepang
+[520.840,524.028]	G0397	female,Malaysia	Kuda Kepang ni pendatang-pendatang Jawa
+[524.620,527.418]	G0397	female,Malaysia	dia daripada Jawa dia bawa ke Johor
+[527.500,530.870]	G0397	female,Malaysia	dan merupakan satu bentuk tarian di mana
+[530.980,533.899]	G0397	female,Malaysia	penari-penari duduk di atas kuda
+[534.129,537.500]	G0397	female,Malaysia	mengejek dan menceritakan kisah perang Islam
+[538.840,544.939]	G0397	female,Malaysia	so dia ceritakan pasal pasal perang Islam la masyarakat Cina membawa Tarian Cina
+[545.890,555.289]	G0397	female,Malaysia	kalau masyarakat Cina pula dia mem-membawa tarian singa tradisional dan tarian naga bersama-sama mereka sementara kaum India membawa bentuk-bentuk seni seperti
+[555.519,556.939]	G0397	female,Malaysia	Baratha
+[557.200,561.260]	G0397	female,Malaysia	Nat-Nat-Nat-Natyam dan Bangra
+[561.848,571.700]	G0397	female,Malaysia	kolonia-kolonialisme juga membawa bentuk seni yang lain seperti fara fira dan ranca Portugis
+[571.989,577.879]	G0397	female,Malaysia	terdapat pelbagai tarian tradisional yang sering mempunyai kepentingan yang rohani sangat kuat
+[578.289,585.230]	G0397	female,Malaysia	sebilangan kaum sebilangan suku dari Malaysia barat dan timur mempunyai tarian yang berbeza
+[585.970,587.510]	G0397	female,Malaysia	macam macam macam
+[587.860,591.110]	G0397	female,Malaysia	so kat Malaysia ni macam-macam la tarian
+[594.549,596.719]	G0397	female,Malaysia	kalau dari segi muzik
+[596.740,597.679]	G0397	female,Malaysia	muzik
+[597.700,601.069]	G0397	female,Malaysia	muzik [UNK] ah budaya mana yang kau suka
+[601.299,604.279]	G0397	female,Malaysia	Melayu ke India ke Cina ke
+[623.559,625.610]	G0397	female,Malaysia	oh ya la perempuan kan
+[640.029,645.168]	G0397	female,Malaysia	kalau daripada lagu kau suka lagu lagu daripada macam
+[645.460,650.270]	G0397	female,Malaysia	lagu bangsa mana macam kalau lagu Melayu kan dia ada lenggok dia macam
+[650.770,654.500]	G0397	female,Malaysia	macam ada macam lengguk lah
+[654.639,657.048]	G0397	female,Malaysia	ada macam best sikit lah kalau
+[657.520,658.549]	G0397	female,Malaysia	India
+[661.449,663.379]	G0397	female,Malaysia	ah so kau suka
+[663.699,665.360]	G0397	female,Malaysia	lagu orang mana
+[665.860,666.949]	G0397	female,Malaysia	budaya mana
+[666.999,668.179]	G0397	female,Malaysia	bangsa mana
+[680.140,680.989]	G0397	female,Malaysia	hm
+[683.110,685.699]	G0397	female,Malaysia	kau tau tak sebenarnya seni
+[685.899,691.369]	G0397	female,Malaysia	dan seni persembahan tradisional Melayu muncul di rantau Kelantan Pattani
+[691.630,695.539]	G0397	female,Malaysia	dengan pengaruh dari India China dan Thailand
+[695.589,697.819]	G0397	female,Malaysia	Thailand dan Indonesia
+[698.470,702.559]	G0397	female,Malaysia	muzik berasaskan instrument berkerusi
+[702.850,705.829]	G0397	female,Malaysia	ah yang paling penting ialah gendang
+[706.329,708.319]	G0397	female,Malaysia	ah so semua kaum dia
+[709.510,712.249]	G0397	female,Malaysia	dia ada gunakan gendang untuk
+[712.510,716.600]	G0397	female,Malaysia	ah buat muzik atau pun untuk menyanyi ke menari ke
+[717.100,723.500]	G0397	female,Malaysia	so terdapat sekurang-ku-* sekurang-kurangnya empat belas jenis gendang tradisional
+[723.850,731.839]	G0397	female,Malaysia	gendang dan alat perkusi tradisional yang lain sering dibuat dari bahan semulajadi seperti cangkang
+[732.279,735.798]	G0397	female,Malaysia	instrumen lain yang lain termasuk rebab
+[737.020,741.350]	G0397	female,Malaysia	serunai seruling dan sengkakala
+[741.669,749.119]	G0397	female,Malaysia	muzik secara tradisinya digunakan untuk bercerita raikan acara kitaran ha-hayat
+[749.439,753.229]	G0397	female,Malaysia	dan pada acara tahunan seperti musim menuai
+[753.579,758.538]	G0397	female,Malaysia	muzik pernah digunakan sebagai satu bentuk komunikasi jarak jauh
+[758.740,766.399]	G0397	female,Malaysia	orkestra tradisional boleh dibahagikan antara dua bentuk gamelan yang memainkan melodi menggunakan gong
+[766.928,768.740]	G0397	female,Malaysia	dan instrumen tali
+[769.358,775.490]	G0397	female,Malaysia	dan nobat yang menggunakan instrumen angin untuk membuat muzik yang lebih serius
+[776.020,778.760]	G0397	female,Malaysia	kalau dekat Malaysia ni kat ah
+[778.839,780.169]	G0397	female,Malaysia	belah timur
+[780.939,782.240]	G0397	female,Malaysia	kumpulan
+[782.260,787.730]	G0397	female,Malaysia	berkumpulan berasaskan gong seperti agong dan kulintang
+[787.928,793.400]	G0397	female,Malaysia	biasanya digunakan dalam upacara seperti pengebumian dan majlis perkahwinan
+[794.980,795.740]	G0397	female,Malaysia	so
+[796.960,798.559]	G0397	female,Malaysia	biasanya dekat
+[798.788,801.559]	G0397	female,Malaysia	selatan Filipina Kalimantan
+[801.760,807.409]	G0397	female,Malaysia	di Indonesia dan di Malaysia Brunei biasanya guna guna gong ni
+[837.969,842.150]	G0397	female,Malaysia	kalau tengok persembahan aku tak pernah lah tapi kalau tengok muzium muzium tu pernah
+[843.699,844.850]	G0397	female,Malaysia	kau pernah ke
+[853.900,856.038]	G0397	female,Malaysia	oh lawatan sekolah pun ada eh
+[862.089,865.490]	G0397	female,Malaysia	dekat muzium tu dia tunjuk apa dia pamerkan apa
+[877.240,877.969]	G0397	female,Malaysia	oh
+[878.740,880.939]	G0397	female,Malaysia	oh karya dia lah macam
+[881.049,888.409]	G0397	female,Malaysia	dia bagitahu sejarah asal [UNK] asal asal benda tu daripada mana macam mana dia buat eh macam tu
+[890.079,891.049]	G0397	female,Malaysia	oh
+[901.059,902.029]	G0397	female,Malaysia	hm hm
+[929.589,930.440]	G0397	female,Malaysia	oh
+[930.729,931.608]	G0397	female,Malaysia	lama
+[962.289,967.370]	G0397	female,Malaysia	hm ah kau tau tak best nya ah ada macam-macam budaya ni
+[967.779,970.518]	G0397	female,Malaysia	dekat Malaysia ni best sebab
+[970.689,973.100]	G0397	female,Malaysia	kalau macam cuti kita [UNK]
+[973.210,976.970]	G0397	female,Malaysia	kalau ada cuti perayaan Tahun Baru Cina ke ah
+[977.318,978.559]	G0397	female,Malaysia	cuti
+[978.580,980.929]	G0397	female,Malaysia	Deepavali ke cuti
+[981.038,984.888]	G0397	female,Malaysia	Hari Raya Aidilfitri ke Adha ke apa-apa
+[985.240,991.308]	G0397	female,Malaysia	semua semua orang boleh cuti so macam best lah kita macam ada [UNK] banyak cuti
+[991.779,994.758]	G0397	female,Malaysia	contoh macam Hari Merdeka ke
+[994.779,995.508]	G0397	female,Malaysia	kita
+[996.526,997.635]	G0397	female,Malaysia	ataupun
+[998.199,999.168]	G0397	female,Malaysia	em em
+[999.460,1003.008]	G0397	female,Malaysia	tu eh cuti-cuti kita boleh pergi balik kampung
+[1011.159,1014.499]	G0397	female,Malaysia	kalau macam orang Sarawak pula dia ada cuti Gawai
+[1014.730,1016.148]	G0397	female,Malaysia	Kaamatan
+[1017.099,1020.409]	G0397	female,Malaysia	Kaamatan dekat Sabah kalau Gawai dekat Sarawak
+[1026.038,1027.337]	G0397	female,Malaysia	kalau macam
+[1027.568,1031.433]	G0397	female,Malaysia	Deepavali dia orang biasa kalau macam orang Melayu dia
+[1031.580,1035.954]	G0397	female,Malaysia	kalau dia nak berkumpul dia berkumpul dekat masjid ke kan dia sembahyang kat masjid
+[1036.117,1037.597]	G0397	female,Malaysia	kalau orang Cina pula
+[1037.828,1038.857]	G0397	female,Malaysia	dia
+[1038.910,1040.059]	0	none,none	[*]
+[1041.670,1043.420]	G0397	female,Malaysia	[UNK] Cina ah ah betul
+[1043.439,1044.950]	G0397	female,Malaysia	orang India pula
+[1045.269,1046.269]	G0397	female,Malaysia	dia
+[1046.588,1052.358]	G0397	female,Malaysia	pergi sembahyang ataupun dia pergi jumpa ahli keluarga semua dekat Batu Caves
+[1052.980,1058.028]	G0397	female,Malaysia	dekat dekat K L tu ataupun ada yang kalau yang duduk dekat
+[1058.049,1060.999]	G0397	female,Malaysia	negeri lain ke apa dia orang duk jumpa dekat
+[1061.348,1063.670]	G0397	female,Malaysia	gereja-gereja ke dekat
+[1063.959,1065.439]	G0397	female,Malaysia	kuil ke
+[1065.700,1066.429]	G0397	female,Malaysia	kan
+[1071.339,1075.309]	G0397	female,Malaysia	so itu je lah yang aku boleh kongsikan dengan engkau
+[1089.160,1090.910]	G0397	female,Malaysia	hm okey
+[1091.619,1092.410]	G0397	female,Malaysia	so
+[1094.348,1095.049]	G0397	female,Malaysia	ah
+[1095.130,1096.337]	G0397	female,Malaysia	bye bye Ina
+[1097.259,1098.470]	G0397	female,Malaysia	okey bye
