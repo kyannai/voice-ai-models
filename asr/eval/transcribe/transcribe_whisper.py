@@ -56,6 +56,54 @@ def detect_and_remove_repetition(text: str, max_repetitions: int = 3) -> tuple[s
     
     original_text = text
     
+    # Check for repeated Unicode characters (e.g., Chinese "嗯嗯嗯嗯..." hallucination)
+    # This must be checked FIRST before word splitting since CJK chars don't use spaces
+    # Look for the same character repeated many times consecutively
+    if len(text) > 20:
+        # Check for repeated single characters (especially non-ASCII like CJK)
+        char_counts = {}
+        i = 0
+        while i < len(text):
+            char = text[i]
+            # Count consecutive occurrences of this character
+            count = 1
+            j = i + 1
+            while j < len(text) and text[j] == char:
+                count += 1
+                j += 1
+            
+            # If a single character repeats more than 10 times consecutively, likely hallucination
+            # Especially for non-ASCII characters (Chinese, etc.)
+            if count > 10 and (ord(char) > 127 or char in ['a', 'e', 'i', 'o', 'u', '.']):
+                # Find where the excessive repetition starts
+                # Keep text before the repetition
+                cleaned = text[:i].strip()
+                logger.warning(f"Detected character repetition hallucination: '{char}' repeated {count} times")
+                return cleaned if cleaned else char, True
+            
+            i = j if j > i else i + 1
+    
+    # Check for repeated 2-4 character patterns (e.g., "嗯嗯" or "um um" patterns)
+    # This catches patterns like "嗯嗯嗯嗯" or "uh uh uh uh"
+    for pattern_len in range(1, 5):
+        if len(text) >= pattern_len * 10:  # Need at least 10 repetitions to check
+            # Try to find patterns that repeat
+            for start_pos in range(min(len(text) - pattern_len * 5, 100)):  # Check first 100 chars
+                pattern = text[start_pos:start_pos + pattern_len]
+                
+                # Count how many times this pattern repeats consecutively
+                count = 0
+                pos = start_pos
+                while pos + pattern_len <= len(text) and text[pos:pos + pattern_len] == pattern:
+                    count += 1
+                    pos += pattern_len
+                
+                # If pattern repeats more than 10 times, likely hallucination
+                if count > 10:
+                    cleaned = text[:start_pos].strip()
+                    logger.warning(f"Detected character pattern hallucination: '{pattern}' repeated {count} times")
+                    return cleaned if cleaned else pattern, True
+    
     # Check for comma-separated repetitions (e.g., "eh, eh, eh, eh, eh,")
     # This is a very common hallucination pattern - must check FIRST
     comma_pattern = re.findall(r'(\b\w{1,5}\b)(?:,\s*\1){5,}', text)
@@ -76,29 +124,39 @@ def detect_and_remove_repetition(text: str, max_repetitions: int = 3) -> tuple[s
                     logger.warning(f"Detected comma-separated hallucination: '{repeated_word}' repeated {count} times")
                     return cleaned, True
     
-    # Check for repeated words (e.g., "Kategori. Kategori. Kategori...")
+    # Check for repeated words/phrases anywhere in the text (e.g., "Kategori. Kategori. Kategori...")
     words = text.split()
     if len(words) > 3:
         # Look for patterns where the same word/phrase repeats many times
-        for pattern_len in range(1, min(10, len(words) // 2)):
-            pattern = words[:pattern_len]
-            pattern_str = " ".join(pattern)
-            
-            # Count consecutive repetitions
-            repetitions = 0
-            idx = 0
-            while idx + pattern_len <= len(words):
-                if words[idx:idx + pattern_len] == pattern:
-                    repetitions += 1
-                    idx += pattern_len
-                else:
+        # Use a sliding window approach to detect repetitions efficiently
+        idx = 0
+        while idx < len(words):
+            # Try different pattern lengths starting from this position
+            for pattern_len in range(1, min(10, (len(words) - idx) // (max_repetitions + 1) + 1)):
+                if idx + pattern_len > len(words):
                     break
+                
+                pattern = words[idx:idx + pattern_len]
+                
+                # Count consecutive repetitions from this position
+                repetitions = 0
+                check_idx = idx
+                while check_idx + pattern_len <= len(words):
+                    if words[check_idx:check_idx + pattern_len] == pattern:
+                        repetitions += 1
+                        check_idx += pattern_len
+                    else:
+                        break
+                
+                # If we find excessive repetition, truncate
+                if repetitions > max_repetitions:
+                    pattern_str = " ".join(pattern)
+                    # Keep everything before the repetition + one instance of the pattern
+                    cleaned = " ".join(words[:idx + pattern_len])
+                    logger.warning(f"Detected word repetition hallucination at position {idx}: pattern '{pattern_str}' repeated {repetitions} times")
+                    return cleaned, True
             
-            # If we find excessive repetition, truncate
-            if repetitions > max_repetitions:
-                cleaned = " ".join(words[:pattern_len])  # Keep 1 instance only
-                logger.warning(f"Detected word repetition hallucination: pattern '{pattern_str}' repeated {repetitions} times")
-                return cleaned, True
+            idx += 1
     
     # Check for simple repeated words (case-insensitive, ignoring punctuation)
     # This catches patterns like "kata kata kata kata"

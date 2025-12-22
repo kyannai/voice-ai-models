@@ -23,33 +23,47 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def normalize_text(text: str) -> str:
+def normalize_text(text: str, steps: List[str] = None) -> str:
     """
-    Normalize text for WER calculation following standard ASR practices.
-    - Lowercase
-    - Replace hyphens with spaces (important for Malay reduplication: "laki-laki" → "laki laki")
-    - Remove punctuation
-    - Normalize whitespace
+    Normalize text for WER calculation with configurable steps.
+    
+    Available normalization steps:
+    - 'lowercase': Convert to lowercase
+    - 'remove_hyphens': Replace hyphens with spaces (important for Malay reduplication)
+    - 'remove_punctuation': Remove all punctuation
+    - 'normalize_whitespace': Normalize whitespace (multiple spaces → single, strip)
     
     Args:
         text: Input text to normalize
+        steps: List of normalization steps to apply. If None, applies all steps.
         
     Returns:
         Normalized text
     """
-    # Lowercase
-    text = text.lower()
+    if steps is None:
+        # Default: apply all normalization steps (standard ASR practice)
+        steps = ['lowercase', 'remove_hyphens', 'remove_punctuation', 'normalize_whitespace']
     
-    # Replace hyphens with spaces BEFORE removing punctuation
-    # This is critical for Malay where hyphens are used for word reduplication
-    # e.g., "laki-laki" (men) should match "laki laki" (not "lakilaki")
-    text = text.replace('-', ' ')
-    
-    # Remove punctuation
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    
-    # Normalize whitespace (multiple spaces to single, strip)
-    text = ' '.join(text.split())
+    # Apply each normalization step in order
+    for step in steps:
+        if step == 'lowercase':
+            text = text.lower()
+        
+        elif step == 'remove_hyphens':
+            # Replace hyphens with spaces BEFORE removing punctuation
+            # This is critical for Malay where hyphens are used for word reduplication
+            # e.g., "laki-laki" (men) should match "laki laki" (not "lakilaki")
+            text = text.replace('-', ' ')
+        
+        elif step == 'remove_punctuation':
+            text = text.translate(str.maketrans('', '', string.punctuation))
+        
+        elif step == 'normalize_whitespace':
+            # Normalize whitespace (multiple spaces to single, strip)
+            text = ' '.join(text.split())
+        
+        else:
+            logger.warning(f"Unknown normalization step: '{step}' (skipping)")
     
     return text
 
@@ -64,7 +78,8 @@ class MetricsCalculator:
     def calculate_metrics(
         self,
         predictions: List[Dict],
-        model_name: str = None
+        model_name: str = None,
+        normalize_steps: List[str] = None
     ) -> Dict:
         """
         Calculate all evaluation metrics from predictions
@@ -72,12 +87,20 @@ class MetricsCalculator:
         Args:
             predictions: List of prediction dicts with 'reference' and 'hypothesis' keys
             model_name: Optional model name for metadata
-            
+            normalize_steps: List of normalization steps to apply. 
+                           If None, applies all steps (default behavior).
+                           If empty list [], no normalization is applied.
+                           
         Returns:
             Dictionary with comprehensive evaluation metrics
         """
         logger.info(f"\n{'='*70}")
-        logger.info("Calculating metrics with text normalization...")
+        if normalize_steps is None:
+            logger.info("Calculating metrics WITH text normalization (all steps)...")
+        elif len(normalize_steps) == 0:
+            logger.info("Calculating metrics WITHOUT text normalization (raw text)...")
+        else:
+            logger.info(f"Calculating metrics with CUSTOM normalization: {', '.join(normalize_steps)}")
         logger.info(f"{'='*70}\n")
         
         # Create dataframe
@@ -87,16 +110,24 @@ class MetricsCalculator:
         refs = out_df["reference"].tolist()
         hyps = out_df["hypothesis"].tolist()
         
-        # Apply normalization for overall metrics only
-        logger.info("Normalizing text (lowercase, remove punctuation, normalize whitespace)...")
-        refs_normalized = [normalize_text(ref) for ref in refs]
-        hyps_normalized = [normalize_text(hyp) for hyp in hyps]
+        # Apply normalization based on steps
+        if normalize_steps is None or len(normalize_steps) > 0:
+            if normalize_steps is None:
+                logger.info("Normalizing text with all steps: lowercase, remove_hyphens, remove_punctuation, normalize_whitespace")
+            else:
+                logger.info(f"Normalizing text with steps: {', '.join(normalize_steps)}")
+            refs_for_metrics = [normalize_text(ref, normalize_steps) for ref in refs]
+            hyps_for_metrics = [normalize_text(hyp, normalize_steps) for hyp in hyps]
+        else:
+            logger.info("Using raw text (no normalization)...")
+            refs_for_metrics = refs
+            hyps_for_metrics = hyps
         
-        # Calculate WER, CER, and MER using normalized text
+        # Calculate WER, CER, and MER
         metrics = {}
-        metrics["WER"] = round(wer(refs_normalized, hyps_normalized), 4)
-        metrics["CER"] = round(cer(refs_normalized, hyps_normalized), 4)
-        metrics["MER"] = round(mer(refs_normalized, hyps_normalized), 4)
+        metrics["WER"] = round(wer(refs_for_metrics, hyps_for_metrics), 4)
+        metrics["CER"] = round(cer(refs_for_metrics, hyps_for_metrics), 4)
+        metrics["MER"] = round(mer(refs_for_metrics, hyps_for_metrics), 4)
         
         print(f"\n[METRICS] WER={metrics['WER']:.4f}, CER={metrics['CER']:.4f}, MER={metrics['MER']:.4f}")
         
@@ -188,7 +219,29 @@ def load_predictions(predictions_file: Path) -> Dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Calculate evaluation metrics from ASR predictions"
+        description="Calculate evaluation metrics from ASR predictions",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Normalization Steps:
+  Available steps (applied in order specified):
+    - lowercase: Convert text to lowercase
+    - remove_hyphens: Replace hyphens with spaces (important for Malay reduplication)
+    - remove_punctuation: Remove all punctuation marks
+    - normalize_whitespace: Normalize whitespace (multiple spaces → single, strip)
+
+Examples:
+  # Default (all normalization steps)
+  python calculate_metrics.py --predictions pred.json --output-dir outputs/
+  
+  # No normalization (raw text)
+  python calculate_metrics.py --predictions pred.json --output-dir outputs/ --no-normalize
+  
+  # Custom normalization (only lowercase and whitespace)
+  python calculate_metrics.py --predictions pred.json --output-dir outputs/ --normalize lowercase,normalize_whitespace
+  
+  # Only remove punctuation
+  python calculate_metrics.py --predictions pred.json --output-dir outputs/ --normalize remove_punctuation
+"""
     )
     
     parser.add_argument(
@@ -205,7 +258,35 @@ def main():
         help="Directory to save evaluation results (default: ./results)"
     )
     
+    parser.add_argument(
+        "--normalize",
+        type=str,
+        default=None,
+        help="Comma-separated list of normalization steps to apply (e.g., 'lowercase,remove_punctuation'). "
+             "If not specified, applies all steps. Use 'none' to disable normalization."
+    )
+    
+    parser.add_argument(
+        "--no-normalize",
+        action="store_true",
+        help="Disable text normalization (shortcut for --normalize none)"
+    )
+    
     args = parser.parse_args()
+    
+    # Parse normalization steps
+    normalize_steps = None  # Default: apply all steps
+    
+    if args.no_normalize:
+        # Explicitly disable normalization
+        normalize_steps = []
+    elif args.normalize:
+        if args.normalize.lower() == 'none':
+            # Disable normalization
+            normalize_steps = []
+        else:
+            # Parse comma-separated list
+            normalize_steps = [step.strip() for step in args.normalize.split(',') if step.strip()]
     
     # Load predictions
     predictions_data = load_predictions(Path(args.predictions))
@@ -213,10 +294,11 @@ def main():
     # Initialize calculator
     calculator = MetricsCalculator()
     
-    # Calculate metrics (no normalization)
+    # Calculate metrics with configurable normalization
     results = calculator.calculate_metrics(
         predictions=predictions_data["predictions"],
-        model_name=predictions_data.get("model")
+        model_name=predictions_data.get("model"),
+        normalize_steps=normalize_steps
     )
     
     # Save results

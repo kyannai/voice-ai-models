@@ -48,7 +48,7 @@ def load_dataset_by_name(
 
 def load_test_data(test_data_path: Union[str, Path], audio_dir: Optional[Union[str, Path]] = None) -> List[Dict]:
     """
-    Load test data from JSON or CSV file
+    Load test data from JSON, CSV, or TSV file
     
     Args:
         test_data_path: Path to test data file
@@ -69,10 +69,24 @@ def load_test_data(test_data_path: Union[str, Path], audio_dir: Optional[Union[s
         logger.info("Format: CSV")
         df = pd.read_csv(test_data_path)
         data = df.to_dict('records')
+    elif test_data_path.suffix == '.tsv':
+        logger.info("Format: TSV")
+        df = pd.read_csv(test_data_path, sep='\t')
+        data = df.to_dict('records')
     else:
         raise ValueError(f"Unsupported file format: {test_data_path.suffix}")
     
     logger.info(f"Loaded {len(data)} samples from {test_data_path.suffix.upper()}")
+    
+    # Normalize field names (handle different naming conventions)
+    for sample in data:
+        # Map 'path' to 'audio_path' if needed
+        if 'path' in sample and 'audio_path' not in sample:
+            sample['audio_path'] = sample['path']
+        
+        # Map 'sentence' to 'reference' if needed
+        if 'sentence' in sample and 'reference' not in sample:
+            sample['reference'] = sample['sentence']
     
     # Resolve audio paths
     if audio_dir:

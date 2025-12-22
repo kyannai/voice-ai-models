@@ -3,7 +3,7 @@
 Dataset Registry Configuration
 
 Defines all available test datasets for ASR evaluation.
-Supports both local datasets (JSON/CSV) and HuggingFace datasets.
+Supports both local datasets (JSON/CSV/TSV) and HuggingFace datasets.
 
 Usage:
     from datasets_config import DATASETS, get_dataset_config
@@ -47,6 +47,33 @@ DATASETS = {
         "audio_dir": EVAL_DIR / "test_data/seacrowd-malcsc",
         "language": "ms",
         "num_samples": 20,  # 20 conversational samples
+    },
+    
+    "fleurs-test": {
+        "type": "local",
+        "description": "FLEURS Malay test set",
+        "test_data": EVAL_DIR / "test_data/YTL_testsets/fleurs_test.tsv",
+        "audio_dir": EVAL_DIR / "test_data/YTL_testsets",
+        "language": "ms",
+        "num_samples": None,
+    },
+    
+    "malay-scripted": {
+        "type": "local",
+        "description": "YTL Malay scripted speech test set",
+        "test_data": EVAL_DIR / "test_data/YTL_testsets/malay_scripted_meta.tsv",
+        "audio_dir": EVAL_DIR / "test_data/YTL_testsets",
+        "language": "ms",
+        "num_samples": None,
+    },
+    
+    "malay-conversational": {
+        "type": "local",
+        "description": "YTL Malay conversational speech test set",
+        "test_data": EVAL_DIR / "test_data/YTL_testsets/malay_conversational_meta.tsv",
+        "audio_dir": EVAL_DIR / "test_data/YTL_testsets",
+        "language": "ms",
+        "num_samples": None,
     },
 }
 

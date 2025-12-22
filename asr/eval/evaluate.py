@@ -194,6 +194,14 @@ class UnifiedEvaluator:
             else:
                 dataset_config_serializable[key] = value
         
+        # Determine normalization configuration for config tracking
+        if self.args.no_normalize:
+            normalize_config = "disabled"
+        elif self.args.normalize:
+            normalize_config = self.args.normalize
+        else:
+            normalize_config = "all_steps"  # Default behavior
+        
         config = {
             "model": self.args.model,
             "model_family": self.model_family,
@@ -204,6 +212,7 @@ class UnifiedEvaluator:
             "max_samples": self.args.max_samples,
             "language": self.args.language,
             "asr_prompt": self.args.asr_prompt,
+            "text_normalization": normalize_config,
             "timestamp": datetime.now().isoformat(),
             "output_dir": str(self.output_dir),
         }
@@ -289,6 +298,12 @@ class UnifiedEvaluator:
             "--predictions", str(predictions_file),
             "--output-dir", str(self.output_dir)
         ]
+        
+        # Add normalization flags if specified
+        if self.args.no_normalize:
+            cmd.append("--no-normalize")
+        elif self.args.normalize:
+            cmd.extend(["--normalize", self.args.normalize])
         
         self.logger.info(f"Command: {' '.join(cmd)}")
         self.logger.info("")
@@ -421,6 +436,14 @@ Examples:
                        help="Language for Whisper models (default: ms)")
     parser.add_argument("--asr-prompt",
                        help="ASR prompt for Qwen models")
+    
+    # Evaluation options
+    parser.add_argument("--normalize", type=str,
+                       help="Comma-separated list of normalization steps: lowercase, remove_hyphens, "
+                            "remove_punctuation, normalize_whitespace. Use 'none' to disable. "
+                            "If not specified, applies all steps.")
+    parser.add_argument("--no-normalize", action="store_true",
+                       help="Disable text normalization (shortcut for --normalize none)")
     
     args = parser.parse_args()
     

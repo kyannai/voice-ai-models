@@ -3,7 +3,7 @@
 Dataset Loader Module
 
 Handles loading of test datasets from various sources:
-- Local JSON/CSV files
+- Local JSON/CSV/TSV files
 - HuggingFace datasets (auto-download and cache)
 
 Usage:
@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 def load_local_dataset(config: Dict, max_samples: Optional[int] = None) -> List[Dict]:
     """
-    Load a local dataset from JSON or CSV file
+    Load a local dataset from JSON, CSV, or TSV file
     
     Args:
         config: Dataset configuration dictionary
@@ -55,6 +55,10 @@ def load_local_dataset(config: Dict, max_samples: Optional[int] = None) -> List[
         logger.info("Format: CSV")
         df = pd.read_csv(test_data_path)
         data = df.to_dict('records')
+    elif test_data_path.suffix == '.tsv':
+        logger.info("Format: TSV")
+        df = pd.read_csv(test_data_path, sep='\t')
+        data = df.to_dict('records')
     else:
         raise ValueError(f"Unsupported file format: {test_data_path.suffix}")
     
@@ -64,6 +68,16 @@ def load_local_dataset(config: Dict, max_samples: Optional[int] = None) -> List[
         logger.info(f"Limited to {max_samples} samples")
     
     logger.info(f"Loaded {len(data)} samples")
+    
+    # Normalize field names (handle different naming conventions)
+    for sample in data:
+        # Map 'path' to 'audio_path' if needed
+        if 'path' in sample and 'audio_path' not in sample:
+            sample['audio_path'] = sample['path']
+        
+        # Map 'sentence' to 'reference' if needed
+        if 'sentence' in sample and 'reference' not in sample:
+            sample['reference'] = sample['sentence']
     
     # Resolve audio paths (make them absolute)
     for sample in data:
