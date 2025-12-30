@@ -1,0 +1,47 @@
+# TTS Evaluation Requirements
+# Install with: pip install -r requirements.txt
+
+# Core Dependencies
+torch>=2.0.0
+torchaudio>=2.0.0
+transformers>=4.35.0,<4.50.0
+
+# Audio Processing
+librosa>=0.10.1,<0.11.0
+soundfile>=0.12.1,<0.13.0
+scipy>=1.10.0,<1.15.0
+
+# Data Processing
+numpy>=1.24.0,<2.0
+pandas>=2.0.0,<2.3.0
+
+# Evaluation Metrics
+jiwer>=3.0.0,<3.1.0
+
+# Utilities
+tqdm>=4.65.0,<5.0.0
+python-dotenv>=1.0.0,<2.0.0
+
+# ===========================================
+# TTS Models (install as needed)
+# ===========================================
+
+# XTTS v2 (Coqui TTS)
+# pip install TTS>=0.22.0
+
+# Kokoro TTS
+# pip install kokoro>=0.3.0 misaki[en,ja,ko,zh]>=0.1.0
+
+# MeloTTS
+# pip install MeloTTS
+
+# ===========================================
+# Neural MOS
+# ===========================================
+# pip install speechmos>=1.2.0
+
+# ===========================================
+# ASR for back-transcription
+# ===========================================
+# Already have transformers for Whisper pipeline
+

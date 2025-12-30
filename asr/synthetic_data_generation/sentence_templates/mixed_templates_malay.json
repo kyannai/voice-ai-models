@@ -1,0 +1,187 @@
+{
+  "description": "Mixed templates combining Malaysian names and numbers for efficient training",
+  "total_templates": 150,
+  "categories": {
+    "budget_announcements": [
+      "Menteri {name} mengumumkan peruntukan sebanyak {amount} untuk projek pembangunan.",
+      "{honorific} {name} berkata kerajaan akan memperuntukkan {amount} untuk sektor pendidikan.",
+      "Perdana Menteri {name} meluluskan bajet bernilai {amount} pada {date}.",
+      "{name} mengumumkan subsidi sebanyak {amount} kepada {number} buah syarikat.",
+      "Menurut {name}, peruntukan {amount} akan diagihkan kepada {number} negeri.",
+      "{honorific} {name} berkata sebanyak {number} peratus daripada {amount} untuk infrastruktur.",
+      "{name} meluluskan dana kecemasan {amount} pada tarikh {date}.",
+      "Menteri {name} mengumumkan pelaburan {amount} melibatkan {number} projek.",
+      "{name} berkata {number} juta ringgit akan disalurkan sebelum {date}.",
+      "Peruntukan sebanyak {amount} diumumkan oleh {name} untuk membantu {number} keluarga."
+    ],
+    "statistics_reports": [
+      "Menurut laporan {name}, kadar pertumbuhan mencapai {percent} peratus pada {date}.",
+      "{name} melaporkan sebanyak {number} kes baru pada {date}.",
+      "Data yang dibentangkan oleh {name} menunjukkan peningkatan {percent} peratus.",
+      "{honorific} {name} berkata {number} orang telah mendaftar sebelum {date}.",
+      "{name} memaklumkan bahawa {number} peratus daripada populasi terjejas.",
+      "Menurut {name}, jumlah {number} orang dijangka hadir pada {date}.",
+      "Prestasi yang dilaporkan {name} menunjukkan pencapaian {percent} peratus sasaran.",
+      "{name} berkata inflasi pada kadar {percent} peratus dicatat pada {date}.",
+      "Kajian {name} mendapati {number} peratus responden bersetuju.",
+      "{honorific} {name} mengumumkan {number} kes diselesaikan melibatkan {amount}."
+    ],
+    "contact_information": [
+      "Untuk maklumat lanjut, hubungi pejabat {name} di {phone}.",
+      "{name} boleh dihubungi di nombor {phone} pada waktu pejabat.",
+      "Setiausaha kepada {name} boleh dihubungi melalui {phone}.",
+      "Pejabat {honorific} {name} di {phone} beroperasi dari pukul {time}.",
+      "Untuk temujanji dengan {name}, hubungi {phone} sebelum {date}.",
+      "{name} memberikan nombor terus beliau iaitu {phone}.",
+      "Hubungi {name} di talian {phone} atau melalui emel.",
+      "Nombor perhubungan {name} adalah {phone}, tersedia 24 jam.",
+      "Untuk berjumpa {name}, tempah melalui {phone} sebelum pukul {time}.",
+      "Pejabat {name} di nombor {phone} buka pada {date}."
+    ],
+    "meeting_schedules": [
+      "{name} akan mengadakan mesyuarat pada {date} jam {time}.",
+      "Mesyuarat dengan {honorific} {name} dijadualkan pada {date} pukul {time}.",
+      "{name} bertemu dengan {number} wakil industri pada {date}.",
+      "Pada {date}, {name} akan membentangkan laporan kepada {number} ahli jawatankuasa.",
+      "Dialog bersama {name} berlangsung pada {date} jam {time} petang.",
+      "{name} mengadakan sidang media pada {date} melibatkan {number} wartawan.",
+      "Temujanji dengan {name} ditetapkan pada {date} pukul {time}.",
+      "{honorific} {name} akan hadir ke mesyuarat pada {date} bersama {number} menteri.",
+      "Perbincangan antara {name} dan {number} pemimpin parti pada {date}.",
+      "{name} menjadualkan lawatan ke {number} lokasi bermula {date}."
+    ],
+    "project_details": [
+      "Projek yang diketuai {name} melibatkan kos {amount} dan tempoh {number} bulan.",
+      "{name} mengumumkan projek bernilai {amount} akan siap pada {date}.",
+      "Menurut {name}, {number} kontraktor akan terlibat dengan anggaran {amount}.",
+      "Projek pembangunan {name} menyasarkan {number} benefisiari dengan bajet {amount}.",
+      "{honorific} {name} berkata projek ini melibatkan {number} hektar tanah bernilai {amount}.",
+      "{name} meluluskan {number} projek bernilai {amount} pada {date}.",
+      "Pembinaan yang dipantau {name} dijangka siap {date} dengan kos {amount}.",
+      "Projek infrastruktur {name} menjangkau {number} kilometer bernilai {amount}.",
+      "{name} mengumumkan {number} fasa projek dengan peruntukan {amount} setiap fasa.",
+      "Menurut {name}, projek ini akan mewujudkan {number} pekerjaan dengan bajet {amount}."
+    ],
+    "election_politics": [
+      "{name} memperoleh {number} undi dalam pilihan raya pada {date}.",
+      "Parti {name} mendapat sokongan {percent} peratus daripada {number} pengundi.",
+      "{name} menang dengan majoriti {number} undi pada {date}.",
+      "Menurut {name}, sebanyak {number} kerusi dimenangi dengan {percent} peratus undi.",
+      "{honorific} {name} mengumumkan kemenangan pada pukul {time} malam {date}.",
+      "Kempen {name} menjangkau {number} kawasan dengan peruntukan {amount}.",
+      "{name} berucap kepada {number} penyokong pada {date} jam {time}.",
+      "Manifesto {name} menyasarkan {number} inisiatif bernilai {amount}.",
+      "Pengundian di kawasan {name} mencatat {percent} peratus keluar mengundi pada {date}.",
+      "{name} dijangka mengumpul {number} tandatangan sebelum {date}."
+    ],
+    "financial_transactions": [
+      "{name} meluluskan pinjaman {amount} untuk {number} usahawan.",
+      "Transaksi melibatkan {name} berjumlah {amount} pada {date}.",
+      "{honorific} {name} menandatangani perjanjian bernilai {amount} dengan {number} syarikat.",
+      "Bank yang dipengerusikan {name} meluluskan {number} pinjaman bernilai {amount}.",
+      "{name} mengumumkan pengurangan kadar faedah kepada {percent} peratus mulai {date}.",
+      "Portfolio pelaburan {name} bernilai {amount} melibatkan {number} sektor.",
+      "{name} berkata sebanyak {amount} diagihkan kepada {number} penerima pada {date}.",
+      "Dana yang diuruskan {name} meningkat {percent} peratus kepada {amount}.",
+      "Menurut {name}, {number} akaun berjumlah {amount} telah dibekukan.",
+      "{name} meluluskan geran sebanyak {amount} untuk {number} projek penyelidikan."
+    ],
+    "development_programs": [
+      "Program yang dilancarkan {name} menyasarkan {number} peserta dengan bajet {amount}.",
+      "{name} mengumumkan latihan untuk {number} graduan bermula {date}.",
+      "{honorific} {name} berkata {number} peratus daripada {amount} untuk program belia.",
+      "Inisiatif {name} akan melatih {number} orang dalam tempoh {number} bulan.",
+      "{name} meluluskan {number} skim bantuan bernilai {amount} setiap satu.",
+      "Program pembangunan {name} melibatkan {number} negeri dengan peruntukan {amount}.",
+      "{name} menyasarkan {number} benefisiari menerima {amount} setiap orang.",
+      "Menurut {name}, {percent} peratus daripada {number} peserta berjaya dalam program ini.",
+      "{name} mengumumkan sambungan program sehingga {date} dengan tambahan {amount}.",
+      "Kejayaan program {name} dicatat pada kadar {percent} peratus melibatkan {number} peserta."
+    ],
+    "infrastructure_announcements": [
+      "Projek jalan raya {name} sepanjang {number} kilometer bernilai {amount}.",
+      "{name} merasmikan pembinaan jambatan {number} meter pada {date}.",
+      "{honorific} {name} mengumumkan naik taraf {number} hospital dengan kos {amount}.",
+      "Menurut {name}, pembinaan {number} sekolah akan siap pada {date}.",
+      "Projek infrastruktur {name} melibatkan {number} kontraktor dengan bajet {amount}.",
+      "{name} berkata {number} projek bernilai {amount} akan bermula {date}.",
+      "Pembangunan yang diumumkan {name} menjangkau {number} kilometer dengan kos {amount}.",
+      "{name} meluluskan pembinaan {number} unit rumah mampu milik berharga {amount}.",
+      "Naik taraf kemudahan {name} dijangka siap {date} dengan peruntukan {amount}.",
+      "Menurut {name}, projek {number} hektar ini bernilai {amount}."
+    ],
+    "education_sector": [
+      "{name} mengumumkan biasiswa bernilai {amount} untuk {number} pelajar.",
+      "Program pendidikan {name} menyasarkan {number} sekolah pada {date}.",
+      "{honorific} {name} meluluskan pembinaan {number} sekolah dengan bajet {amount}.",
+      "{name} berkata {number} peratus pelajar layak mendapat bantuan {amount}.",
+      "Inisiatif pendidikan {name} melibatkan {number} guru bermula {date}.",
+      "{name} mengumumkan {amount} untuk {number} institusi pengajian tinggi.",
+      "Menurut {name}, {number} pelajar akan menerima biasiswa {amount} setiap tahun.",
+      "Program latihan {name} untuk {number} pensyarah bermula pada {date}.",
+      "{name} meluluskan peruntukan {amount} untuk {number} projek penyelidikan.",
+      "Prestasi {number} sekolah meningkat {percent} peratus di bawah program {name}."
+    ],
+    "healthcare_initiatives": [
+      "{name} meluluskan peruntukan {amount} untuk {number} hospital.",
+      "Program kesihatan {name} menyasarkan {number} klinik pada {date}.",
+      "{honorific} {name} mengumumkan vaksinasi untuk {number} orang bermula {date}.",
+      "{name} berkata {percent} peratus daripada {amount} untuk kesihatan awam.",
+      "Inisiatif {name} akan merawat {number} pesakit dengan bajet {amount}.",
+      "{name} meluluskan pembinaan {number} klinik bernilai {amount}.",
+      "Menurut {name}, {number} peratus penduduk mendapat rawatan pada {date}.",
+      "Program pemeriksaan {name} melibatkan {number} peserta di {number} lokasi.",
+      "{name} mengumumkan {amount} untuk membeli {number} peralatan perubatan.",
+      "Kempen kesihatan {name} menjangkau {number} kampung bermula {date}."
+    ],
+    "economic_policy": [
+      "{name} mengumumkan dasar ekonomi dengan sasaran pertumbuhan {percent} peratus.",
+      "Menurut {name}, KDNK dijangka meningkat {percent} peratus pada {date}.",
+      "{honorific} {name} berkata pelaburan asing mencecah {amount} melibatkan {number} syarikat.",
+      "Dasar {name} menyasarkan {number} sektor dengan insentif {amount}.",
+      "{name} meluluskan pengurangan cukai kepada {percent} peratus mulai {date}.",
+      "Ekonomi yang diurus {name} berkembang {percent} peratus dengan KDNK {amount}.",
+      "{name} mengumumkan pakej rangsangan {amount} untuk {number} industri.",
+      "Menurut {name}, eksport meningkat {percent} peratus kepada {amount} pada {date}.",
+      "Dasar fiskal {name} menyasarkan defisit {percent} peratus dengan bajet {amount}.",
+      "{name} berkata {number} pekerjaan baru dijangka tercipta pada {date}."
+    ],
+    "social_programs": [
+      "{name} melancarkan program kebajikan untuk {number} keluarga bernilai {amount}.",
+      "Bantuan yang diumumkan {name} melibatkan {number} penerima sebanyak {amount} setiap orang.",
+      "{honorific} {name} berkata {percent} peratus daripada {number} keluarga layak mendapat bantuan.",
+      "Program {name} menyalurkan {amount} kepada {number} golongan terjejas.",
+      "{name} meluluskan bantuan khas {amount} untuk {number} mangsa banjir pada {date}.",
+      "Inisiatif kebajikan {name} menyasarkan {number} komuniti dengan peruntukan {amount}.",
+      "{name} mengumumkan bantuan bulanan {amount} untuk {number} warga emas.",
+      "Program pemulihan {name} melibatkan {number} peserta dengan bajet {amount}.",
+      "Menurut {name}, {number} peratus penerima mendapat {amount} sebelum {date}.",
+      "{name} meluluskan {number} permohonan bantuan berjumlah {amount}."
+    ],
+    "environmental_projects": [
+      "{name} meluluskan projek hijau bernilai {amount} melibatkan {number} hektar.",
+      "Program alam sekitar {name} menyasarkan pengurangan {percent} peratus pencemaran.",
+      "{honorific} {name} mengumumkan penanaman {number} pokok dengan kos {amount}.",
+      "{name} berkata projek solar {number} megawatt akan siap pada {date}.",
+      "Inisiatif hijau {name} melibatkan {number} komuniti dengan bajet {amount}.",
+      "{name} meluluskan kawasan perlindungan seluas {number} hektar bernilai {amount}.",
+      "Menurut {name}, sasaran pengurangan karbon {percent} peratus menjelang {date}.",
+      "Projek kitar semula {name} menyasarkan {number} tan sisa dengan peruntukan {amount}.",
+      "{name} mengumumkan {number} projek tenaga boleh diperbaharui bernilai {amount}.",
+      "Program konservasi {name} melindungi {number} spesies dengan bajet {amount}."
+    ],
+    "tourism_development": [
+      "{name} melancarkan kempen pelancongan dengan bajet {amount} untuk {number} destinasi.",
+      "Menurut {name}, {number} pelancong dijangka hadir pada {date}.",
+      "{honorific} {name} berkata sektor pelancongan tumbuh {percent} peratus dengan hasil {amount}.",
+      "Program pelancongan {name} menyasarkan {number} juta pelancong menjelang {date}.",
+      "{name} meluluskan naik taraf {number} tapak pelancongan dengan kos {amount}.",
+      "Kempen {name} menjangkau {number} negara dengan peruntukan {amount}.",
+      "{name} mengumumkan pakej pelancongan {amount} untuk {number} ejen pelancongan.",
+      "Menurut {name}, pendapatan pelancongan mencecah {amount} dengan pertumbuhan {percent} peratus.",
+      "Festival yang dianjurkan {name} menarik {number} pengunjung pada {date}.",
+      "{name} meluluskan pembangunan {number} resort bernilai {amount}."
+    ]
+  }
+}
+

@@ -34,6 +34,14 @@ def load_input_data(input_file: Path) -> List[Dict]:
     if input_file.suffix == '.json':
         with open(input_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
+        
+        # Handle synthesized.json format with 'results' wrapper
+        if isinstance(data, dict) and 'results' in data:
+            logger.info("Detected synthesized.json format with 'results' wrapper")
+            if 'metadata' in data:
+                logger.info(f"Metadata: {data['metadata']}")
+            data = data['results']
+        
     elif input_file.suffix == '.csv':
         import pandas as pd
         df = pd.read_csv(input_file)
@@ -87,8 +95,12 @@ def validate_and_convert_sample(
     
     # Get or compute duration
     duration = sample.get('duration') or sample.get('audio_duration')
-    if duration is None or require_duration:
+    if duration is None:
         # Load audio to get duration
+        audio_array, sr = librosa.load(str(audio_path), sr=None)
+        duration = len(audio_array) / sr
+    elif require_duration and duration == 0:
+        # Recompute duration if it's 0 and required
         audio_array, sr = librosa.load(str(audio_path), sr=None)
         duration = len(audio_array) / sr
     

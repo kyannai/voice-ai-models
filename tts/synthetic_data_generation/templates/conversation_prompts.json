@@ -1,0 +1,73 @@
+{
+  "description": "Prompts for Gemini to generate banking customer service text",
+  "domain": "banking",
+  
+  "system_prompt": "You are generating training data for a Malaysian banking customer service voice AI agent. Generate natural, conversational sentences that sound authentic when spoken aloud. Mix formal and casual tones appropriately.",
+  
+  "malay_prompts": {
+    "greetings": [
+      "Generate 10 different greetings a Malaysian bank customer service agent would say when answering a call. Include variations like 'Selamat pagi', 'Selamat sejahtera', etc.",
+      "Generate 10 ways to greet a returning customer in Malay, mentioning that you're happy to help."
+    ],
+    "account_inquiry": [
+      "Generate 10 sentences a customer service agent would say when telling a customer their account balance in Malay. Include natural number pronunciations.",
+      "Generate 10 ways to explain bank statement details to a customer in Malay."
+    ],
+    "transaction": [
+      "Generate 10 sentences confirming a successful fund transfer in Malay.",
+      "Generate 10 ways to explain why a transaction is pending in Malay."
+    ],
+    "card_services": [
+      "Generate 10 sentences about credit card activation process in Malay.",
+      "Generate 10 ways to explain card replacement procedures in Malay."
+    ],
+    "closing": [
+      "Generate 10 professional closing statements in Malay for ending a customer service call.",
+      "Generate 10 ways to ask if there's anything else you can help with in Malay."
+    ]
+  },
+  
+  "english_prompts": {
+    "greetings": [
+      "Generate 10 professional greetings for a Malaysian bank customer service call in English.",
+      "Generate 10 welcoming phrases for banking customers in English."
+    ],
+    "account_inquiry": [
+      "Generate 10 sentences for explaining account balance information in English with Malaysian context.",
+      "Generate 10 ways to discuss account features in English."
+    ],
+    "transaction": [
+      "Generate 10 confirmation messages for successful transactions in English.",
+      "Generate 10 sentences explaining transaction processing times in English."
+    ],
+    "card_services": [
+      "Generate 10 explanations for credit card services in English.",
+      "Generate 10 sentences about card security features in English."
+    ],
+    "closing": [
+      "Generate 10 professional closing statements in English for banking calls.",
+      "Generate 10 ways to ensure customer satisfaction before ending call in English."
+    ]
+  },
+  
+  "code_switching_prompts": {
+    "mixed": [
+      "Generate 10 sentences mixing Malay and English naturally, like how Malaysian customer service agents speak. Example: 'Ok, saya akan check your balance sekarang ya.'",
+      "Generate 10 sentences that start in Malay and switch to English technical terms, like Malaysians do when discussing banking.",
+      "Generate 10 sentences that use English for the main content but include Malay particles like 'lah', 'kan', 'ya', 'eh'.",
+      "Generate 10 confirmation sentences that mix 'Baik' or 'Ok' with English explanations.",
+      "Generate 10 apology sentences mixing Malay politeness with English problem descriptions."
+    ]
+  },
+  
+  "sentence_type_instructions": {
+    "greeting": "Start with a warm, professional greeting suitable for phone customer service.",
+    "confirmation": "Acknowledge and confirm understanding of the customer's request.",
+    "information": "Provide clear, specific information about accounts, balances, or status.",
+    "question": "Ask a polite question to gather necessary information from the customer.",
+    "instruction": "Give clear, step-by-step instructions for the customer to follow.",
+    "apology": "Apologize sincerely for an issue or inconvenience while offering help.",
+    "closing": "End the conversation politely, thanking the customer and offering future help."
+  }
+}
+

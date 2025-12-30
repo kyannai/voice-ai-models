@@ -1,0 +1,163 @@
+# TTS Synthetic Training Data Generation Configuration
+# For XTTS v2 Fine-tuning on Malaysian Banking Customer Service
+# Languages: Malay (60%), English (20%), Code-switching (20%)
+
+# ==============================================================================
+# SPEAKER CONFIGURATION
+# ==============================================================================
+# 5 speakers for banking customer service voice agent
+# Update voice_ids with your ElevenLabs voice IDs before running
+
+speakers:
+  speaker_1:
+    name: "Aisha"
+    voice_id: "PLACEHOLDER_VOICE_ID_1"  # Update with ElevenLabs voice ID
+    gender: "female"
+    role: "Senior Agent"
+    description: "Professional female voice for senior customer service"
+    
+  speaker_2:
+    name: "Ahmad"
+    voice_id: "PLACEHOLDER_VOICE_ID_2"
+    gender: "male"
+    role: "General Support"
+    description: "Friendly male voice for general inquiries"
+    
+  speaker_3:
+    name: "Siti"
+    voice_id: "PLACEHOLDER_VOICE_ID_3"
+    gender: "female"
+    role: "Account Services"
+    description: "Warm female voice for account-related queries"
+    
+  speaker_4:
+    name: "Hafiz"
+    voice_id: "PLACEHOLDER_VOICE_ID_4"
+    gender: "male"
+    role: "Technical Support"
+    description: "Clear male voice for technical assistance"
+    
+  speaker_5:
+    name: "Nurul"
+    voice_id: "PLACEHOLDER_VOICE_ID_5"
+    gender: "female"
+    role: "Promotions"
+    description: "Energetic female voice for promotions and offers"
+
+# ==============================================================================
+# TEXT GENERATION SETTINGS (Gemini 2.5 Flash)
+# ==============================================================================
+text_generation:
+  # Gemini API configuration
+  model: "gemini-2.5-flash"
+  api_key: ${GOOGLE_API_KEY}  # Load from environment variable
+  
+  # Generation targets
+  samples_per_speaker: 240     # ~30 min per speaker at 7.5s average
+  min_words_per_sample: 8      # Minimum words (~5 seconds)
+  max_words_per_sample: 25     # Maximum words (~15 seconds)
+  target_duration_seconds: 7.5 # Target duration per clip
+  
+  # Language distribution (Malay-heavy for Malaysian banking)
+  language_distribution:
+    malay: 0.60           # 60% pure Malay
+    english: 0.20         # 20% pure English
+    code_switching: 0.20  # 20% mixed Malay-English
+  
+  # Domain configuration
+  domain: "banking"
+  
+  # Banking customer service topics
+  topics:
+    - name: "greetings_closings"
+      weight: 0.15
+      description: "Greetings, welcomes, and call closings"
+    - name: "account_inquiry"
+      weight: 0.20
+      description: "Account balance, statements, account info"
+    - name: "transaction_status"
+      weight: 0.15
+      description: "Transfer status, payment confirmations"
+    - name: "card_services"
+      weight: 0.15
+      description: "Credit/debit card activation, limits, issues"
+    - name: "loan_applications"
+      weight: 0.10
+      description: "Loan inquiries, applications, repayment"
+    - name: "online_banking"
+      weight: 0.15
+      description: "E-banking, mobile app, TAC, passwords"
+    - name: "complaints_feedback"
+      weight: 0.10
+      description: "Complaints handling, feedback, escalation"
+
+  # Sentence types to generate
+  sentence_types:
+    - greeting        # "Selamat pagi, terima kasih kerana menghubungi kami"
+    - confirmation    # "Baik, saya faham permintaan anda"
+    - information     # "Baki akaun anda ialah..."
+    - question        # "Boleh saya tahu nombor akaun anda?"
+    - instruction     # "Sila masukkan TAC anda"
+    - apology         # "Maaf atas kesulitan yang berlaku"
+    - closing         # "Terima kasih, selamat hari raya"
+
+# ==============================================================================
+# ELEVENLABS TTS CONFIGURATION
+# ==============================================================================
+elevenlabs:
+  # API key (load from environment variable)
+  api_key: ${ELEVENLABS_API_KEY}
+  
+  # Model to use
+  model: "eleven_multilingual_v2"  # Best for Malay
+  
+  # Voice settings
+  stability: 0.5            # 0-1, higher = more stable/consistent
+  similarity_boost: 0.75    # 0-1, higher = closer to original voice
+  style: 0.0                # 0-1, exaggeration of speaker style
+  use_speaker_boost: true   # Enhance voice clarity
+  
+  # API settings
+  max_retries: 3
+  retry_delay: 2            # seconds
+  timeout: 30               # seconds per request
+  
+  # Rate limiting (to avoid hitting API limits)
+  requests_per_minute: 30
+  batch_size: 10            # Process in batches
+
+# ==============================================================================
+# OUTPUT CONFIGURATION
+# ==============================================================================
+output:
+  # Base directory for outputs
+  base_dir: "./outputs"
+  
+  # Audio output settings
+  audio_format: "wav"       # wav for XTTS training (will convert from mp3)
+  sample_rate: 22050        # XTTS expected sample rate
+  
+  # Output structure (per speaker)
+  # outputs/
+  #   speaker_1/
+  #     wavs/
+  #     metadata.csv
+  #   speaker_2/
+  #     ...
+  
+  # XTTS training manifest format
+  # metadata.csv: audio_file|text|speaker_id
+
+# ==============================================================================
+# QUALITY CONTROL
+# ==============================================================================
+quality:
+  validate_audio: true
+  min_audio_duration: 3.0   # seconds (minimum)
+  max_audio_duration: 15.0  # seconds (maximum for XTTS)
+  target_audio_duration: 7.5  # seconds (optimal)
+  
+  # Text validation
+  min_text_length: 20       # characters
+  max_text_length: 200      # characters
+

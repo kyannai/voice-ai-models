@@ -11,9 +11,13 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Get config file from argument or use default
+CONFIG_FILE="${1:-config.yaml}"
+
 echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE}NVIDIA Parakeet TDT Training Launcher${NC}"
 echo -e "${BLUE}========================================${NC}\n"
+echo -e "Config file: ${GREEN}$CONFIG_FILE${NC}\n"
 
 # Check if virtual environment exists
 if [ -d "../.venv" ]; then
@@ -39,10 +43,11 @@ fi
 # Setup CUDA memory management (prevents fragmentation)
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
-# Check if config.yaml exists
-if [ ! -f "config.yaml" ]; then
-    echo -e "${RED}✗${NC} config.yaml not found!"
-    echo -e "   Please create a config.yaml file first"
+# Check if config file exists
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo -e "${RED}✗${NC} $CONFIG_FILE not found!"
+    echo -e "   Please create a configuration file first"
+    echo -e "   Usage: bash run_training.sh [config_file.yaml]"
     exit 1
 fi
 
@@ -86,7 +91,7 @@ echo -e "   Then open: ${GREEN}http://localhost:6006${NC}"
 echo -e "   Look for the '${YELLOW}val_wer${NC}' graph (should decrease over time)"
 echo -e ""
 
-python train_parakeet_tdt.py --config config.yaml
+python train_parakeet_tdt.py --config "$CONFIG_FILE"
 
 # Check exit status
 if [ $? -eq 0 ]; then

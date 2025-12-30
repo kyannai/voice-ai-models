@@ -1,0 +1,127 @@
+{
+  "description": "Malay sentence templates for Malaysian public figures and historical names",
+  "total_templates": 80,
+  "categories": {
+    "news_announcement": [
+      "Menteri {name} telah mengumumkan program baharu untuk rakyat Malaysia.",
+      "{honorific} {name} berkata bahawa kerajaan akan melaksanakan dasar baru ini.",
+      "Perdana Menteri {name} mengadakan sidang media pada hari ini.",
+      "{name} telah memberikan kenyataan rasmi mengenai isu semasa.",
+      "Dalam satu sidang akhbar, {honorific} {name} menyatakan komitmen kerajaan.",
+      "{name} mengumumkan peruntukan sebanyak jutaan ringgit untuk projek ini.",
+      "Menurut {name}, program ini akan memberi manfaat kepada rakyat.",
+      "{honorific} {name} telah menandatangani perjanjian dengan beberapa negara.",
+      "{name} menekankan pentingnya perpaduan rakyat Malaysia.",
+      "Kenyataan {name} disambut baik oleh pelbagai pihak."
+    ],
+    "formal_parliamentary": [
+      "Yang Berhormat {name} berkata bahawa pindaan akta ini penting untuk negara.",
+      "{name} telah mempersoalkan dasar kerajaan di Parlimen.",
+      "Ahli Parlimen {name} membangkitkan isu rakyat dalam mesyuarat.",
+      "Yang Berhormat {name} mencadangkan penambahbaikan kepada sistem.",
+      "{name} berdebat dengan sengit mengenai rang undang-undang baru.",
+      "Soalan daripada {name} dijawab oleh Menteri berkenaan.",
+      "{name} mengkritik kelemahan dalam pelaksanaan dasar.",
+      "Yang Berhormat {name} mengalu-alukan keputusan kerajaan.",
+      "{name} telah mengundi menyokong pindaan tersebut.",
+      "Usul yang dikemukakan oleh {name} telah diterima."
+    ],
+    "historical_context": [
+      "{name} adalah pahlawan kemerdekaan yang dihormati rakyat Malaysia.",
+      "Sejarah mencatat jasa {name} dalam memperjuangkan kemerdekaan negara.",
+      "{name} merupakan tokoh penting dalam pembentukan Malaysia.",
+      "Sumbangan {name} kepada negara tidak akan dilupakan.",
+      "{name} adalah pemimpin yang bijaksana dan berwibawa.",
+      "Legasi {name} terus menginspirasi generasi muda.",
+      "Pada zaman {name}, Malaysia mencapai banyak kejayaan.",
+      "{name} dikenang sebagai bapa pembangunan negara.",
+      "Perjuangan {name} telah membawa perubahan besar kepada Malaysia.",
+      "Nama {name} terukir dalam sejarah negara."
+    ],
+    "political_discussion": [
+      "Parti yang diketuai oleh {name} mendapat sokongan rakyat.",
+      "{name} merupakan pemimpin parti yang berpengaruh.",
+      "Pengikut {name} percaya kepada visi beliau untuk negara.",
+      "{name} dan pasukannya bekerja keras untuk rakyat.",
+      "Dasar yang diperkenalkan oleh {name} mendapat pujian.",
+      "{name} menghadapi cabaran dengan penuh keyakinan.",
+      "Strategi {name} telah membawa kejayaan kepada parti.",
+      "{name} dikenali sebagai pemimpin yang berkarisma.",
+      "Ramai yang menyokong kepimpinan {name}.",
+      "{name} berjuang untuk kepentingan rakyat Malaysia."
+    ],
+    "conversational": [
+      "Saya mendengar {name} akan hadir ke majlis tersebut.",
+      "Adakah {name} sudah tiba di lokasi acara?",
+      "Kata orang {name} akan bercakap mengenai isu ini.",
+      "Saya ingin bertemu dengan {name} jika ada peluang.",
+      "{name} dijangka akan membuat pengumuman penting.",
+      "Ramai yang menanti kedatangan {name}.",
+      "Menurut sumber, {name} akan menghadiri mesyuarat itu.",
+      "Khabar angin mengatakan {name} akan mengumumkan sesuatu.",
+      "{name} sering menjadi topik perbincangan rakyat.",
+      "Pendapat {name} mengenai perkara ini sangat dinanti-nantikan."
+    ],
+    "meeting_event": [
+      "{name} dijadualkan untuk bertemu dengan pemimpin negara lain.",
+      "Mesyuarat yang dipengerusikan oleh {name} berlangsung lancar.",
+      "{name} akan menghadiri sidang kemuncak pada bulan depan.",
+      "Dalam mesyuarat itu, {name} membentangkan laporan terperinci.",
+      "{name} menganjurkan forum dialog dengan rakyat.",
+      "Majlis yang dirasmikan oleh {name} berjalan dengan jayanya.",
+      "{name} memberikan ucapan inspirasi pada majlis tersebut.",
+      "Dialog bersama {name} mendapat sambutan menggalakkan.",
+      "{name} mengadakan perjumpaan dengan wakil rakyat.",
+      "Pertemuan antara {name} dan pemimpin industri sangat produktif."
+    ],
+    "achievement_recognition": [
+      "{name} telah menerima anugerah berprestij atas sumbangan beliau.",
+      "Pengiktirafan diberikan kepada {name} atas jasa murni.",
+      "{name} dinobatkan sebagai tokoh tahun ini.",
+      "Kejayaan {name} dalam bidang pentadbiran diiktiraf antarabangsa.",
+      "{name} menerima penghormatan daripada universiti tempatan.",
+      "Anugerah khas dipersembahkan kepada {name}.",
+      "{name} telah mencapai pencapaian yang membanggakan.",
+      "Prestasi {name} dipuji oleh ramai pihak.",
+      "{name} dianugerahkan gelaran kehormat atas jasanya.",
+      "Sumbangan {name} kepada masyarakat mendapat pengiktirafan tinggi."
+    ],
+    "quote_reference": [
+      "Menurut {name}, pembangunan ekonomi adalah keutamaan.",
+      "{name} pernah berkata bahawa perpaduan adalah kunci kejayaan.",
+      "Seperti yang dinyatakan oleh {name}, pendidikan adalah asas pembangunan.",
+      "Kata-kata {name} sering dijadikan panduan oleh rakyat.",
+      "{name} menegaskan bahawa rakyat adalah keutamaan.",
+      "Dalam ucapannya, {name} menekankan kepentingan integriti.",
+      "{name} sering mengingatkan tentang nilai murni bangsa.",
+      "Pesan {name} kepada generasi muda sangat bermakna.",
+      "Falsafah {name} dalam kepimpinan menjadi ikutan ramai.",
+      "Nasihat {name} relevan untuk situasi semasa."
+    ],
+    "position_role": [
+      "{name} berkhidmat sebagai Menteri selama beberapa tahun.",
+      "Peranan {name} dalam kabinet sangat penting.",
+      "{name} memegang jawatan sebagai Timbalan Menteri.",
+      "Sebagai {position}, {name} mempunyai tanggungjawab besar.",
+      "{name} dilantik sebagai pengerusi jawatankuasa khas.",
+      "Tugas {name} termasuk mengawasi pelaksanaan dasar.",
+      "{name} bertanggungjawab terhadap beberapa portfolio penting.",
+      "Dalam kapasiti sebagai {position}, {name} membuat keputusan strategik.",
+      "{name} telah berkhidmat dengan dedikasi tinggi.",
+      "Jawatan yang disandang oleh {name} memerlukan kepakaran."
+    ],
+    "question_inquiry": [
+      "Adakah {name} akan hadir pada majlis rasmi tersebut?",
+      "Apakah pendapat {name} mengenai isu semasa ini?",
+      "Bilakah {name} akan mengumumkan keputusan itu?",
+      "Mengapa {name} membuat kenyataan sedemikian?",
+      "Bagaimana {name} merancang untuk menangani masalah ini?",
+      "Siapakah yang akan menggantikan {name} dalam jawatan itu?",
+      "Adakah benar bahawa {name} akan bersara tidak lama lagi?",
+      "Apakah strategi {name} untuk mengatasi cabaran ini?",
+      "Bolehkah {name} menjelaskan dasar baru ini?",
+      "Adakah {name} bersetuju dengan keputusan tersebut?"
+    ]
+  }
+}
+

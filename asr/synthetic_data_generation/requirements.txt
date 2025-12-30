@@ -1,0 +1,32 @@
+# Synthetic Data Generation Requirements
+# Dependencies for generating training data with ElevenLabs
+
+# ElevenLabs SDK
+elevenlabs>=1.0.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Audio processing
+librosa>=0.10.2
+soundfile>=0.12.1
+pydub>=0.25.1  # For MP3 handling
+mutagen>=1.47.0  # For reading audio metadata (duration)
+
+# Data processing
+numpy>=1.26.0,<2.0
+pandas>=2.2.0
+pyyaml>=6.0.2
+
+# Utilities
+tqdm>=4.66.0
+requests>=2.31.0
+
+# Logging
+colorlog>=6.8.0  # Colorful logging
+
+# Already available from main requirements:
+# - torch
+# - transformers
+# - datasets
+

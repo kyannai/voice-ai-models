@@ -1,0 +1,533 @@
+{
+  "description": "Top 50 Malaysian politicians and 25 historical non-politicians",
+  "total_count": 75,
+  "politicians": [
+    {
+      "name": "Tunku Abdul Rahman",
+      "honorific": "Tunku",
+      "title": "Bapa Kemerdekaan",
+      "period": "1957-1970",
+      "significance": "Perdana Menteri pertama Malaysia"
+    },
+    {
+      "name": "Tun Abdul Razak",
+      "honorific": "Tun",
+      "title": "Bapa Pembangunan",
+      "period": "1970-1976",
+      "significance": "Perdana Menteri kedua Malaysia"
+    },
+    {
+      "name": "Tun Hussein Onn",
+      "honorific": "Tun",
+      "title": "Bapa Perpaduan",
+      "period": "1976-1981",
+      "significance": "Perdana Menteri ketiga Malaysia"
+    },
+    {
+      "name": "Tun Dr Mahathir Mohamad",
+      "honorific": "Tun Dr",
+      "title": "Bapa Pemodenan",
+      "period": "1981-2003, 2018-2020",
+      "significance": "Perdana Menteri Malaysia (dua penggal)"
+    },
+    {
+      "name": "Tun Abdullah Ahmad Badawi",
+      "honorific": "Tun",
+      "title": "Perdana Menteri kelima",
+      "period": "2003-2009",
+      "significance": "Perdana Menteri Malaysia"
+    },
+    {
+      "name": "Datuk Seri Najib Razak",
+      "honorific": "Datuk Seri",
+      "title": "Perdana Menteri keenam",
+      "period": "2009-2018",
+      "significance": "Perdana Menteri Malaysia"
+    },
+    {
+      "name": "Tan Sri Muhyiddin Yassin",
+      "honorific": "Tan Sri",
+      "title": "Perdana Menteri ketujuh",
+      "period": "2020-2021",
+      "significance": "Perdana Menteri Malaysia"
+    },
+    {
+      "name": "Datuk Seri Ismail Sabri Yaakob",
+      "honorific": "Datuk Seri",
+      "title": "Perdana Menteri kelapan",
+      "period": "2021-2022",
+      "significance": "Perdana Menteri Malaysia"
+    },
+    {
+      "name": "Datuk Seri Anwar Ibrahim",
+      "honorific": "Datuk Seri",
+      "title": "Perdana Menteri kesepuluh",
+      "period": "2022-sekarang",
+      "significance": "Perdana Menteri Malaysia dan Reformis"
+    },
+    {
+      "name": "Tun Dr Ismail Abdul Rahman",
+      "honorific": "Tun Dr",
+      "title": "Negarawan",
+      "period": "1960-1973",
+      "significance": "Timbalan Perdana Menteri"
+    },
+    {
+      "name": "Tun Ghafar Baba",
+      "honorific": "Tun",
+      "title": "Negarawan UMNO",
+      "period": "1970-1990an",
+      "significance": "Timbalan Perdana Menteri"
+    },
+    {
+      "name": "Tun Musa Hitam",
+      "honorific": "Tun",
+      "title": "Negarawan",
+      "period": "1981-1986",
+      "significance": "Timbalan Perdana Menteri"
+    },
+    {
+      "name": "Datuk Seri Dr Wan Azizah Wan Ismail",
+      "honorific": "Datuk Seri Dr",
+      "title": "Timbalan Perdana Menteri",
+      "period": "2018-2020",
+      "significance": "Timbalan Perdana Menteri pertama wanita"
+    },
+    {
+      "name": "Datuk Seri Ahmad Zahid Hamidi",
+      "honorific": "Datuk Seri",
+      "title": "Timbalan Perdana Menteri",
+      "period": "2015-2018, 2022-sekarang",
+      "significance": "Presiden UMNO dan Timbalan PM"
+    },
+    {
+      "name": "Tun Daim Zainuddin",
+      "honorific": "Tun",
+      "title": "Menteri Kewangan",
+      "period": "1984-1991, 1999-2001",
+      "significance": "Tokoh ekonomi Malaysia"
+    },
+    {
+      "name": "Tengku Razaleigh Hamzah",
+      "honorific": "Tengku",
+      "title": "Menteri Kewangan",
+      "period": "1976-1984",
+      "significance": "Tokoh veteran UMNO"
+    },
+    {
+      "name": "Tun Sambanthan",
+      "honorific": "Tun",
+      "title": "Pemimpin India Malaysia",
+      "period": "1950-1970an",
+      "significance": "Presiden MIC dan menteri"
+    },
+    {
+      "name": "Tun Tan Cheng Lock",
+      "honorific": "Tun",
+      "title": "Pemimpin Cina Malaysia",
+      "period": "1940-1960an",
+      "significance": "Pengasas MCA"
+    },
+    {
+      "name": "Tun Dr Ling Liong Sik",
+      "honorific": "Tun Dr",
+      "title": "Presiden MCA",
+      "period": "1986-2003",
+      "significance": "Menteri Pengangkutan"
+    },
+    {
+      "name": "Tun S Samy Vellu",
+      "honorific": "Tun",
+      "title": "Presiden MIC",
+      "period": "1979-2010",
+      "significance": "Menteri Kerja Raya"
+    },
+    {
+      "name": "Dato' Onn Jaafar",
+      "honorific": "Dato'",
+      "title": "Pengasas UMNO",
+      "period": "1946-1951",
+      "significance": "Pemimpin awal kemerdekaan"
+    },
+    {
+      "name": "Tan Sri Abdul Rahman Talib",
+      "honorific": "Tan Sri",
+      "title": "Menteri Pendidikan",
+      "period": "1960an",
+      "significance": "Tokoh pendidikan negara"
+    },
+    {
+      "name": "Tan Sri Rafidah Aziz",
+      "honorific": "Tan Sri",
+      "title": "Menteri Perdagangan",
+      "period": "1987-2008",
+      "significance": "Menteri wanita terlama"
+    },
+    {
+      "name": "Datuk Seri Hishammuddin Hussein",
+      "honorific": "Datuk Seri",
+      "title": "Menteri Pertahanan",
+      "period": "2009-2018, 2020-2021",
+      "significance": "Cucu Tunku Abdul Rahman"
+    },
+    {
+      "name": "Tan Sri Shahrir Abdul Samad",
+      "honorific": "Tan Sri",
+      "title": "Menteri Perdagangan",
+      "period": "2008-2009",
+      "significance": "Ahli parlimen veteran"
+    },
+    {
+      "name": "Tan Sri Rais Yatim",
+      "honorific": "Tan Sri",
+      "title": "Menteri Luar Negeri",
+      "period": "1989-1999",
+      "significance": "Tokoh veteran UMNO"
+    },
+    {
+      "name": "Datuk Seri Nazri Aziz",
+      "honorific": "Datuk Seri",
+      "title": "Menteri di JPM",
+      "period": "2004-2018",
+      "significance": "Menteri Parlimen veteran"
+    },
+    {
+      "name": "Khairy Jamaluddin",
+      "honorific": "",
+      "title": "Menteri Kesihatan",
+      "period": "2020-2022",
+      "significance": "Tokoh muda UMNO"
+    },
+    {
+      "name": "Yang Berhormat Lim Kit Siang",
+      "honorific": "Yang Berhormat",
+      "title": "Penasihat DAP",
+      "period": "1969-sekarang",
+      "significance": "Veteran politik Malaysia"
+    },
+    {
+      "name": "Lim Guan Eng",
+      "honorific": "",
+      "title": "Menteri Kewangan",
+      "period": "2018-2020",
+      "significance": "Bekas Ketua Menteri Pulau Pinang"
+    },
+    {
+      "name": "Karpal Singh",
+      "honorific": "",
+      "title": "Peguam dan Ahli Parlimen",
+      "period": "1978-2014",
+      "significance": "Tokoh perjuangan DAP"
+    },
+    {
+      "name": "Allahyarham Tok Guru Nik Aziz Nik Mat",
+      "honorific": "Allahyarham Tok Guru",
+      "title": "Mursyidul Am PAS",
+      "period": "1990-2015",
+      "significance": "Menteri Besar Kelantan dan Ulama"
+    },
+    {
+      "name": "Allahyarham Ustaz Fadzil Noor",
+      "honorific": "Allahyarham Ustaz",
+      "title": "Presiden PAS",
+      "period": "1989-2002",
+      "significance": "Pemimpin PAS"
+    },
+    {
+      "name": "Dato' Seri Tuan Guru Abdul Hadi Awang",
+      "honorific": "Dato' Seri Tuan Guru",
+      "title": "Presiden PAS",
+      "period": "2002-sekarang",
+      "significance": "Pemimpin PAS dan Menteri Besar Terengganu"
+    },
+    {
+      "name": "Mohamad Sabu",
+      "honorific": "Mat Sabu",
+      "title": "Presiden Amanah",
+      "period": "2015-sekarang",
+      "significance": "Menteri Pertahanan"
+    },
+    {
+      "name": "Datuk Seri Azmin Ali",
+      "honorific": "Datuk Seri",
+      "title": "Menteri Ekonomi",
+      "period": "2018-2020",
+      "significance": "Bekas Menteri Besar Selangor"
+    },
+    {
+      "name": "Tan Sri Khalid Ibrahim",
+      "honorific": "Tan Sri",
+      "title": "Menteri Besar Selangor",
+      "period": "2008-2014",
+      "significance": "Menteri Besar Selangor"
+    },
+    {
+      "name": "Nurul Izzah Anwar",
+      "honorific": "",
+      "title": "Ahli Parlimen",
+      "period": "2008-2022",
+      "significance": "Anak Anwar Ibrahim"
+    },
+    {
+      "name": "Tan Sri Lee Lam Thye",
+      "honorific": "Tan Sri",
+      "title": "Ahli Parlimen",
+      "period": "1974-1990",
+      "significance": "Pemimpin masyarakat"
+    },
+    {
+      "name": "Datuk Zaid Ibrahim",
+      "honorific": "Datuk",
+      "title": "Bekas Menteri",
+      "period": "2008",
+      "significance": "Peguam dan ahli politik"
+    },
+    {
+      "name": "Datuk Seri Tiong King Sing",
+      "honorific": "Datuk Seri",
+      "title": "Menteri Pelancongan",
+      "period": "2022-sekarang",
+      "significance": "Presiden PDP Sarawak"
+    },
+    {
+      "name": "Tun Pehin Sri Abdul Taib Mahmud",
+      "honorific": "Tun Pehin Sri",
+      "title": "Ketua Menteri Sarawak",
+      "period": "1981-2014",
+      "significance": "Ketua Menteri terlama Sarawak"
+    },
+    {
+      "name": "Allahyarham Datuk Patinggi Adenan Satem",
+      "honorific": "Allahyarham Datuk Patinggi",
+      "title": "Ketua Menteri Sarawak",
+      "period": "2014-2017",
+      "significance": "Pemimpin Sarawak"
+    },
+    {
+      "name": "Datuk Patinggi Abang Johari Openg",
+      "honorific": "Datuk Patinggi",
+      "title": "Ketua Menteri Sarawak",
+      "period": "2017-sekarang",
+      "significance": "Ketua Menteri Sarawak"
+    },
+    {
+      "name": "Datuk Stephen Kalong Ningkan",
+      "honorific": "Datuk",
+      "title": "Ketua Menteri Sarawak",
+      "period": "1963-1966",
+      "significance": "Ketua Menteri pertama Sarawak"
+    },
+    {
+      "name": "Tan Sri Harris Salleh",
+      "honorific": "Tan Sri",
+      "title": "Ketua Menteri Sabah",
+      "period": "1976-1985",
+      "significance": "Pemimpin Sabah"
+    },
+    {
+      "name": "Tan Sri Joseph Pairin Kitingan",
+      "honorific": "Tan Sri",
+      "title": "Ketua Menteri Sabah",
+      "period": "1985-1994",
+      "significance": "Pemimpin Kadazandusun"
+    },
+    {
+      "name": "Tan Sri Musa Aman",
+      "honorific": "Tan Sri",
+      "title": "Ketua Menteri Sabah",
+      "period": "2003-2018",
+      "significance": "Ketua Menteri Sabah"
+    },
+    {
+      "name": "Datuk Seri Hajiji Noor",
+      "honorific": "Datuk Seri",
+      "title": "Ketua Menteri Sabah",
+      "period": "2020-sekarang",
+      "significance": "Ketua Menteri Sabah"
+    },
+    {
+      "name": "Tan Sri James Masing",
+      "honorific": "Tan Sri",
+      "title": "Pemimpin Sarawak",
+      "period": "1983-2021",
+      "significance": "Timbalan Ketua Menteri Sarawak"
+    }
+  ],
+  "historical_figures": [
+    {
+      "name": "Tan Sri P Ramlee",
+      "honorific": "Tan Sri",
+      "title": "Ikon Seni Malaysia",
+      "period": "1948-1973",
+      "significance": "Pelakon, penyanyi, pengarah filem legenda"
+    },
+    {
+      "name": "Sudirman Arshad",
+      "honorific": "",
+      "title": "Penyanyi Legenda",
+      "period": "1976-1992",
+      "significance": "Penyanyi kebangsaan Malaysia"
+    },
+    {
+      "name": "Hang Tuah",
+      "honorific": "Hang",
+      "title": "Pahlawan Melayu",
+      "period": "Kesultanan Melaka",
+      "significance": "Laksamana legenda Melaka"
+    },
+    {
+      "name": "Hang Jebat",
+      "honorific": "Hang",
+      "title": "Pahlawan Melayu",
+      "period": "Kesultanan Melaka",
+      "significance": "Pahlawan legenda Melaka"
+    },
+    {
+      "name": "Tun Perak",
+      "honorific": "Tun",
+      "title": "Bendahara Melaka",
+      "period": "Kesultanan Melaka",
+      "significance": "Bendahara agung Melaka"
+    },
+    {
+      "name": "Parameswara",
+      "honorific": "",
+      "title": "Pengasas Melaka",
+      "period": "1400an",
+      "significance": "Pengasas Kesultanan Melaka"
+    },
+    {
+      "name": "Mat Kilau",
+      "honorific": "",
+      "title": "Pahlawan Pahang",
+      "period": "1891-1895",
+      "significance": "Pejuang menentang British"
+    },
+    {
+      "name": "Tok Janggut",
+      "honorific": "Tok",
+      "title": "Pahlawan Kelantan",
+      "period": "1915",
+      "significance": "Pejuang menentang British"
+    },
+    {
+      "name": "Rosli Dhobi",
+      "honorific": "",
+      "title": "Pahlawan Sarawak",
+      "period": "1949",
+      "significance": "Pejuang kemerdekaan Sarawak"
+    },
+    {
+      "name": "Rentap",
+      "honorific": "",
+      "title": "Pahlawan Iban",
+      "period": "1853-1863",
+      "significance": "Pemimpin Iban Sarawak"
+    },
+    {
+      "name": "Dato' Maharaja Lela",
+      "honorific": "Dato'",
+      "title": "Pahlawan Perak",
+      "period": "1875",
+      "significance": "Pejuang Perak"
+    },
+    {
+      "name": "Kapitan Cina Yap Ah Loy",
+      "honorific": "Kapitan Cina",
+      "title": "Pengasas Kuala Lumpur",
+      "period": "1868-1885",
+      "significance": "Tokoh pembangunan Kuala Lumpur"
+    },
+    {
+      "name": "Sybil Kathigasu",
+      "honorific": "",
+      "title": "Pejuang Kemerdekaan",
+      "period": "1941-1945",
+      "significance": "Heroin perang dunia kedua"
+    },
+    {
+      "name": "Tan Sri Robert Kuok",
+      "honorific": "Tan Sri",
+      "title": "Usahawan Terkaya",
+      "period": "1950-sekarang",
+      "significance": "Raja Gula dan jutawan Malaysia"
+    },
+    {
+      "name": "Datuk Seri Dr Sheikh Muszaphar Shukor",
+      "honorific": "Datuk Seri Dr",
+      "title": "Angkasawan",
+      "period": "2007",
+      "significance": "Angkasawan pertama Malaysia"
+    },
+    {
+      "name": "Datuk Nicol David",
+      "honorific": "Datuk",
+      "title": "Juara Skuasy Dunia",
+      "period": "2000-2019",
+      "significance": "Juara dunia skuasy 8 kali"
+    },
+    {
+      "name": "Datuk Lee Chong Wei",
+      "honorific": "Datuk",
+      "title": "Pemain Badminton",
+      "period": "1998-2019",
+      "significance": "Pemain badminton terhebat Malaysia"
+    },
+    {
+      "name": "Tun Salleh Abas",
+      "honorific": "Tun",
+      "title": "Ketua Hakim Negara",
+      "period": "1984-1988",
+      "significance": "Tokoh kehakiman"
+    },
+    {
+      "name": "Tun Mohamed Suffian Mohamed Hashim",
+      "honorific": "Tun",
+      "title": "Ketua Hakim Negara",
+      "period": "1974-1982",
+      "significance": "Tokoh kehakiman"
+    },
+    {
+      "name": "Tan Sri Siti Nurhaliza",
+      "honorific": "Tan Sri",
+      "title": "Penyanyi Kebangsaan",
+      "period": "1995-sekarang",
+      "significance": "Penyanyi paling berjaya Malaysia"
+    },
+    {
+      "name": "Dato' Michelle Yeoh",
+      "honorific": "Dato'",
+      "title": "Pelakon Antarabangsa",
+      "period": "1984-sekarang",
+      "significance": "Pelakon Hollywood pemenang Oscar"
+    },
+    {
+      "name": "Tan Sri Tony Fernandes",
+      "honorific": "Tan Sri",
+      "title": "Usahawan",
+      "period": "1993-sekarang",
+      "significance": "Pengasas AirAsia"
+    },
+    {
+      "name": "Tan Sri Lim Goh Tong",
+      "honorific": "Tan Sri",
+      "title": "Usahawan",
+      "period": "1960-2007",
+      "significance": "Pengasas Genting"
+    },
+    {
+      "name": "Tun Dr Siti Hasmah Mohamad Ali",
+      "honorific": "Tun Dr",
+      "title": "Aktivis Sosial",
+      "period": "1960-sekarang",
+      "significance": "Tokoh wanita dan pendidikan"
+    },
+    {
+      "name": "Yasmin Ahmad",
+      "honorific": "",
+      "title": "Pengarah Filem",
+      "period": "1997-2009",
+      "significance": "Pengarah filem terkenal Malaysia"
+    }
+  ]
+}

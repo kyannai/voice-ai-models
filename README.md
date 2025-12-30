@@ -678,3 +678,22 @@ If you use this project in your research, please cite:
 
 </div>
 
+
+
+
+
+for Stage 2:
+
+Generate Synthetic Data:
+- cd /Users/kyan/data/swprojects/ytl/voice-ai/asr/synthetic_data_generation
+- source .venv/bin/activate
+- python scripts/generate_sentences.py --name 5k_v3 --max-sentences 5000 --seed 1510
+- python scripts/synthesize_with_elevenlabs.py --name 5k_v3 --resume
+
+(After completed)
+- mv outputs/5k_v3 ../train/training_data/
+- rsync
+
+(in the server)
+- python prepare_synthetic_manifests.py   --input ../training_data/5k_v3/synthesized.json   --audio-base-dir ../training_data/5k_v3/  --output-dir ./data   --train-split 0.9   --seed 4
+- bash run_training.sh config_synthetic_names_numbers.yaml

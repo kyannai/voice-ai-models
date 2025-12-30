@@ -1,0 +1,20 @@
+# TTS Synthetic Data Generation Requirements
+
+# API clients
+elevenlabs>=1.0.0
+google-generativeai>=0.8.0
+
+# Audio processing
+pydub>=0.25.0
+mutagen>=1.47.0
+soundfile>=0.12.1
+librosa>=0.10.1
+
+# Data processing
+pyyaml>=6.0
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+
+# Utilities
+pandas>=2.0.0
+

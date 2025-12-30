@@ -1,0 +1,144 @@
+# Synthetic Training Data Generation Configuration
+# For Parakeet-TDT Fine-tuning on Malaysian Names & Numbers
+
+# ==============================================================================
+# DATA GENERATION SETTINGS
+# ==============================================================================
+generation:
+  # Target dataset size
+  target_hours: 1  # Starting with 10 hours (can scale up later)
+  
+  # Generation strategy: MIXED ONLY (most efficient - trains names AND numbers together)
+  use_mixed_templates: true  # Always use mixed templates for efficiency
+  
+  # Mixed templates configuration (PRIMARY APPROACH)
+  # This trains both names and numbers in the same sentences - much more efficient!
+  mixed:
+    samples_per_name: 16  # 16 mixed sentences per name (225 names × 16 = 3,600 samples)
+                          # 3,600 samples × 10 sec avg = ~10 hours of audio
+    min_sentence_length: 50  # Minimum characters (longer due to mixed content)
+    max_sentence_length: 250  # Maximum characters
+  
+  # Pure name templates (OPTIONAL - set to 0 to disable)
+  # Only enable if you need additional name-only variety
+  names:
+    samples_per_name: 0  # Disabled - mixed templates already train names
+    min_sentence_length: 40
+    max_sentence_length: 200
+  
+  # Pure number templates (OPTIONAL - set to 0 to disable)
+  # Only enable if you need additional number-only variety
+  numbers:
+    total_samples: 0  # Disabled - mixed templates already train numbers
+    min_sentence_length: 30
+    max_sentence_length: 180
+    
+    # Number type distribution (should sum to 1.0)
+    type_weights:
+      currency: 0.25      # Currency amounts in ringgit format (no RM prefix)
+      dates: 0.20         # Dates in various formats
+      phone_numbers: 0.15 # Malaysian phone numbers
+      id_numbers: 0.10    # IC, passport numbers
+      general: 0.30       # General numbers, percentages, decimals
+
+# ==============================================================================
+# ELEVENLABS TTS CONFIGURATION
+# ==============================================================================
+elevenlabs:
+  # API key (load from environment variable)
+  api_key: ${ELEVENLABS_API_KEY}
+  
+  # Model to use
+  model: "eleven_multilingual_v2"  # Best for Malay
+  
+  # Voice IDs - Add as many as you want for speaker diversity
+  # Script will randomly select one voice per sentence
+  # Find voice IDs at: https://elevenlabs.io/voice-library
+  voice_ids:
+    - "lvNyQwaZPcGFiNUWWiVa" 
+    - "15Y62ZlO8it2f5wduybx"
+    - "FRzaj7L4px15biN0RGSj"
+    - "SrWU271vZiNf2mrBhzL5"
+    - "jtEc6V0BMZoMqpAMRJbl"
+    - "GRrjXNxBiQvkZ37pgMw0"
+    - "qAJVXEQ6QgjOQ25KuoU8"
+    - "IWNl2N9h4kpb5pOZn2NT"
+    - "lMSqoJeA0cBBNA9FeHAs"
+    - "NHFTLozDZneDWyQjRGAO"
+    - "qKNMkrcmsdf29T6K7Dbu"
+    - "vzENlyfJ5X29uOlVQMWY"
+    - "NpVSXJvYSdIbjOaMbShj"
+    - "vRaj2Gd0mefB1EU96ua2"
+    - "UcqZLa941Kkt8ZhEEybf"
+    - "BeIxObt4dYBRJLYoe1hU"
+    - "6wUwImsP7fbYqriNJwp8"
+    - "Wc6X61hTD7yucJMheuLN"
+    - "INmScOFtmeMGA4p0XRr1"
+    - "C1gMsiiE7sXAt59fmvYg"
+    - "PPybRLZHRicSB057bHyI"
+
+  
+  # Voice settings
+  stability: 0.5            # 0-1, higher = more stable/consistent
+  similarity_boost: 0.75    # 0-1, higher = closer to original voice
+  style: 0.0                # 0-1, exaggeration of speaker style
+  use_speaker_boost: true   # Enhance voice clarity
+  
+  # API settings
+  max_retries: 3
+  retry_delay: 2  # seconds
+  timeout: 30     # seconds per request
+  
+  # Rate limiting (to avoid hitting API limits)
+  requests_per_minute: 30
+  batch_size: 10  # Process in batches
+
+# ==============================================================================
+# OUTPUT CONFIGURATION
+# ==============================================================================
+output:
+  # Base directory for outputs
+  base_dir: "./outputs"
+  
+  # Audio output settings
+  audio_dir: "./outputs/audio"
+  audio_format: "mp3"  # mp3 or wav (mp3 recommended for storage efficiency)
+  sample_rate: 22050   # ElevenLabs default
+  
+  # Manifest output
+  manifest_dir: "./outputs/manifests"
+  train_split: 0.9  # 90% train, 10% validation
+  
+  # Metadata
+  metadata_file: "./outputs/generation_metadata.json"
+  log_file: "./outputs/generation.log"
+
+# ==============================================================================
+# DATA SOURCES
+# ==============================================================================
+data_sources:
+  politicians_file: "./data_sources/malaysian_politicians.json"
+  historical_file: "./data_sources/malaysian_historical.json"
+  number_patterns_file: "./data_sources/number_patterns.json"
+  
+  # Sentence templates
+  mixed_templates_file: "./sentence_templates/mixed_templates_malay.json"
+  name_templates_file: "./sentence_templates/name_templates_malay.json"
+  number_templates_file: "./sentence_templates/number_templates_malay.json"
+
+# ==============================================================================
+# LANGUAGE SETTINGS
+# ==============================================================================
+language:
+  primary: "malay"  # Malay language only
+  use_honorifics: true  # Include Yang Berhormat, Tun, Tan Sri, etc.
+  
+# ==============================================================================
+# VALIDATION & QUALITY CONTROL
+# ==============================================================================
+quality:
+  validate_audio: true  # Check audio files after generation
+  min_audio_duration: 1.0  # seconds
+  max_audio_duration: 30.0  # seconds
+  check_text_audio_match: true  # Verify text matches audio
+

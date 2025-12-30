@@ -1,0 +1,79 @@
+# NVIDIA Parakeet TDT 0.6B v3 - Continued Training Configuration
+# Fine-tuning on Synthetic Names & Numbers Dataset
+# This config loads the existing checkpoint and continues training
+
+model:
+  # Load from .nemo model (weights only, fresh training state)
+  # Use the 500-sample trained model as starting point
+  name: "./models/full.nemo"
+  
+  # Memory optimization
+  gradient_checkpointing: true
+
+data:
+  # Synthetic dataset manifest files
+  # These will be generated from synthesized.json in the training_data directory
+  train_manifest: "./data/synthetic_train_manifest.json"
+  val_manifest: "./data/synthetic_val_manifest.json"
+  
+  # Dataset size (500 synthetic samples)
+  max_samples: -1  # Use all synthetic samples (~500)
+  max_val_samples: -1  # Use all validation samples
+  
+  # Audio processing
+  sampling_rate: 16000
+  max_audio_length: 30.0  # seconds
+  min_audio_length: 0.1   # seconds
+
+training:
+  # Output directory for continued training
+  output_dir: "./outputs/parakeet-tdt-5k-v3"
+  run_name: "parakeet-tdt-5k-v3"
+  
+  # Training epochs - Start fresh from epoch 0 on synthetic data
+  num_train_epochs: 1
+  max_steps: -1
+  
+  # Batch size (can be larger for small dataset)
+  per_device_train_batch_size: 20
+  per_device_eval_batch_size: 10
+  gradient_accumulation_steps: 6
+  
+  optimizer: "adamw_8bit"
+  learning_rate: 5.0e-5
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  # Learning rate scheduler
+  scheduler: "CosineAnnealing"
+  warmup_steps: 10              # ✅ ~25% of epoch
+  min_learning_rate: 1.0e-7
+  
+  # Precision
+  fp16: false
+  bf16: true  # A100/H100 optimized
+  
+  # Evaluate and save checkpoints every epoch (38 steps)
+  logging_steps: 5
+  eval_steps: 38                # Validate once per epoch
+  save_steps: 38                # Save once per epoch  
+  save_total_limit: 5
+  load_best_model_at_end: true
+
+  dataloader_num_workers: 8
+  dataloader_pin_memory: true
+  
+  # Training will start fresh from epoch 0 using the .nemo model weights
+  resume_from_checkpoint: false
+  # checkpoint_path: not needed when using .nemo model in model.name
+  
+  # Hardware
+  num_gpus: 1
+
+# Weights & Biases (optional)
+wandb:
+  enabled: false
+  project: "parakeet-tdt-synthetic-names-numbers"
+  entity: null
+  run_name: "parakeet-synthetic-continued"
+

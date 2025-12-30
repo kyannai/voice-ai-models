@@ -1,0 +1,226 @@
+{
+  "description": "Number patterns and formats for Malaysian context",
+  "number_types": {
+    "currency": {
+      "description": "Malaysian Ringgit amounts (no RM prefix)",
+      "patterns": [
+        "{amount}",
+        "{amount} ringgit",
+        "{amount} ringgit {cents} sen",
+        "ringgit {amount}",
+        "{whole_amount}",
+        "sebanyak {amount}",
+        "berjumlah {amount}",
+        "kos {amount}",
+        "harga {amount}"
+      ],
+      "amount_ranges": {
+        "small": [1, 999],
+        "medium": [1000, 99999],
+        "large": [100000, 9999999],
+        "very_large": [10000000, 999999999]
+      },
+      "spoken_forms": {
+        "10": "sepuluh",
+        "100": "seratus",
+        "1000": "seribu",
+        "10000": "sepuluh ribu",
+        "100000": "seratus ribu",
+        "1000000": "sejuta",
+        "10000000": "sepuluh juta",
+        "100000000": "seratus juta",
+        "1000000000": "satu bilion"
+      }
+    },
+    "dates": {
+      "description": "Malaysian date formats",
+      "patterns": [
+        "{day} {month_malay} {year}",
+        "tarikh {day}/{month}/{year}",
+        "{day}/{month}/{year}",
+        "pada {day} {month_malay} {year}",
+        "{day} haribulan {month_malay} {year}",
+        "{day}-{month}-{year}",
+        "hari {day_name} {day} {month_malay}",
+        "{month_malay} {year}"
+      ],
+      "months_malay": [
+        "Januari", "Februari", "Mac", "April", "Mei", "Jun",
+        "Julai", "Ogos", "September", "Oktober", "November", "Disember"
+      ],
+      "days_malay": [
+        "Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"
+      ],
+      "year_range": [2010, 2025]
+    },
+    "phone_numbers": {
+      "description": "Malaysian phone number formats",
+      "patterns": [
+        "nombor telefon {prefix}-{number1}-{number2}",
+        "{prefix}-{number1}-{number2}",
+        "nombor {prefix} {number1} {number2}",
+        "telefon {prefix}{number1}{number2}",
+        "hubungi {prefix}-{number1}-{number2}",
+        "talian {prefix}-{number1}-{number2}",
+        "boleh dihubungi di {prefix}-{number1}-{number2}"
+      ],
+      "prefixes": {
+        "mobile": ["010", "011", "012", "013", "014", "015", "016", "017", "018", "019"],
+        "landline_kl": ["03"],
+        "landline_penang": ["04"],
+        "landline_johor": ["07"],
+        "landline_sabah": ["088", "089"],
+        "landline_sarawak": ["082", "083", "084", "085"]
+      },
+      "number_length": {
+        "mobile_part1": 3,
+        "mobile_part2": 4,
+        "landline_part1": 3,
+        "landline_part2": 4
+      }
+    },
+    "id_numbers": {
+      "description": "Malaysian IC and passport numbers",
+      "patterns": [
+        "nombor kad pengenalan {ic_number}",
+        "IC nombor {ic_number}",
+        "MyKad {ic_number}",
+        "nombor {ic_number}",
+        "kad pengenalan {ic_number}",
+        "nombor pasport {passport}",
+        "pasport {passport}",
+        "nombor rujukan {ref_number}"
+      ],
+      "ic_format": "YYMMDD-PB-GGGG",
+      "passport_format": "A########",
+      "reference_format": "REF######"
+    },
+    "general_numbers": {
+      "description": "General numbers including decimals, percentages, ordinals",
+      "patterns": {
+        "whole_numbers": [
+          "nombor {number}",
+          "jumlah {number}",
+          "sebanyak {number}",
+          "berjumlah {number}",
+          "bilangan {number}",
+          "sejumlah {number}",
+          "kira-kira {number}",
+          "lebih kurang {number}"
+        ],
+        "decimals": [
+          "{whole} perpuluhan {decimal}",
+          "{whole} titik {decimal}",
+          "{number} peratus",
+          "kadar {number}"
+        ],
+        "percentages": [
+          "{number} peratus",
+          "{number}%",
+          "peratusan {number}",
+          "kadar {number} peratus",
+          "{number} peratus daripada"
+        ],
+        "ordinals": [
+          "yang pertama",
+          "yang kedua",
+          "yang ketiga",
+          "yang keempat",
+          "yang kelima",
+          "ke-{number}",
+          "ranking {number}",
+          "tempat ke-{number}"
+        ],
+        "ranges": [
+          "antara {number1} hingga {number2}",
+          "dari {number1} ke {number2}",
+          "{number1} sehingga {number2}",
+          "lebih daripada {number}",
+          "kurang daripada {number}",
+          "melebihi {number}"
+        ]
+      },
+      "number_ranges": {
+        "small": [1, 100],
+        "medium": [100, 10000],
+        "large": [10000, 1000000],
+        "very_large": [1000000, 100000000]
+      }
+    },
+    "time": {
+      "description": "Time expressions in Malay",
+      "patterns": [
+        "pukul {hour}",
+        "pukul {hour}:{minute}",
+        "pukul {hour} {period}",
+        "jam {hour}",
+        "pada pukul {hour}:{minute}",
+        "{hour} {period}",
+        "tepat pukul {hour}"
+      ],
+      "periods": ["pagi", "tengah hari", "petang", "malam"],
+      "hour_range": [1, 12],
+      "hour_24_range": [0, 23],
+      "minute_range": [0, 59]
+    },
+    "measurements": {
+      "description": "Measurements and units",
+      "patterns": [
+        "{number} meter",
+        "{number} kilometer",
+        "{number} kilogram",
+        "{number} gram",
+        "{number} liter",
+        "{number} sentimeter",
+        "seluas {number} meter persegi",
+        "seberat {number} kilogram",
+        "sepanjang {number} kilometer",
+        "tinggi {number} meter"
+      ],
+      "units": [
+        "meter", "kilometer", "sentimeter", "milimeter",
+        "kilogram", "gram", "tan",
+        "liter", "mililiter",
+        "hektar", "ekar",
+        "celcius", "darjah"
+      ]
+    }
+  },
+  "malay_number_words": {
+    "0": "kosong",
+    "1": "satu",
+    "2": "dua",
+    "3": "tiga",
+    "4": "empat",
+    "5": "lima",
+    "6": "enam",
+    "7": "tujuh",
+    "8": "lapan",
+    "9": "sembilan",
+    "10": "sepuluh",
+    "11": "sebelas",
+    "12": "dua belas",
+    "13": "tiga belas",
+    "14": "empat belas",
+    "15": "lima belas",
+    "16": "enam belas",
+    "17": "tujuh belas",
+    "18": "lapan belas",
+    "19": "sembilan belas",
+    "20": "dua puluh",
+    "30": "tiga puluh",
+    "40": "empat puluh",
+    "50": "lima puluh",
+    "60": "enam puluh",
+    "70": "tujuh puluh",
+    "80": "lapan puluh",
+    "90": "sembilan puluh",
+    "100": "seratus",
+    "1000": "seribu",
+    "10000": "sepuluh ribu",
+    "100000": "seratus ribu",
+    "1000000": "sejuta",
+    "1000000000": "satu bilion"
+  }
+}
+

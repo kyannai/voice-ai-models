@@ -1,0 +1,174 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tts-eval"
+version = "1.0.0"
+description = "Unified TTS evaluation toolkit for XTTS v2, Kokoro, MeloTTS, and GLM-TTS models"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "YTL AI Team"}
+]
+keywords = ["tts", "text-to-speech", "evaluation", "xtts", "kokoro", "melotts"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+
+dependencies = [
+    # Core ML Frameworks
+    # Note: torch, torchaudio should be installed separately with CUDA support
+    "transformers>=4.35.0,<4.50.0",
+    
+    # Audio Processing
+    "librosa>=0.10.1,<0.11.0",
+    "soundfile>=0.12.1,<0.13.0",
+    "scipy>=1.10.0,<1.15.0",
+    
+    # Data Processing
+    "numpy>=1.24.0,<2.0",
+    "pandas>=2.0.0,<2.3.0",
+    
+    # Evaluation Metrics
+    "jiwer>=3.0.0,<3.1.0",  # For ASR-back-WER
+    
+    # Utilities
+    "tqdm>=4.65.0,<5.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+]
+
+[project.optional-dependencies]
+# XTTS v2 (Coqui TTS)
+xtts = [
+    "TTS>=0.22.0",
+]
+
+# Kokoro TTS
+kokoro = [
+    "kokoro>=0.3.0",
+    "misaki[en,ja,ko,zh]>=0.1.0",  # G2P for different languages
+]
+
+# MeloTTS
+melotts = [
+    "MeloTTS>=0.1.0",
+]
+
+# GLM-TTS (uses transformers)
+glmtts = [
+    "accelerate>=0.25.0,<0.35.0",
+]
+
+# Neural MOS (UTMOS)
+mos = [
+    "speechmos>=1.2.0",
+]
+
+# ASR for back-transcription (Whisper)
+asr = [
+    "openai-whisper>=20231117",
+]
+
+# All TTS models
+all = [
+    "TTS>=0.22.0",
+    "kokoro>=0.3.0",
+    "misaki[en,ja,ko,zh]>=0.1.0",
+    "speechmos>=1.2.0",
+    "accelerate>=0.25.0,<0.35.0",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "ipython>=8.0.0",
+    "jupyter>=1.0.0",
+]
+
+[project.scripts]
+tts-evaluate = "evaluate:main"
+tts-batch-eval = "batch_evaluate:main"
+
+[project.urls]
+Homepage = "https://github.com/ytl/voice-ai"
+Documentation = "https://github.com/ytl/voice-ai/tree/main/tts/eval"
+Repository = "https://github.com/ytl/voice-ai"
+
+[tool.setuptools]
+packages = ["synthesize", "calculate_metrics"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml", "*.json"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["outputs/*", ".venv/*", "test_data/*", "__pycache__/*"]
+
+# ==========================================
+# Tool Configurations
+# ==========================================
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+  | outputs
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "C",
+    "B",
+]
+ignore = [
+    "E501",
+    "B008",
+    "C901",
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "outputs",
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+exclude = [
+    'outputs/',
+    '.venv/',
+    'build/',
+]
+

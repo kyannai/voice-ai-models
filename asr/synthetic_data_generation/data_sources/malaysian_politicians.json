@@ -1,0 +1,579 @@
+{
+  "description": "Current Malaysian politicians (as of 2024-2025)",
+  "total_count": 170,
+  "politicians": [
+    {
+      "name": "Anwar Ibrahim",
+      "honorific": "Yang Amat Berhormat Datuk Seri",
+      "position": "Perdana Menteri Malaysia",
+      "party": "PKR"
+    },
+    {
+      "name": "Ahmad Zahid Hamidi",
+      "honorific": "Datuk Seri",
+      "position": "Timbalan Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Fadillah Yusof",
+      "honorific": "Datuk Seri",
+      "position": "Timbalan Perdana Menteri",
+      "party": "PBB"
+    },
+    {
+      "name": "Tunku Abdul Rahman",
+      "honorific": "Tunku",
+      "position": "Perdana Menteri Pertama Malaysia",
+      "party": "UMNO"
+    },
+    {
+      "name": "Abdul Razak Hussein",
+      "honorific": "Tun",
+      "position": "Bekas Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Hussein Onn",
+      "honorific": "Tun",
+      "position": "Bekas Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Mahathir Mohamad",
+      "honorific": "Tun Doktor",
+      "position": "Bekas Perdana Menteri",
+      "party": "Pejuang"
+    },
+    {
+      "name": "Abdullah Ahmad Badawi",
+      "honorific": "Tun",
+      "position": "Bekas Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Najib Abdul Razak",
+      "honorific": "Datuk Seri",
+      "position": "Bekas Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Wan Azizah Wan Ismail",
+      "honorific": "Datuk Seri Doktor",
+      "position": "Bekas Timbalan Perdana Menteri",
+      "party": "PKR"
+    },
+    {
+      "name": "Musa Hitam",
+      "honorific": "Tun",
+      "position": "Bekas Timbalan Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Ghafar Baba",
+      "honorific": "Tun",
+      "position": "Bekas Timbalan Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Ismail Abdul Rahman",
+      "honorific": "Tun Doktor",
+      "position": "Bekas Timbalan Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Mohamad Hasan",
+      "honorific": "Datuk Seri",
+      "position": "Menteri Pertahanan",
+      "party": "UMNO"
+    },
+    {
+      "name": "Tengku Zafrul Aziz",
+      "honorific": "Tengku Dato' Sri",
+      "position": "Menteri Pelaburan, Perdagangan dan Industri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Lim Guan Eng",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "DAP"
+    },
+    {
+      "name": "Rafizi Ramli",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Ekonomi",
+      "party": "PKR"
+    },
+    {
+      "name": "Anthony Loke",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Pengangkutan",
+      "party": "DAP"
+    },
+    {
+      "name": "Gobind Singh Deo",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Digital",
+      "party": "DAP"
+    },
+    {
+      "name": "Hannah Yeoh",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Belia dan Sukan",
+      "party": "DAP"
+    },
+    {
+      "name": "Fahmi Fadzil",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Komunikasi",
+      "party": "PKR"
+    },
+    {
+      "name": "Azalina Othman Said",
+      "honorific": "Datuk Seri",
+      "position": "Menteri di Jabatan Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Johari Abdul Ghani",
+      "honorific": "Datuk Seri",
+      "position": "Menteri Pelaburan",
+      "party": "UMNO"
+    },
+    {
+      "name": "Saifuddin Nasution Ismail",
+      "honorific": "Datuk Seri",
+      "position": "Menteri Dalam Negeri",
+      "party": "PKR"
+    },
+    {
+      "name": "Nga Kor Ming",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Kerajaan Tempatan",
+      "party": "DAP"
+    },
+    {
+      "name": "Steven Sim",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Sumber Manusia",
+      "party": "DAP"
+    },
+    {
+      "name": "Nurul Izzah Anwar",
+      "honorific": "Yang Berhormat",
+      "position": "Penasihat Kanan Ekonomi dan Kewangan",
+      "party": "PKR"
+    },
+    {
+      "name": "Nik Nazmi Nik Ahmad",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Sumber Asli dan Alam Sekitar",
+      "party": "PKR"
+    },
+    {
+      "name": "Salahuddin Ayub",
+      "honorific": "Allahyarham Datuk Seri",
+      "position": "Menteri Dalam Negeri",
+      "party": "Amanah"
+    },
+    {
+      "name": "Khaled Nordin",
+      "honorific": "Datuk Seri",
+      "position": "Menteri Pertahanan",
+      "party": "UMNO"
+    },
+    {
+      "name": "Muhyiddin Yassin",
+      "honorific": "Tan Sri",
+      "position": "Bekas Perdana Menteri",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Ismail Sabri Yaakob",
+      "honorific": "Datuk Seri",
+      "position": "Bekas Perdana Menteri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Abdul Hadi Awang",
+      "honorific": "Dato' Seri Tuan Guru",
+      "position": "Presiden PAS",
+      "party": "PAS"
+    },
+    {
+      "name": "Hamzah Zainudin",
+      "honorific": "Datuk Seri",
+      "position": "Setiausaha Agung Bersatu",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Azmin Ali",
+      "honorific": "Datuk Seri",
+      "position": "Timbalan Presiden Bersatu",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Radzi Jidin",
+      "honorific": "Datuk Seri",
+      "position": "Ahli Parlimen",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Ronald Kiandee",
+      "honorific": "Datuk Seri",
+      "position": "Timbalan Speaker Dewan Rakyat",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Wan Saiful Wan Jan",
+      "honorific": "Datuk Seri",
+      "position": "Ahli Parlimen",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Shahidan Kassim",
+      "honorific": "Tan Sri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Annuar Musa",
+      "honorific": "Tan Sri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Hishammuddin Hussein",
+      "honorific": "Datuk Seri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Khairy Jamaluddin",
+      "honorific": "Yang Berhormat",
+      "position": "Bekas Menteri",
+      "party": "Bebas"
+    },
+    {
+      "name": "Takiyuddin Hassan",
+      "honorific": "Dato' Seri",
+      "position": "Setiausaha Agung PAS",
+      "party": "PAS"
+    },
+    {
+      "name": "Tuan Ibrahim Tuan Man",
+      "honorific": "Dato' Seri",
+      "position": "Timbalan Presiden PAS",
+      "party": "PAS"
+    },
+    {
+      "name": "Ahmad Fadhli Shaari",
+      "honorific": "Dato'",
+      "position": "Menteri Muda Perpaduan",
+      "party": "PAS"
+    },
+    {
+      "name": "Syed Saddiq Syed Abdul Rahman",
+      "honorific": "Yang Berhormat",
+      "position": "Presiden MUDA",
+      "party": "MUDA"
+    },
+    {
+      "name": "Amirudin Shari",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Selangor",
+      "party": "PKR"
+    },
+    {
+      "name": "Muhammad Sanusi Mohamad Nor",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Kedah",
+      "party": "PAS"
+    },
+    {
+      "name": "Ahmad Samsuri Mokhtar",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Terengganu",
+      "party": "PAS"
+    },
+    {
+      "name": "Mohamad Shafie Apdal",
+      "honorific": "Datuk Seri",
+      "position": "Presiden Warisan",
+      "party": "Warisan"
+    },
+    {
+      "name": "Hajiji Noor",
+      "honorific": "Datuk Seri",
+      "position": "Ketua Menteri Sabah",
+      "party": "GRS"
+    },
+    {
+      "name": "Abang Johari Openg",
+      "honorific": "Datuk Patinggi",
+      "position": "Premier Sarawak",
+      "party": "GPS"
+    },
+    {
+      "name": "Chow Kon Yeow",
+      "honorific": "Yang Amat Berhormat",
+      "position": "Ketua Menteri Pulau Pinang",
+      "party": "DAP"
+    },
+    {
+      "name": "Amiruddin Hamzah",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Selangor",
+      "party": "PKR"
+    },
+    {
+      "name": "Aminuddin Harun",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Negeri Sembilan",
+      "party": "PKR"
+    },
+    {
+      "name": "Ahmad Faizal Azumu",
+      "honorific": "Datuk Seri",
+      "position": "Bekas Menteri Besar Perak",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Saarani Mohamad",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Perak",
+      "party": "UMNO"
+    },
+    {
+      "name": "Adly Zahari",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Pahang",
+      "party": "UMNO"
+    },
+    {
+      "name": "Abdul Rauf Yusoh",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Johor",
+      "party": "UMNO"
+    },
+    {
+      "name": "Onn Hafiz Ghazi",
+      "honorific": "Dato'",
+      "position": "Menteri Besar Johor",
+      "party": "UMNO"
+    },
+    {
+      "name": "Hasni Mohammad",
+      "honorific": "Datuk",
+      "position": "Bekas Menteri Besar Johor",
+      "party": "UMNO"
+    },
+    {
+      "name": "Noor Azmi Ghazali",
+      "honorific": "Dato' Sri",
+      "position": "Speaker Dewan Rakyat",
+      "party": "UMNO"
+    },
+    {
+      "name": "Teresa Kok",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Perumahan",
+      "party": "DAP"
+    },
+    {
+      "name": "Charles Santiago",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "DAP"
+    },
+    {
+      "name": "Tony Pua",
+      "honorific": "Yang Berhormat",
+      "position": "Penasihat Ekonomi",
+      "party": "DAP"
+    },
+    {
+      "name": "Teo Nie Ching",
+      "honorific": "Yang Berhormat",
+      "position": "Timbalan Menteri",
+      "party": "DAP"
+    },
+    {
+      "name": "Liew Chin Tong",
+      "honorific": "Yang Berhormat",
+      "position": "Timbalan Menteri Pertahanan",
+      "party": "DAP"
+    },
+    {
+      "name": "Ong Kian Ming",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "DAP"
+    },
+
+
+    {
+      "name": "Ramkarpal Singh",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "DAP"
+    },
+    {
+      "name": "Sivarasa Rasiah",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "PKR"
+    },
+    {
+      "name": "Zuraida Kamaruddin",
+      "honorific": "Puan",
+      "position": "Ahli Parlimen",
+      "party": "Bebas"
+    },
+    {
+      "name": "Xavier Jayakumar",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "PKR"
+    },
+    {
+      "name": "Nik Omar Nik Abdul Aziz",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "PAS"
+    },
+    {
+      "name": "Khairuddin Aman Razali",
+      "honorific": "Dato' Seri",
+      "position": "Ahli Parlimen",
+      "party": "PAS"
+    },
+    {
+      "name": "Ahmad Marzuk Shaary",
+      "honorific": "Dato'",
+      "position": "Ahli Parlimen",
+      "party": "PAS"
+    },
+    {
+      "name": "Mohamad Amar Nik Abdullah",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Besar Kelantan",
+      "party": "PAS"
+    },
+    {
+      "name": "Idris Ahmad",
+      "honorific": "Dato' Seri",
+      "position": "Bekas Menteri Agama",
+      "party": "PAS"
+    },
+    {
+      "name": "Rina Harun",
+      "honorific": "Dato' Sri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Reezal Merican Naina Merican",
+      "honorific": "Datuk Seri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Noh Omar",
+      "honorific": "Dato' Seri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Bung Moktar Radin",
+      "honorific": "Dato' Seri",
+      "position": "Ahli Parlimen",
+      "party": "UMNO"
+    },
+    {
+      "name": "Tiong King Sing",
+      "honorific": "Dato' Sri",
+      "position": "Menteri Pelancongan",
+      "party": "PDP"
+    },
+    {
+      "name": "Zulkifli Noordin",
+      "honorific": "Dato'",
+      "position": "Bekas Ahli Parlimen",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Rashid Hasnon",
+      "honorific": "Dato'",
+      "position": "Ahli Parlimen",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Ahmad Maslan",
+      "honorific": "Dato' Seri",
+      "position": "Timbalan Speaker",
+      "party": "UMNO"
+    },
+    {
+      "name": "Zambry Abdul Kadir",
+      "honorific": "Dato' Seri",
+      "position": "Menteri Luar Negeri",
+      "party": "UMNO"
+    },
+    {
+      "name": "Nancy Shukri",
+      "honorific": "Dato' Sri",
+      "position": "Menteri Pelancongan",
+      "party": "PBB"
+    },
+    {
+      "name": "Fadhlina Sidek",
+      "honorific": "Yang Berhormat",
+      "position": "Menteri Pendidikan",
+      "party": "Amanah"
+    },
+    {
+      "name": "Dzulkefly Ahmad",
+      "honorific": "Doktor",
+      "position": "Menteri Kesihatan",
+      "party": "Amanah"
+    },
+    {
+      "name": "Mujahid Yusof Rawa",
+      "honorific": "Yang Berhormat",
+      "position": "Bekas Menteri Agama",
+      "party": "Amanah"
+    },
+    {
+      "name": "Aiman Athirah Sabu",
+      "honorific": "Yang Berhormat",
+      "position": "Ahli Parlimen",
+      "party": "Amanah"
+    },
+    {
+      "name": "Saifuddin Abdullah",
+      "honorific": "Datuk Seri",
+      "position": "Bekas Menteri Luar Negeri",
+      "party": "Bersatu"
+    },
+    {
+      "name": "Zafrul Tengku Abdul Aziz",
+      "honorific": "Tengku Dato' Sri",
+      "position": "Menteri Pelaburan",
+      "party": "UMNO"
+    },
+    {
+      "name": "Ong Tee Keat",
+      "honorific": "Dato' Seri",
+      "position": "Bekas Presiden MCA",
+      "party": "MCA"
+    },
+    {
+      "name": "Wee Ka Siong",
+      "honorific": "Dato' Sri",
+      "position": "Presiden MCA",
+      "party": "MCA"
+    }
+  ]
+}
+

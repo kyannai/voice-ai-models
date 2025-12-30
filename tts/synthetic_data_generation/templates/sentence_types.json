@@ -1,0 +1,158 @@
+{
+  "description": "Sentence types and examples for TTS training data",
+  
+  "types": {
+    "greeting": {
+      "description": "Greetings and welcomes",
+      "weight": 0.10,
+      "examples": {
+        "malay": [
+          "Selamat pagi, terima kasih kerana menghubungi perkhidmatan pelanggan kami.",
+          "Selamat sejahtera, saya Aisha dari bahagian khidmat pelanggan.",
+          "Assalamualaikum dan selamat petang, apa yang boleh saya bantu hari ini?"
+        ],
+        "english": [
+          "Good morning, thank you for calling our customer service.",
+          "Hello, this is Ahmad from the customer support team.",
+          "Good afternoon, how may I assist you today?"
+        ],
+        "code_switching": [
+          "Hello, selamat pagi, welcome to our customer service line.",
+          "Good morning, terima kasih for calling us today."
+        ]
+      }
+    },
+    
+    "confirmation": {
+      "description": "Acknowledgments and confirmations",
+      "weight": 0.15,
+      "examples": {
+        "malay": [
+          "Baik, saya faham permintaan encik.",
+          "Betul, saya sudah catat nombor akaun tersebut.",
+          "Saya sudah terima maklumat yang diperlukan."
+        ],
+        "english": [
+          "Alright, I understand your request.",
+          "Yes, I have noted down your account number.",
+          "I have received the required information."
+        ],
+        "code_switching": [
+          "Ok, I understand your concern. Let me check for you.",
+          "Baik, I got it. Give me a moment to verify.",
+          "Noted, saya akan process your request now."
+        ]
+      }
+    },
+    
+    "information": {
+      "description": "Providing information and details",
+      "weight": 0.25,
+      "examples": {
+        "malay": [
+          "Baki akaun semasa anda ialah lima ribu tiga ratus ringgit.",
+          "Transaksi terakhir anda adalah pada hari Isnin lepas.",
+          "Penyata akaun akan dihantar melalui emel dalam masa tiga hari bekerja."
+        ],
+        "english": [
+          "Your current account balance is five thousand three hundred ringgit.",
+          "Your last transaction was on Monday.",
+          "The statement will be sent via email within three working days."
+        ],
+        "code_switching": [
+          "Your balance sekarang is five thousand ringgit lebih.",
+          "Transaction status dia still pending, estimated dalam 24 hours.",
+          "Ok so your account statement akan keluar end of this month."
+        ]
+      }
+    },
+    
+    "question": {
+      "description": "Asking for information",
+      "weight": 0.15,
+      "examples": {
+        "malay": [
+          "Boleh saya tahu nombor akaun anda untuk pengesahan?",
+          "Nama penuh yang didaftar dalam akaun apa ya?",
+          "Adakah ini nombor telefon yang betul untuk dihubungi?"
+        ],
+        "english": [
+          "May I have your account number for verification?",
+          "What is the full name registered on the account?",
+          "Is this the correct phone number to contact you?"
+        ],
+        "code_switching": [
+          "Boleh you provide your account number for verification?",
+          "Can I get your IC number untuk confirm identity?",
+          "What transaction date yang you nak check?"
+        ]
+      }
+    },
+    
+    "instruction": {
+      "description": "Giving instructions",
+      "weight": 0.15,
+      "examples": {
+        "malay": [
+          "Sila masukkan kod TAC yang dihantar ke telefon anda.",
+          "Untuk aktivasi kad, sila hubungi nombor di belakang kad.",
+          "Anda perlu ke cawangan terdekat untuk menukar kata laluan."
+        ],
+        "english": [
+          "Please enter the TAC code sent to your phone.",
+          "To activate your card, please call the number on the back.",
+          "You will need to visit the nearest branch to change your password."
+        ],
+        "code_switching": [
+          "Ok, please click on the verification link dalam email you.",
+          "You kena key in the OTP yang we sent to your phone.",
+          "Just follow the steps dalam app, confirm transaction tu."
+        ]
+      }
+    },
+    
+    "apology": {
+      "description": "Apologizing for issues",
+      "weight": 0.10,
+      "examples": {
+        "malay": [
+          "Maaf atas kesulitan yang berlaku, kami akan selesaikan segera.",
+          "Minta maaf kerana perlu menunggu lama.",
+          "Saya mohon maaf, sistem kami sedang mengalami gangguan."
+        ],
+        "english": [
+          "I apologize for the inconvenience, we will resolve this promptly.",
+          "Sorry for the long wait.",
+          "I apologize, our system is currently experiencing issues."
+        ],
+        "code_switching": [
+          "Sorry ya, system kita tengah slow sikit now.",
+          "Maaf for the delay, let me check with my supervisor.",
+          "I apologize tau, this shouldn't have happened."
+        ]
+      }
+    },
+    
+    "closing": {
+      "description": "Ending the conversation",
+      "weight": 0.10,
+      "examples": {
+        "malay": [
+          "Terima kasih kerana menghubungi kami, selamat hari raya.",
+          "Ada apa-apa lagi yang boleh saya bantu?",
+          "Terima kasih, semoga hari anda ceria."
+        ],
+        "english": [
+          "Thank you for calling, have a great day.",
+          "Is there anything else I can help you with?",
+          "Thank you for your patience, goodbye."
+        ],
+        "code_switching": [
+          "Thank you for calling ya, have a good day!",
+          "Ok, anything else I can help you dengan?",
+          "Terima kasih, take care and goodbye!"
+        ]
+      }
+    }
+  }
+}
