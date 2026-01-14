@@ -1,2 +1,0 @@
-model,num_samples,wer,cer,mer,avg_rtf,total_audio_duration,total_processing_time
-mesolitica/Malaysian-whisper-large-v3-turbo-v3,765,0.3032,0.1427,0.2496,0.13867297649439447,3195.8927500000027,443.1839601993561

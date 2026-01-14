@@ -1,4 +1,0 @@
-model_key,model,description,wer,cer,mer,avg_rtf,num_samples
-whisper-large-v3-turbo,openai/whisper-large-v3-turbo,OpenAI Whisper Large V3 Turbo,0.1112,0.0306,0.1098,0.11337148620486799,765
-final_model.nemo,../train/train_parakeet_tdt/outputs.bak/parakeet-tdt-malay-asr/final_model.nemo,Fine-tuned Parakeet TDT 0.6B (Malay),0.1744,0.0426,0.1713,0.029954764125661535,765
-malaysian-whisper-large-v3-turbo-v3,mesolitica/Malaysian-whisper-large-v3-turbo-v3,Malaysian Whisper Large V3 Turbo,0.3032,0.1427,0.2496,0.13867297649439447,765

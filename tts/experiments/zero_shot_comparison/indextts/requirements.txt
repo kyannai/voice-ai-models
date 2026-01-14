@@ -1,0 +1,51 @@
+# IndexTTS2 Requirements
+# ======================
+#
+# Installation:
+#   python -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# Additional setup (requires uv package manager):
+#   git clone https://github.com/index-tts/index-tts.git
+#   cd index-tts
+#   git lfs pull
+#   pip install -U uv
+#   uv sync --all-extras
+#
+# Download model:
+#   uv tool install "huggingface-hub[cli,hf_xet]"
+#   hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
+#
+# See: https://github.com/index-tts/index-tts
+
+# Core dependencies
+numpy>=1.24.0
+torch>=2.0.0
+torchaudio>=2.0.0
+torchcodec>=0.1.0
+soundfile>=0.12.0
+librosa>=0.10.0
+numba>=0.57.0  # Required for Python 3.11+ compatibility
+tqdm>=4.65.0
+
+# IndexTTS2-specific dependencies
+omegaconf>=2.3.0
+huggingface-hub>=0.20.0
+safetensors>=0.4.0
+modelscope>=1.9.0
+json5>=0.10.0
+sentencepiece>=0.2.0
+einops>=0.8.0
+jieba>=0.42.0
+g2p-en>=2.1.0
+cn2an>=0.5.0
+munch>=4.0.0
+accelerate>=1.0.0
+wetext>=0.0.9  # For Windows/Mac
+WeTextProcessing  # For Linux (provides 'tn' module for text normalization)
+descript-audiotools>=0.7.0
+
+# IMPORTANT: IndexTTS2 requires transformers>=4.52
+# This is incompatible with XTTS which requires transformers<4.50
+transformers==4.52.1

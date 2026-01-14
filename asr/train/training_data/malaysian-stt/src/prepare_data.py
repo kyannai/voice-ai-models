@@ -1,0 +1,487 @@
+#!/usr/bin/env python3
+"""
+Data preparation script for Malaysian STT dataset.
+Converts parquet files with Whisper-style timestamps to NeMo manifest format.
+
+Optimized for fast processing of millions of samples using vectorized operations.
+
+Parquet format:
+- audio_filename: relative path to audio file (e.g., "prepared-pseudolabel-chunks/0-0.mp3")
+- segment_timestamp: Whisper format with text and timestamps
+  e.g., "<|startoftranscript|><|ms|><|transcribe|><|0.00|> text here<|1.42|><|endoftext|>"
+
+NeMo manifest format (JSONL):
+{"audio_filepath": "/abs/path/audio.mp3", "text": "transcription", "duration": 2.78}
+"""
+
+import os
+import re
+import json
+import argparse
+import logging
+from pathlib import Path
+from typing import Tuple, List, Optional
+from tqdm import tqdm
+
+import pandas as pd
+import pyarrow.parquet as pq
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
+def extract_text_vectorized(series: pd.Series) -> pd.Series:
+    """
+    Extract text from Whisper-style timestamps using vectorized operations.
+    Removes all <|...|> markers.
+    """
+    # Remove all <|...|> markers
+    text = series.str.replace(r'<\|[^|]*\|>', '', regex=True)
+    # Normalize whitespace
+    text = text.str.replace(r'\s+', ' ', regex=True).str.strip()
+    return text
+
+
+def extract_duration_vectorized(series: pd.Series) -> pd.Series:
+    """
+    Extract duration (last numeric timestamp) from Whisper-style timestamps.
+    Uses vectorized regex extraction.
+    """
+    # Extract all timestamps and get the last one
+    # Pattern matches numbers like 0.00, 1.42, 2.78
+    def get_last_timestamp(s):
+        if pd.isna(s) or not s:
+            return 0.0
+        times = re.findall(r'<\|(\d+\.\d+)\|>', s)
+        return float(times[-1]) if times else 0.0
+    
+    return series.apply(get_last_timestamp)
+
+
+def load_and_process_parquet(pq_file: Path, source_name: str) -> pd.DataFrame:
+    """
+    Load a parquet file and process it using vectorized operations.
+    
+    Returns DataFrame with columns: audio_filename, text, duration, source
+    """
+    logger.info(f"Loading {pq_file.name}...")
+    
+    # Read parquet
+    table = pq.read_table(pq_file)
+    df = table.to_pandas()
+    
+    logger.info(f"  Rows: {len(df):,}")
+    
+    # Filter out rows with missing data
+    df = df.dropna(subset=['audio_filename', 'segment_timestamp'])
+    df = df[df['audio_filename'].str.len() > 0]
+    df = df[df['segment_timestamp'].str.len() > 0]
+    
+    logger.info(f"  After filtering nulls: {len(df):,}")
+    
+    # Extract text and duration using vectorized operations
+    logger.info(f"  Extracting text...")
+    df['text'] = extract_text_vectorized(df['segment_timestamp'])
+    
+    logger.info(f"  Extracting durations...")
+    df['duration'] = extract_duration_vectorized(df['segment_timestamp'])
+    
+    # Filter empty texts
+    df = df[df['text'].str.len() > 0]
+    
+    # Add source
+    df['source'] = source_name
+    
+    # Select only needed columns
+    df = df[['audio_filename', 'text', 'duration', 'source']].copy()
+    
+    logger.info(f"  Final samples: {len(df):,}")
+    
+    return df
+
+
+def load_all_parquet_files(data_dir: Path, datasets: Optional[List[str]] = None) -> pd.DataFrame:
+    """
+    Load all parquet files from the data directory.
+    
+    Args:
+        data_dir: Directory containing parquet files
+        datasets: Optional list of dataset names to include (e.g., ['malaysian_context_v2', 'extra'])
+    
+    Returns concatenated DataFrame with all samples.
+    """
+    parquet_files = sorted(data_dir.glob("*.parquet"))
+    
+    if not parquet_files:
+        raise FileNotFoundError(f"No parquet files found in {data_dir}")
+    
+    logger.info(f"Found {len(parquet_files)} parquet files")
+    
+    # Filter by dataset names if specified
+    if datasets:
+        filtered_files = []
+        for pq_file in parquet_files:
+            source_name = pq_file.stem.split('-00000')[0]
+            if source_name in datasets:
+                filtered_files.append(pq_file)
+        
+        if not filtered_files:
+            raise ValueError(f"No parquet files match datasets: {datasets}")
+        
+        logger.info(f"Filtering to {len(filtered_files)} datasets: {datasets}")
+        parquet_files = filtered_files
+    
+    dfs = []
+    for pq_file in parquet_files:
+        source_name = pq_file.stem.split('-00000')[0]
+        df = load_and_process_parquet(pq_file, source_name)
+        dfs.append(df)
+    
+    # Concatenate all DataFrames
+    logger.info("Concatenating all datasets...")
+    combined_df = pd.concat(dfs, ignore_index=True)
+    logger.info(f"Total samples: {len(combined_df):,}")
+    
+    return combined_df
+
+
+def validate_audio_files(
+    df: pd.DataFrame,
+    audio_base_dir: Path,
+    max_check: int = 1000
+) -> Tuple[int, int]:
+    """
+    Validate that audio files exist (spot check).
+    """
+    check_df = df.sample(n=min(max_check, len(df)), random_state=42)
+    
+    found = 0
+    missing = 0
+    missing_examples = []
+    
+    for audio_filename in tqdm(check_df['audio_filename'], desc="Validating audio files"):
+        audio_path = audio_base_dir / audio_filename
+        if audio_path.exists():
+            found += 1
+        else:
+            missing += 1
+            if len(missing_examples) < 5:
+                missing_examples.append(str(audio_path))
+    
+    if missing_examples:
+        logger.warning(f"Missing audio file examples:")
+        for ex in missing_examples:
+            logger.warning(f"  {ex}")
+    
+    return found, missing
+
+
+def filter_existing_audio(
+    df: pd.DataFrame,
+    audio_base_dir: Path
+) -> pd.DataFrame:
+    """
+    Filter DataFrame to only include samples where audio file exists.
+    This checks EVERY file (slower but ensures no missing files).
+    """
+    logger.info(f"Checking {len(df):,} audio files exist (this may take a while)...")
+    
+    # Vectorized check using apply
+    def file_exists(audio_filename):
+        return (audio_base_dir / audio_filename).exists()
+    
+    # Use tqdm for progress
+    tqdm.pandas(desc="Checking audio files")
+    exists_mask = df['audio_filename'].progress_apply(file_exists)
+    
+    original_count = len(df)
+    df_filtered = df[exists_mask].copy()
+    missing_count = original_count - len(df_filtered)
+    
+    logger.info(f"  Found: {len(df_filtered):,}, Missing: {missing_count:,}")
+    if missing_count > 0:
+        logger.warning(f"  Removed {missing_count:,} samples with missing audio files")
+    
+    return df_filtered
+
+
+def split_train_val(
+    df: pd.DataFrame,
+    train_ratio: float = 0.95,
+    seed: int = 42
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Split DataFrame into train and validation sets, stratified by source.
+    """
+    train_dfs = []
+    val_dfs = []
+    
+    for source in df['source'].unique():
+        source_df = df[df['source'] == source].sample(frac=1, random_state=seed)
+        split_idx = int(len(source_df) * train_ratio)
+        
+        train_dfs.append(source_df.iloc[:split_idx])
+        val_dfs.append(source_df.iloc[split_idx:])
+        
+        logger.info(f"  {source}: {split_idx:,} train, {len(source_df) - split_idx:,} val")
+    
+    train_df = pd.concat(train_dfs, ignore_index=True).sample(frac=1, random_state=seed)
+    val_df = pd.concat(val_dfs, ignore_index=True).sample(frac=1, random_state=seed)
+    
+    return train_df, val_df
+
+
+def save_manifest(
+    df: pd.DataFrame,
+    output_path: Path,
+    audio_base_dir: Path
+):
+    """
+    Save DataFrame to NeMo manifest format (JSONL).
+    Uses batch writing for efficiency.
+    """
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Create absolute paths
+    audio_base_str = str(audio_base_dir.absolute())
+    
+    logger.info(f"Writing {len(df):,} samples to {output_path.name}...")
+    
+    with open(output_path, 'w', encoding='utf-8') as f:
+        for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Writing {output_path.name}"):
+            audio_filepath = os.path.join(audio_base_str, row['audio_filename'])
+            manifest_entry = {
+                'audio_filepath': audio_filepath,
+                'text': row['text'],
+                'duration': row['duration']
+            }
+            f.write(json.dumps(manifest_entry, ensure_ascii=False) + '\n')
+    
+    logger.info(f"Saved {len(df):,} samples to {output_path}")
+
+
+def save_manifest_fast(
+    df: pd.DataFrame,
+    output_path: Path,
+    audio_base_dir: Path
+):
+    """
+    Save DataFrame to NeMo manifest format (JSONL) using fast batch operations.
+    """
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Create absolute paths column
+    audio_base_str = str(audio_base_dir.absolute())
+    df = df.copy()
+    df['audio_filepath'] = audio_base_str + '/' + df['audio_filename']
+    
+    logger.info(f"Writing {len(df):,} samples to {output_path.name}...")
+    
+    # Select columns for manifest
+    manifest_df = df[['audio_filepath', 'text', 'duration']]
+    
+    # Write as JSONL using pandas (much faster than row-by-row)
+    manifest_df.to_json(output_path, orient='records', lines=True, force_ascii=False)
+    
+    logger.info(f"Saved {len(df):,} samples to {output_path}")
+
+
+def print_statistics(df: pd.DataFrame, name: str):
+    """Print dataset statistics."""
+    total_duration = df['duration'].sum()
+    avg_duration = df['duration'].mean()
+    avg_text_len = df['text'].str.len().mean()
+    
+    # Count by source
+    by_source = df['source'].value_counts()
+    
+    logger.info(f"\n{'='*60}")
+    logger.info(f"{name} Statistics")
+    logger.info(f"{'='*60}")
+    logger.info(f"  Total samples: {len(df):,}")
+    logger.info(f"  Total duration: {total_duration / 3600:.1f} hours")
+    logger.info(f"  Avg duration: {avg_duration:.2f}s")
+    logger.info(f"  Avg text length: {avg_text_len:.1f} chars")
+    logger.info(f"\n  By source:")
+    for source, count in by_source.items():
+        logger.info(f"    {source}: {count:,}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Prepare Malaysian STT data for NeMo training (optimized)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Basic usage (from src/ directory)
+  python prepare_data.py --data-dir ../data --audio-base-dir .. --output-dir ./output
+  
+  # Test with small subset
+  python prepare_data.py --data-dir ../data --audio-base-dir .. --output-dir ./test_output \\
+    --max-samples 10000 --validate-audio
+  
+  # Full run with custom split
+  python prepare_data.py --data-dir ../data --audio-base-dir .. --output-dir ./output \\
+    --train-split 0.9
+        """
+    )
+    parser.add_argument(
+        "--data-dir",
+        type=str,
+        required=True,
+        help="Directory containing parquet files"
+    )
+    parser.add_argument(
+        "--audio-base-dir",
+        type=str,
+        required=True,
+        help="Base directory for audio files (audio_filename paths are relative to this)"
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        required=True,
+        help="Output directory for manifest files"
+    )
+    parser.add_argument(
+        "--train-split",
+        type=float,
+        default=0.95,
+        help="Ratio of samples for training (default: 0.95)"
+    )
+    parser.add_argument(
+        "--validate-audio",
+        action="store_true",
+        help="Validate that audio files exist (spot check 1000 files)"
+    )
+    parser.add_argument(
+        "--max-samples",
+        type=int,
+        default=None,
+        help="Maximum number of samples to process (for testing)"
+    )
+    parser.add_argument(
+        "--min-duration",
+        type=float,
+        default=0.1,
+        help="Minimum audio duration in seconds (default: 0.1)"
+    )
+    parser.add_argument(
+        "--max-duration",
+        type=float,
+        default=30.0,
+        help="Maximum audio duration in seconds (default: 30.0)"
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help="Random seed for train/val split (default: 42)"
+    )
+    parser.add_argument(
+        "--datasets",
+        type=str,
+        nargs='+',
+        default=None,
+        help="Only include specific datasets (by parquet name prefix). "
+             "E.g., --datasets malaysian_context_v2 extra"
+    )
+    parser.add_argument(
+        "--filter-existing",
+        action="store_true",
+        help="Only include samples where audio file exists (checks ALL files, slower but safe)"
+    )
+    
+    args = parser.parse_args()
+    
+    # Setup paths
+    data_dir = Path(args.data_dir).resolve()
+    audio_base_dir = Path(args.audio_base_dir).resolve()
+    output_dir = Path(args.output_dir).resolve()
+    
+    logger.info("="*60)
+    logger.info("Malaysian STT Data Preparation (Optimized)")
+    logger.info("="*60)
+    logger.info(f"Data directory: {data_dir}")
+    logger.info(f"Audio base directory: {audio_base_dir}")
+    logger.info(f"Output directory: {output_dir}")
+    logger.info(f"Train split: {args.train_split}")
+    logger.info(f"Duration range: {args.min_duration}s - {args.max_duration}s")
+    if args.max_samples:
+        logger.info(f"Max samples: {args.max_samples:,}")
+    if args.datasets:
+        logger.info(f"Datasets filter: {args.datasets}")
+    logger.info("="*60)
+    
+    # Load and process all parquet files
+    logger.info("\n📦 Loading and processing parquet files...")
+    df = load_all_parquet_files(data_dir, datasets=args.datasets)
+    
+    # Limit samples if requested
+    if args.max_samples and args.max_samples < len(df):
+        df = df.sample(n=args.max_samples, random_state=args.seed)
+        logger.info(f"Limited to {len(df):,} samples")
+    
+    # Filter by duration
+    original_count = len(df)
+    df = df[(df['duration'] >= args.min_duration) & (df['duration'] <= args.max_duration)]
+    filtered_count = original_count - len(df)
+    if filtered_count > 0:
+        logger.info(f"Filtered {filtered_count:,} samples by duration")
+    
+    # Validate audio files (spot check)
+    # Filter to only existing audio files (checks ALL files)
+    if args.filter_existing:
+        logger.info("\n🔍 Filtering to only existing audio files...")
+        df = filter_existing_audio(df, audio_base_dir)
+    # Validate audio files (spot check only)
+    elif args.validate_audio:
+        logger.info("\n🔍 Validating audio files (spot check)...")
+        found, missing = validate_audio_files(df, audio_base_dir)
+        logger.info(f"  Found: {found}, Missing: {missing}")
+        if missing > 0:
+            logger.warning(f"  {missing / (found + missing) * 100:.1f}% of checked files are missing")
+    
+    # Split train/val
+    logger.info(f"\n✂️  Splitting train/val ({args.train_split:.0%}/{1-args.train_split:.0%})...")
+    train_df, val_df = split_train_val(df, args.train_split, args.seed)
+    
+    # Print statistics
+    print_statistics(train_df, "Training Set")
+    print_statistics(val_df, "Validation Set")
+    
+    # Save manifests (using fast method)
+    logger.info("\n💾 Saving manifests...")
+    train_manifest_path = output_dir / "train_manifest.json"
+    val_manifest_path = output_dir / "val_manifest.json"
+    
+    save_manifest_fast(train_df, train_manifest_path, audio_base_dir)
+    save_manifest_fast(val_df, val_manifest_path, audio_base_dir)
+    
+    # Success summary
+    logger.info("\n" + "="*60)
+    logger.info("✅ Data preparation completed!")
+    logger.info("="*60)
+    logger.info(f"Train manifest: {train_manifest_path}")
+    logger.info(f"  Samples: {len(train_df):,}")
+    logger.info(f"Val manifest: {val_manifest_path}")
+    logger.info(f"  Samples: {len(val_df):,}")
+    logger.info("="*60)
+    
+    # Example manifest entry
+    if len(train_df) > 0:
+        logger.info("\n📄 Example manifest entry:")
+        row = train_df.iloc[0]
+        example = {
+            'audio_filepath': str(audio_base_dir / row['audio_filename']),
+            'text': row['text'],
+            'duration': row['duration']
+        }
+        logger.info(json.dumps(example, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()

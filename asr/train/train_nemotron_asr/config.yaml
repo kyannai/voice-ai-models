@@ -1,0 +1,95 @@
+# NVIDIA Nemotron Speech Streaming 0.6B Fine-tuning Configuration
+# Optimized for ASR fine-tuning on custom datasets
+# Model: https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b
+
+model:
+  # Pre-trained model from HuggingFace/NVIDIA
+  name: "nvidia/nemotron-speech-streaming-en-0.6b"
+  # Alternative: Use a local .nemo file
+  # name: "./path/to/model.nemo"
+
+  # Memory optimization: Enable gradient checkpointing (30-50% memory savings)
+  gradient_checkpointing: true
+
+data:
+  # NeMo manifest files (JSONL format)
+  # Each line: {"audio_filepath": "/path/to/audio.wav", "text": "transcription", "duration": 2.5}
+  train_manifest: "./data/train_manifest.json"
+  val_manifest: "./data/val_manifest.json"
+  
+  # Dataset size
+  max_samples: -1  # Use full dataset (-1 or null for all samples)
+  # max_samples: 500000  # Limit training samples
+  
+  # Validation set limit (speeds up eval checkpoints)
+  max_val_samples: 1000  # Limit validation to 1k samples (faster eval)
+  
+  # Audio processing
+  sampling_rate: 16000
+  max_audio_length: 30.0  # seconds
+  min_audio_length: 0.1   # seconds
+
+training:
+  # Output directory
+  output_dir: "./outputs/nemotron-streaming-malay-asr"
+  run_name: "nemotron-streaming-finetuning"
+  
+  # Training epochs and steps
+  num_train_epochs: 1
+  max_steps: -1  # Set to positive number to limit total steps
+  
+  # Batch size and accumulation
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 16  # Effective batch size = 8 * 16 = 128
+  
+  # Optimizer settings
+  optimizer: "adamw_8bit"  # 8-bit optimizer: 75% memory reduction
+  # optimizer: "adamw"     # Standard optimizer (if bitsandbytes unavailable)
+  learning_rate: 2.0e-4
+  weight_decay: 0.0001
+  max_grad_norm: 1.0
+  
+  # Learning rate scheduler
+  scheduler: "CosineAnnealing"
+  warmup_steps: 100
+  min_learning_rate: 1.0e-6
+  
+  # Precision and optimization
+  fp16: false  # Disabled in favor of bf16
+  bf16: true   # A100/H100 optimized
+  
+  # Logging and evaluation
+  logging_steps: 100
+  eval_steps: 5000       # Validate every 5k steps
+  save_steps: 5000       # Save every 5k steps
+  save_total_limit: 3    # Keep last 3 checkpoints
+  load_best_model_at_end: true
+  
+  # DataLoader settings
+  dataloader_num_workers: 8
+  dataloader_pin_memory: true
+  
+  # Resume from checkpoint
+  resume_from_checkpoint: true
+  # checkpoint_path: "./outputs/nemotron-streaming-malay-asr/nemotron-streaming-finetuning/.../checkpoints/last.ckpt"
+  
+  # Hardware
+  num_gpus: 1  # Multi-GPU supported
+
+# Weights & Biases (optional)
+wandb:
+  enabled: false
+  project: "nemotron-streaming-malay-asr"
+  entity: null  # Your W&B username/team
+  run_name: "nemotron-streaming-finetuning"
+
+# Notes:
+# 1. Nemotron Speech Streaming is optimized for low-latency streaming ASR
+# 2. Uses cache-aware FastConformer encoder with RNNT decoder
+# 3. Native support for punctuation and capitalization
+# 4. Configurable chunk sizes at inference: 80ms, 160ms, 560ms, 1120ms
+# 5. Training is standard NeMo ASR training (streaming is inference-only)
+# 6. 8-bit optimizer requires: pip install bitsandbytes
+# 7. bf16 recommended for A100/H100 GPUs
+# 8. Model automatically adds punctuation and capitalization

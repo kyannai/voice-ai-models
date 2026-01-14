@@ -1,2 +1,0 @@
-# TTS Metrics Calculator
-

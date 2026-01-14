@@ -1,0 +1,8 @@
+# Piper TTS Dependencies
+# ======================
+# Fast and local neural text-to-speech engine
+# https://github.com/OHF-Voice/piper1-gpl
+#
+# Note: This model uses pre-trained voices, not zero-shot voice cloning
+
+piper-tts>=1.2.0

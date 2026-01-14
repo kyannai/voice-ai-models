@@ -1,0 +1,122 @@
+# MagpieTTS Fine-tuning Config for Malaysian TTS
+# ================================================
+# Fine-tunes nvidia/magpie_tts_multilingual_357m on Malaysian-TTS dataset
+
+# Pretrained model to fine-tune
+pretrained_model: nvidia/magpie_tts_multilingual_357m
+
+# Model configuration
+model:
+  # Data paths (relative to project root)
+  # Using 2 speakers only: kp_ms and shafiqah_idayu (~443 hours)
+  train_manifest: data/manifests/train_manifest_2speakers.json
+  val_manifest: data/manifests/val_manifest_2speakers.json
+  
+  # Training hyperparameters for NEW LANGUAGE
+  # -----------------------------------------
+  # Since we're adding Malay as a NEW language (not fine-tuning existing),
+  # we use a moderate-to-high learning rate to:
+  # 1. Train new language embeddings from scratch
+  # 2. Learn Malay phonetics and prosody patterns
+  # 3. Adapt the model to code-switching (Malay-English)
+  
+  batch_size: 8              # Reduce to 4 if OOM
+  learning_rate: 2e-4        # Higher LR for new language (vs 1e-5 for fine-tuning)
+  
+  # Audio settings (must match prepare_data.py)
+  sample_rate: 22050
+  
+  # New language configuration
+  # Adding Malay (ms) as a new language to the model
+  languages:
+    - en
+    - es
+    - de
+    - fr
+    - vi
+    - it
+    - zh
+    - ms  # New: Malay
+  
+  # Text representation for Malay
+  # -----------------------------------------
+  # We use IPA phonemes from espeak-ng for better pronunciation:
+  #   - Consistent phoneme representation
+  #   - Handles code-switching (Malay-English)
+  #   - Better pronunciation for loanwords
+  #
+  # The data preparation script (prepare_data.py --use-phonemes) converts
+  # text to phonemes using the MalayPhonemizer before training.
+  #
+  # For inference, use synthesize.py with --use-phonemes flag.
+  use_phonemes: true
+  
+  # Layer freezing strategy for new language
+  # Option 1: Freeze encoder, train decoder (faster, less flexible)
+  # Option 2: Train all layers (slower, better quality) - RECOMMENDED
+  freeze_encoder: false
+
+# Trainer configuration (PyTorch Lightning)
+trainer:
+  max_epochs: 10  # Reduced for faster experimentation
+  
+  # GPU settings
+  # precision: '16-mixed' enables automatic mixed precision for faster training
+  precision: '16-mixed'
+  
+  # Gradient settings
+  accumulate_grad_batches: 4    # Effective batch size = batch_size * accumulate
+  gradient_clip_val: 1.0
+  
+  # Logging
+  log_every_n_steps: 50
+  val_check_interval: 0.5       # Validate twice per epoch
+  
+  # Strategy for multi-GPU
+  # Options: 'auto', 'ddp', 'ddp_spawn', 'deepspeed'
+  strategy: auto
+
+# Experiment manager (NeMo)
+exp_manager:
+  exp_dir: experiments/magpietts_malay
+  name: magpietts_malay_finetune
+  
+  # Checkpointing
+  create_checkpoint_callback: true
+  checkpoint_callback_params:
+    monitor: val_loss
+    mode: min
+    save_top_k: 3
+    save_last: true
+    filename: 'magpietts_malay-{epoch:02d}-{val_loss:.4f}'
+  
+  # Resume training
+  resume_if_exists: true
+  resume_ignore_no_checkpoint: true
+  
+  # Logging
+  create_tensorboard_logger: true
+  create_wandb_logger: false    # Set to true if using W&B
+
+# Optimizer configuration
+optim:
+  name: adamw
+  lr: 2e-4                   # Match model.learning_rate
+  betas: [0.9, 0.98]
+  weight_decay: 0.01
+  
+  # Learning rate scheduler
+  # For new language training, use longer warmup to stabilize
+  sched:
+    name: CosineAnnealing
+    warmup_steps: 2000       # Longer warmup for new language
+    min_lr: 1e-6
+
+# Training tips for new language:
+# ================================
+# 1. Start with learning_rate: 2e-4 (our default)
+# 2. If loss is unstable, reduce to 1e-4
+# 3. If loss plateaus early, increase to 5e-4
+# 4. Monitor val_loss - should decrease steadily
+# 5. Training ~10k samples: expect 20-50 epochs
+# 6. Training full dataset: expect 10-20 epochs

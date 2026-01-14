@@ -1,2 +1,0 @@
-model,num_samples,wer,cer,mer,avg_rtf,total_audio_duration,total_processing_time
-openai/whisper-large-v3-turbo,765,0.1066,0.0293,0.1052,0.10852058172533656,3195.8927500000027,346.8201403617859

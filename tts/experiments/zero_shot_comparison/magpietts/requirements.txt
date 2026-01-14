@@ -1,0 +1,12 @@
+# MagpieTTS (NVIDIA NeMo) Dependencies
+# =====================================
+# Model: nvidia/magpie_tts_multilingual_357m
+# Note: This model uses fixed speakers, not zero-shot voice cloning
+
+# NeMo TTS toolkit
+nemo_toolkit[tts] @ git+https://github.com/NVIDIA/NeMo.git@main
+
+# Additional dependencies
+kaldialign
+soundfile
+scipy

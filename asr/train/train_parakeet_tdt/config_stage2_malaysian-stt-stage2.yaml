@@ -1,0 +1,96 @@
+# NVIDIA Parakeet TDT 0.6B v3 Fine-tuning Configuration
+# Optimized for ASR fine-tuning on custom datasets
+
+model:
+  # Finetuned stage 1 model
+  name: "./models/full.nemo"
+  gradient_checkpointing: true
+
+data:
+  train_manifest: "/home/kyan/voice-ai/asr/train/training_data/malaysian-stt-stage2/output/train_manifest.json"
+  val_manifest: "/home/kyan/voice-ai/asr/train/training_data/malaysian-stt-stage2/output/val_manifest.json"
+  
+  # Dataset size
+  max_samples: -1  # Use full dataset (~3.1M samples)
+  # max_samples: 500000  # Limit training samples (set to null or -1 for full dataset)
+  # max_samples: 1000000  # Use 1M samples for extended training (requires more memory)
+  
+  # Validation set limit (speeds up eval checkpoints)
+  max_val_samples: 1000  # Limit validation to 1k samples (faster eval)
+  
+  # Audio processing
+  sampling_rate: 16000
+  max_audio_length: 30.0  # seconds
+  min_audio_length: 0.1   # seconds
+
+training:
+  # Output directory
+  output_dir: "./outputs/parakeet-tdt-malay-asr-stage2"
+  run_name: "parakeet-tdt-malay-stage2"
+  
+  # Training epochs and steps
+  num_train_epochs: 1.0 
+  max_steps: -1  # Set to positive number to limit total steps
+  
+  # Batch size and accumulation (adjusted for memory constraints)
+  # Full 5M dataset needs aggressive memory optimization
+  per_device_train_batch_size: 8    # Reduced for full dataset OOM prevention
+  per_device_eval_batch_size: 4     # Reduced to avoid OOM during evaluation
+  gradient_accumulation_steps: 16   # Increased to maintain effective batch size of 128
+  
+  # Optimizer settings
+  optimizer: "adamw_8bit"  # 8-bit optimizer: 75% memory reduction, ~5% slower
+  # optimizer: "adamw8bit" # Alternative naming (also works)
+  # optimizer: "adamw"     # Standard optimizer (if bitsandbytes unavailable)
+  learning_rate: 2.0e-4  # Same as stage 1 (same domain, more data) 
+  weight_decay: 0.0001
+  max_grad_norm: 1.0
+  
+  # Learning rate scheduler
+  scheduler: "CosineAnnealing"
+  warmup_steps: 500  # ~2% of epoch for stable warmup
+  min_learning_rate: 1.0e-6
+  
+  # Precision and optimization
+  fp16: false  # Disabled in favor of bf16
+  bf16: true   # A100/H100 optimized
+  
+  # Logging and evaluation (optimized for full dataset training)
+  logging_steps: 100     # Log frequently for monitoring
+  eval_steps: 24000      # Validate ~1x per epoch (24k steps/epoch)
+  save_steps: 24000      # Save ~1x per epoch
+  save_total_limit: 2    # Keep last 3 checkpoints
+  load_best_model_at_end: true  # Load best model at end
+  
+  # DataLoader settings (increased for better throughput)
+  dataloader_num_workers: 8  # Increased for faster data loading
+  dataloader_pin_memory: true
+  
+  # Resume from checkpoint
+  resume_from_checkpoint: true
+  # checkpoint_path: "./outputs/parakeet-tdt-malay-asr/parakeet-tdt-malay-finetuning/2025-11-08_17-42-54/checkpoints/parakeet-tdt--epoch=00-step=23062-val_wer=0.2095-last.ckpt"
+  
+  # Hardware
+  num_gpus: 1  # Multi-GPU not fully tested yet
+
+# Weights & Biases (optional)
+wandb:
+  enabled: false
+  project: "ilmu-bukit-tinggi-v2"
+  entity: null  # Your W&B username/team
+  run_name: "parakeet-tdt-malay-asr-stage2"
+
+# Notes:
+# 1. Stage 2 training on malaysian-stt-stage2 dataset (~3.1M samples, ~6600 hours)
+# 2. Uses finetuned stage 1 model as base (./models/full.nemo)
+# 3. Effective batch size: 8 * 16 = 128
+# 4. Learning rate 2e-4 (same as stage 1 - same domain, more data)
+# 5. Steps per epoch: ~24,205 steps
+# 5. GPU utilization: ~50-60GB with 8-bit optimizer + gradient checkpointing
+# 6. 8-bit optimizer: Requires `pip install bitsandbytes` (auto-falls back if unavailable)
+# 7. Gradient checkpointing enabled: 30-50% activation memory reduction, ~15% slower
+# 8. Validation limited to 1k samples (speeds up eval checkpoints)
+# 9. Memory optimization: PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True (set in run_training.sh)
+# 10. Model automatically adds punctuation and capitalization
+# 11. bf16 recommended for A100/H100 (better than fp16)
+

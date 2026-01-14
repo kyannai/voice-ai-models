@@ -1,0 +1,29 @@
+# MagpieTTS Malay Training Data Preparation
+# ==========================================
+
+# HuggingFace datasets
+datasets>=2.14.0
+huggingface-hub>=0.16.0
+
+# Audio processing
+librosa>=0.10.0
+soundfile>=0.12.0
+pydub>=0.25.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+tqdm>=4.65.0
+
+# NeMo (for training and inference) - MUST use GitHub main for MagpieTTS
+nemo_toolkit[tts] @ git+https://github.com/NVIDIA/NeMo.git@main
+kaldialign
+
+# Training
+pytorch-lightning>=2.0.0
+omegaconf>=2.3.0
+tensorboard>=2.14.0
+
+# Phonemizer for Malay text-to-phoneme conversion
+# Also requires espeak-ng: apt install espeak-ng (Ubuntu) or brew install espeak (macOS)
+phonemizer>=3.2.0

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "text": "Eh, kau dah makan ke belum? Jom kita pergi mamak lepak kejap.",
+    "english": "Hey, have you eaten yet? Let's go hang out at the mamak for a bit.",
+    "style": "casual/informal"
+  },
+  {
+    "id": 2,
+    "text": "Wah, macam best je tempat ni! Boleh kita ambil gambar sini tak?",
+    "english": "Wow, this place looks so nice! Can we take a photo here?",
+    "style": "excited"
+  },
+  {
+    "id": 3,
+    "text": "Alamak, saya lupa bawa dompet la. Boleh tolong bayar dulu tak? Nanti saya transfer balik.",
+    "english": "Oh no, I forgot to bring my wallet. Can you pay first? I'll transfer you back later.",
+    "style": "apologetic"
+  },
+  {
+    "id": 4,
+    "text": "Betul ke benda ni? Saya rasa macam tak betul je, cuba check balik.",
+    "english": "Is this correct? I feel like something's wrong, try checking again.",
+    "style": "questioning"
+  },
+  {
+    "id": 5,
+    "text": "Okay, so basically kita kena siapkan report ni sebelum Jumaat, kalau tak boss akan marah.",
+    "english": "Okay, so basically we need to finish this report before Friday, or the boss will be angry.",
+    "style": "explaining/work"
+  },
+  {
+    "id": 6,
+    "text": "Terima kasih banyak-banyak ya! Awak memang baik hati, saya sangat hargai bantuan awak.",
+    "english": "Thank you so much! You're really kind-hearted, I really appreciate your help.",
+    "style": "grateful"
+  },
+  {
+    "id": 7,
+    "text": "Saya dah penat sangat ni, kerja non-stop dari pagi. Nak balik rehat kejap boleh tak?",
+    "english": "I'm really tired, been working non-stop since morning. Can I go home and rest for a bit?",
+    "style": "tired/requesting"
+  },
+  {
+    "id": 8,
+    "text": "Jangan risau la, benda ni senang je sebenarnya. Sini, saya tunjuk macam mana nak buat.",
+    "english": "Don't worry, this is actually easy. Here, let me show you how to do it.",
+    "style": "reassuring"
+  },
+  {
+    "id": 9,
+    "text": "Selamat pagi! Cuaca hari ni cantik kan? Jom kita pergi jogging dekat taman tu.",
+    "english": "Good morning! The weather today is nice, isn't it? Let's go jogging at that park.",
+    "style": "cheerful"
+  },
+  {
+    "id": 10,
+    "text": "Maaf, saya tak faham apa yang awak cakap tadi. Boleh ulang sekali lagi dengan perlahan sikit?",
+    "english": "Sorry, I didn't understand what you said just now. Can you repeat it more slowly?",
+    "style": "polite/requesting clarification"
+  }
+]

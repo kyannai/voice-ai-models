@@ -1,0 +1,27 @@
+# XTTS v2 (Coqui TTS) Requirements
+# =================================
+#
+# Installation:
+#   python -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# Supported languages: en, es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, hu, ko, hi
+# Malay (ms) is NOT natively supported - falls back to English phonetics.
+
+# Core dependencies
+numpy>=1.24.0
+torch>=2.0.0
+torchaudio>=2.0.0
+torchcodec>=0.1.0
+soundfile>=0.12.0
+librosa>=0.10.0
+numba>=0.57.0  # Required for Python 3.11+ compatibility
+tqdm>=4.65.0
+
+# XTTS-specific dependencies
+TTS>=0.22.0
+
+# IMPORTANT: XTTS requires transformers<4.50 due to GenerationMixin changes
+# This is incompatible with IndexTTS2 which requires transformers>=4.52
+transformers==4.39.3
