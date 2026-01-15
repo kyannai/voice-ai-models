@@ -6,19 +6,32 @@ This script converts the downloaded HuggingFace dataset to NeMo manifest format:
 1. Loads metadata from saved HuggingFace dataset
 2. Loads audio from extracted MP3 files
 3. Resamples to target sample rate (22.05kHz for MagpieTTS)
-4. Converts text to phonemes (optional, recommended)
-5. Saves as WAV files
-6. Creates NeMo manifest files with speaker IDs and language codes
+4. Saves as WAV files
+5. Creates NeMo manifest files with speaker IDs and language codes
+6. Optionally generates G2P dictionary for Phase 1 language training
+
+Two-Phase Training Pipeline:
+- Phase 1 (Language): Use --generate-g2p to create G2P dictionary. Raw text in manifests.
+- Phase 2 (Voice Clone): Just prepare data. Model already has Malay G2P from Phase 1.
 
 Output manifest format (JSONL):
-{"audio_filepath": "/path/to/audio.wav", "text": "phonemes or text", "duration": 2.5, "speaker": 0, "language": "ms"}
+{"audio_filepath": "/path/to/audio.wav", "text": "raw text", "duration": 2.5, "speaker": 0, "language": "es"}
+
+Note: We use "es" (Spanish slot) because we replace Spanish G2P with Malay G2P at runtime.
+This allows us to reuse the Spanish tokenizer's internal structure (offsets, vocab) for Malay.
 
 Usage:
-    # With phonemes (recommended)
-    python prepare_data.py --data-dir data/raw --audio-output-dir data/audio --manifest-output-dir data/manifests --use-phonemes
+    # Phase 1: Language training (generates G2P dictionary)
+    python prepare_data.py --data-dir data/raw --audio-output-dir data/audio \\
+        --manifest-output-dir data/manifests --generate-g2p
     
-    # Without phonemes (character-level)
-    python prepare_data.py --data-dir data/raw --audio-output-dir data/audio --manifest-output-dir data/manifests
+    # Phase 2: Voice cloning (no G2P needed - model has it)
+    python prepare_data.py --data-dir data/raw --audio-output-dir data/audio \\
+        --manifest-output-dir data/manifests
+        
+    # Legacy: With phonemes (for voice cloning with external phonemizer)
+    python prepare_data.py --data-dir data/raw --audio-output-dir data/audio \\
+        --manifest-output-dir data/manifests --use-phonemes
 """
 
 import argparse
@@ -69,6 +82,12 @@ SPEAKER_MAP = {
 # Target sample rate for MagpieTTS (22.05kHz)
 DEFAULT_TARGET_SAMPLE_RATE = 22050
 
+# Filtering thresholds (must match train.py)
+# MagpieTTS has max sequence length of 2048 tokens
+DEFAULT_MIN_DURATION = 0.5       # Minimum audio duration in seconds
+DEFAULT_MAX_DURATION = 15.0      # Maximum audio duration in seconds
+DEFAULT_MAX_TEXT_CHARS = 1500    # Maximum text length in characters
+
 
 def load_and_resample_audio(
     audio_path: Path,
@@ -114,12 +133,12 @@ def process_single_audio(args: tuple) -> dict | None:
     Process a single audio file (for parallel processing).
     
     Args:
-        args: Tuple of (idx, source_path, output_path, target_sr, text, speaker_id)
+        args: Tuple of (idx, source_path, output_path, target_sr, text, speaker_id, min_duration, max_duration)
         
     Returns:
         Manifest entry dict or None if failed
     """
-    idx, source_path, output_path, target_sr, text, speaker_id = args
+    idx, source_path, output_path, target_sr, text, speaker_id, min_duration, max_duration = args
     
     try:
         # Load and resample audio
@@ -129,20 +148,21 @@ def process_single_audio(args: tuple) -> dict | None:
         
         audio, duration = result
         
-        # Skip very short or very long audio
-        if duration < 0.5 or duration > 30.0:
+        # Skip audio outside duration bounds
+        if duration < min_duration or duration > max_duration:
             return None
         
         # Save audio as WAV
         save_audio(audio, Path(output_path), target_sr)
         
         # Create manifest entry
+        # Use 'es' (Spanish slot) for Malay - we replace Spanish G2P with Malay G2P
         return {
             "audio_filepath": str(Path(output_path).absolute()),
             "text": text,
             "duration": round(duration, 3),
             "speaker": speaker_id,
-            "language": "ms"
+            "language": "es"
         }
     except Exception:
         return None
@@ -179,6 +199,9 @@ def prepare_speaker_data(
     target_sr: int,
     max_samples: int | None = None,
     phonemizer: Any | None = None,
+    min_duration: float = DEFAULT_MIN_DURATION,
+    max_duration: float = DEFAULT_MAX_DURATION,
+    max_text_chars: int = DEFAULT_MAX_TEXT_CHARS,
 ) -> list[dict[str, Any]]:
     """
     Process data for a single speaker.
@@ -191,11 +214,15 @@ def prepare_speaker_data(
         target_sr: Target sample rate
         max_samples: Maximum samples to process for this speaker
         phonemizer: Optional MalayPhonemizer instance for text-to-phoneme conversion
+        min_duration: Minimum audio duration in seconds
+        max_duration: Maximum audio duration in seconds
+        max_text_chars: Maximum text length in characters
         
     Returns:
         List of manifest entries
     """
     logger.info(f"Processing speaker: {speaker_name}")
+    logger.info(f"  Filters: duration={min_duration}-{max_duration}s, max_text={max_text_chars} chars")
     if phonemizer:
         logger.info(f"  Using phoneme conversion (batch mode)")
     
@@ -216,18 +243,28 @@ def prepare_speaker_data(
     speaker_output_dir = output_audio_dir / speaker_name
     speaker_output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Step 1: Collect all texts and audio paths
-    logger.info(f"  Step 1/3: Collecting metadata...")
+    # Step 1: Collect all texts and audio paths (with early filtering)
+    logger.info(f"  Step 1/3: Collecting and filtering metadata...")
     texts = []
     valid_indices = []
     audio_paths = []
     audio_missing = 0
+    text_too_long = 0
+    text_empty = 0
     
     for idx in tqdm(indices, desc="    Collecting", unit="samples"):
         sample = dataset[int(idx)]
         
         text = sample.get('normalized') or sample.get('original', '')
         if not text or not text.strip():
+            text_empty += 1
+            continue
+        
+        text = text.strip()
+        
+        # Filter by text length early (before processing audio)
+        if len(text) > max_text_chars:
+            text_too_long += 1
             continue
         
         audio_filename = sample.get('audio_filename', '')
@@ -239,11 +276,12 @@ def prepare_speaker_data(
             audio_missing += 1
             continue
         
-        texts.append(text.strip())
+        texts.append(text)
         valid_indices.append(idx)
         audio_paths.append(str(source_audio_path))
     
-    logger.info(f"    Found {len(texts):,} valid samples, {audio_missing:,} missing audio")
+    logger.info(f"    Found {len(texts):,} valid samples")
+    logger.info(f"    Filtered: {text_too_long:,} text too long, {text_empty:,} empty, {audio_missing:,} missing audio")
     
     # Step 2: Batch phonemize all texts
     if phonemizer and texts:
@@ -263,7 +301,7 @@ def prepare_speaker_data(
             continue
         output_filename = f"{speaker_name}_{idx:08d}.wav"
         output_path = str(speaker_output_dir / output_filename)
-        process_args.append((idx, source_path, output_path, target_sr, text, speaker_id))
+        process_args.append((idx, source_path, output_path, target_sr, text, speaker_id, min_duration, max_duration))
     
     # Process in parallel
     manifest_entries = []
@@ -441,6 +479,42 @@ Examples:
         action="store_true",
         help="Disable code-switching detection (use pure Malay phonemization)"
     )
+    parser.add_argument(
+        "--generate-g2p",
+        action="store_true",
+        help="Generate G2P dictionary from corpus (Phase 1 language training only)"
+    )
+    parser.add_argument(
+        "--g2p-output",
+        type=str,
+        default="data/g2p/ipa_malay_dict.txt",
+        help="Output path for G2P dictionary (default: data/g2p/ipa_malay_dict.txt)"
+    )
+    parser.add_argument(
+        "--speakers",
+        type=str,
+        nargs="+",
+        default=None,
+        help="Specific speakers to include (default: all speakers)"
+    )
+    parser.add_argument(
+        "--min-duration",
+        type=float,
+        default=DEFAULT_MIN_DURATION,
+        help=f"Minimum audio duration in seconds (default: {DEFAULT_MIN_DURATION})"
+    )
+    parser.add_argument(
+        "--max-duration",
+        type=float,
+        default=DEFAULT_MAX_DURATION,
+        help=f"Maximum audio duration in seconds (default: {DEFAULT_MAX_DURATION})"
+    )
+    parser.add_argument(
+        "--max-text-chars",
+        type=int,
+        default=DEFAULT_MAX_TEXT_CHARS,
+        help=f"Maximum text length in characters (default: {DEFAULT_MAX_TEXT_CHARS})"
+    )
     
     args = parser.parse_args()
     
@@ -466,6 +540,14 @@ Examples:
         logger.error(f"No speaker directories found in {metadata_dir}")
         return
     
+    # Filter speakers if specified
+    if args.speakers:
+        speaker_dirs = [d for d in speaker_dirs if d.name in args.speakers]
+        if not speaker_dirs:
+            logger.error(f"No matching speakers found for: {args.speakers}")
+            logger.error(f"Available speakers: {[d.name for d in metadata_dir.iterdir() if d.is_dir()]}")
+            return
+    
     logger.info(f"{'='*70}")
     logger.info(f"MagpieTTS Malay Data Preparation")
     logger.info(f"{'='*70}")
@@ -475,6 +557,8 @@ Examples:
     logger.info(f"Manifest output: {manifest_output_dir}")
     logger.info(f"Target sample rate: {args.target_sample_rate} Hz")
     logger.info(f"Train/val split: {args.train_split:.0%}/{1-args.train_split:.0%}")
+    logger.info(f"Duration filter: {args.min_duration}-{args.max_duration}s")
+    logger.info(f"Max text length: {args.max_text_chars} chars")
     if args.max_samples:
         logger.info(f"Max samples: {args.max_samples:,}")
     logger.info(f"Speakers found: {[d.name for d in speaker_dirs]}")
@@ -517,6 +601,9 @@ Examples:
             target_sr=args.target_sample_rate,
             max_samples=samples_per_speaker,
             phonemizer=phonemizer,
+            min_duration=args.min_duration,
+            max_duration=args.max_duration,
+            max_text_chars=args.max_text_chars,
         )
         all_entries.extend(entries)
     
@@ -555,12 +642,48 @@ Examples:
     logger.info(f"Val manifest: {val_manifest_path}")
     logger.info(f"  Samples: {len(val_entries):,}")
     logger.info(f"Audio files: {output_audio_dir}")
-    logger.info(f"Text format: {'phonemes (IPA)' if args.use_phonemes else 'characters'}")
+    if args.use_phonemes:
+        logger.info(f"Text format: phonemes (IPA) - for legacy voice cloning")
+    else:
+        logger.info(f"Text format: raw text - for Phase 1/2 training")
+    if args.generate_g2p:
+        logger.info(f"G2P dictionary: {args.g2p_output}")
     
     # Show example manifest entry
     if train_entries:
         logger.info(f"\nExample manifest entry:")
         logger.info(json.dumps(train_entries[0], indent=2, ensure_ascii=False))
+    
+    # Generate G2P dictionary if requested (Phase 1)
+    if args.generate_g2p:
+        logger.info(f"\n{'='*70}")
+        logger.info(f"Generating G2P Dictionary (Phase 1)")
+        logger.info(f"{'='*70}")
+        
+        try:
+            from generate_g2p_dict import generate_g2p_dictionary
+            
+            # Use both train and val manifests for comprehensive coverage
+            manifest_paths = [str(train_manifest_path), str(val_manifest_path)]
+            
+            stats = generate_g2p_dictionary(
+                manifest_paths=manifest_paths,
+                output_path=args.g2p_output,
+                min_word_freq=1,
+                batch_size=1000,
+            )
+            
+            logger.info(f"\nG2P Dictionary Generated!")
+            logger.info(f"  Output: {args.g2p_output}")
+            logger.info(f"  Entries: {stats['dictionary_entries']:,}")
+            logger.info(f"  Failed words: {stats['failed_words']:,}")
+            
+        except ImportError:
+            logger.error("Could not import generate_g2p_dict module.")
+            logger.error("Make sure generate_g2p_dict.py is in the same directory.")
+        except Exception as e:
+            logger.error(f"G2P generation failed: {e}")
+            raise
 
 
 if __name__ == "__main__":

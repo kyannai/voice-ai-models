@@ -1,281 +1,300 @@
-# MagpieTTS Malay Fine-tuning
+# MagpieTTS Malay Two-Phase Training
 
-Fine-tune NVIDIA's MagpieTTS multilingual model to add Malay language support using the `mesolitica/Malaysian-TTS` dataset.
+Fine-tune NVIDIA's MagpieTTS multilingual model to add Malay language support using a two-phase training pipeline.
 
 ## Overview
 
-This project adds Malay as a new language to the pretrained `nvidia/magpie_tts_multilingual_357m` model through continual fine-tuning. The training uses IPA phonemes (via espeak-ng) for better pronunciation quality.
+This project implements a two-phase approach to adding Malay as a new language:
+
+- **Phase 1: Language Training** - Teaches the model Malay pronunciation (G2P) and prosody
+- **Phase 2: Voice Cloning** - Fine-tunes with specific speaker voices
+
+After training, the model can synthesize Malay speech directly from raw text - no external phonemizer needed at inference time.
 
 **Model**: [nvidia/magpie_tts_multilingual_357m](https://huggingface.co/nvidia/magpie_tts_multilingual_357m)  
 **Dataset**: [mesolitica/Malaysian-TTS](https://huggingface.co/datasets/mesolitica/Malaysian-TTS) (~500k samples, 5 speakers)
+
+## Technical Implementation
+
+### Fresh Malay Tokenizer with Custom IPA Vocabulary
+
+MagpieTTS has hardcoded language support for 7 languages. To add Malay, we:
+
+1. **Repurpose the Spanish slot** - Use the Spanish tokenizer's position in the model (indices 96-199)
+2. **Create fresh Malay IPA vocabulary** - Extract 61 unique IPA symbols from our G2P dictionary (includes Malay-specific phonemes like `ə`, `ŋ` that Spanish doesn't have)
+3. **Replace Spanish tokenizer entirely** - Create a new `IPATokenizer` with Malay vocabulary and G2P
+4. **Reset token embeddings** - Reinitialize embeddings at indices 96-199 with Xavier initialization, removing all Spanish phoneme knowledge
+
+This approach ensures:
+- Malay learns from scratch without Spanish bias
+- All Malay IPA phonemes are in the vocabulary (no "unknown phoneme" errors)
+- Pretrained encoder/decoder weights are preserved for transfer learning
+
+### Training Data Format
+
+Training data uses `language='es'` to route through the Spanish slot (which now contains our Malay tokenizer):
+
+```json
+{"audio_filepath": "audio/sample.wav", "text": "Selamat pagi", "duration": 2.5, "speaker": 0, "language": "es"}
+```
+
+### Inference
+
+Use `--language ms` for user-friendly interface (internally mapped to `es`):
+
+```bash
+python src/synthesize.py --text "Selamat pagi" --language ms --model-path models/malay_base.nemo
+```
+
+## Architecture
+
+```
+Phase 1: Language Training (Run Once)
+┌──────────────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ nvidia/magpie_tts    │ ──▶ │ + Malay G2P     │ ──▶ │ Malay Base Model │
+│ (pretrained)         │     │ + Fresh IPA     │     │ (malay_base.nemo)│
+│                      │     │ + Reset Embeds  │     │                  │
+└──────────────────────┘     └─────────────────┘     └──────────────────┘
+                                                             │
+                                                             ▼
+Phase 2: Voice Cloning (Per Speaker)
+┌──────────────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ Malay Base Model     │ ──▶ │ + New Speaker   │ ──▶ │ Production Model │
+│                      │     │   Voice Data    │     │                  │
+└──────────────────────┘     └─────────────────┘     └──────────────────┘
+                                                             │
+                                                             ▼
+Inference (No phonemizer needed!)
+┌──────────────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ "Selamat pagi"       │ ──▶ │ Model (has G2P) │ ──▶ │ Audio            │
+│ (raw Malay text)     │     │                 │     │                  │
+└──────────────────────┘     └─────────────────┘     └──────────────────┘
+```
 
 ## Prerequisites
 
 - Python 3.10+
 - NVIDIA GPU with CUDA support (A100 recommended)
 - ~100GB disk space for full dataset
-- espeak-ng for phoneme conversion
+- espeak-ng (for Phase 1 G2P dictionary generation only)
 
 ```bash
-# Install espeak-ng (required for phoneme conversion)
+# Install espeak-ng (required for Phase 1 only)
 sudo apt install espeak-ng  # Ubuntu/Debian
 brew install espeak         # macOS
 ```
 
 ## Quick Start
 
-```bash
-# 1. Create and activate virtual environment
-python -m venv .venv
-source .venv/bin/activate
+### Phase 1: Language Training (One-Time)
 
-# 2. Install dependencies
+```bash
+# 1. Install dependencies
 make install
 
-# 3. Download and prepare data (full dataset)
-make download
-make prepare
+# 2. Prepare data and generate G2P dictionary
+make phase1-prepare
 
-# 4. Start training
-make train
+# 3. Train Malay language model
+make phase1-train
 
-# 5. Test synthesis with trained model
-make synth TEXT="Selamat pagi" MODEL_PATH=experiments/magpietts_malay/magpietts_malay_finetune/checkpoints/last.nemo
+# 4. Export base model
+make phase1-export
 ```
 
-## Step-by-Step Guide
-
-### Step 1: Install Dependencies
+### Phase 2: Voice Cloning (Per Speaker)
 
 ```bash
-make install
+# 1. Prepare speaker data
+make phase2-prepare
+
+# 2. Fine-tune with new voice
+make phase2-train
 ```
 
-This installs:
-- NeMo toolkit (from GitHub main branch)
-- PyTorch Lightning
-- Audio processing libraries (librosa, soundfile)
-- Phonemizer with espeak-ng support
-
-### Step 2: Download Dataset
+### Synthesis (No Phonemizer Needed!)
 
 ```bash
-# Full dataset (~500k samples, ~100GB)
-make download
+# Synthesize raw Malay text
+make synth TEXT="Selamat pagi, apa khabar?" MODEL_PATH=models/malay_base.nemo
 
-# OR small subset for testing (~10k samples)
-make download-small
+# With specific speaker (0-4)
+make synth TEXT="Terima kasih" MODEL_PATH=models/malay_base.nemo SPEAKER=2
 ```
 
-The dataset includes 5 Malaysian speakers:
-- `anwar_ibrahim` - Male, political speech
-- `husein` - Male, conversational
-- `kp_ms` - Female, news
-- `kp_zh` - Female, news (Mandarin-accented)
-- `shafiqah_idayu` - Female, conversational
+## Detailed Guide
 
-### Step 3: Explore Dataset (Optional)
+### Phase 1: Language Training
 
+Phase 1 teaches the model to understand Malay as a new language. This involves:
+1. Generating a G2P (Grapheme-to-Phoneme) dictionary from the training corpus
+2. Adding a Malay tokenizer to the model
+3. Training the model on Malay audio with raw text
+
+**Data Preparation:**
 ```bash
-make explore
+make phase1-prepare
 ```
 
-Shows dataset statistics, sample texts, and speaker distribution.
+This will:
+- Download the Malaysian-TTS dataset
+- Process audio files (resample to 22.05kHz)
+- Create manifest files with raw text (not phonemes)
+- Generate G2P dictionary using espeak-ng
 
-### Step 4: Prepare Training Data
-
+**Training:**
 ```bash
-# Full dataset (recommended)
-make prepare
+# Train with all available GPUs
+make phase1-train
 
-# OR small subset for testing
-make prepare-small
+# Train with specific number of GPUs
+make phase1-train GPUS=2
 ```
 
-This step:
-1. Converts audio to 22.05kHz WAV format
-2. Converts text to IPA phonemes using espeak-ng
-3. Creates NeMo-compatible JSON manifest files
-4. Splits into 95% train / 5% validation
-
-**Output:**
-- `data/audio/` - Processed WAV files
-- `data/manifests/train_manifest.json` - Training manifest
-- `data/manifests/val_manifest.json` - Validation manifest
-
-### Step 5: Start Training
-
+**Export Model:**
 ```bash
-# Train with 1 GPU (default)
-make train
-
-# Train with multiple GPUs
-make train GPUS=4
-
-# Resume from checkpoint
-make train-resume CHECKPOINT=experiments/magpietts_malay/magpietts_malay_finetune/checkpoints/last.nemo
+make phase1-export
+# Output: models/malay_base.nemo
 ```
 
-**Training Configuration** (`configs/magpietts_malay.yaml`):
-- Batch size: 8
-- Learning rate: 2e-4 (higher for new language)
-- Max epochs: 100
-- Precision: 16-bit mixed
+### Phase 2: Voice Cloning
 
-**Estimated Time** (A100 GPU):
-- ~8 hours per epoch
-- Full training: 10-20 epochs recommended
+Phase 2 fine-tunes the Malay-capable model with new speaker voices. The model already has Malay G2P built-in, so no phonemizer is needed.
 
-### Step 6: Monitor Training
-
+**Prepare New Speaker Data:**
 ```bash
-# Start TensorBoard
-make tensorboard
+make phase2-prepare
 ```
 
-Open http://localhost:6006 to view:
-- Training/validation loss curves
-- Learning rate schedule
-- Audio samples (if configured)
-
-### Step 7: Test Synthesis
-
+**Fine-tune:**
 ```bash
-# Test with trained model (uses phonemes)
-make synth TEXT="Selamat pagi, apa khabar?" MODEL_PATH=experiments/magpietts_malay/magpietts_malay_finetune/checkpoints/last.nemo
-
-# Test with original pretrained model (no phonemes)
-make synth-chars TEXT="Hello world" MODEL_PATH=nvidia/magpie_tts_multilingual_357m
-
-# Synthesize from file
-make synth-file INPUT=sentences.txt MODEL_PATH=path/to/model.nemo
-
-# List available speakers
-make list-speakers
+make phase2-train
 ```
 
-**Synthesis Options:**
-- `TEXT` - Text to synthesize
-- `MODEL_PATH` - Path to .nemo checkpoint
-- `SPEAKER` - Speaker index (0-4)
-- `LANGUAGE` - Language code (default: ms)
+### Configuration
+
+Config files are in `configs/`:
+- `phase1_language.yaml` - Language training settings
+- `phase2_voiceclone.yaml` - Voice cloning settings
+
+Key parameters:
+```yaml
+# Phase 1
+batch_size: 32
+learning_rate: 2e-4
+max_epochs: 100
+
+# Phase 2
+batch_size: 32
+learning_rate: 1e-4  # Lower for fine-tuning
+max_epochs: 30
+```
+
+### Available Speakers
+
+The Malaysian-TTS dataset includes 5 speakers:
+
+| ID | Name            | Gender | Style          |
+|----|-----------------|--------|----------------|
+| 0  | anwar_ibrahim   | Male   | Political      |
+| 1  | husein          | Male   | Conversational |
+| 2  | kp_ms           | Female | News           |
+| 3  | kp_zh           | Female | News (accented)|
+| 4  | shafiqah_idayu  | Female | Conversational |
 
 ## Project Structure
 
 ```
 train_magpietts_malay/
 ├── configs/
-│   └── magpietts_malay.yaml    # Training configuration
-├── data/
-│   ├── raw/                    # Downloaded dataset
-│   ├── audio/                  # Processed WAV files
-│   └── manifests/              # Training manifests
-├── experiments/                # Training outputs & checkpoints
-├── output/                     # Synthesized audio
+│   ├── phase1_language.yaml    # Phase 1 config (language training)
+│   └── phase2_voiceclone.yaml  # Phase 2 config (voice cloning)
 ├── src/
 │   ├── download_dataset.py     # Dataset downloader
-│   ├── explore_dataset.py      # Dataset explorer
-│   ├── malay_phonemizer.py     # Text-to-phoneme converter
-│   ├── prepare_data.py         # Data preparation
-│   ├── synthesize.py           # Inference script
-│   └── train.py                # Training script
-├── Makefile                    # Automation commands
-├── requirements.txt            # Python dependencies
-└── README.md                   # This file
+│   ├── prepare_data.py         # Data preparation + G2P generation
+│   ├── train.py                # Training script
+│   └── synthesize.py           # Inference script
+├── data/
+│   ├── raw/                    # Downloaded dataset
+│   ├── audio/                  # Processed audio
+│   ├── manifests/              # Training manifests (language='es')
+│   └── g2p/                    # G2P dictionary (ipa_malay_dict.txt)
+├── models/
+│   └── malay_base.nemo         # Exported base model
+├── experiments/                # Training checkpoints
+├── Makefile                    # Build automation
+└── README.md
 ```
 
-## Checkpoints
+## Make Commands
 
-Checkpoints are saved to `experiments/magpietts_malay/magpietts_malay_finetune/checkpoints/`:
-
-| File | Description |
-|------|-------------|
-| `last.nemo` | Latest checkpoint (saved every epoch) |
-| `magpietts_malay-{epoch}-{val_loss}.nemo` | Best checkpoints by validation loss |
-
-The config keeps the top 3 best checkpoints plus the latest.
-
-## Phoneme Format
-
-Text is converted to IPA phonemes using espeak-ng:
-
-```
-Input:  "Selamat pagi, apa khabar?"
-Output: "səlamat paɡi, apə xabar?"
+### Data Management (Step 1)
+```bash
+make install           # Install dependencies
+make download          # Download full dataset
+make download-small    # Download small subset
+make explore           # Show dataset statistics
 ```
 
-For code-switching (Malay-English), the phonemizer detects English words and uses English phonemes:
-
+### Phase 1: Language Training (Step 2)
+```bash
+make phase1-prepare    # Prepare data + generate G2P dictionary
+make phase1-train      # Train language model
+make phase1-export     # Export to models/malay_base.nemo
 ```
-Input:  "Okay, meeting kita postpone ke next week."
-Output: "oʊkeɪ, miːɾɪŋ kitə postpone kə nɛkst wɛəʔ."
+
+### Phase 2: Voice Cloning (Step 3)
+```bash
+make phase2-prepare    # Prepare new speaker data
+make phase2-train      # Fine-tune with new voice
 ```
 
-## Configuration
+### Synthesis
+```bash
+make synth TEXT="..."              # Synthesize text
+make synth-file INPUT=file.txt     # Synthesize from file
+make list-speakers                 # Show available speakers
+```
 
-Edit `configs/magpietts_malay.yaml` to customize:
-
-```yaml
-model:
-  batch_size: 8           # Reduce to 4 if OOM
-  learning_rate: 2e-4     # Higher LR for new language
-
-trainer:
-  max_epochs: 100         # Reduce for faster experiments
-  precision: '16-mixed'   # Use '32' if numerical issues
-
-exp_manager:
-  exp_dir: experiments/magpietts_malay
-  checkpoint_callback_params:
-    save_top_k: 3         # Keep top N checkpoints
+### Utilities
+```bash
+make check-gpu         # Check GPU availability
+make tensorboard       # Start TensorBoard
+make list-checkpoints  # List training checkpoints
+make convert           # Convert checkpoint to .pt
+make clean             # Remove generated files
 ```
 
 ## Troubleshooting
 
-### CUDA Out of Memory
-Reduce batch size in config:
+### Phase 1: G2P dictionary not found
+```bash
+# Make sure to run prepare first
+make phase1-prepare
+```
+
+### Phase 2: Base model not found
+```bash
+# Export the Phase 1 model first
+make phase1-export
+```
+
+### CUDA out of memory
+Reduce batch size in the config file:
 ```yaml
 model:
-  batch_size: 4
+  batch_size: 16  # Reduce from 32
 ```
 
-### Sequence Length Error
-The model has a max sequence length of 2048 tokens. Long texts are automatically filtered during training.
-
-### espeak-ng Not Found
-Install espeak-ng:
+### espeak-ng not found
 ```bash
-sudo apt install espeak-ng
-```
-
-### NeMo Import Errors
-Make sure you're using NeMo from GitHub main:
-```bash
-make install-fresh
-```
-
-## Make Commands Reference
-
-```bash
-make help           # Show all commands
-make install        # Install dependencies
-make install-fresh  # Reinstall NeMo from scratch
-make download       # Download full dataset
-make download-small # Download small subset
-make explore        # Show dataset statistics
-make prepare        # Prepare full dataset
-make prepare-small  # Prepare small subset
-make train          # Start training
-make train GPUS=4   # Train with multiple GPUs
-make tensorboard    # Start TensorBoard
-make synth TEXT="..." MODEL_PATH=...  # Synthesize speech
-make clean          # Remove generated files
-make clean-all      # Remove everything
+sudo apt install espeak-ng  # Ubuntu/Debian
+brew install espeak         # macOS
 ```
 
 ## License
 
 This project uses:
-- NVIDIA NeMo: Apache 2.0 License
-- MagpieTTS model: NVIDIA License
-- Malaysian-TTS dataset: Check dataset license on HuggingFace
+- NVIDIA MagpieTTS (Apache 2.0)
+- mesolitica/Malaysian-TTS dataset
+- NeMo Framework (Apache 2.0)

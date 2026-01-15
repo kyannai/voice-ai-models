@@ -8,11 +8,6 @@ data/
 *.json
 !configs/*.yaml
 
-# Models (except READMEs)
-models/*.nemo
-models/*.ckpt
-models/**/upload_log.txt
-
 # Python
 __pycache__/
 *.py[cod]

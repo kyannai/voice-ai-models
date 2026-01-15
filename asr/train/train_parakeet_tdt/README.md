@@ -1,483 +1,298 @@
-# 🚀 NVIDIA Parakeet TDT 0.6B v3 Training
+# Parakeet TDT ASR Training
 
-Complete guide for fine-tuning NVIDIA Parakeet TDT (Token-and-Duration Transducer) models on custom ASR datasets using **NVIDIA NeMo** framework.
+Fine-tune NVIDIA Parakeet TDT (Token-and-Duration Transducer) 0.6B v3 for Malay language automatic speech recognition (ASR).
 
----
-
-## 📋 Overview
+## Overview
 
 **Why Parakeet TDT?**
-- ⚡ **Lightning-Fast**: 60 minutes of audio in ~1 second
-- 🎯 **High Accuracy**: 98% on long audio files (up to 24 minutes)
-- 📝 **Auto-Punctuation**: Built-in punctuation and capitalization
-- 🕐 **Word Timestamps**: Precise word-level timing
-- 💾 **Lightweight**: Only 0.6B parameters (~4-6GB VRAM)
-- 🔧 **Easy to Fine-tune**: No quantization needed
+- **Lightning-Fast**: 60 minutes of audio in ~1 second
+- **High Accuracy**: 98% on long audio files (up to 24 minutes)
+- **Auto-Punctuation**: Built-in punctuation and capitalization
+- **Word Timestamps**: Precise word-level timing
+- **Lightweight**: Only 0.6B parameters (~4-6GB VRAM)
+- **Easy to Fine-tune**: No quantization needed
 
-**Framework: NVIDIA NeMo**
-- Official framework for NVIDIA speech AI models
-- Native support for Parakeet TDT architecture
-- Robust training pipelines with distributed training support
-- Integrated experiment management and logging
+**Model**: [nvidia/parakeet-tdt-0.6b-v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)  
+**Dataset**: [mesolitica/Malaysian-STT-Whisper](https://huggingface.co/datasets/mesolitica/Malaysian-STT-Whisper) (~5.2M samples)  
+**Framework**: NVIDIA NeMo
 
----
+## Prerequisites
 
-## 🎯 Quick Start
+- Python 3.10+
+- NVIDIA GPU with CUDA support (A100 recommended)
+- ~100GB disk space for dataset + training outputs
 
-### 1. Install Dependencies
-
-```bash
-# Install all training dependencies from main requirements file
-cd ~/voice-ai/asr/train
-pip install -r requirements.txt
-
-# Or just install NeMo toolkit if you already have other deps
-pip install nemo_toolkit[asr]
-```
-
-### 2. Prepare Your Data
-
-Convert your training data to NeMo manifest format:
+## Quick Start
 
 ```bash
-python prepare_data.py \
-  --train-data /path/to/train.json \
-  --val-data /path/to/val.json \
-  --audio-base-dir /path/to/audio/files \
-  --output-dir ./data
+# 1. Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate
+
+# 2. Install dependencies
+make install
+make install-8bit  # Recommended for large datasets
+
+# 3. Download and prepare data
+make download      # Download from HuggingFace
+make unzip         # Extract zip files
+make prepare       # Create NeMo manifests
+
+# 4. Start training
+make train
+
+# 5. Monitor training
+make tensorboard
 ```
 
-This will create:
-- `./data/train_manifest.json` - Training manifest
-- `./data/val_manifest.json` - Validation manifest
+## Step-by-Step Guide
 
-### 3. Configure Training
+### Step 1: Install Dependencies
 
-Edit `config.yaml` to customize training parameters:
+```bash
+make install
+```
 
+For large dataset training (recommended):
+```bash
+make install-8bit
+```
+
+### Step 2: Download Dataset
+
+```bash
+# Download Malaysian-STT dataset from HuggingFace (~100GB)
+make download
+
+# Extract zip files
+make unzip
+```
+
+### Step 3: Prepare Training Data
+
+```bash
+# Full dataset (~5.2M samples)
+make prepare
+
+# OR small subset for testing (10k samples)
+make prepare-small
+```
+
+This creates NeMo manifest files:
+- `data/manifests/train_manifest.json` - Training manifest
+- `data/manifests/val_manifest.json` - Validation manifest
+
+**NeMo Manifest Format** (JSONL):
+```jsonl
+{"audio_filepath": "/path/to/audio.wav", "text": "transcription", "duration": 2.5}
+```
+
+### Step 4: Configure Training
+
+Edit the appropriate config file:
+
+```bash
+# Stage 1: Initial fine-tuning
+vim configs/parakeet_stage1.yaml
+
+# Stage 2: Continued training
+vim configs/parakeet_stage2.yaml
+```
+
+Key settings:
 ```yaml
 model:
   name: "nvidia/parakeet-tdt-0.6b-v3"
+  gradient_checkpointing: true
 
 data:
-  train_manifest: "./data/train_manifest.json"
-  val_manifest: "./data/val_manifest.json"
+  train_manifest: "./data/manifests/train_manifest.json"
+  val_manifest: "./data/manifests/val_manifest.json"
 
 training:
-  num_train_epochs: 3
+  num_train_epochs: 1
   per_device_train_batch_size: 8
-  learning_rate: 2.0e-5
+  learning_rate: 2.0e-4
 ```
 
-### 4. Start Training
+### Step 5: Start Training
 
 ```bash
-# Option A: Use the launcher script (recommended)
-bash run_training.sh
+# Train with stage1 config (default)
+make train
 
-# Option B: Run directly
-python train_parakeet_tdt.py --config config.yaml
+# Train with stage2 config
+make train-stage2
+
+# Train with custom config
+make train-custom CONFIG=path/to/config.yaml
 ```
 
-### 5. Monitor Training
+### Step 6: Monitor Training
 
 ```bash
-# View TensorBoard logs
-tensorboard --logdir ./outputs/parakeet-tdt-malay-asr
+make tensorboard
 ```
 
----
+Open http://localhost:6006 to view:
+- `val_wer` - Word Error Rate (should decrease)
+- `train_loss` - Training loss
+- `lr` - Learning rate schedule
 
-## 📊 Data Format
+### Step 7: Upload to HuggingFace
 
-### Input Data Format (Flexible)
-
-Your input data can be in JSON or CSV format:
-
-**JSON Format:**
-```json
-[
-  {
-    "audio_path": "audio1.wav",
-    "text": "this is a test",
-    "duration": 2.5
-  },
-  {
-    "audio_path": "audio2.wav",
-    "transcription": "another example",
-    "duration": 3.2
-  }
-]
+```bash
+export HF_TOKEN='your_huggingface_token'
+make upload MODEL=models/full.nemo REPO=parakeet-tdt-0.6b-malay
 ```
 
-**CSV Format:**
-```csv
-audio_path,text,duration
-audio1.wav,this is a test,2.5
-audio2.wav,another example,3.2
+## Project Structure
+
+```
+train_parakeet_tdt/
+├── configs/
+│   ├── parakeet_stage1.yaml    # Stage 1: Initial fine-tuning
+│   └── parakeet_stage2.yaml    # Stage 2: Continued training
+├── data/
+│   ├── raw/                    # Downloaded dataset
+│   └── manifests/              # NeMo manifest files
+├── models/                     # Saved models
+├── outputs/                    # Training outputs & checkpoints
+├── src/
+│   ├── prepare_data.py         # Data preparation script
+│   ├── train.py                # Main training script
+│   ├── upload_model.py         # HuggingFace upload utility
+│   ├── check_tensorboard.py    # TensorBoard event checker
+│   └── unzip_data.py           # Data extraction utility
+├── Makefile                    # Automation commands
+├── requirements.txt            # Python dependencies
+└── README.md
 ```
 
-### NeMo Manifest Format (JSONL)
+## Make Commands
 
-The `prepare_data.py` script converts your data to NeMo's required format:
+```bash
+make help           # Show all commands
 
-```jsonl
-{"audio_filepath": "/absolute/path/to/audio1.wav", "text": "this is a test", "duration": 2.5}
-{"audio_filepath": "/absolute/path/to/audio2.wav", "text": "another example", "duration": 3.2}
+# Installation (Step 1)
+make install        # Install dependencies
+make install-8bit   # Install 8-bit optimizer
+make check-gpu      # Check GPU availability
+
+# Data Management (Step 2)
+make download       # Download Malaysian-STT dataset
+make unzip          # Extract zip files
+make prepare        # Prepare full dataset
+make prepare-small  # Prepare small subset (10k samples)
+
+# Training (Step 3)
+make train          # Train with stage1 config (default)
+make train-stage1   # Train stage 1
+make train-stage2   # Train stage 2
+make train-custom CONFIG=path  # Custom config
+
+# Monitoring
+make tensorboard    # Start TensorBoard
+make check-events   # Check event files
+
+# Model Upload
+make upload MODEL=path REPO=name  # Upload to HuggingFace
+
+# Cleanup
+make clean-outputs  # Remove training outputs
+make clean-data     # Remove downloaded data
+make clean-all      # Remove all generated files
 ```
 
-**Required Fields:**
-- `audio_filepath`: Absolute path to audio file
-- `text`: Transcription text (plain text, Parakeet adds punctuation automatically)
-- `duration`: Audio duration in seconds
+## Training Configurations
 
----
+### Stage 1: Initial Fine-tuning
 
-## ⚙️ Training Configuration
+For training on the full Malaysian-STT dataset (~5.2M samples):
 
-### Model Selection
+| Parameter | Value |
+|-----------|-------|
+| Learning Rate | 2.0e-4 |
+| Batch Size | 8 |
+| Gradient Accumulation | 16 |
+| Effective Batch Size | 128 |
+| Optimizer | AdamW 8-bit |
+| Precision | bfloat16 |
+| Estimated Time | ~4 days on A100 |
 
-```yaml
-model:
-  name: "nvidia/parakeet-tdt-0.6b-v3"  # Recommended
-  # Alternatives:
-  # - "nvidia/parakeet-tdt-1.1b" (more accurate, 2x slower)
-  # - "nvidia/parakeet-rnnt-0.6b" (streaming-capable)
-```
+### Stage 2: Continued Training
 
-### Batch Size Guidelines
+For additional fine-tuning on new data:
 
-Parakeet TDT 0.6B is very memory-efficient:
+| Parameter | Value |
+|-----------|-------|
+| Base Model | Stage 1 checkpoint |
+| Learning Rate | 2.0e-4 |
+| Epochs | 1 |
 
-| GPU VRAM | Batch Size | Gradient Accum | Effective Batch |
-|----------|------------|----------------|-----------------|
-| 8GB      | 4          | 4              | 16              |
-| 16GB     | 8          | 2              | 16              |
-| 24GB     | 16         | 1              | 16              |
-| 40GB+    | 32         | 1              | 32              |
-
-**No quantization needed!** The model is already lightweight.
-
-### Learning Rate
-
-```yaml
-training:
-  # Fine-tuning (recommended for custom data < 10k hours)
-  learning_rate: 2.0e-5
-  warmup_steps: 500
-  
-  # Extensive pre-training (for large datasets > 10k hours)
-  # learning_rate: 1.0e-3
-  # warmup_steps: 15000
-```
-
-### Training Stages (Following Official Parakeet Training)
-
-**Stage 1: Pre-training (Optional, for large datasets)**
-```yaml
-training:
-  learning_rate: 1.0e-3
-  warmup_steps: 15000
-  max_steps: 150000
-  scheduler: "CosineAnnealing"
-```
-
-**Stage 2: Fine-tuning (Recommended for most use cases)**
-```yaml
-training:
-  learning_rate: 2.0e-5  # or 1.0e-5
-  warmup_steps: 500      # or 0
-  max_steps: 5000        # or num_train_epochs: 3
-  scheduler: "CosineAnnealing"
-```
-
----
-
-## 📦 Hardware Requirements
+## Hardware Requirements
 
 ### Minimum (Consumer GPUs)
 - **GPU**: 8GB VRAM (RTX 3060, RTX 4060)
 - **RAM**: 16GB
-- **Disk**: 10GB for model + data
 - **Batch Size**: 4-8
 
 ### Recommended (Professional GPUs)
-- **GPU**: 16GB+ VRAM (RTX 4090, A5000)
+- **GPU**: 24GB+ VRAM (RTX 4090, A5000)
 - **RAM**: 32GB
-- **Disk**: 50GB+ for large datasets
 - **Batch Size**: 16-32
 
 ### High-Performance (Data Center)
 - **GPU**: 40GB+ VRAM (A100, H100)
-- **RAM**: 64GB+
-- **Multi-GPU**: Supported (distributed training)
+- **RAM**: 64GB
 - **Batch Size**: 32-64+
 
-**Note**: Parakeet TDT is much more memory-efficient than LLM-based models (Qwen, etc.)
+## Troubleshooting
 
----
+### CUDA Out of Memory
 
-## 🎓 Training Best Practices
-
-### For Small Datasets (< 100 hours)
-- Start with pre-trained model (don't train from scratch)
-- Use learning rate: `2e-5`
-- Train for 3-5 epochs
-- Monitor validation loss closely (watch for overfitting)
-- Consider data augmentation
-
-### For Medium Datasets (100-1000 hours)
-- Learning rate: `2e-5` or `1e-5`
-- Train for 2-3 epochs
-- Use cosine annealing scheduler
-- Evaluate every 1000 steps
-
-### For Large Datasets (> 1000 hours)
-- Two-stage training (optional):
-  1. Pre-train: lr=`1e-3`, 150k steps
-  2. Fine-tune: lr=`1e-5`, 5k steps
-- Use distributed training for speed
-- Monitor WER on validation set
-
-### Data Quality Tips
-- **Audio Quality**: 16kHz sample rate minimum, clean recordings
-- **Transcription**: Accurate transcriptions (Parakeet adds punctuation automatically)
-- **Duration**: 0.1s - 30s per sample (avoid very short/long clips)
-- **Language**: Works best on English (can be fine-tuned for other languages)
-- **Diversity**: Include various speakers, accents, recording conditions
-
----
-
-## 🔍 Monitoring Training
-
-### TensorBoard
-
-```bash
-tensorboard --logdir ./outputs/parakeet-tdt-malay-asr
-```
-
-**Key Metrics to Watch:**
-- `val_wer` - Word Error Rate (lower is better)
-- `val_loss` - Validation loss (should decrease)
-- `train_loss` - Training loss (should decrease smoothly)
-- `learning_rate` - Should follow scheduler curve
-
-### Checkpoints
-
-Checkpoints are saved automatically in:
-```
-./outputs/parakeet-tdt-malay-asr/
-├── checkpoints/
-│   ├── parakeet-tdt--epoch=0-val_wer=0.1234.ckpt
-│   ├── parakeet-tdt--epoch=1-val_wer=0.0987.ckpt
-│   └── parakeet-tdt--epoch=2-val_wer=0.0856.ckpt
-└── logs/
-    └── tensorboard events
-```
-
-Best 3 checkpoints are kept (configurable via `save_total_limit`).
-
----
-
-## 🧪 After Training
-
-### 1. Export Final Model
-
-The final model is automatically saved to:
-```
-./outputs/parakeet-tdt-malay-asr/final_model.nemo
-```
-
-### 2. Test the Model
-
-Use the transcription script:
-
-```bash
-cd ../../eval/transcribe
-
-python transcribe_parakeet.py \
-  --model ../../train/train_parakeet_tdt/outputs/parakeet-tdt-malay-asr/final_model.nemo \
-  --test-data /path/to/test.json \
-  --output-dir ./results/parakeet-finetuned \
-  --device cuda
-```
-
-### 3. Calculate Metrics
-
-```bash
-cd ../shared
-python calculate_metrics.py ../transcribe/results/parakeet-finetuned/predictions.json
-```
-
-### 4. Compare with Base Model
-
-```bash
-# Transcribe with base model
-python transcribe_parakeet.py \
-  --model nvidia/parakeet-tdt-0.6b-v3 \
-  --test-data /path/to/test.json \
-  --output-dir ./results/parakeet-base
-
-# Compare results
-python analyze_results.py \
-  --result1 ./results/parakeet-base/predictions.json \
-  --result2 ./results/parakeet-finetuned/predictions.json \
-  --output-dir ./comparison
-```
-
----
-
-## 🐛 Troubleshooting
-
-### "ModuleNotFoundError: No module named 'nemo'"
-
-**Solution:**
-```bash
-# Install from main requirements (recommended)
-cd ~/voice-ai/asr/train
-pip install -r requirements.txt
-
-# Or just NeMo
-pip install nemo_toolkit[asr]
-```
-
-### "CUDA Out of Memory"
-
-**Solutions:**
-1. Reduce batch size in `config.yaml`:
+1. Reduce batch size in config:
    ```yaml
-   per_device_train_batch_size: 4  # or 2
+   per_device_train_batch_size: 4
    ```
 
 2. Increase gradient accumulation:
    ```yaml
-   gradient_accumulation_steps: 4
+   gradient_accumulation_steps: 32
    ```
 
-3. Ensure no other processes are using GPU:
-   ```bash
-   nvidia-smi
+3. Enable gradient checkpointing:
+   ```yaml
+   model:
+     gradient_checkpointing: true
    ```
 
-### "Manifest file not found"
+### ModuleNotFoundError: No module named 'nemo'
 
-**Solution:**
-1. Run `prepare_data.py` first to create manifests
-2. Check paths in `config.yaml` are correct
-3. Ensure audio files exist at the paths specified in manifest
+```bash
+make install
+```
 
-### "Training is too slow"
+### Training is too slow
 
-**Solutions:**
-1. Increase batch size (if you have VRAM)
+1. Increase batch size if VRAM allows
 2. Reduce `dataloader_num_workers` if CPU is bottleneck
-3. Enable `fp16` training
-4. Use faster storage (SSD) for audio files
-5. Consider multi-GPU training
+3. Use SSD for audio files
+4. Consider multi-GPU training
 
-### "Validation WER not improving"
+### Validation WER not improving
 
-**Checks:**
-1. **Overfitting**: Reduce learning rate or add regularization
-2. **Data quality**: Check transcription accuracy
-3. **Learning rate**: Try 1e-5 instead of 2e-5
-4. **Training duration**: May need more epochs
-5. **Data size**: Small datasets may not improve much
+1. Check transcription accuracy
+2. Try lower learning rate: `1e-5`
+3. May need more epochs
+4. Verify audio quality (16kHz+)
 
-### "Model outputs are not punctuated"
-
-**Note:** Parakeet TDT automatically adds punctuation during inference, not during training. The model learns to predict punctuation from the training data structure.
-
----
-
-## 📖 Advanced Topics
-
-### Multi-GPU Training
-
-Edit `config.yaml`:
-```yaml
-training:
-  num_gpus: 2  # or 4, 8, etc.
-```
-
-NeMo automatically handles distributed training with PyTorch Lightning.
-
-### Custom Learning Rate Schedule
-
-```yaml
-training:
-  scheduler: "CosineAnnealing"  # or "WarmupAnnealing", "PolynomialDecayAnnealing"
-  warmup_steps: 1000
-  min_learning_rate: 1.0e-6
-```
-
-### Resume from Checkpoint
-
-```yaml
-training:
-  resume_from_checkpoint: true
-```
-
-NeMo will automatically find and resume from the last checkpoint.
-
-### Weights & Biases Integration
-
-```yaml
-wandb:
-  enabled: true
-  project: "parakeet-tdt-malay"
-  entity: "your-username"
-```
-
----
-
-## 📚 Additional Resources
-
-- **NVIDIA NeMo Docs**: https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/stable/
-- **Parakeet Paper**: https://arxiv.org/abs/2408.xxxxx
-- **Parakeet TDT 0.6B v3**: https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3
-- **NeMo ASR Tutorial**: https://github.com/NVIDIA/NeMo/tree/main/tutorials/asr
-- **Training Configurations**: Check model card for official training hyperparameters
-
----
-
-## 🔄 Comparison with Other Frameworks
-
-| Framework | Best For | Pros | Cons |
-|-----------|----------|------|------|
-| **NeMo** ✓ | Parakeet models | Native support, robust, distributed training | Learning curve |
-| LLamaFactory | LLM-based ASR | Easy to use, flexible | Not optimized for TDT |
-| HuggingFace Trainer | Transformer models | Familiar API | Limited ASR-specific features |
-| Custom PyTorch | Full control | Maximum flexibility | More code to write |
-
-**For Parakeet TDT, NeMo is the clear winner** - it's the official framework and provides the best support.
-
----
-
-## ❓ FAQ
-
-**Q: Do I need quantization for Parakeet TDT 0.6B?**  
-A: No! The model is already lightweight (~4-6GB VRAM). Quantization is not necessary.
-
-**Q: Can I fine-tune on non-English languages?**  
-A: Yes, but the base model is English-optimized. Fine-tuning on other languages works but may require more data.
-
-**Q: How much data do I need?**  
-A: Minimum 10 hours, recommended 100+ hours for good results on a new domain.
-
-**Q: Should I use TDT or RNNT?**  
-A: Use **TDT** (0.6b-v3) for best accuracy and automatic punctuation. Use **RNNT** only if you need streaming.
-
-**Q: Can I train from scratch?**  
-A: Possible but not recommended. Fine-tuning from pre-trained model is much faster and achieves better results.
-
----
-
-## 📄 License
+## License
 
 Training scripts are provided as-is. Check NVIDIA's model license for usage terms.
 
----
+## Acknowledgements
 
-**Happy Training! 🚀**
-
+- NVIDIA NeMo Team for the excellent framework
+- NVIDIA for the base Parakeet TDT model
+- mesolitica for the Malaysian-STT dataset

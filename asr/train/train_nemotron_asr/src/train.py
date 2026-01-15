@@ -554,14 +554,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Using default config.yaml
-  python train_nemotron_asr.py
+  # Using default config
+  python src/train.py
   
-  # Using custom config
-  python train_nemotron_asr.py --config my_config.yaml
+  # Using specific config
+  python src/train.py --config configs/nemotron_streaming.yaml
   
   # For multi-GPU training, use:
-  torchrun --nproc_per_node=2 train_nemotron_asr.py --config config.yaml
+  torchrun --nproc_per_node=2 src/train.py --config configs/nemotron_streaming.yaml
 
 For more information, see: https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/configs.html
         """
@@ -569,8 +569,8 @@ For more information, see: https://docs.nvidia.com/deeplearning/nemo/user-guide/
     parser.add_argument(
         "--config",
         type=str,
-        default="config.yaml",
-        help="Path to training configuration file (default: config.yaml)"
+        default="configs/nemotron_streaming.yaml",
+        help="Path to training configuration file (default: configs/nemotron_streaming.yaml)"
     )
     
     args = parser.parse_args()
@@ -578,8 +578,8 @@ For more information, see: https://docs.nvidia.com/deeplearning/nemo/user-guide/
     # Check if config file exists
     if not Path(args.config).exists():
         logging.error(f"Configuration file not found: {args.config}")
-        logging.error("Please create a config.yaml file or specify --config path")
-        logging.error("See config.yaml for an example configuration")
+        logging.error("Please specify --config path or ensure configs/ directory has config files")
+        logging.error("Available configs: configs/nemotron_streaming.yaml")
         return 1
     
     # Start training

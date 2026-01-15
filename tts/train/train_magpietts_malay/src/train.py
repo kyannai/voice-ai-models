@@ -2,12 +2,16 @@
 """
 Fine-tune MagpieTTS on Malaysian-TTS dataset.
 
-This script fine-tunes the pretrained MagpieTTS model on the prepared
-Malaysian TTS dataset using NeMo framework with GPU acceleration.
+Two-Phase Training Pipeline:
+- Phase 1 (Language): Teaches model Malay G2P from pretrained model
+- Phase 2 (Voice Clone): Fine-tunes Malay model with new speaker voices
 
 Usage:
-    python train.py --config configs/magpietts_malay.yaml
-    python train.py --config configs/magpietts_malay.yaml --gpus 2
+    # Phase 1: Language training
+    python train.py --config configs/phase1_language.yaml
+    
+    # Phase 2: Voice cloning
+    python train.py --config configs/phase2_voiceclone.yaml
 """
 
 import argparse
@@ -32,6 +36,121 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def add_malay_tokenizer(model, g2p_dict_path: str):
+    """
+    Add Malay tokenizer to MagpieTTS model by replacing Spanish tokenizer entirely.
+    
+    We create a fresh IPATokenizer with:
+    - Malay-specific IPA vocabulary (extracted from G2P dictionary)
+    - Malay G2P dictionary for word-to-phoneme conversion
+    
+    This ensures all Malay phonemes (like ə, ŋ) are in the vocabulary.
+    Training data uses language='es' to route through the Spanish slot.
+    
+    Args:
+        model: MagpieTTSModel instance
+        g2p_dict_path: Path to the Malay G2P dictionary file
+    """
+    from pathlib import Path
+    from nemo.collections.common.tokenizers.text_to_speech.tts_tokenizers import IPATokenizer
+    from nemo.collections.tts.g2p.models.i18n_ipa import IpaG2p
+    
+    g2p_dict_path = str(Path(g2p_dict_path).absolute())
+    
+    if not Path(g2p_dict_path).exists():
+        raise FileNotFoundError(f"G2P dictionary not found: {g2p_dict_path}")
+    
+    logger.info(f"Creating Malay tokenizer with fresh IPA vocab: {g2p_dict_path}")
+    
+    agg_tok = model.tokenizer
+    
+    if 'spanish_phoneme' not in agg_tok.tokenizers:
+        raise RuntimeError("Spanish tokenizer not found, cannot replace")
+    
+    # Create Malay G2P
+    malay_g2p = IpaG2p(
+        phoneme_dict=g2p_dict_path,
+        heteronyms=None,
+        phoneme_probability=0.8,
+        ignore_ambiguous_words=False,
+        use_chars=True,
+        use_stresses=True,
+    )
+    logger.info(f"  Created Malay IpaG2p with {len(malay_g2p.phoneme_dict)} entries")
+    
+    # Extract all unique IPA symbols from the Malay G2P dictionary
+    all_phonemes = set()
+    for word, pronunciations in malay_g2p.phoneme_dict.items():
+        for pron in pronunciations:
+            all_phonemes.update(pron)
+    
+    # Add common punctuation
+    punct_symbols = set(".,!?;:'-\"()[]{}…–—")
+    all_phonemes.update(punct_symbols)
+    
+    logger.info(f"  Extracted {len(all_phonemes)} unique IPA symbols for Malay")
+    
+    # Create fresh IPATokenizer with Malay vocabulary
+    malay_tokenizer = IPATokenizer(
+        g2p=malay_g2p,
+        punct=True,
+        apostrophe=True,
+        pad_with_space=False,
+    )
+    
+    # Verify vocab
+    if hasattr(malay_tokenizer, 'tokens'):
+        tok_vocab = set(malay_tokenizer.tokens)
+        missing = all_phonemes - tok_vocab - {' '}
+        if missing:
+            logger.warning(f"  Some phonemes not in tokenizer vocab: {list(missing)[:10]}")
+    
+    # Replace Spanish tokenizer entirely
+    agg_tok.tokenizers['spanish_phoneme'] = malay_tokenizer
+    logger.info("  Replaced Spanish tokenizer with fresh Malay tokenizer")
+    logger.info("  Training data should use language='es'")
+    
+    logger.info("Malay tokenizer added successfully (using Spanish slot)")
+
+
+def reset_language_embeddings(model, tokenizer_name: str = 'spanish_phoneme'):
+    """
+    Reinitialize token embeddings for a specific language slot.
+    
+    This gives the model a "clean slate" for learning a new language
+    without bias from the original language's phoneme patterns.
+    
+    Args:
+        model: MagpieTTSModel instance
+        tokenizer_name: Name of the tokenizer slot to reset (default: 'spanish_phoneme')
+    """
+    import torch
+    
+    agg_tok = model.tokenizer
+    
+    if tokenizer_name not in agg_tok.tokenizer_offsets:
+        raise ValueError(f"Tokenizer '{tokenizer_name}' not found. Available: {list(agg_tok.tokenizer_offsets.keys())}")
+    
+    offset = agg_tok.tokenizer_offsets[tokenizer_name]
+    size = agg_tok.num_tokens_per_tokenizer[tokenizer_name]
+    
+    logger.info(f"Resetting embeddings for '{tokenizer_name}' (indices {offset}:{offset+size})")
+    
+    # Check if model has text_embedding layer
+    if not hasattr(model, 'text_embedding'):
+        raise RuntimeError("Model does not have 'text_embedding' layer")
+    
+    # Reinitialize embeddings with small random values
+    with torch.no_grad():
+        embedding_dim = model.text_embedding.weight.shape[1]
+        # Use Xavier/Glorot initialization scaled for embedding
+        std = (2.0 / (size + embedding_dim)) ** 0.5
+        model.text_embedding.weight[offset:offset+size].normal_(0, std)
+    
+    logger.info(f"  Reset {size} embeddings (dim={embedding_dim}) with std={std:.4f}")
+    logger.info("  Spanish language knowledge cleared - ready for Malay training")
 
 
 def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = None):
@@ -100,14 +219,39 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
     exp_config = config.get('exp_manager', {})
     exp_manager(trainer, exp_config)
     
-    # Load pretrained model or resume
+    # Determine training phase
+    phase = config.get('phase', 'language')  # Default to language training
+    logger.info(f"Training phase: {phase}")
+    
+    # Load model based on phase and resume settings
     if resume_from:
         logger.info(f"Resuming from checkpoint: {resume_from}")
         model = MagpieTTSModel.load_from_checkpoint(resume_from)
+    elif phase == 'voiceclone':
+        # Phase 2: Voice cloning - load from Malay base model
+        base_model = config.get('base_model')
+        if not base_model:
+            raise ValueError("Phase 2 (voiceclone) requires 'base_model' path in config")
+        logger.info(f"Loading Malay base model for voice cloning: {base_model}")
+        model = MagpieTTSModel.restore_from(base_model)
+        logger.info("Malay tokenizer already present in base model")
     else:
+        # Phase 1: Language training - load from pretrained and add Malay tokenizer
         pretrained_model = config.get('pretrained_model', 'nvidia/magpie_tts_multilingual_357m')
         logger.info(f"Loading pretrained model: {pretrained_model}")
         model = MagpieTTSModel.from_pretrained(pretrained_model)
+        
+        # Add Malay tokenizer with G2P dictionary (Phase 1 only)
+        g2p_dict = config.get('g2p_dict') or config.get('model', {}).get('g2p_dict')
+        if g2p_dict:
+            add_malay_tokenizer(model, g2p_dict)
+            
+            # Reset Spanish embeddings to give Malay a clean slate
+            # This removes Spanish phoneme bias while keeping shared encoder/decoder knowledge
+            reset_language_embeddings(model, 'spanish_phoneme')
+        else:
+            logger.warning("No G2P dictionary specified - model won't have Malay G2P support")
+            logger.warning("Use --generate-g2p in prepare_data.py to create one")
     
     # Get model config from our YAML
     model_config = config.get('model', {})
@@ -203,7 +347,8 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
             audio = torch.FloatTensor(audio)
             
             text = sample['text']
-            language = sample.get('language', 'ms')
+            # Default to 'es' (Spanish slot) - we replace Spanish G2P with Malay G2P
+            language = sample.get('language', 'es')
             
             # Tokenize text if tokenizer available
             if self.tokenizer:

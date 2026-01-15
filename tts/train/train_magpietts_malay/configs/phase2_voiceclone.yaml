@@ -1,0 +1,71 @@
+# Phase 2: Voice Cloning Config
+# ==============================
+# Fine-tunes the Malay-capable model with new speaker voices.
+# No external phonemizer needed - model already has Malay G2P.
+#
+# Run: make phase2-train
+# Requires: models/malay_base.nemo (from Phase 1)
+
+# Training phase identifier
+phase: voiceclone
+
+# Base model from Phase 1 (already has Malay G2P)
+base_model: models/malay_base.nemo
+
+# Model configuration
+model:
+  # Data paths (raw text - model handles G2P internally)
+  train_manifest: data/manifests/train_manifest.json
+  val_manifest: data/manifests/val_manifest.json
+  
+  # Training hyperparameters for VOICE CLONING
+  # Lower learning rate to preserve language knowledge
+  batch_size: 32
+  learning_rate: 1e-4        # Lower for fine-tuning
+  
+  # Audio settings
+  sample_rate: 22050
+  
+  # Can optionally freeze encoder for faster training
+  # Set to true if only training voice characteristics
+  freeze_encoder: false
+
+# Trainer configuration
+trainer:
+  max_epochs: 30             # Fewer epochs for voice cloning
+  precision: '16-mixed'
+  accumulate_grad_batches: 2  # Smaller effective batch for fine-tuning
+  gradient_clip_val: 1.0
+  log_every_n_steps: 50
+  val_check_interval: 0.5
+  strategy: auto
+
+# Experiment manager
+exp_manager:
+  exp_dir: experiments/phase2_voiceclone
+  name: malay_voiceclone
+  
+  create_checkpoint_callback: true
+  checkpoint_callback_params:
+    monitor: val_loss
+    mode: min
+    save_top_k: 3
+    save_last: true
+    filename: 'malay_voice-{epoch:02d}-{val_loss:.4f}'
+  
+  resume_if_exists: true
+  resume_ignore_no_checkpoint: true
+  
+  create_tensorboard_logger: true
+  create_wandb_logger: false
+
+# Optimizer
+optim:
+  name: adamw
+  lr: 1e-4                   # Lower LR for fine-tuning
+  betas: [0.9, 0.98]
+  weight_decay: 0.01
+  sched:
+    name: CosineAnnealing
+    warmup_steps: 500        # Shorter warmup for fine-tuning
+    min_lr: 1e-7

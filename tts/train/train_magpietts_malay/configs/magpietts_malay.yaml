@@ -20,8 +20,8 @@ model:
   # 2. Learn Malay phonetics and prosody patterns
   # 3. Adapt the model to code-switching (Malay-English)
   
-  batch_size: 8              # Reduce to 4 if OOM
-  learning_rate: 2e-4        # Higher LR for new language (vs 1e-5 for fine-tuning)
+  batch_size: 64             # Aggressive - pushing A100 limits (~72GB expected)
+  learning_rate: 5e-4        # Increased with larger batch size (linear scaling)
   
   # Audio settings (must match prepare_data.py)
   sample_rate: 22050
@@ -58,7 +58,7 @@ model:
 
 # Trainer configuration (PyTorch Lightning)
 trainer:
-  max_epochs: 10  # Reduced for faster experimentation
+  max_epochs: 30  # Conservative to avoid overfitting
   
   # GPU settings
   # precision: '16-mixed' enables automatic mixed precision for faster training
@@ -101,7 +101,7 @@ exp_manager:
 # Optimizer configuration
 optim:
   name: adamw
-  lr: 2e-4                   # Match model.learning_rate
+  lr: 5e-4                   # Match model.learning_rate
   betas: [0.9, 0.98]
   weight_decay: 0.01
   
