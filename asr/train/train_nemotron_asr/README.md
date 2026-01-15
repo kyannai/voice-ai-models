@@ -171,14 +171,6 @@ NeMo manifest files in JSONL format:
 {"audio_filepath": "/path/to/audio2.wav", "text": "transcription two", "duration": 3.2}
 ```
 
-## Hardware Requirements
-
-| Hardware | VRAM | Batch Size |
-|----------|------|------------|
-| Consumer GPU | 8GB | 4-8 |
-| Professional GPU | 24GB+ | 16-32 |
-| Data Center | 40GB+ | 32-64+ |
-
 ## Technical Notes
 
 - Nemotron uses cache-aware FastConformer encoder with RNNT decoder
@@ -186,26 +178,30 @@ NeMo manifest files in JSONL format:
 - Native support for punctuation and capitalization
 - bf16 recommended for A100/H100 GPUs
 
-## Troubleshooting
+## Model Card: Nemotron Speech Streaming Malay ASR
 
-### CUDA Out of Memory
+**Status**: Not yet trained
 
-1. Reduce batch size:
-   ```yaml
-   per_device_train_batch_size: 4
-   ```
+### Planned Training
 
-2. Enable gradient checkpointing:
-   ```yaml
-   model:
-     gradient_checkpointing: true
-   ```
+| Field | Value |
+|-------|-------|
+| Base Model | [nvidia/nemotron-speech-streaming-en-0.6b](https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b) |
+| Architecture | Cache-aware FastConformer + RNNT |
+| Parameters | 0.6B |
+| Framework | NVIDIA NeMo |
 
-### ModuleNotFoundError: No module named 'nemo'
+### Training Configuration
 
-```bash
-make install
-```
+Refer to `train_parakeet_tdt` for training parameters:
+- Dataset: [mesolitica/Malaysian-STT-Whisper](https://huggingface.co/datasets/mesolitica/Malaysian-STT-Whisper)
+- Config template: `../train_parakeet_tdt/configs/parakeet_stage1.yaml`
+
+### Notes
+
+- Uses same data pipeline as Parakeet TDT
+- Streaming inference capability for real-time ASR
+- Update this section after training is complete
 
 ## License
 

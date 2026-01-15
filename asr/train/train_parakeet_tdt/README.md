@@ -204,88 +204,139 @@ make clean-data     # Remove downloaded data
 make clean-all      # Remove all generated files
 ```
 
-## Training Configurations
+## Model Card: Parakeet TDT 0.6B Malay ASR
+
+This section documents how the Malay ASR model was trained for future maintainers.
+
+### Model Information
+
+| Field | Value |
+|-------|-------|
+| Base Model | [nvidia/parakeet-tdt-0.6b-v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) |
+| Architecture | FastConformer + TDT (Token-and-Duration Transducer) |
+| Parameters | 0.6B |
+| Framework | NVIDIA NeMo |
+| Training Hardware | NVIDIA A100-SXM4-80GB |
+
+### Training Pipeline Overview
+
+The model was trained in two stages:
+
+```
+Stage 1: Malaysian-STT-Whisper (~5.2M samples)
+    ↓
+Stage 2: 5K Synthetic names & numbers data
+```
+
+---
 
 ### Stage 1: Initial Fine-tuning
 
-For training on the full Malaysian-STT dataset (~5.2M samples):
+**Dataset**: [mesolitica/Malaysian-STT-Whisper](https://huggingface.co/datasets/mesolitica/Malaysian-STT-Whisper)
+
+| Field | Value |
+|-------|-------|
+| Total Samples | ~5.2M audio-text pairs |
+| Subsets Used | `malaysian_context_v2`, `extra` |
+| Audio Format | 16kHz WAV |
+| Languages | Malay (primary), some English |
+| Train/Val Split | 95% / 5% |
+
+**Config**: `configs/parakeet_stage1.yaml`
 
 | Parameter | Value |
 |-----------|-------|
-| Learning Rate | 2.0e-4 |
+| Epochs | 1 |
 | Batch Size | 8 |
 | Gradient Accumulation | 16 |
 | Effective Batch Size | 128 |
+| Learning Rate | 2.0e-4 |
+| LR Scheduler | CosineAnnealing |
+| Warmup Steps | 100 |
 | Optimizer | AdamW 8-bit |
 | Precision | bfloat16 |
-| Estimated Time | ~4 days on A100 |
+| Total Steps | ~659,506 |
+| Duration | ~4 days on A100-80GB |
+| Checkpoints | Every 41,000 steps (~6 hours) |
 
-### Stage 2: Continued Training
+---
 
-For additional fine-tuning on new data:
+### Stage 2: 5K Synthetic Names & Numbers
+
+**Dataset**: Synthetic data generated using TTS
+
+Data location: `../training_data/5k_v3/`
+
+| Field | Value |
+|-------|-------|
+| Total Samples | ~5,000 synthetic audio-text pairs |
+| Content | Malaysian names, numbers, addresses |
+| Generation | TTS synthesis (`synthetic_data_generation`) |
+| Purpose | Improve recognition of names and numbers |
+
+**Config**: `configs/parakeet_5k.yaml`
 
 | Parameter | Value |
 |-----------|-------|
-| Base Model | Stage 1 checkpoint |
-| Learning Rate | 2.0e-4 |
+| Base Model | Stage 1 checkpoint (`./models/full.nemo`) |
 | Epochs | 1 |
+| Batch Size | 20 |
+| Gradient Accumulation | 6 |
+| Effective Batch Size | 120 |
+| Learning Rate | 5.0e-5 (lower for fine-tuning) |
+| Warmup Steps | 10 |
+| Steps per Epoch | ~38 |
 
-## Hardware Requirements
-
-### Minimum (Consumer GPUs)
-- **GPU**: 8GB VRAM (RTX 3060, RTX 4060)
-- **RAM**: 16GB
-- **Batch Size**: 4-8
-
-### Recommended (Professional GPUs)
-- **GPU**: 24GB+ VRAM (RTX 4090, A5000)
-- **RAM**: 32GB
-- **Batch Size**: 16-32
-
-### High-Performance (Data Center)
-- **GPU**: 40GB+ VRAM (A100, H100)
-- **RAM**: 64GB
-- **Batch Size**: 32-64+
-
-## Troubleshooting
-
-### CUDA Out of Memory
-
-1. Reduce batch size in config:
-   ```yaml
-   per_device_train_batch_size: 4
-   ```
-
-2. Increase gradient accumulation:
-   ```yaml
-   gradient_accumulation_steps: 32
-   ```
-
-3. Enable gradient checkpointing:
-   ```yaml
-   model:
-     gradient_checkpointing: true
-   ```
-
-### ModuleNotFoundError: No module named 'nemo'
-
+**Synthetic Data Generation**:
 ```bash
-make install
+cd ../training_data/5k_v3/src/
+./prepare_synthetic_data.sh  # Generate TTS audio
+python prepare_synthetic_manifests.py  # Create manifests
 ```
 
-### Training is too slow
+---
 
-1. Increase batch size if VRAM allows
-2. Reduce `dataloader_num_workers` if CPU is bottleneck
-3. Use SSD for audio files
-4. Consider multi-GPU training
+### Memory Optimizations
 
-### Validation WER not improving
+To fit large datasets on A100-80GB:
+- 8-bit AdamW optimizer (75% optimizer memory reduction)
+- Gradient checkpointing (30-50% activation memory reduction)
+- `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`
+- Reduced batch size with higher gradient accumulation
 
-1. Check transcription accuracy
-2. Try lower learning rate: `1e-5`
-3. May need more epochs
-4. Verify audio quality (16kHz+)
+### Model Outputs
+
+The trained model includes:
+- Auto-punctuation and capitalization
+- Word-level timestamps
+- Support for audio up to 24 minutes
+
+### Checkpoint Locations
+
+```
+# Stage 1: Malaysian-STT-Whisper
+outputs/parakeet-tdt-malay-asr/
+└── parakeet-tdt-malay-finetuning/
+    └── YYYY-MM-DD_HH-MM-SS/checkpoints/
+
+# Stage 2: 5K Synthetic
+outputs/parakeet-tdt-5k-v3/
+└── parakeet-tdt-5k-v3/
+    └── YYYY-MM-DD_HH-MM-SS/checkpoints/
+```
+
+### Usage
+
+```python
+import nemo.collections.asr as nemo_asr
+
+# Load trained model
+model = nemo_asr.models.ASRModel.restore_from("path/to/checkpoint.nemo")
+
+# Transcribe audio
+transcription = model.transcribe(["audio.wav"])
+print(transcription)
+```
 
 ## License
 
