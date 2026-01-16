@@ -44,12 +44,13 @@ GPUS ?= -1  # -1 means use all available GPUs
 MODEL_PATH ?= nvidia/magpie_tts_multilingual_357m
 LANGUAGE := ms
 SPEAKER := 0
+CODE_SWITCH ?= 0
 
 .PHONY: help install download download-small explore \
         phase1-prepare phase1-train phase1-export \
         phase2-prepare phase2-train \
-        synth synth-file list-speakers synth-test \
-        convert convert-best list-checkpoints phase1-convert \
+        synth synthesize synth-file list-speakers synth-test \
+        convert convert-latest convert-best list-checkpoints phase1-convert \
         check-gpu tensorboard clean clean-all clean-output
 
 # ============================================================
@@ -86,10 +87,12 @@ help:
 	@echo "    LANGUAGE=ms                   - Language code"
 	@echo ""
 	@echo "=== Utilities ==="
-	@echo "  make check-gpu        - Check GPU availability"
-	@echo "  make tensorboard      - Start TensorBoard"
-	@echo "  make list-checkpoints - List available checkpoints"
-	@echo "  make convert          - Convert latest checkpoint to .pt"
+	@echo "  make check-gpu                    - Check GPU availability"
+	@echo "  make tensorboard                  - Start TensorBoard"
+	@echo "  make list-checkpoints             - List available checkpoints"
+	@echo "  make convert CKPT=<name>.ckpt     - Convert specific checkpoint"
+	@echo "  make convert-latest               - Convert latest checkpoint"
+	@echo "  make convert-best                 - Convert best (lowest val_loss)"
 	@echo ""
 	@echo "=== Cleanup ==="
 	@echo "  make clean            - Remove generated files (audio, manifests)"
@@ -253,6 +256,20 @@ endif
 		--language $(LANGUAGE) \
 		--speaker $(SPEAKER)
 
+synthesize:
+ifndef TEXT
+	@echo "Error: TEXT is required. Usage: make synthesize TEXT=\"Your text here\" MODEL_PATH=path/to/model.pt LANGUAGE=ms CODE_SWITCH=1"
+	@exit 1
+endif
+	@echo "Synthesizing: $(TEXT)"
+	python $(SRC_DIR)/synthesize.py \
+		--model-path $(MODEL_PATH) \
+		--text "$(TEXT)" \
+		--output-dir $(OUTPUT_DIR) \
+		--language $(LANGUAGE) \
+		--speaker $(SPEAKER) \
+		$(if $(filter 1 true yes,$(CODE_SWITCH)),--code-switch,)
+
 synth-file:
 ifndef INPUT
 	@echo "Error: INPUT is required. Usage: make synth-file INPUT=sentences.txt"
@@ -305,18 +322,32 @@ list-checkpoints:
 
 convert:
 ifndef CKPT
+	@echo "Usage: make convert CKPT=<checkpoint_name>"
+	@echo ""
+	@echo "Available checkpoints:"
+	@ls -1 $(PHASE1_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | xargs -n1 basename | grep -v last || echo "  No checkpoints found"
+	@echo ""
+	@echo "Example:"
+	@echo "  make convert CKPT=malay_lang-epoch=00-val_loss=7.3366.ckpt"
+else
+	@CKPT_PATH="$(PHASE1_CHECKPOINT_DIR)/$(CKPT)"; \
+	echo "Converting checkpoint: $$CKPT_PATH"; \
+	if [ ! -f "$$CKPT_PATH" ]; then \
+		echo "Error: Checkpoint not found: $$CKPT_PATH"; \
+		exit 1; \
+	fi; \
+	$(PYTHON) src/convert_checkpoint.py "$$CKPT_PATH" -o "$(MODELS_DIR)/malay_base.pt"
+endif
+
+convert-latest:
 	@echo "Converting latest checkpoint to .pt state dict..."
-	@LATEST=$$(ls -t $(PHASE1_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | head -1); \
+	@LATEST=$$(ls -t $(PHASE1_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | grep -v last | head -1); \
 	if [ -z "$$LATEST" ]; then \
 		echo "Error: No checkpoints found in $(PHASE1_CHECKPOINT_DIR)"; \
 		exit 1; \
 	fi; \
 	echo "Found: $$LATEST"; \
 	$(PYTHON) src/convert_checkpoint.py "$$LATEST" -o "$(MODELS_DIR)/malay_base.pt"
-else
-	@echo "Converting checkpoint: $(CKPT)"
-	$(PYTHON) src/convert_checkpoint.py "$(CKPT)"
-endif
 
 convert-best:
 	@echo "Finding best checkpoint by val_loss..."

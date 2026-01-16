@@ -42,6 +42,14 @@ try:
 except ImportError:
     pass
 
+# Optional language ID for stronger code-switch detection
+LANGID_AVAILABLE = False
+try:
+    import langid
+    LANGID_AVAILABLE = True
+except ImportError:
+    pass
+
 # Speaker mapping (same as in prepare_data.py)
 SPEAKER_MAP = {
     "anwar_ibrahim": 0,
@@ -243,6 +251,72 @@ def load_model(model_path: str, device: str = "cuda", g2p_dict: str = None, lang
     return model
 
 
+def detect_token_language(token: str, english_words: set, malay_abbrev: set) -> str:
+    """Detect language for a token using langid if available, else heuristics."""
+    token_lower = token.lower()
+    if token_lower in english_words:
+        return "en"
+    if token_lower in malay_abbrev:
+        return "ms"
+    
+    if LANGID_AVAILABLE and len(token) >= 3:
+        try:
+            label, _ = langid.classify(token)
+            if label.startswith("en"):
+                return "en"
+            if label in ("ms", "id"):
+                return "ms"
+        except Exception:
+            pass
+    
+    return "ms"
+
+
+def split_text_by_language(text: str) -> list[tuple[str, str]]:
+    """Split text into (segment, language) tuples using LID + heuristics."""
+    import re
+    
+    try:
+        from malay_phonemizer import MalayPhonemizer
+        english_words = MalayPhonemizer.ENGLISH_WORDS
+        malay_abbrev = set(MalayPhonemizer.ABBREVIATIONS.keys())
+    except Exception:
+        english_words = set()
+        malay_abbrev = set()
+    
+    tokens = re.findall(r"[A-Za-z']+|[^\w\s]+|\s+", text, re.UNICODE)
+    
+    segments: list[tuple[str, str]] = []
+    current = ""
+    current_lang = None
+    
+    for tok in tokens:
+        if tok.isspace():
+            current += tok
+            continue
+        
+        if re.match(r"[A-Za-z']+$", tok):
+            lang = detect_token_language(tok, english_words, malay_abbrev)
+        else:
+            lang = current_lang or "ms"
+        
+        if current_lang is None:
+            current_lang = lang
+        
+        if lang != current_lang and current.strip():
+            segments.append((current.strip(), current_lang))
+            current = tok
+            current_lang = lang
+        else:
+            current += tok
+            current_lang = lang
+    
+    if current.strip():
+        segments.append((current.strip(), current_lang or "ms"))
+    
+    return segments
+
+
 def synthesize_text(
     model,
     text: str,
@@ -291,6 +365,54 @@ def synthesize_text(
     return audio, SAMPLE_RATE
 
 
+def synthesize_text_with_codeswitch(
+    model,
+    text: str,
+    speaker_index: int = 0,
+    apply_text_normalization: bool = True,
+    pause_seconds: float = 0.0,
+) -> tuple:
+    """Synthesize audio for code-switched text by splitting into language segments."""
+    segments = split_text_by_language(text)
+    if not segments:
+        return synthesize_text(
+            model,
+            text,
+            language="ms",
+            speaker_index=speaker_index,
+            apply_text_normalization=apply_text_normalization,
+        )
+    
+    audio_parts = []
+    pause = None
+    if pause_seconds > 0:
+        pause = torch.zeros(int(SAMPLE_RATE * pause_seconds))
+    
+    for segment_text, lang in segments:
+        audio, _ = synthesize_text(
+            model,
+            segment_text,
+            language=lang,
+            speaker_index=speaker_index,
+            apply_text_normalization=apply_text_normalization,
+        )
+        audio_parts.append(torch.tensor(audio))
+        if pause is not None:
+            audio_parts.append(pause)
+    
+    if not audio_parts:
+        return synthesize_text(
+            model,
+            text,
+            language="ms",
+            speaker_index=speaker_index,
+            apply_text_normalization=apply_text_normalization,
+        )
+    
+    combined = torch.cat(audio_parts).cpu().numpy()
+    return combined, SAMPLE_RATE
+
+
 def synthesize_batch(
     model,
     texts: list[str],
@@ -300,6 +422,7 @@ def synthesize_batch(
     apply_text_normalization: bool = True,
     prefix: str = "output",
     phonemizer=None,
+    code_switch: bool = False,
 ):
     """
     Synthesize multiple texts and save to files.
@@ -321,14 +444,22 @@ def synthesize_batch(
         logger.info(f"[{i+1}/{len(texts)}] Synthesizing: {text[:50]}...")
         
         try:
-            audio, sr = synthesize_text(
-                model,
-                text,
-                language=language,
-                speaker_index=speaker_index,
-                apply_text_normalization=apply_text_normalization,
-                phonemizer=phonemizer,
-            )
+            if code_switch:
+                audio, sr = synthesize_text_with_codeswitch(
+                    model,
+                    text,
+                    speaker_index=speaker_index,
+                    apply_text_normalization=apply_text_normalization,
+                )
+            else:
+                audio, sr = synthesize_text(
+                    model,
+                    text,
+                    language=language,
+                    speaker_index=speaker_index,
+                    apply_text_normalization=apply_text_normalization,
+                    phonemizer=phonemizer,
+                )
             
             output_path = output_dir / f"{prefix}_{i:04d}.wav"
             sf.write(str(output_path), audio, sr)
@@ -431,6 +562,11 @@ Available speakers:
         help="Disable text normalization"
     )
     parser.add_argument(
+        "--code-switch",
+        action="store_true",
+        help="Split mixed Malay/English text and synthesize with per-segment languages"
+    )
+    parser.add_argument(
         "--device",
         type=str,
         default="cuda" if torch.cuda.is_available() else "cpu",
@@ -502,14 +638,22 @@ Available speakers:
     
     if len(texts) == 1 and args.output_file:
         # Single file output
-        audio, sr = synthesize_text(
-            model,
-            texts[0],
-            language=args.language,
-            speaker_index=args.speaker,
-            apply_text_normalization=apply_tn,
-            phonemizer=phonemizer,
-        )
+        if args.code_switch:
+            audio, sr = synthesize_text_with_codeswitch(
+                model,
+                texts[0],
+                speaker_index=args.speaker,
+                apply_text_normalization=apply_tn,
+            )
+        else:
+            audio, sr = synthesize_text(
+                model,
+                texts[0],
+                language=args.language,
+                speaker_index=args.speaker,
+                apply_text_normalization=apply_tn,
+                phonemizer=phonemizer,
+            )
         
         output_path = output_dir / args.output_file
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -527,6 +671,7 @@ Available speakers:
             apply_text_normalization=apply_tn,
             prefix=f"{args.language}_{speaker_name}",
             phonemizer=phonemizer,
+            code_switch=args.code_switch,
         )
 
 

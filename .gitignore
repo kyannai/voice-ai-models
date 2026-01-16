@@ -145,3 +145,4 @@ Thumbs.db
 outputs
 
 tts/models/*
+asr/benchmark/test_data/YTL_testsets/

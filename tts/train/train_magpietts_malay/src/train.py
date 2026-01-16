@@ -309,6 +309,61 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
     # 10 seconds is typically ~100-200 tokens for phonemes
     MAX_DURATION_FOR_TRAINING = 15.0  # Reduced from 20s to avoid long sequences
     
+    def resolve_tokenizer(tokenizer_obj, lang_value: str):
+        """Resolve the correct sub-tokenizer for a language code."""
+        if not hasattr(tokenizer_obj, 'tokenizers'):
+            return tokenizer_obj, lang_value
+        
+        # Direct match by language code
+        if lang_value in tokenizer_obj.tokenizers:
+            return tokenizer_obj, lang_value
+        
+        # Map Malay/Spanish language code to Spanish tokenizer slot
+        if lang_value in ('es', 'ms') and 'spanish_phoneme' in tokenizer_obj.tokenizers:
+            return tokenizer_obj.tokenizers['spanish_phoneme'], 'spanish_phoneme'
+        
+        # Map Malay code to explicit malay_phoneme if present
+        if lang_value == 'ms' and 'malay_phoneme' in tokenizer_obj.tokenizers:
+            return tokenizer_obj.tokenizers['malay_phoneme'], 'malay_phoneme'
+        
+        return tokenizer_obj, lang_value
+
+    def encode_text_for_language(tokenizer_obj, text_value: str, lang_value: str) -> torch.LongTensor:
+        """Encode text with language-aware tokenizer when available."""
+        if tokenizer_obj is None:
+            return torch.LongTensor([ord(c) % 256 for c in text_value])
+        
+        resolved_tokenizer, resolved_lang = resolve_tokenizer(tokenizer_obj, lang_value)
+
+        # Prefer language-aware encoding for AggregateTokenizer
+        try:
+            return torch.LongTensor(resolved_tokenizer.encode(text_value, language=resolved_lang))
+        except TypeError:
+            pass
+        try:
+            return torch.LongTensor(resolved_tokenizer.encode(text_value, lang=resolved_lang))
+        except TypeError:
+            pass
+        try:
+            return torch.LongTensor(resolved_tokenizer.encode(text_value, resolved_lang))
+        except TypeError:
+            pass
+        except Exception as e:
+            logger.warning(f"Tokenizer encode failed for language='{lang_value}': {e}")
+        
+        # Fallbacks for older tokenizer APIs
+        if hasattr(resolved_tokenizer, 'text_to_ids'):
+            try:
+                return torch.LongTensor(resolved_tokenizer.text_to_ids(text_value, resolved_lang))
+            except TypeError:
+                try:
+                    return torch.LongTensor(resolved_tokenizer.text_to_ids(text_value))
+                except Exception as e:
+                    logger.warning(f"Tokenizer text_to_ids failed: {e}")
+        
+        # Last-resort fallback: character-level bytes
+        return torch.LongTensor([ord(c) % 256 for c in text_value])
+
     class MagpieTTSDataset(Dataset):
         """Dataset for MagpieTTS that produces correctly formatted batches."""
         
@@ -350,21 +405,8 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
             # Default to 'es' (Spanish slot) - we replace Spanish G2P with Malay G2P
             language = sample.get('language', 'es')
             
-            # Tokenize text if tokenizer available
-            if self.tokenizer:
-                try:
-                    # MagpieTTS tokenizer typically expects (text, language) for phoneme tokenizer
-                    if hasattr(self.tokenizer, 'encode'):
-                        text_tokens = self.tokenizer.encode(text)
-                    else:
-                        text_tokens = list(text.encode('utf-8'))  # Fallback to byte encoding
-                    text_tokens = torch.LongTensor(text_tokens)
-                except Exception as e:
-                    # Fallback: convert characters to indices
-                    text_tokens = torch.LongTensor([ord(c) % 256 for c in text])
-            else:
-                # Simple character encoding fallback
-                text_tokens = torch.LongTensor([ord(c) % 256 for c in text])
+            # Tokenize text with language-aware tokenizer (critical for Malay slot)
+            text_tokens = encode_text_for_language(self.tokenizer, text, language)
             
             # Safety truncation (should rarely happen after pre-filtering)
             if len(text_tokens) > self.max_text_tokens:

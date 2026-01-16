@@ -24,7 +24,7 @@ OUTPUT_DIR="output"
 MODELS=""
 
 # Zero-shot models (support voice cloning)
-ZERO_SHOT_MODELS="xtts indextts glmtts"
+ZERO_SHOT_MODELS="xtts indextts glmtts chatterbox"
 # Fixed-voice models
 FIXED_VOICE_MODELS="magpietts piper"
 # All models
@@ -52,7 +52,7 @@ print_help() {
     echo "  --speaker FILE         Reference audio for zero-shot voice cloning"
     echo "                         (default: speakers/output/elevenlabs_*.wav)"
     echo "  --models MODEL...      Models to run (default: all)"
-    echo "                         Zero-shot: xtts, indextts, glmtts"
+    echo "                         Zero-shot: xtts, indextts, glmtts, chatterbox"
     echo "                         Fixed-voice: magpietts, piper"
     echo "  --output-dir DIR       Output directory (default: output)"
     echo "  --help                 Show this help"
@@ -234,6 +234,12 @@ print(json.dumps(data, ensure_ascii=False))
                         exit 1
                     fi
                 fi
+                ;;
+            chatterbox)
+                python synthesize_chatterbox.py \
+                    --text "$TEXT" \
+                    --speaker-wav "$SPEAKER" \
+                    --output output/chatterbox.wav
                 ;;
             magpietts)
                 python synthesize_magpietts.py \

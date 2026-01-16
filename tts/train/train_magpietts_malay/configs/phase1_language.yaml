@@ -25,9 +25,8 @@ model:
   val_manifest: data/manifests/val_manifest.json
   
   # Training hyperparameters for FRESH LANGUAGE EMBEDDINGS
-  # Conservative LR to protect pretrained encoder/decoder
-  # Embeddings will still learn well with lower LR given 610k samples
-  batch_size: 32             # Smaller batch for more gradient updates
+  # Larger batch for better GPU utilization (uses ~70GB of 80GB A100)
+  batch_size: 64             # Doubled for faster training
   learning_rate: 1e-4        # Conservative for pretrained layers
   
   # Audio settings
@@ -38,9 +37,9 @@ model:
 
 # Trainer configuration
 trainer:
-  max_epochs: 20             # More epochs for fresh embeddings to converge
+  max_epochs: 60             # More epochs for fresh embeddings to converge
   precision: '16-mixed'
-  accumulate_grad_batches: 4  # Effective batch = 128 (same throughput, more stable)
+  accumulate_grad_batches: 2  # Effective batch = 128 (halved to match doubled batch)
   gradient_clip_val: 0.5     # Tighter clipping for stability
   log_every_n_steps: 100
   val_check_interval: 0.25   # Check 4x per epoch for better monitoring
@@ -73,5 +72,5 @@ optim:
   weight_decay: 0.01
   sched:
     name: CosineAnnealing
-    warmup_steps: 2000       # ~10% of first epoch, gradual ramp-up
+    warmup_steps: 4000       # Longer warmup for stable fresh-embedding training
     min_lr: 1e-6

@@ -1,0 +1,24 @@
+# Chatterbox-Turbo (Resemble AI) Requirements
+# ============================================
+#
+# Installation:
+#   python -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# Chatterbox-Turbo is a 350M parameter English TTS model with zero-shot cloning.
+# It supports paralinguistic tags: [laugh], [chuckle], [cough], etc.
+
+# Core dependencies
+numpy>=1.24.0
+torch>=2.0.0
+torchaudio>=2.0.0
+soundfile>=0.12.0
+librosa>=0.10.0
+tqdm>=4.65.0
+
+# Chatterbox TTS
+chatterbox-tts
+
+# Perth watermarker (required by Chatterbox)
+resemble-perth
