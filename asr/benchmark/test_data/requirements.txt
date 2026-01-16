@@ -1,0 +1,19 @@
+# MagpieTTS Malay data preparation (download + prepare_data.py)
+# =============================================================
+
+# HuggingFace datasets
+datasets>=2.14.0
+huggingface-hub>=0.16.0
+
+# Audio processing
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# Data processing
+numpy>=1.24.0
+tqdm>=4.65.0
+
+# Optional: phonemizer for --generate-g2p or --use-phonemes
+# Also requires espeak-ng: apt install espeak-ng (Ubuntu) or brew install espeak (macOS)
+phonemizer>=3.2.0
+langid>=1.1.6

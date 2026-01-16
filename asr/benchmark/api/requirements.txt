@@ -1,0 +1,21 @@
+# YTL API ASR Tests
+# Usage: uv pip install -r requirements.txt
+
+# OpenAI client for YTL ASR API
+openai>=1.0.0
+
+# Environment configuration
+python-dotenv>=1.0.0
+
+# Data processing
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Malay NLP processing
+malaya>=5.1.0
+pypi-kenlm
+PySastrawi
+
+# Evaluation metrics
+torchmetrics>=1.0.0
+torch>=2.0.0

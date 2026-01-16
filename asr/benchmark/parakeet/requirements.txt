@@ -1,0 +1,28 @@
+# Parakeet ASR Tests (NVIDIA NeMo)
+# Usage: uv pip install -r requirements.txt
+
+# Environment configuration
+python-dotenv>=1.0.0
+
+# Data processing
+numpy>=1.21.0,<2.0.0  # Pin to NumPy 1.x for NeMo compatibility
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Malay NLP processing
+malaya>=5.1.0
+pypi-kenlm
+PySastrawi
+
+# Evaluation metrics
+torchmetrics>=1.0.0
+
+# PyTorch
+torch>=2.0.0
+
+# Audio processing
+librosa>=0.10.0
+
+# NVIDIA NeMo for Parakeet models
+nemo-toolkit[asr]>=1.23.0
+huggingface-hub>=0.20.0

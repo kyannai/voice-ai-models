@@ -146,3 +146,9 @@ outputs
 
 tts/models/*
 asr/benchmark/test_data/YTL_testsets/
+asr/benchmark/test_data/.ytl_testsets_prepared
+asr/benchmark/api/ytl_labs/
+asr/benchmark/whisper/ytl_labs/
+asr/benchmark/whisper/faster_whisper/
+asr/benchmark/parakeet/ytl_parakeet/
+asr/benchmark/test_data/YTL_testsets.tar
