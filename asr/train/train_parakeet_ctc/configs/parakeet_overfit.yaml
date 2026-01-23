@@ -1,0 +1,57 @@
+# NVIDIA Parakeet CTC 1.1B Multilingual Overfit Configuration
+# Sanity check: overfit a tiny subset to verify pipeline correctness.
+
+model:
+  # Modified model with expanded vocabulary (surgical expansion)
+  name: "./models/parakeet-ctc-1.1b-multilingual.nemo"
+  gradient_checkpointing: true
+
+data:
+  train_manifest: "../training_data/multilingual-overfit/manifests/train_manifest.json"
+  val_manifest: "../training_data/multilingual-overfit/manifests/val_manifest.json"
+  max_samples: 32
+  max_val_samples: 16
+  sampling_rate: 16000
+  max_audio_length: 30.0
+  min_audio_length: 0.1
+
+training:
+  output_dir: "./outputs/parakeet-ctc-multilingual-overfit"
+  run_name: "parakeet-ctc-multilingual-overfit"
+
+  num_train_epochs: 500  # More epochs for overfit with frozen encoder
+  max_steps: -1
+
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 1
+
+  # CTC with adapted tokenizer - train decoder more carefully
+  # Freeze encoder initially to let decoder learn the new vocabulary
+  freeze_encoder: true
+
+  optimizer: "adamw"
+  learning_rate: 5.0e-5  # Lower LR for stability with new vocab
+  weight_decay: 0.01
+  max_grad_norm: 0.5  # Stricter gradient clipping
+
+  scheduler: "CosineAnnealing"
+  warmup_steps: 100  # More warmup for stability
+  min_learning_rate: 1.0e-7
+
+  fp16: false
+  bf16: true
+
+  logging_steps: 10
+  eval_steps: 8
+  save_steps: 8
+  save_total_limit: 3
+  load_best_model_at_end: false
+  disable_checkpointing: true
+  disable_spec_augment: true
+
+  dataloader_num_workers: 4
+  dataloader_pin_memory: true
+
+  resume_from_checkpoint: false
+  num_gpus: 1

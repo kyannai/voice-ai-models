@@ -14,7 +14,6 @@ Speakers:
 - anwar_ibrahim: ~106k samples
 - husein: ~127k samples  
 - kp_ms: ~160k samples
-- kp_zh: ~111k samples (Chinese - may exclude for Malay TTS)
 - shafiqah_idayu: ~142k samples
 
 Usage:
@@ -45,7 +44,6 @@ SPEAKER_SPLITS = [
     "anwar_ibrahim",
     "husein", 
     "kp_ms",
-    "kp_zh",
     "shafiqah_idayu"
 ]
 
@@ -73,16 +71,6 @@ AUDIO_ZIP_FILES = {
     "kp-chatbot": "kp-chatbot.zip",
     "kp-chatbot-politics": "kp-chatbot-politics.zip",
     "kp-gaya-hidup": "kp-gaya-hidup.zip",
-    # KP ZH (Chinese)
-    "chinese-news-part-0": "chinese-news-part-0.zip",
-    "chinese-news-part-1": "chinese-news-part-1.zip",
-    "chinese-news-part-2": "chinese-news-part-2.zip",
-    "chinese-news-part-3": "chinese-news-part-3.zip",
-    "kp-alpaca-chinese": "kp-alpaca-chinese.zip",
-    "kp-chinese-texts-part2": "kp-chinese-texts-part2.zip",
-    "kp-chinese-texts-part3": "kp-chinese-texts-part3.zip",
-    "kp-chinese-texts-part4": "kp-chinese-texts-part4.zip",
-    "kp-mandarin-part1": "kp-mandarin-part1.zip",
     # Shafiqah Idayu
     "shafiqah-idayu-chatbot-normalized-v2": "shafiqah-idayu-chatbot-normalized-v2.zip",
     "shafiqah-idayu-chatbot-politics-normalized-v2": "shafiqah-idayu-chatbot-politics-normalized-v2.zip",

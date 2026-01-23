@@ -1,0 +1,6 @@
+# Common dependencies for benchmark scripts
+malaya>=5.0
+pandas>=2.0
+torchmetrics>=1.0
+python-dotenv>=1.0
+tqdm>=4.0

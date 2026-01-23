@@ -1,68 +1,45 @@
-import os
-import time
-import argparse
-import tqdm
-import re
-import malaya
-import random
-import json
-import pandas as pd
-import multiprocessing as mp
-import torch
+#!/usr/bin/env python3
+"""
+Batch evaluation of NVIDIA Parakeet ASR on benchmark datasets.
 
+Usage:
+    python ytl_parakeet_test.py -m nvidia/parakeet-tdt-0.6b-v2
+    python ytl_parakeet_test.py -m nvidia/parakeet-tdt-0.6b-v3  # Multilingual (25 languages)
+    python ytl_parakeet_test.py -m /path/to/model.nemo -b 16 -w 1
+"""
+
+import argparse
+import json
+import multiprocessing as mp
+import os
+import random
+import sys
 from pathlib import Path
+
+import torch
+import tqdm
 from dotenv import load_dotenv
 
+# Add parent directory to path for common imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from common import (
+    get_dataset_names,
+    get_dataset_path,
+    load_dataset,
+    postprocess_text_mal,
+    print_results,
+    run_evaluation,
+    split_dict,
+)
+
 load_dotenv()
-from torchmetrics.text import WordErrorRate
-
-DATASETS = {
-    "fleurs_test": "../test_data/YTL_testsets/fleurs_test.tsv",
-    "malay_conversational": "../test_data/YTL_testsets/malay_conversational_meta.tsv",
-    "malay_scripted": "../test_data/YTL_testsets/malay_scripted_meta.tsv",
-}
-
-
-lm = malaya.language_model.kenlm(model = 'bahasa-wiki-news')
-corrector = malaya.spelling_correction.probability.load(language_model=lm)
-normalizer_mal = malaya.normalizer.rules.load(corrector, None)
-
-chars_to_ignore_regex_normalise = r"""[\/:\\;"−*`‑―''""„~«»–—…\[\]\(\)\t\r\n!?,\.]"""
-pattern_normalise = re.compile(chars_to_ignore_regex_normalise, flags=re.UNICODE)
-
-
-def postprocess_text_mal(texts):
-    def normalize_superscripts(text: str) -> str:
-        superscripts = {
-            '¹': 'satu',
-            '²': 'dua',
-            '³': 'tiga',
-        }
-        for k, v in superscripts.items():
-            text = text.replace(k, v)
-        return text
-    result_text = []
-    for sentence in texts:
-        sentence = normalize_superscripts(sentence).lower()
-        sentence = pattern_normalise.sub(' ', sentence)
-        sentence = normalizer_mal.normalize(sentence,
-                                            normalize_url=True,
-                                            normalize_email=True,
-                                            normalize_time=False,
-                                            normalize_emoji=False)['normalize']
-
-        sentence = re.sub(r"[^\w\s'\-]", ' ', sentence)
-        sentence = re.sub(r'(\s{2,})', ' ', re.sub('(\s+$)|(\A\s+)', '', sentence))
-        result_text.append(sentence)
-    return result_text
 
 
 class ParakeetRecognizer:
-    """
-    NVIDIA Parakeet model-based ASR recognizer using NeMo
-    """
+    """NVIDIA Parakeet model-based ASR recognizer using NeMo."""
     
-    def __init__(self, model_id="nvidia/parakeet-tdt-0.6b", batch_size=16):
+    def __init__(self, model_id: str = "nvidia/parakeet-tdt-0.6b-v2", batch_size: int = 16):
         import nemo.collections.asr as nemo_asr
         
         self.model_id = model_id
@@ -102,44 +79,30 @@ class ParakeetRecognizer:
         print(f"Model loaded successfully on {self.device}")
         self.total_transcriptions = 0
     
-    def _audio_to_tensor(self, wav_path):
+    def _audio_to_tensor(self, wav_path: str) -> torch.Tensor:
+        """Load audio file and convert to torch tensor."""
         import librosa
         audio, sr = librosa.load(wav_path, sr=16000)
         return torch.from_numpy(audio)
     
-    def transcribe(self, wav_path):
+    def transcribe(self, wav_path: str) -> str:
+        """Transcribe a single audio file."""
         audio_tensor = self._audio_to_tensor(wav_path)
         
         with torch.inference_mode():
             with torch.no_grad():
-                output = self.model.transcribe([audio_tensor])
+                output = self.model.transcribe([audio_tensor], verbose=False)
         
         self.total_transcriptions += 1
-        
-        if isinstance(output, tuple):
-            output = output[0]
-        
-        text = ""
-        if isinstance(output, list) and len(output) > 0:
-            first_result = output[0]
-            if hasattr(first_result, 'text'):
-                text = first_result.text.strip()
-            else:
-                text = str(first_result).strip()
-        else:
-            text = str(output).strip()
-        
-        return text
+        return self._extract_text(output)
     
-    def transcribe_batch(self, wav_paths):
-        audio_tensors = []
-        for wav_path in wav_paths:
-            audio_tensor = self._audio_to_tensor(wav_path)
-            audio_tensors.append(audio_tensor)
+    def transcribe_batch(self, wav_paths: list) -> list:
+        """Transcribe multiple audio files in batch."""
+        audio_tensors = [self._audio_to_tensor(p) for p in wav_paths]
         
         with torch.inference_mode():
             with torch.no_grad():
-                output = self.model.transcribe(audio_tensors)
+                output = self.model.transcribe(audio_tensors, verbose=False)
         
         self.total_transcriptions += len(wav_paths)
         
@@ -158,79 +121,34 @@ class ParakeetRecognizer:
         
         if len(texts) != len(wav_paths):
             raise ValueError(
-                f"Expected {len(wav_paths)} transcriptions but got {len(texts)}. "
-                f"Output format: {type(output)}"
+                f"Expected {len(wav_paths)} transcriptions but got {len(texts)}"
             )
         
         return texts
 
-
-def split_dict(data, num_splits):
-    """Split dictionary into N roughly equal parts."""
-    keys = list(data.keys())
-    random.shuffle(keys)
-    split_keys = [keys[i::num_splits] for i in range(num_splits)]
-    return [{k: data[k] for k in subset} for subset in split_keys]
-
-
-def job_audio(args):
-    audio_dict_slice, out_dir, postprocessing, model_id, batch_size = args
-    recognizer = ParakeetRecognizer(model_id=model_id, batch_size=batch_size)
-
-    # Collect audio files that need processing
-    audio_items = []
-    for uid, wav_path in audio_dict_slice.items():
-        out_path = Path(out_dir) / f"{uid}.json"
-        if not out_path.exists():
-            audio_items.append((uid, wav_path, out_path))
-
-    if not audio_items:
-        return
-
-    # Process in batches for efficiency
-    for i in tqdm.tqdm(range(0, len(audio_items), batch_size), desc="Batches"):
-        batch = audio_items[i:i + batch_size]
-        uids = [item[0] for item in batch]
-        wav_paths = [item[1] for item in batch]
-        out_paths = [item[2] for item in batch]
-
-        try:
-            # Batch transcription
-            texts = recognizer.transcribe_batch(wav_paths)
-
-            for uid, wav_path, out_path, text in zip(uids, wav_paths, out_paths, texts):
-                result = {"text": text,
-                          "text_norm": postprocessing([text])[0]}
-
-                with open(out_path, "w", encoding="utf-8") as f:
-                    json.dump(result, f, ensure_ascii=False, indent=2)
-
-        except Exception as e:
-            print(f"[ERROR] Batch error: {e}")
-            # Fall back to individual processing
-            for uid, wav_path, out_path in batch:
-                try:
-                    text = recognizer.transcribe(wav_path)
-                    result = {"text": text,
-                              "text_norm": postprocessing([text])[0]}
-
-                    with open(out_path, "w", encoding="utf-8") as f:
-                        json.dump(result, f, ensure_ascii=False, indent=2)
-
-                except Exception as e:
-                    print(f"[ERROR] {wav_path}: {e}")
+    def _extract_text(self, output) -> str:
+        """Extract text from NeMo output."""
+        if isinstance(output, tuple):
+            output = output[0]
+        
+        if isinstance(output, list) and len(output) > 0:
+            first_result = output[0]
+            if hasattr(first_result, 'text'):
+                return first_result.text.strip()
+            return str(first_result).strip()
+        return str(output).strip()
 
 
-def run_single_worker(audio_dict, out_dir, postprocessing, model_id, batch_size):
+def process_single_worker(audio_dict, out_dir, model_id, batch_size):
     """Run transcription with a single worker (recommended for GPU)."""
     recognizer = ParakeetRecognizer(model_id=model_id, batch_size=batch_size)
 
     # Collect audio files that need processing
-    audio_items = []
-    for uid, wav_path in audio_dict.items():
-        out_path = Path(out_dir) / f"{uid}.json"
-        if not out_path.exists():
-            audio_items.append((uid, wav_path, out_path))
+    audio_items = [
+        (uid, wav_path, Path(out_dir) / f"{uid}.json")
+        for uid, wav_path in audio_dict.items()
+        if not (Path(out_dir) / f"{uid}.json").exists()
+    ]
 
     if not audio_items:
         print("All files already processed.")
@@ -238,7 +156,7 @@ def run_single_worker(audio_dict, out_dir, postprocessing, model_id, batch_size)
 
     print(f"Processing {len(audio_items)} files...")
 
-    # Process in batches for efficiency
+    # Process in batches
     for i in tqdm.tqdm(range(0, len(audio_items), batch_size), desc="Batches"):
         batch = audio_items[i:i + batch_size]
         uids = [item[0] for item in batch]
@@ -246,13 +164,13 @@ def run_single_worker(audio_dict, out_dir, postprocessing, model_id, batch_size)
         out_paths = [item[2] for item in batch]
 
         try:
-            # Batch transcription
             texts = recognizer.transcribe_batch(wav_paths)
 
-            for uid, wav_path, out_path, text in zip(uids, wav_paths, out_paths, texts):
-                result = {"text": text,
-                          "text_norm": postprocessing([text])[0]}
-
+            for uid, out_path, text in zip(uids, out_paths, texts):
+                result = {
+                    "text": text,
+                    "text_norm": postprocess_text_mal([text])[0]
+                }
                 with open(out_path, "w", encoding="utf-8") as f:
                     json.dump(result, f, ensure_ascii=False, indent=2)
 
@@ -262,23 +180,31 @@ def run_single_worker(audio_dict, out_dir, postprocessing, model_id, batch_size)
             for uid, wav_path, out_path in batch:
                 try:
                     text = recognizer.transcribe(wav_path)
-                    result = {"text": text,
-                              "text_norm": postprocessing([text])[0]}
-
+                    result = {
+                        "text": text,
+                        "text_norm": postprocess_text_mal([text])[0]
+                    }
                     with open(out_path, "w", encoding="utf-8") as f:
                         json.dump(result, f, ensure_ascii=False, indent=2)
+                except Exception as e2:
+                    print(f"[ERROR] {wav_path}: {e2}")
 
-                except Exception as e:
-                    print(f"[ERROR] {wav_path}: {e}")
+
+def process_audio_batch(args):
+    """Worker function for multi-worker processing."""
+    audio_dict_slice, out_dir, model_id, batch_size = args
+    process_single_worker(audio_dict_slice, out_dir, model_id, batch_size)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run Parakeet ASR benchmark on YTL test datasets")
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Run Parakeet ASR benchmark on YTL test datasets"
+    )
     parser.add_argument(
         "--model", "-m",
         type=str,
         required=True,
-        help="Path to .nemo model file or HuggingFace model ID (e.g., nvidia/parakeet-tdt-0.6b)"
+        help="Path to .nemo model file or HuggingFace model ID"
     )
     parser.add_argument(
         "--batch-size", "-b",
@@ -292,68 +218,73 @@ if __name__ == "__main__":
         default=1,
         help="Number of workers (default: 1, recommended for GPU)"
     )
+    parser.add_argument(
+        "--dataset", "-d",
+        type=str,
+        choices=get_dataset_names(),
+        help="Run on specific dataset only (default: run all)"
+    )
+    parser.add_argument(
+        "--max-samples",
+        type=int,
+        help="Limit the number of samples to process for each dataset"
+    )
     args = parser.parse_args()
 
-    # Configuration from arguments
-    workers = args.workers
-    batch_size = args.batch_size
-    model_id = args.model
+    print(f"Model: {args.model}")
+    print(f"Batch size: {args.batch_size}")
+    print(f"Workers: {args.workers}")
 
-    print(f"Model: {model_id}")
-    print(f"Batch size: {batch_size}")
-    print(f"Workers: {workers}")
+    # Determine which datasets to run
+    datasets_to_run = [args.dataset] if args.dataset else get_dataset_names()
 
     all_wers = {}
-    for d in DATASETS:
-        print(f"\n{'=' * 60}\nProcessing dataset: {d}\n{'=' * 60}")
+    for dataset_name in datasets_to_run:
+        print(f"\n{'=' * 60}\nProcessing dataset: {dataset_name}\n{'=' * 60}")
 
-        save_dir = f'./ytl_parakeet/{d}'
-        Path(save_dir).mkdir(exist_ok=True, parents=True)
-        audio_dict = {}
-        ref_transcript = {}
-
-        all_data = pd.read_csv(DATASETS[d], sep='\t')
-        tsv_dir = Path(DATASETS[d]).parent  # Get the directory containing the TSV file
-        assert len(all_data['utterance_id'].tolist()) == all_data['utterance_id'].nunique()
-        print(f'duration is {all_data["duration"].sum() / 3600:.2f} hours')
-        lang_postprocessing = postprocess_text_mal
-        for idx, row in all_data.iterrows():
-            audio_filepath = tsv_dir / row["path"]  # Construct full path relative to TSV location
-            audio_dict[str(Path(audio_filepath).stem)] = str(audio_filepath)
-            ref_transcript[str(Path(audio_filepath).stem)] = row["sentence"]
-
-        if workers == 1:
-            # Single worker mode (recommended for GPU)
-            run_single_worker(audio_dict, save_dir, lang_postprocessing, model_id, batch_size)
+        # Load dataset
+        dataset_path = get_dataset_path(dataset_name, Path(__file__).parent)
+        audio_dict, ref_transcript, duration_dict = load_dataset(dataset_path)
+        
+        # Apply sample limiting if requested
+        if args.max_samples:
+            original_num_samples = len(audio_dict)
+            selected_uids = random.sample(
+                list(audio_dict.keys()), 
+                min(args.max_samples, original_num_samples)
+            )
+            audio_dict = {uid: audio_dict[uid] for uid in selected_uids}
+            ref_transcript = {uid: ref_transcript[uid] for uid in selected_uids}
+            duration_dict = {uid: duration_dict[uid] for uid in selected_uids}
+            
+            duration_hours = sum(duration_dict.values()) / 3600
+            print(f"Limited to {len(audio_dict)} samples (from {original_num_samples} total). Duration: {duration_hours:.2f} hours")
         else:
-            # Multi-worker mode (for CPU or multi-GPU setups)
-            audio_dict_slices = split_dict(audio_dict, workers)
-            args = [(slice, save_dir, lang_postprocessing, model_id, batch_size) for slice in audio_dict_slices]
+            duration_hours = sum(duration_dict.values()) / 3600
+            print(f"Samples: {len(audio_dict)}, Duration: {duration_hours:.2f} hours")
 
-            with mp.Pool(processes=workers) as pool:
-                pool.map(job_audio, args)
+        # Setup output directory
+        save_dir = Path(__file__).parent / f"ytl_parakeet/{dataset_name}"
+        save_dir.mkdir(exist_ok=True, parents=True)
 
-        WER = WordErrorRate()
-        json_files = {l.stem: str(l) for l in list(Path(save_dir).glob('*.json'))}
-        count = 0
-        for utt in json_files:
-            try:
-                with open(json_files[utt], 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                hyp = data.get("text_norm", "")
-                if count % 50 == 0:
-                    print(f'utt {utt} \n hyp {hyp} \n ref {ref_transcript[utt]}')
-                WER.update([hyp], [ref_transcript[utt]])
-                count += 1
-            except Exception as e:
-                print(f"Error processing {utt}: {e}")
+        if args.workers == 1:
+            process_single_worker(audio_dict, save_dir, args.model, args.batch_size)
+        else:
+            audio_dict_slices = split_dict(audio_dict, args.workers)
+            job_args = [
+                (slice_data, save_dir, args.model, args.batch_size)
+                for slice_data in audio_dict_slices
+            ]
+            with mp.Pool(processes=args.workers) as pool:
+                pool.map(process_audio_batch, job_args)
 
-        _wer = WER.compute()
-        print(f"Final WER for {d}: {_wer:.3f}")
-        all_wers[d] = float(_wer)
-        WER.reset()
+        # Evaluate results
+        wer = run_evaluation(save_dir, ref_transcript, dataset_name)
+        all_wers[dataset_name] = wer
 
-    print(f"\n{'=' * 60}\nAll Results:\n{'=' * 60}")
-    for dataset_name, wer_value in all_wers.items():
-        print(f"{dataset_name}: {wer_value:.3f}")
-    print(all_wers)
+    print_results(all_wers)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

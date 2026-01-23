@@ -1,0 +1,53 @@
+============================================================
+Model: nvidia/parakeet-tdt_ctc-0.6b-ja
+Tokenizer type: SentencePieceTokenizer
+Vocab size: 3072
+============================================================
+
+First 20 vocab entries:
+      0: ' ⁇ '
+      1: '。'
+      2: ''
+      3: 'の'
+      4: 'が'
+      5: 'を'
+      6: 'に'
+      7: 'は'
+      8: '、'
+      9: 'で'
+     10: 'と'
+     11: 'も'
+     12: 'い'
+     13: 'か'
+     14: 'る'
+     15: 'な'
+     16: 'し'
+     17: 'って'
+     18: 'り'
+     19: 'から'
+
+
+Language Support Test:
+------------------------------------------------------------
+
+Input:   'hello world'
+Tokens:  [2, 1333, 542, 1216, 1216, 514, 2, 1376, 514, 663, 1216, 1007]
+Decoded: 'hello world'
+Status:  ✓ Supported
+
+Input:   '你好世界'
+Tokens:  [2, 0, 1136, 385]
+Decoded: ' ⁇ 好世界'
+Status:  ✗ NOT supported (UNK tokens)
+
+Input:   '今天天气很好'
+Tokens:  [240, 825, 825, 0, 1136]
+Decoded: '今天天 ⁇ 好'
+Status:  ✗ NOT supported (UNK tokens)
+
+Input:   'saya makan nasi'
+Tokens:  [2, 691, 397, 1401, 397, 2, 400, 397, 813, 397, 593, 2, 593, 397, 691, 539]
+Decoded: 'saya makan nasi'
+Status:  ✓ Supported
+
+============================================================

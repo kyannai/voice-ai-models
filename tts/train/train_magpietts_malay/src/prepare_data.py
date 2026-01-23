@@ -75,8 +75,7 @@ SPEAKER_MAP = {
     "anwar_ibrahim": 0,
     "husein": 1,
     "kp_ms": 2,
-    "kp_zh": 3,
-    "shafiqah_idayu": 4,
+    "shafiqah_idayu": 3,
 }
 
 # Target sample rate for MagpieTTS (22.05kHz)

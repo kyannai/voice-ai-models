@@ -1,5 +1,5 @@
-# MagpieTTS Malay data preparation (download + prepare_data.py)
-# =============================================================
+# ASR Benchmark Test Data Preparation
+# ====================================
 
 # HuggingFace datasets
 datasets>=2.14.0

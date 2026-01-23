@@ -504,15 +504,29 @@ def train(config_path: str):
         logging.info(f"  tensorboard --logdir {output_dir}")
         logging.info("="*70 + "\n")
         
-        # Check if explicit checkpoint path is provided
+        # Checkpoint handling:
+        # 1. If resume_from_checkpoint=True and checkpoints exist in output_dir → auto-resume (latest)
+        # 2. Otherwise, if checkpoint_path specified → start from that checkpoint
+        # 3. Otherwise → start from scratch
         checkpoint_path = config['training'].get('checkpoint_path')
-        if checkpoint_path and Path(checkpoint_path).exists():
-            logging.info(f"Resuming from checkpoint: {checkpoint_path}")
+        resume_enabled = config['training'].get('resume_from_checkpoint', False)
+        
+        # Check for existing checkpoints in output directory
+        existing_ckpts = list(output_dir.rglob("*.ckpt")) if output_dir.exists() else []
+        
+        if resume_enabled and existing_ckpts:
+            # Auto-resume: let exp_manager handle it (finds latest checkpoint)
+            logging.info(f"Found {len(existing_ckpts)} existing checkpoint(s) in output directory")
+            logging.info("Auto-resuming from latest checkpoint...")
+            trainer.fit(asr_model)
+        elif checkpoint_path and Path(checkpoint_path).exists():
+            # First run: start from initial checkpoint
+            logging.info(f"Starting from initial checkpoint: {checkpoint_path}")
             trainer.fit(asr_model, ckpt_path=checkpoint_path)
         else:
             if checkpoint_path:
                 logging.warning(f"Checkpoint path specified but not found: {checkpoint_path}")
-                logging.warning("Starting from scratch or using auto-resume")
+            logging.info("Starting training from scratch")
             trainer.fit(asr_model)
         
         # Step 7: Save final model

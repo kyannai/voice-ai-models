@@ -1,0 +1,7 @@
+# Common dependencies for dataset management
+pandas>=2.0.0
+
+# Text normalization for multilingual ASR
+num2words>=0.5.12
+cn2an>=0.5.22
+langid>=1.1.6

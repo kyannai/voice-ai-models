@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Single audio file transcription using YTL API
+Single audio file transcription using YTL API.
 
 Usage:
     python ytl_api_test_single.py -a /path/to/audio.wav
@@ -8,39 +8,21 @@ Usage:
 """
 
 import argparse
-import os
+import sys
 from pathlib import Path
 
 import openai
 from dotenv import load_dotenv
 
+# Add parent directory to path for common imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from common import resolve_api_config
+
 load_dotenv()
 
 
-def resolve_api_config(env_name: str, base_url_override: str | None) -> tuple[str, str]:
-    if base_url_override:
-        api_key = os.getenv("ILMU_API_KEY")
-        if not api_key:
-            raise ValueError("ILMU_API_KEY environment variable not set")
-        return api_key, base_url_override
-
-    if env_name == "staging":
-        api_key = os.getenv("ILMU_STAGING_API_KEY")
-        base_url = os.getenv("ILMU_STAGING_URL")
-    else:
-        api_key = os.getenv("ILMU_PRODUCTION_API_KEY")
-        base_url = os.getenv("ILMU_PRODUCTION_URL")
-
-    if not api_key or not base_url:
-        raise ValueError(
-            "Missing API config. Set ILMU_STAGING_URL/ILMU_STAGING_API_KEY "
-            "or ILMU_PRODUCTION_URL/ILMU_PRODUCTION_API_KEY in .env."
-        )
-
-    return api_key, base_url
-
-
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(
         description="Transcribe a single audio file using YTL ASR API"
     )
@@ -66,8 +48,8 @@ def main():
     parser.add_argument(
         "--base-url",
         type=str,
-        default="https://api.ytlailabs.tech/v1",
-        help="API base URL (default: https://api.ytlailabs.tech/v1)"
+        default=None,
+        help="API base URL override"
     )
     args = parser.parse_args()
 
@@ -88,13 +70,9 @@ def main():
     print(f"API URL: {base_url}")
     print("-" * 60)
 
-    # Initialize client
-    client = openai.OpenAI(
-        api_key=api_key,
-        base_url=base_url
-    )
+    # Initialize client and transcribe
+    client = openai.OpenAI(api_key=api_key, base_url=base_url)
 
-    # Transcribe
     print("Transcribing...")
     with open(audio_path, "rb") as f:
         response = client.audio.transcriptions.create(
@@ -102,16 +80,14 @@ def main():
             file=f
         )
 
-    text = response.text
-
     print("\n" + "=" * 60)
     print("TRANSCRIPTION:")
     print("=" * 60)
-    print(text)
+    print(response.text)
     print("=" * 60)
 
     return 0
 
 
 if __name__ == "__main__":
-    exit(main())
+    raise SystemExit(main())

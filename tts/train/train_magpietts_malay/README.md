@@ -199,8 +199,7 @@ The Malaysian-TTS dataset includes 5 speakers:
 | 0  | anwar_ibrahim   | Male   | Political      |
 | 1  | husein          | Male   | Conversational |
 | 2  | kp_ms           | Female | News           |
-| 3  | kp_zh           | Female | News (accented)|
-| 4  | shafiqah_idayu  | Female | Conversational |
+| 3  | shafiqah_idayu  | Female | Conversational |
 
 ## Project Structure
 

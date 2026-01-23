@@ -73,9 +73,9 @@ def add_malay_tokenizer(model, g2p_dict_path: str):
     malay_g2p = IpaG2p(
         phoneme_dict=g2p_dict_path,
         heteronyms=None,
-        phoneme_probability=0.8,
+        phoneme_probability=1.0,
         ignore_ambiguous_words=False,
-        use_chars=True,
+        use_chars=False,
         use_stresses=True,
     )
     logger.info(f"  Created Malay IpaG2p with {len(malay_g2p.phoneme_dict)} entries")
@@ -111,6 +111,12 @@ def add_malay_tokenizer(model, g2p_dict_path: str):
     agg_tok.tokenizers['spanish_phoneme'] = malay_tokenizer
     logger.info("  Replaced Spanish tokenizer with fresh Malay tokenizer")
     logger.info("  Training data should use language='es'")
+    
+    # Ensure aggregate tokenizer maps language codes to the Spanish slot
+    if hasattr(agg_tok, 'lang2tokenizer'):
+        agg_tok.lang2tokenizer['es'] = 'spanish_phoneme'
+        agg_tok.lang2tokenizer['ms'] = 'spanish_phoneme'
+        logger.info("  Updated lang2tokenizer mapping: es/ms -> spanish_phoneme")
     
     logger.info("Malay tokenizer added successfully (using Spanish slot)")
 
@@ -179,6 +185,9 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
         num_gpus = torch.cuda.device_count()
         logger.info(f"CUDA device count: {num_gpus}")
         logger.info(f"CUDA device name: {torch.cuda.get_device_name(0)}")
+        
+        # Use Tensor Cores for faster matmul on supported GPUs (A100, etc.)
+        torch.set_float32_matmul_precision("high")
         
         # Handle -1 (all GPUs) or specific number
         if gpus == -1:
@@ -260,6 +269,11 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
     batch_size = model_config.get('batch_size', 8)
     sample_rate = model_config.get('sample_rate', 22050)
     
+    # Debug token logging (env overrides config)
+    debug_tokens = bool(int(os.environ.get("DEBUG_TOKENS", "0"))) or model_config.get('debug_tokens', False)
+    debug_every = int(os.environ.get("DEBUG_TOKENS_EVERY", "1000") or 1000)
+    debug_max = int(os.environ.get("DEBUG_TOKENS_MAX", "60") or 60)
+    
     logger.info(f"Train manifest: {train_manifest}")
     logger.info(f"Val manifest: {val_manifest}")
     logger.info(f"Batch size: {batch_size}")
@@ -312,11 +326,11 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
     def resolve_tokenizer(tokenizer_obj, lang_value: str):
         """Resolve the correct sub-tokenizer for a language code."""
         if not hasattr(tokenizer_obj, 'tokenizers'):
-            return tokenizer_obj, lang_value
+            return tokenizer_obj, None
         
         # Direct match by language code
         if lang_value in tokenizer_obj.tokenizers:
-            return tokenizer_obj, lang_value
+            return tokenizer_obj.tokenizers[lang_value], lang_value
         
         # Map Malay/Spanish language code to Spanish tokenizer slot
         if lang_value in ('es', 'ms') and 'spanish_phoneme' in tokenizer_obj.tokenizers:
@@ -326,38 +340,67 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
         if lang_value == 'ms' and 'malay_phoneme' in tokenizer_obj.tokenizers:
             return tokenizer_obj.tokenizers['malay_phoneme'], 'malay_phoneme'
         
-        return tokenizer_obj, lang_value
+        return tokenizer_obj, None
 
     def encode_text_for_language(tokenizer_obj, text_value: str, lang_value: str) -> torch.LongTensor:
         """Encode text with language-aware tokenizer when available."""
         if tokenizer_obj is None:
             return torch.LongTensor([ord(c) % 256 for c in text_value])
         
-        resolved_tokenizer, resolved_lang = resolve_tokenizer(tokenizer_obj, lang_value)
-
-        # Prefer language-aware encoding for AggregateTokenizer
+        # Prefer aggregate tokenizer to get global IDs with offsets
+        if hasattr(tokenizer_obj, 'lang2tokenizer') and hasattr(tokenizer_obj, 'tokenizers'):
+            if lang_value not in tokenizer_obj.lang2tokenizer and lang_value in ('es', 'ms') and 'spanish_phoneme' in tokenizer_obj.tokenizers:
+                tokenizer_obj.lang2tokenizer[lang_value] = 'spanish_phoneme'
         try:
-            return torch.LongTensor(resolved_tokenizer.encode(text_value, language=resolved_lang))
+            return torch.LongTensor(tokenizer_obj.encode(text_value, language=lang_value))
         except TypeError:
             pass
         try:
-            return torch.LongTensor(resolved_tokenizer.encode(text_value, lang=resolved_lang))
+            return torch.LongTensor(tokenizer_obj.encode(text_value, lang=lang_value))
         except TypeError:
             pass
         try:
-            return torch.LongTensor(resolved_tokenizer.encode(text_value, resolved_lang))
+            return torch.LongTensor(tokenizer_obj.encode(text_value, lang_value))
         except TypeError:
             pass
         except Exception as e:
-            logger.warning(f"Tokenizer encode failed for language='{lang_value}': {e}")
+            if not hasattr(encode_text_for_language, "_warned"):
+                encode_text_for_language._warned = set()
+            key = f"{lang_value}:{type(tokenizer_obj)}"
+            if key not in encode_text_for_language._warned:
+                logger.warning(f"Tokenizer encode failed for language='{lang_value}': {e}")
+                encode_text_for_language._warned.add(key)
+        
+        resolved_tokenizer, resolved_name = resolve_tokenizer(tokenizer_obj, lang_value)
+
+        # Fallback: tokenizers like IPATokenizer often expect encode(text) only
+        try:
+            token_ids = resolved_tokenizer.encode(text_value)
+            if resolved_name and hasattr(tokenizer_obj, 'tokenizer_offsets'):
+                offset = tokenizer_obj.tokenizer_offsets.get(resolved_name)
+                if offset is not None:
+                    token_ids = [i + offset for i in token_ids]
+            return torch.LongTensor(token_ids)
+        except Exception as e:
+            logger.warning(f"Tokenizer encode(text) failed: {e}")
         
         # Fallbacks for older tokenizer APIs
         if hasattr(resolved_tokenizer, 'text_to_ids'):
             try:
-                return torch.LongTensor(resolved_tokenizer.text_to_ids(text_value, resolved_lang))
+                token_ids = resolved_tokenizer.text_to_ids(text_value, resolved_name)
+                if resolved_name and hasattr(tokenizer_obj, 'tokenizer_offsets'):
+                    offset = tokenizer_obj.tokenizer_offsets.get(resolved_name)
+                    if offset is not None:
+                        token_ids = [i + offset for i in token_ids]
+                return torch.LongTensor(token_ids)
             except TypeError:
                 try:
-                    return torch.LongTensor(resolved_tokenizer.text_to_ids(text_value))
+                    token_ids = resolved_tokenizer.text_to_ids(text_value)
+                    if resolved_name and hasattr(tokenizer_obj, 'tokenizer_offsets'):
+                        offset = tokenizer_obj.tokenizer_offsets.get(resolved_name)
+                        if offset is not None:
+                            token_ids = [i + offset for i in token_ids]
+                    return torch.LongTensor(token_ids)
                 except Exception as e:
                     logger.warning(f"Tokenizer text_to_ids failed: {e}")
         
@@ -422,6 +465,8 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
                 'language': language,
             }
     
+    debug_state = {"batches_seen": 0}
+
     def collate_fn(batch):
         """Collate function for MagpieTTS batch format."""
         # Find max lengths
@@ -456,6 +501,18 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
             speakers.append(item['speaker'])
             languages.append(item['language'])
         
+        if debug_tokens:
+            debug_state["batches_seen"] += 1
+            if debug_state["batches_seen"] % max(1, debug_every) == 0:
+                sample = batch[0]
+                text_preview = sample.get("raw_text", "")[:120]
+                lang = sample.get("language", "es")
+                token_ids = sample["text"][:debug_max].tolist()
+                logger.info(
+                    f"[debug_tokens] batch={debug_state['batches_seen']} "
+                    f"lang={lang} text='{text_preview}' tokens[:{debug_max}]={token_ids}"
+                )
+
         return {
             'audio': torch.stack(audios),
             'audio_lens': torch.LongTensor(audio_lens),
@@ -468,11 +525,13 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
     train_dataset = MagpieTTSDataset(train_samples, sample_rate=sample_rate, tokenizer=tokenizer)
     val_dataset = MagpieTTSDataset(val_samples, sample_rate=sample_rate, tokenizer=tokenizer)
     
+    if not debug_tokens:
+        logger.info("DataLoader workers: train=4, val=2 (debug_tokens off)")
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=4,
+        num_workers=0 if debug_tokens else 8,
         collate_fn=collate_fn,
         pin_memory=True,
         drop_last=True,
@@ -482,7 +541,7 @@ def setup_training(config_path: str, gpus: int = 1, resume_from: str | None = No
         val_dataset,
         batch_size=max(1, batch_size // 2),
         shuffle=False,
-        num_workers=2,
+        num_workers=0 if debug_tokens else 4,
         collate_fn=collate_fn,
     )
     

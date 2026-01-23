@@ -1,0 +1,12 @@
+# KeSpeech dataset preparation dependencies
+soundfile>=0.12.0
+tqdm>=4.65.0
+numpy>=1.24.0
+
+# For Chinese text normalization
+num2words>=0.5.12
+cn2an>=0.5.22
+langid>=1.1.6
+
+
+

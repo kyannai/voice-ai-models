@@ -1,0 +1,51 @@
+# NVIDIA Parakeet CTC 1.1B Multilingual Training Configuration
+# Full training on Malay + Chinese data
+
+model:
+  name: "./models/parakeet-ctc-1.1b-multilingual.nemo"
+  gradient_checkpointing: true
+
+data:
+  train_manifest: "../training_data/multilingual/manifests/train_manifest.json"
+  val_manifest: "../training_data/multilingual/manifests/val_manifest.json"
+  sampling_rate: 16000
+  max_audio_length: 30.0
+  min_audio_length: 0.5
+
+training:
+  output_dir: "./outputs/parakeet-ctc-multilingual"
+  run_name: "parakeet-ctc-multilingual"
+
+  num_train_epochs: 50
+  max_steps: -1
+
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 16
+  gradient_accumulation_steps: 2
+
+  freeze_encoder: false
+
+  optimizer: "adamw"
+  learning_rate: 5.0e-5
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  scheduler: "CosineAnnealing"
+  warmup_steps: 1000
+  warmup_ratio: null
+  min_learning_rate: 1.0e-7
+
+  fp16: false
+  bf16: true
+
+  logging_steps: 50
+  eval_steps: 500
+  save_steps: 500
+  save_total_limit: 5
+  load_best_model_at_end: true
+
+  dataloader_num_workers: 8
+  dataloader_pin_memory: true
+
+  resume_from_checkpoint: false
+  num_gpus: 1

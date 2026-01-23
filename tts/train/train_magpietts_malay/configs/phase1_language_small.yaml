@@ -1,0 +1,53 @@
+# Phase 1 (Small): Overfit sanity check
+# =====================================
+# Trains on a small subset to verify tokenizer/G2P wiring.
+
+phase: language
+
+pretrained_model: nvidia/magpie_tts_multilingual_357m
+g2p_dict: data/g2p/ipa_malay_dict.txt
+
+model:
+  train_manifest: data/manifests_small/train_manifest.json
+  val_manifest: data/manifests_small/val_manifest.json
+  batch_size: 32
+  learning_rate: 1e-4
+  sample_rate: 22050
+  freeze_encoder: false
+
+trainer:
+  max_epochs: 50
+  precision: '16-mixed'
+  accumulate_grad_batches: 1
+  gradient_clip_val: 0.5
+  log_every_n_steps: 100
+  val_check_interval: 1.0
+  check_val_every_n_epoch: 10
+  strategy: auto
+
+exp_manager:
+  exp_dir: experiments/phase1_language_small
+  name: malay_language_overfit
+  create_checkpoint_callback: true
+  checkpoint_callback_params:
+    monitor: val_loss
+    mode: min
+    save_top_k: -1
+    save_last: false
+    filename: 'malay_overfit-{epoch:02d}-{val_loss:.4f}'
+    every_n_epochs: 10
+  resume_if_exists: true
+  resume_ignore_no_checkpoint: true
+  create_tensorboard_logger: true
+  create_wandb_logger: false
+
+optim:
+  name: adamw
+  lr: 1e-4
+  betas: [0.9, 0.98]
+  weight_decay: 0.01
+  sched:
+    name: CosineAnnealing
+    warmup_steps: 1000
+    min_lr: 1e-6
+

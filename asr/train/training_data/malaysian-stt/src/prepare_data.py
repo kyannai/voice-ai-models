@@ -12,10 +12,15 @@ Parquet format:
 
 NeMo manifest format (JSONL):
 {"audio_filepath": "/abs/path/audio.mp3", "text": "transcription", "duration": 2.78}
+
+Text Normalization:
+- Optionally converts numbers, currency, etc. to spoken words
+- Supports English (num2words), Malay (custom), Chinese (cn2an)
 """
 
 import os
 import re
+import sys
 import json
 import argparse
 import logging
@@ -26,11 +31,30 @@ from tqdm import tqdm
 import pandas as pd
 import pyarrow.parquet as pq
 
+# Add common directory to path for text_normalizer
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "common"))
+try:
+    from text_normalizer import normalize_text, normalize_text_batch, detect_language
+    TEXT_NORMALIZER_AVAILABLE = True
+except ImportError:
+    TEXT_NORMALIZER_AVAILABLE = False
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def extract_language_vectorized(series: pd.Series) -> pd.Series:
+    """
+    Extract language code from Whisper-style timestamps.
+    Format: <|startoftranscript|><|ms|><|transcribe|>...
+    Returns: Series of language codes ('ms', 'en', 'zh', 'ta', etc.)
+    """
+    # Extract the language tag (2-letter code after startoftranscript)
+    lang = series.str.extract(r'<\|([a-z]{2})\|>', expand=False)
+    return lang.fillna('unknown')
 
 
 def extract_text_vectorized(series: pd.Series) -> pd.Series:
@@ -65,7 +89,7 @@ def load_and_process_parquet(pq_file: Path, source_name: str) -> pd.DataFrame:
     """
     Load a parquet file and process it using vectorized operations.
     
-    Returns DataFrame with columns: audio_filename, text, duration, source
+    Returns DataFrame with columns: audio_filename, text, duration, source, language
     """
     logger.info(f"Loading {pq_file.name}...")
     
@@ -82,12 +106,15 @@ def load_and_process_parquet(pq_file: Path, source_name: str) -> pd.DataFrame:
     
     logger.info(f"  After filtering nulls: {len(df):,}")
     
-    # Extract text and duration using vectorized operations
+    # Extract text, duration, and language using vectorized operations
     logger.info(f"  Extracting text...")
     df['text'] = extract_text_vectorized(df['segment_timestamp'])
     
     logger.info(f"  Extracting durations...")
     df['duration'] = extract_duration_vectorized(df['segment_timestamp'])
+    
+    logger.info(f"  Extracting language tags...")
+    df['language'] = extract_language_vectorized(df['segment_timestamp'])
     
     # Filter empty texts
     df = df[df['text'].str.len() > 0]
@@ -96,7 +123,7 @@ def load_and_process_parquet(pq_file: Path, source_name: str) -> pd.DataFrame:
     df['source'] = source_name
     
     # Select only needed columns
-    df = df[['audio_filename', 'text', 'duration', 'source']].copy()
+    df = df[['audio_filename', 'text', 'duration', 'source', 'language']].copy()
     
     logger.info(f"  Final samples: {len(df):,}")
     
@@ -179,24 +206,57 @@ def validate_audio_files(
     return found, missing
 
 
+# Module-level function for multiprocessing (must be picklable)
+def _check_audio_batch(args):
+    """Check a batch of files. Returns list of (index, exists) tuples."""
+    start_idx, batch, base_dir = args
+    results = []
+    for i, filename in enumerate(batch):
+        path = os.path.join(base_dir, filename)
+        results.append((start_idx + i, os.path.exists(path)))
+    return results
+
+
 def filter_existing_audio(
     df: pd.DataFrame,
-    audio_base_dir: Path
+    audio_base_dir: Path,
+    num_workers: int = 32
 ) -> pd.DataFrame:
     """
     Filter DataFrame to only include samples where audio file exists.
-    This checks EVERY file (slower but ensures no missing files).
+    Uses multiprocessing for fast checking of millions of files.
     """
-    logger.info(f"Checking {len(df):,} audio files exist (this may take a while)...")
+    from concurrent.futures import ProcessPoolExecutor, as_completed
     
-    # Vectorized check using apply
-    def file_exists(audio_filename):
-        return (audio_base_dir / audio_filename).exists()
+    logger.info(f"Checking {len(df):,} audio files exist...")
     
-    # Use tqdm for progress
-    tqdm.pandas(desc="Checking audio files")
-    exists_mask = df['audio_filename'].progress_apply(file_exists)
+    audio_base_str = str(audio_base_dir)
+    filenames = df['audio_filename'].tolist()
     
+    # Split into batches for parallel processing
+    batch_size = 10000
+    batches = []
+    for i in range(0, len(filenames), batch_size):
+        batches.append((i, filenames[i:i+batch_size], audio_base_str))
+    
+    logger.info(f"  Using {num_workers} workers to check {len(batches)} batches...")
+    
+    exists_mask = [False] * len(filenames)
+    found_count = 0
+    
+    with ProcessPoolExecutor(max_workers=num_workers) as executor:
+        futures = {executor.submit(_check_audio_batch, batch): batch[0] for batch in batches}
+        
+        with tqdm(total=len(filenames), desc="Checking audio files") as pbar:
+            for future in as_completed(futures):
+                results = future.result()
+                for idx, exists in results:
+                    exists_mask[idx] = exists
+                    if exists:
+                        found_count += 1
+                pbar.update(len(results))
+    
+    # Apply mask to dataframe
     original_count = len(df)
     df_filtered = df[exists_mask].copy()
     missing_count = original_count - len(df_filtered)
@@ -394,6 +454,25 @@ Examples:
         action="store_true",
         help="Only include samples where audio file exists (checks ALL files, slower but safe)"
     )
+    parser.add_argument(
+        "--normalize-text",
+        action="store_true",
+        help="Normalize text (convert numbers, currency to words)"
+    )
+    parser.add_argument(
+        "--language",
+        type=str,
+        default=None,
+        choices=['en', 'ms', 'zh', 'auto'],
+        help="Language for text normalization (default: auto-detect)"
+    )
+    parser.add_argument(
+        "--include-languages",
+        type=str,
+        nargs='+',
+        default=None,
+        help="Only include these language codes (e.g., --include-languages en ms)"
+    )
     
     args = parser.parse_args()
     
@@ -414,6 +493,11 @@ Examples:
         logger.info(f"Max samples: {args.max_samples:,}")
     if args.datasets:
         logger.info(f"Datasets filter: {args.datasets}")
+    if args.normalize_text:
+        lang_str = args.language if args.language else "auto-detect"
+        logger.info(f"Text normalization: enabled (language: {lang_str})")
+    if args.include_languages:
+        logger.info(f"Including only languages: {args.include_languages}")
     logger.info("="*60)
     
     # Load and process all parquet files
@@ -431,6 +515,61 @@ Examples:
     filtered_count = original_count - len(df)
     if filtered_count > 0:
         logger.info(f"Filtered {filtered_count:,} samples by duration")
+    
+    # Filter by language (include only specified languages)
+    if args.include_languages:
+        logger.info(f"\n✓ Including only languages: {args.include_languages}")
+        original_count = len(df)
+        # Show counts for all languages
+        for lang in df['language'].unique():
+            lang_count = (df['language'] == lang).sum()
+            status = "✓" if lang in args.include_languages else "✗"
+            logger.info(f"  {status} {lang}: {lang_count:,} samples")
+        # Filter to only included languages
+        df = df[df['language'].isin(args.include_languages)]
+        filtered_count = original_count - len(df)
+        logger.info(f"  Removed {filtered_count:,} samples, keeping: {len(df):,}")
+    
+    # Normalize text (convert numbers, currency to words)
+    if args.normalize_text:
+        if not TEXT_NORMALIZER_AVAILABLE:
+            logger.error("Text normalizer not available. Install dependencies:")
+            logger.error("  pip install num2words cn2an langid")
+            sys.exit(1)
+        
+        logger.info("\n📝 Normalizing text (converting numbers to words)...")
+        
+        if args.language and args.language != 'auto':
+            # Use specified language for all samples
+            lang = args.language
+            logger.info(f"  Using fixed language: {lang}")
+            
+            batch_size = 10000
+            normalized_texts = []
+            for i in tqdm(range(0, len(df), batch_size), desc="Normalizing"):
+                batch = df['text'].iloc[i:i+batch_size].tolist()
+                normalized_batch = normalize_text_batch(batch, language=lang)
+                normalized_texts.extend(normalized_batch)
+            df['text'] = normalized_texts
+        else:
+            # Use language from Whisper tags (fast, no langid needed)
+            logger.info("  Using language from Whisper tags (fast mode)")
+            
+            # Map Whisper language codes to normalizer codes
+            lang_map = {'ms': 'ms', 'en': 'en', 'zh': 'zh', 'ta': 'en', 'id': 'ms'}
+            
+            # Normalize by language group for efficiency
+            for lang_code in df['language'].unique():
+                mask = df['language'] == lang_code
+                norm_lang = lang_map.get(lang_code, 'en')
+                count = mask.sum()
+                logger.info(f"    {lang_code} ({norm_lang}): {count:,} samples")
+                
+                texts = df.loc[mask, 'text'].tolist()
+                normalized = normalize_text_batch(texts, language=norm_lang)
+                df.loc[mask, 'text'] = normalized
+        
+        logger.info(f"  Normalized {len(df):,} samples")
     
     # Validate audio files (spot check)
     # Filter to only existing audio files (checks ALL files)

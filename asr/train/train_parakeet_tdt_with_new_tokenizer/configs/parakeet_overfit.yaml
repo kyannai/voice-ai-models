@@ -1,0 +1,67 @@
+# NVIDIA Parakeet TDT 0.6B Multilingual Overfit Configuration
+# Sanity check: overfit a tiny subset to verify pipeline correctness.
+
+model:
+  # Fixed model with proper tokenizer configuration
+  name: "./models/parakeet-tdt-0.6b-multilingual-fixed.nemo"
+  gradient_checkpointing: true
+
+data:
+  # Same manifests, but we cap samples for overfit
+  train_manifest: "../training_data/multilingual-overfit/manifests/train_manifest.json"
+  val_manifest: "../training_data/multilingual-overfit/manifests/val_manifest.json"
+  # Use slightly more samples to provide more diverse gradients
+  max_samples: 32
+  max_val_samples: 16
+  sampling_rate: 16000
+  max_audio_length: 30.0
+  min_audio_length: 0.1
+
+training:
+  output_dir: "./outputs/parakeet-tdt-multilingual-overfit"
+  run_name: "parakeet-tdt-multilingual-overfit"
+
+  # More epochs - with 85% random embeddings we need longer training
+  num_train_epochs: 500
+  max_steps: -1
+
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 1
+
+  # FREEZE encoder initially!
+  # The decoder/joint are 85% randomly initialized. We need to let them
+  # learn to interpret encoder features BEFORE unfreezing the encoder.
+  # Otherwise the encoder gets corrupted by random gradients from decoder.
+  freeze_encoder: true
+
+  optimizer: "adamw"
+  # MUCH lower LR - 85% of embeddings are random, need gentle updates
+  # to avoid collapsing to degenerate solutions
+  learning_rate: 1.0e-5
+  weight_decay: 0.0
+  # Tighter gradient clipping to prevent explosions
+  max_grad_norm: 0.5
+
+  scheduler: "CosineAnnealing"
+  # Very long warmup - let embeddings stabilize before full LR
+  warmup_steps: 200
+  min_learning_rate: 1.0e-8
+
+  fp16: false
+  bf16: true
+
+  logging_steps: 10
+  # Eval once per epoch (8 steps) - don't waste time on frequent validation
+  eval_steps: 8
+  save_steps: 8
+  save_total_limit: 3
+  load_best_model_at_end: false
+  disable_checkpointing: true
+  disable_spec_augment: true
+
+  dataloader_num_workers: 4
+  dataloader_pin_memory: true
+
+  resume_from_checkpoint: false
+  num_gpus: 1

@@ -21,6 +21,7 @@ Usage:
 """
 
 import argparse
+import json
 import logging
 from pathlib import Path
 
@@ -55,8 +56,7 @@ SPEAKER_MAP = {
     "anwar_ibrahim": 0,
     "husein": 1,
     "kp_ms": 2,
-    "kp_zh": 3,
-    "shafiqah_idayu": 4,
+    "shafiqah_idayu": 3,
 }
 
 # Reverse mapping for display
@@ -146,9 +146,9 @@ def add_malay_tokenizer(model, g2p_dict_path: str = None):
         malay_g2p = IpaG2p(
             phoneme_dict=g2p_dict_path,
             heteronyms=None,
-            phoneme_probability=0.8,
+            phoneme_probability=1.0,
             ignore_ambiguous_words=False,
-            use_chars=True,
+            use_chars=False,
             use_stresses=True,
         )
         logger.info(f"  Created Malay IpaG2p with {len(malay_g2p.phoneme_dict)} entries")
@@ -189,6 +189,12 @@ def add_malay_tokenizer(model, g2p_dict_path: str = None):
         agg_tok.tokenizers['spanish_phoneme'] = malay_tokenizer
         logger.info("  Replaced Spanish tokenizer with fresh Malay tokenizer")
         logger.info("  Use language='es' to synthesize Malay text")
+        
+        # Ensure aggregate tokenizer maps language codes to the Spanish slot
+        if hasattr(agg_tok, 'lang2tokenizer'):
+            agg_tok.lang2tokenizer['es'] = 'spanish_phoneme'
+            agg_tok.lang2tokenizer['ms'] = 'spanish_phoneme'
+            logger.info("  Updated lang2tokenizer mapping: es/ms -> spanish_phoneme")
         
         logger.info("Malay tokenizer added successfully (using Spanish slot)")
         return True
@@ -423,6 +429,9 @@ def synthesize_batch(
     prefix: str = "output",
     phonemizer=None,
     code_switch: bool = False,
+    index_start: int = 0,
+    separator: str = "_",
+    pad_width: int = 4,
 ):
     """
     Synthesize multiple texts and save to files.
@@ -441,7 +450,8 @@ def synthesize_batch(
     output_dir.mkdir(parents=True, exist_ok=True)
     
     for i, text in enumerate(texts):
-        logger.info(f"[{i+1}/{len(texts)}] Synthesizing: {text[:50]}...")
+        display_index = i + 1
+        logger.info(f"[{display_index}/{len(texts)}] Synthesizing: {text[:50]}...")
         
         try:
             if code_switch:
@@ -461,7 +471,12 @@ def synthesize_batch(
                     phonemizer=phonemizer,
                 )
             
-            output_path = output_dir / f"{prefix}_{i:04d}.wav"
+            file_index = i + index_start
+            if pad_width > 0:
+                index_str = f"{file_index:0{pad_width}d}"
+            else:
+                index_str = str(file_index)
+            output_path = output_dir / f"{prefix}{separator}{index_str}.wav"
             sf.write(str(output_path), audio, sr)
             logger.info(f"  Saved: {output_path}")
             
@@ -509,8 +524,7 @@ Available speakers:
     0: anwar_ibrahim
     1: husein
     2: kp_ms
-    3: kp_zh
-    4: shafiqah_idayu
+    3: shafiqah_idayu
         """
     )
     parser.add_argument(
@@ -542,6 +556,12 @@ Available speakers:
         type=str,
         default=None,
         help="Output filename for single text (default: auto-generated)"
+    )
+    parser.add_argument(
+        "--name",
+        type=str,
+        default=None,
+        help="Output name prefix for batch synthesis (e.g. abc -> abc-1.wav, abc-2.wav)"
     )
     parser.add_argument(
         "--language",
@@ -588,6 +608,18 @@ Available speakers:
         default=DEFAULT_G2P_DICT,
         help=f"Path to G2P dictionary for Malay (default: {DEFAULT_G2P_DICT})"
     )
+    parser.add_argument(
+        "--manifest",
+        type=str,
+        default=None,
+        help="Path to a NeMo manifest; if set, samples text from it"
+    )
+    parser.add_argument(
+        "--manifest-limit",
+        type=int,
+        default=3,
+        help="Max number of texts to load from manifest (default: 3)"
+    )
     
     args = parser.parse_args()
     
@@ -599,8 +631,8 @@ Available speakers:
         return
     
     # Validate input
-    if not args.text and not args.input_file:
-        parser.error("Either --text or --input-file is required")
+    if not args.text and not args.input_file and not args.manifest:
+        parser.error("Either --text, --input-file, or --manifest is required")
     
     # Initialize phonemizer if requested (legacy mode)
     phonemizer = None
@@ -625,8 +657,46 @@ Available speakers:
     )
     
     # Prepare texts
-    if args.text:
-        texts = [args.text]
+    if args.manifest:
+        texts = []
+        with open(args.manifest, 'r', encoding='utf-8') as f:
+            for line in f:
+                if len(texts) >= args.manifest_limit:
+                    break
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entry = json.loads(line)
+                    text = entry.get("text", "").strip()
+                    if text:
+                        texts.append(text)
+                except Exception:
+                    continue
+        if not texts:
+            logger.error(f"No texts found in manifest: {args.manifest}")
+            return
+        logger.info("Loaded texts from manifest:")
+        for i, t in enumerate(texts, start=1):
+            logger.info(f"  [{i}] {t}")
+    elif args.text:
+        raw_text = args.text.strip()
+        if raw_text.startswith("[") and raw_text.endswith("]"):
+            try:
+                parsed = json.loads(raw_text)
+                if isinstance(parsed, list) and all(isinstance(t, str) for t in parsed):
+                    texts = parsed
+                else:
+                    texts = [args.text]
+            except Exception:
+                logger.warning(
+                    "Failed to parse --text as JSON list. "
+                    "Use single quotes around the JSON, e.g. "
+                    "TEXT='[\"a\",\"b\"]'."
+                )
+                texts = [args.text]
+        else:
+            texts = [args.text]
     else:
         with open(args.input_file, 'r', encoding='utf-8') as f:
             texts = [line.strip() for line in f if line.strip()]
@@ -662,6 +732,16 @@ Available speakers:
     else:
         # Batch output
         speaker_name = SPEAKER_NAMES.get(args.speaker, f"speaker{args.speaker}")
+        if args.name:
+            prefix = args.name
+            index_start = 1
+            separator = "-"
+            pad_width = 0
+        else:
+            prefix = f"{args.language}_{speaker_name}"
+            index_start = 0
+            separator = "_"
+            pad_width = 4
         synthesize_batch(
             model,
             texts,
@@ -669,9 +749,12 @@ Available speakers:
             language=args.language,
             speaker_index=args.speaker,
             apply_text_normalization=apply_tn,
-            prefix=f"{args.language}_{speaker_name}",
+            prefix=prefix,
             phonemizer=phonemizer,
             code_switch=args.code_switch,
+            index_start=index_start,
+            separator=separator,
+            pad_width=pad_width,
         )
 
 

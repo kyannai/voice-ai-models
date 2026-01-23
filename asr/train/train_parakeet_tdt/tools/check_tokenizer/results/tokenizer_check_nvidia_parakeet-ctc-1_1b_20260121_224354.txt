@@ -1,0 +1,53 @@
+============================================================
+Model: nvidia/parakeet-ctc-1.1b
+Tokenizer type: SentencePieceTokenizer
+Vocab size: 1024
+============================================================
+
+First 20 vocab entries:
+      0: ' ⁇ '
+      1: 't'
+      2: 'th'
+      3: 'a'
+      4: 'i'
+      5: 'the'
+      6: 're'
+      7: 'w'
+      8: 's'
+      9: 'o'
+     10: 'in'
+     11: 'at'
+     12: 'er'
+     13: 'ou'
+     14: 'nd'
+     15: 'c'
+     16: 'b'
+     17: 'h'
+     18: 'on'
+     19: 'm'
+
+
+Language Support Test:
+------------------------------------------------------------
+
+Input:   'hello world'
+Tokens:  [67, 30, 1000, 575]
+Decoded: 'hello world'
+Status:  ✓ Supported
+
+Input:   '你好世界'
+Tokens:  [996, 0]
+Decoded: ' ⁇ '
+Status:  ✗ NOT supported (UNK tokens)
+
+Input:   '今天天气很好'
+Tokens:  [996, 0]
+Decoded: ' ⁇ '
+Status:  ✗ NOT supported (UNK tokens)
+
+Input:   'saya makan nasi'
+Tokens:  [279, 999, 178, 1018, 29, 42, 43, 1001]
+Decoded: 'saya makan nasi'
+Status:  ✓ Supported
+
+============================================================

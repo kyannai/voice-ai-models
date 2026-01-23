@@ -27,6 +27,8 @@ DATA_DIR := data
 RAW_DIR := $(DATA_DIR)/raw
 AUDIO_DIR := $(DATA_DIR)/audio
 MANIFEST_DIR := $(DATA_DIR)/manifests
+SMALL_AUDIO_DIR := $(DATA_DIR)/audio_small
+SMALL_MANIFEST_DIR := $(DATA_DIR)/manifests_small
 G2P_DIR := $(DATA_DIR)/g2p
 SRC_DIR := src
 MODELS_DIR := models
@@ -36,9 +38,12 @@ EXPERIMENT_DIR := experiments
 # Training config
 G2P_DICT := $(G2P_DIR)/ipa_malay_dict.txt
 PHASE1_CONFIG := configs/phase1_language.yaml
+PHASE1_SMALL_CONFIG := configs/phase1_language_small.yaml
 PHASE2_CONFIG := configs/phase2_voiceclone.yaml
 MALAY_BASE_MODEL := $(MODELS_DIR)/malay_base.nemo
 GPUS ?= -1  # -1 means use all available GPUs
+MAX_SAMPLES ?= 1000
+SPEAKERS ?=
 
 # Synthesis config
 MODEL_PATH ?= nvidia/magpie_tts_multilingual_357m
@@ -47,9 +52,9 @@ SPEAKER := 0
 CODE_SWITCH ?= 0
 
 .PHONY: help install download download-small explore \
-        phase1-prepare phase1-train phase1-export \
+        phase1-prepare phase1-prepare-small phase1-train phase1-train-small phase1-export \
         phase2-prepare phase2-train \
-        synth synthesize synth-file list-speakers synth-test \
+        synth synthesize synth-file list-speakers synth-test synth-demo synth-train-samples \
         convert convert-latest convert-best list-checkpoints phase1-convert \
         check-gpu tensorboard clean clean-all clean-output
 
@@ -69,7 +74,9 @@ help:
 	@echo ""
 	@echo "=== Phase 1: Language Training (Step 2, Run Once) ==="
 	@echo "  make phase1-prepare  - Prepare data + generate G2P dictionary"
+	@echo "  make phase1-prepare-small MAX_SAMPLES=1000 - Prepare small subset"
 	@echo "  make phase1-train    - Train model to learn Malay language"
+	@echo "  make phase1-train-small MAX_SAMPLES=1000 - Overfit on small subset"
 	@echo "  make phase1-export   - Export Malay base model to models/"
 	@echo ""
 	@echo "=== Phase 2: Voice Cloning (Step 3, Per Speaker) ==="
@@ -78,6 +85,8 @@ help:
 	@echo ""
 	@echo "=== Synthesis (No phonemizer needed!) ==="
 	@echo "  make synth TEXT=\"...\"           - Synthesize raw Malay text"
+	@echo "  make synth-demo                  - Convert latest + run demo synth"
+	@echo "  make synth-train-samples         - Convert latest + synth from small manifest"
 	@echo "  make synth-file INPUT=file.txt  - Synthesize from text file"
 	@echo "  make list-speakers              - Show available speakers"
 	@echo ""
@@ -124,7 +133,8 @@ download:
 	@echo "Downloading full dataset from HuggingFace..."
 	python $(SRC_DIR)/download_dataset.py \
 		--dataset $(DATASET_NAME) \
-		--output-dir $(RAW_DIR)
+		--output-dir $(RAW_DIR) \
+		$(if $(SPEAKERS),--speakers $(SPEAKERS),)
 	@echo "Download complete!"
 
 download-small:
@@ -132,7 +142,8 @@ download-small:
 	python $(SRC_DIR)/download_dataset.py \
 		--dataset $(DATASET_NAME) \
 		--output-dir $(RAW_DIR) \
-		--max-samples $(MAX_SAMPLES_SMALL)
+		--max-samples $(MAX_SAMPLES_SMALL) \
+		$(if $(SPEAKERS),--speakers $(SPEAKERS),)
 	@echo "Download complete!"
 
 explore:
@@ -166,6 +177,28 @@ phase1-prepare: install download
 	@echo "  Manifests: $(MANIFEST_DIR)/"
 	@echo "  G2P dictionary: $(G2P_DICT)"
 
+phase1-prepare-small: install
+	@echo ""
+	@echo "========================================"
+	@echo "Phase 1: Preparing SMALL data subset"
+	@echo "========================================"
+	@if [ ! -f "$(G2P_DICT)" ]; then \
+		echo "Error: G2P dictionary not found at $(G2P_DICT)"; \
+		echo "Run 'make phase1-prepare' first"; \
+		exit 1; \
+	fi
+	python $(SRC_DIR)/prepare_data.py \
+		--data-dir $(RAW_DIR) \
+		--audio-output-dir $(SMALL_AUDIO_DIR) \
+		--manifest-output-dir $(SMALL_MANIFEST_DIR) \
+		--target-sample-rate $(TARGET_SAMPLE_RATE) \
+		--train-split $(TRAIN_SPLIT) \
+		--max-samples $(MAX_SAMPLES) \
+		$(if $(SPEAKERS),--speakers $(SPEAKERS),)
+	@echo ""
+	@echo "Phase 1 small data preparation preparation complete!"
+	@echo "  Manifests: $(SMALL_MANIFEST_DIR)/"
+
 phase1-train:
 	@echo ""
 	@echo "========================================"
@@ -182,6 +215,18 @@ phase1-train:
 	fi
 	python $(SRC_DIR)/train.py \
 		--config $(PHASE1_CONFIG) \
+		--gpus $(GPUS)
+
+phase1-train-small: phase1-prepare-small
+	@echo ""
+	@echo "========================================"
+	@echo "Phase 1: Overfit SMALL dataset"
+	@echo "========================================"
+	@echo "  Max samples: $(MAX_SAMPLES)"
+	@echo "  Goal: verify wiring by overfitting"
+	@echo "========================================"
+	python $(SRC_DIR)/train.py \
+		--config $(PHASE1_SMALL_CONFIG) \
 		--gpus $(GPUS)
 
 phase1-export:
@@ -268,6 +313,7 @@ endif
 		--output-dir $(OUTPUT_DIR) \
 		--language $(LANGUAGE) \
 		--speaker $(SPEAKER) \
+		$(if $(NAME),--name $(NAME),) \
 		$(if $(filter 1 true yes,$(CODE_SWITCH)),--code-switch,)
 
 synth-file:
@@ -296,6 +342,31 @@ synth-test:
 		--speaker 0
 	@echo "Test audio saved to $(OUTPUT_DIR)/"
 
+synth-demo:
+	@echo "Converting latest checkpoint to .pt..."
+	@$(MAKE) convert-latest
+	@echo "Running demo synthesis..."
+	@$(MAKE) synthesize \
+		TEXT='["selamat pagi tuan tuan dan puan puan","Ini boleh dilakukan dengan mewujudkan proses pelantikan yang telus dan berasaskan merit, bebas daripada campur tangan politik.","Okay, so basically kita kena siapkan report ni sebelum Jumaat, kalau tak boss akan marah."]' \
+		MODEL_PATH="$(MODELS_DIR)/malay_base.pt" \
+		LANGUAGE=ms \
+		CODE_SWITCH=1 \
+		NAME=demo
+
+synth-train-samples:
+	@echo "Converting latest SMALL checkpoint to .pt..."
+	@$(MAKE) convert-latest-small
+	@echo "Synthesizing from training manifest..."
+	python $(SRC_DIR)/synthesize.py \
+		--model-path $(MODELS_DIR)/malay_base_small.pt \
+		--manifest $(SMALL_MANIFEST_DIR)/train_manifest.json \
+		--manifest-limit 3 \
+		--output-dir $(OUTPUT_DIR) \
+		--language ms \
+		--speaker $(SPEAKER) \
+		--name train_sample \
+		$(if $(filter 1 true yes,$(CODE_SWITCH)),--code-switch,)
+
 # ============================================================
 # Utilities
 # ============================================================
@@ -313,6 +384,7 @@ tensorboard:
 # ============================================================
 
 PHASE1_CHECKPOINT_DIR := experiments/phase1_language/malay_language_training/checkpoints
+PHASE1_SMALL_CHECKPOINT_DIR := experiments/phase1_language_small/malay_language_overfit/checkpoints
 
 list-checkpoints:
 	@echo "Phase 1 checkpoints:"
@@ -349,6 +421,16 @@ convert-latest:
 	echo "Found: $$LATEST"; \
 	$(PYTHON) src/convert_checkpoint.py "$$LATEST" -o "$(MODELS_DIR)/malay_base.pt"
 
+convert-latest-small:
+	@echo "Converting latest SMALL checkpoint to .pt state dict..."
+	@LATEST=$$(ls -t $(PHASE1_SMALL_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | grep -v last | head -1); \
+	if [ -z "$$LATEST" ]; then \
+		echo "Error: No checkpoints found in $(PHASE1_SMALL_CHECKPOINT_DIR)"; \
+		exit 1; \
+	fi; \
+	echo "Found: $$LATEST"; \
+	$(PYTHON) src/convert_checkpoint.py "$$LATEST" -o "$(MODELS_DIR)/malay_base_small.pt"
+
 convert-best:
 	@echo "Finding best checkpoint by val_loss..."
 	@BEST=$$(ls $(PHASE1_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | grep -v last | sort -t= -k3 -n | head -1); \
@@ -358,6 +440,16 @@ convert-best:
 	fi; \
 	echo "Best: $$BEST"; \
 	$(PYTHON) src/convert_checkpoint.py "$$BEST" -o "$(MODELS_DIR)/malay_best.pt"
+
+convert-best-small:
+	@echo "Finding best SMALL checkpoint by val_loss..."
+	@BEST=$$(ls $(PHASE1_SMALL_CHECKPOINT_DIR)/*.ckpt 2>/dev/null | grep -v last | sort -t= -k3 -n | head -1); \
+	if [ -z "$$BEST" ]; then \
+		echo "Error: No checkpoints found in $(PHASE1_SMALL_CHECKPOINT_DIR)"; \
+		exit 1; \
+	fi; \
+	echo "Best: $$BEST"; \
+	$(PYTHON) src/convert_checkpoint.py "$$BEST" -o "$(MODELS_DIR)/malay_best_small.pt"
 
 phase1-convert:
 	@echo "Converting latest Phase 1 checkpoint..."

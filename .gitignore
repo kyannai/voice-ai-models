@@ -152,3 +152,9 @@ asr/benchmark/whisper/ytl_labs/
 asr/benchmark/whisper/faster_whisper/
 asr/benchmark/parakeet/ytl_parakeet/
 asr/benchmark/test_data/YTL_testsets.tar
+
+*.nemo
+*.ckpt
+*.pt
+*.tar.gz
+*.tar.gz.*

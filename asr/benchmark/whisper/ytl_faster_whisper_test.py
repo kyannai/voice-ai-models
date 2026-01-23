@@ -1,105 +1,130 @@
-import pandas as pd
-import tqdm
-import re
-import malaya
+#!/usr/bin/env python3
+"""
+Batch evaluation of Faster Whisper on benchmark datasets.
 
-from faster_whisper import WhisperModel
-from torchmetrics.text import WordErrorRate
+Usage:
+    python ytl_faster_whisper_test.py
+    python ytl_faster_whisper_test.py --model large-v3-turbo
+"""
+
+import argparse
+import sys
 from pathlib import Path
 
+import tqdm
+from faster_whisper import WhisperModel
 
-lm = malaya.language_model.kenlm(model = 'bahasa-wiki-news')
-corrector = malaya.spelling_correction.probability.load(language_model = lm)
-# stemmer = malaya.stem.huggingface()
-normalizer_mal = malaya.normalizer.rules.load(corrector, None)
+# Add parent directory to path for common imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-DATASETS = {
-    "fleurs_test": "../test_data/YTL_testsets/fleurs_test.tsv",
-    "malay_conversational": "../test_data/YTL_testsets/malay_conversational_meta.tsv",
-    "malay_scripted": "../test_data/YTL_testsets/malay_scripted_meta.tsv",
-}
-
-
-def postprocess_text_mal(texts):
-    def normalize_superscripts(text: str) -> str:
-        superscripts = {
-            '¹': 'satu',
-            '²': 'dua',
-            '³': 'tiga',
-        }
-        for k, v in superscripts.items():
-            text = text.replace(k, v)
-        return text
-    result_text = []
-    chars_to_ignore_regex_normalise = r"""[\/:\\;"−*`‑―‘’“”„~«»–—…\[\]\(\)\t\r\n!?,\.]"""
-    pattern_normalise = re.compile(chars_to_ignore_regex_normalise, flags=re.UNICODE)
-    for sentence in texts:
-        sentence = normalize_superscripts(sentence).lower()
-        sentence = pattern_normalise.sub(' ', sentence)
-        sentence = normalizer_mal.normalize(sentence,
-                                            normalize_url=True,
-                                            normalize_email=True,
-                                            normalize_time=False,
-                                            normalize_emoji=False)['normalize']
-
-        sentence = re.sub(r'(?<!\w)-(?!\w)', ' ', sentence)
-        sentence = re.sub(r"[^\w\s\-]", ' ', sentence)
-        sentence = re.sub(r'(\s{2,})', ' ', re.sub('(\s+$)|(\A\s+)', '', sentence))
-        result_text.append(sentence)
-    return result_text
+from common import (
+    get_dataset_names,
+    get_dataset_path,
+    load_dataset,
+    postprocess_text_mal,
+    print_results,
+)
+from common.evaluation import compute_wer
 
 
-download_root = './faster_whisper'
-Path(download_root).mkdir(parents=True, exist_ok=True)
-model = WhisperModel("large-v3-turbo",
-                     download_root=download_root,
-                     device="cuda",
-                     compute_type="float16")
+class FasterWhisperRecognizer:
+    """Faster Whisper ASR recognizer."""
+    
+    def __init__(
+        self,
+        model_name: str = "large-v3-turbo",
+        device: str = "cuda",
+        compute_type: str = "float16",
+    ):
+        self.download_root = Path(__file__).parent / "faster_whisper"
+        self.download_root.mkdir(parents=True, exist_ok=True)
+        
+        print(f"Loading Faster Whisper model: {model_name}")
+        print(f"Device: {device}, Compute type: {compute_type}")
+        
+        self.model = WhisperModel(
+            model_name,
+            download_root=str(self.download_root),
+            device=device,
+            compute_type=compute_type,
+        )
+        print("Model loaded successfully!")
+    
+    def transcribe(self, audio_path: str, language: str = "ms") -> str:
+        """Transcribe a single audio file."""
+        segments, info = self.model.transcribe(
+            audio_path,
+            language=language,
+            without_timestamps=False,
+            vad_filter=True,
+            beam_size=5,
+        )
+        
+        text = ""
+        for segment in segments:
+            text += segment.text + " "
+        
+        return text.strip()
 
 
-def compute_transcript():
-    lang_id = 'ms'
-    postprocessing = postprocess_text_mal
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Run Faster Whisper benchmark on YTL test datasets"
+    )
+    parser.add_argument(
+        "--model", "-m",
+        type=str,
+        default="large-v3-turbo",
+        help="Whisper model name (default: large-v3-turbo)"
+    )
+    parser.add_argument(
+        "--device",
+        type=str,
+        default="cuda",
+        choices=["cuda", "cpu"],
+        help="Device to use (default: cuda)"
+    )
+    parser.add_argument(
+        "--dataset", "-d",
+        type=str,
+        choices=get_dataset_names(),
+        help="Run on specific dataset only (default: run all)"
+    )
+    args = parser.parse_args()
+
+    # Initialize recognizer
+    recognizer = FasterWhisperRecognizer(
+        model_name=args.model,
+        device=args.device,
+    )
+
+    # Determine which datasets to run
+    datasets_to_run = [args.dataset] if args.dataset else get_dataset_names()
 
     all_wers = {}
-    for d in DATASETS:
+    for dataset_name in datasets_to_run:
+        print(f"\n{'=' * 60}\nProcessing dataset: {dataset_name}\n{'=' * 60}")
 
-        all_data = pd.read_csv(DATASETS[d], sep='\t')
-        tsv_dir = Path(DATASETS[d]).parent  # Get the directory containing the TSV file
-        audio_dict = {}
-        ref_transcript = {}
+        # Load dataset
+        dataset_path = get_dataset_path(dataset_name, Path(__file__).parent)
+        audio_dict, ref_transcript, duration_dict = load_dataset(dataset_path)
+        duration_hours = sum(duration_dict.values()) / 3600
+        print(f"Samples: {len(audio_dict)}, Duration: {duration_hours:.2f} hours")
+
+        # Transcribe all audio files
         sys_transcription = {}
+        for audio_utt in tqdm.tqdm(audio_dict, desc="Transcribing"):
+            text = recognizer.transcribe(audio_dict[audio_utt])
+            sys_transcription[audio_utt] = postprocess_text_mal([text])[0]
 
-        for idx, row in all_data.iterrows():
-            audio_filepath = tsv_dir / row["path"]  # Construct full path relative to TSV location
-            duration = float(row["duration"])
-            audio_dict[str(Path(audio_filepath).stem)] = str(audio_filepath)
-            ref_transcript[str(Path(audio_filepath).stem)] = row["sentence"]
+        # Compute WER
+        wer = compute_wer(sys_transcription, ref_transcript, sample_interval=0)
+        print(f"Final WER for {dataset_name}: {wer:.3f}")
+        all_wers[dataset_name] = wer
 
-        for audio_utt in tqdm.tqdm(audio_dict):
-            # audio, sr = torchaudio.load(audio_files[audio_utt])
-            segments, info = model.transcribe(audio_dict[audio_utt],
-                                              language=lang_id,
-                                              without_timestamps=False,
-                                              vad_filter=True,
-                                              beam_size=5)
-            text = ''
-            for segment in segments:
-                text += segment.text + ' '
-            sys_transcription[audio_utt] = postprocessing([text])[0]
-
-        WER = WordErrorRate()
-        for utt in sys_transcription:
-            hyp = sys_transcription[utt]
-
-            # print(f'utt {utt} \n hyp {hyp} \n ref {ref_transcript[utt]}')
-            WER.update(hyp, ref_transcript[utt])
-
-        _wer = WER.compute()
-        print(f"Final WER: {_wer}")
-        WER.reset()
-    print(all_wers)
+    print_results(all_wers)
+    return 0
 
 
 if __name__ == "__main__":
-    compute_transcript()
+    raise SystemExit(main())
