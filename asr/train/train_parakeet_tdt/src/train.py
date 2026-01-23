@@ -310,7 +310,7 @@ def create_nemo_config(config: Dict) -> OmegaConf:
             'exp_dir': config['training']['output_dir'],
             'name': config['training'].get('run_name', 'parakeet-tdt-finetuning'),
             'create_tensorboard_logger': True,
-            'create_checkpoint_callback': True,
+            'create_checkpoint_callback': not config['training'].get('disable_checkpointing', False),
             'checkpoint_callback_params': {
                 'monitor': 'val_wer',
                 'mode': 'min',

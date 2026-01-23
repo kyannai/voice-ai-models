@@ -1,7 +1,12 @@
 # Common dependencies for dataset management
 pandas>=2.0.0
+pyarrow>=14.0.0
+tqdm>=4.65.0
 
 # Text normalization for multilingual ASR
+# - num2words: English number to words conversion
+# - cn2an: Chinese number to words conversion
+# - langid: Language detection (for auto-detect mode)
 num2words>=0.5.12
 cn2an>=0.5.22
 langid>=1.1.6

@@ -230,13 +230,35 @@ Examples:
         current_out_channels = current_decoder.out_channels
         
         with torch.no_grad():
-            # Copy original token weights
+            # Copy original token weights (positions 0 to old_vocab_size-1)
             current_decoder.weight[:old_vocab_size].copy_(ori_decoder_weights[:old_vocab_size])
             current_decoder.bias[:old_vocab_size].copy_(ori_decoder_bias[:old_vocab_size])
             
-            # Copy blank token to new position
+            # Copy blank token to new position (last position in output)
             current_decoder.weight[current_out_channels - 1].copy_(ori_decoder_weights[old_vocab_size])
             current_decoder.bias[current_out_channels - 1].copy_(ori_decoder_bias[old_vocab_size])
+            
+            # ===== INITIALIZE NEW TOKEN WEIGHTS =====
+            # New tokens (old_vocab_size to new_vocab_size-1) need smart initialization:
+            # - Small random weights (for gradient flow during training)
+            # - Slightly negative bias (so they don't dominate English initially)
+            num_new_tokens = new_vocab_size - old_vocab_size
+            if num_new_tokens > 0:
+                # Get statistics from existing vocab tokens
+                existing_weight_std = ori_decoder_weights[:old_vocab_size].std()
+                existing_bias_mean = ori_decoder_bias[:old_vocab_size].mean()
+                
+                # Initialize new weights with small random values
+                current_decoder.weight[old_vocab_size:new_vocab_size].normal_(
+                    mean=0.0,
+                    std=existing_weight_std * 0.01
+                )
+                # Initialize bias slightly below mean
+                current_decoder.bias[old_vocab_size:new_vocab_size].fill_(existing_bias_mean - 5.0)
+                
+                logger.info(f"  ✓ Initialized {num_new_tokens} new tokens:")
+                logger.info(f"    - Bias: {existing_bias_mean - 5.0:.2f} (existing mean: {existing_bias_mean:.2f})")
+                logger.info(f"    - Weight std: {existing_weight_std * 0.01:.4f}")
         
         logger.info(f"  ✓ Restored {old_vocab_size} original tokens + blank")
         logger.info(f"  ✓ Decoder expanded: {old_vocab_size + 1} → {current_out_channels}")

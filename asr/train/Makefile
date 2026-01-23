@@ -63,7 +63,7 @@ help:
 	@echo "  make prepare-all             - Prepare ALL datasets"
 	@echo ""
 	@echo "Individual Dataset Preparation (auto-downloads if needed):"
-	@echo "  make prepare-malaysian-stt       - Malaysian STT (Stage 1, ~1000h)"
+	@echo "  make prepare-malaysian-stt       - Malaysian STT (Stage 1, ~1000h, ASR preprocessed)"
 	@echo "  make prepare-malaysian-stt-stage2 - Malaysian STT Stage 2 (~500h)"
 	@echo "  make prepare-chinese-mandarin    - Chinese LiPS (~100h)"
 	@echo "  make prepare-kespeech            - KeSpeech Mandarin (~1500h local)"
@@ -95,8 +95,7 @@ help:
 	@echo "  EXPANDED_CTC_OUTPUT    - Output path for expanded CTC model"
 	@echo "  EXPANDED_TDT_OUTPUT    - Output path for expanded TDT model"
 	@echo "  TEST_AUDIO             - Audio file to test before/after vocab expansion"
-	@echo "  OVERFIT_TRAIN_SAMPLES  - Train samples for overfit manifests (default: 64)"
-	@echo "  OVERFIT_VAL_SAMPLES    - Val samples for overfit manifests (default: 16)"
+	@echo "  OVERFIT_SAMPLES        - Samples for overfit manifests (default: 100, same for train/val)"
 	@echo "  MODEL                  - HuggingFace model or .nemo path (for test-tokenizer-languages)"
 	@echo "  LANGUAGES              - Comma-separated languages to test (default: en,ms,cn)"
 	@echo "  VERBOSE                - Set to 1 for detailed tokenizer test output"
@@ -105,7 +104,8 @@ help:
 	@echo "  make prepare-chinese-mandarin MAX_SAMPLES=1000  # Small test"
 	@echo "  make prepare-malaysian-stt                      # Full dataset"
 	@echo "  make expand-ctc-tokenizer MANIFESTS='chinese.json:5000 malay.json:3000'"
-	@echo "  make expand-tdt-tokenizer MANIFESTS='chinese.json:5000'"
+	@echo "  make expand-tdt-tokenizer MANIFESTS='chinese.json:5000 malay.json:3000' \\"
+	@echo "       EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-multilingual.nemo"
 	@echo ""
 
 # =============================================================================
@@ -190,9 +190,7 @@ prepare-malaysian-stt: _setup-common
 	@echo "Unzipping data files..."
 	cd $(MALAYSIAN_STT_DIR)/data/raw && \
 		for f in *.zip; do [ -f "$$f" ] && unzip -o -q "$$f" || true; done
-	@echo "Installing dependencies..."
-	cd $(COMMON_DIR) && . .venv/bin/activate && uv pip install -q num2words cn2an langid pandas pyarrow tqdm
-	@echo "Creating manifests (EN/MS only, filtering missing audio)..."
+	@echo "Creating manifests (EN/MS only, with ASR preprocessing)..."
 	cd $(MALAYSIAN_STT_DIR) && ../../$(COMMON_DIR)/.venv/bin/python src/prepare_data.py \
 		--data-dir data/raw/data \
 		--audio-base-dir data/raw \
@@ -201,9 +199,12 @@ prepare-malaysian-stt: _setup-common
 		--include-languages en ms \
 		--datasets extra imda malaysian_context_v2 science_context science_en science_ms \
 		--filter-existing \
+		--preprocess-asr \
+		--clean-for-asr \
+		--filter-invalid-chars \
 		$(MAX_SAMPLES_ARG)
 	@touch $(STAMP_MALAYSIAN_STT)
-	@echo "Done: malaysian-stt prepared (EN/MS only, missing audio filtered)!"
+	@echo "Done: malaysian-stt prepared (EN/MS only, ASR preprocessed, cleaned)!"
 
 # =============================================================================
 # Malaysian STT Stage 2
@@ -261,6 +262,7 @@ prepare-kespeech: _setup-kespeech
 		--data-dir . \
 		--output-dir data \
 		--subsets train_phase1 train_phase2 dev_phase1 dev_phase2 test \
+		--normalize-text \
 		$(MAX_SAMPLES_ARG)
 	@touch $(STAMP_KESPEECH)
 	@echo "Done: kespeech prepared!"
@@ -324,6 +326,10 @@ clean-all: clean
 # Paths for multilingual data
 MULTILINGUAL_DIR := $(TRAINING_DATA_DIR)/multilingual
 MULTILINGUAL_OVERFIT_DIR := $(TRAINING_DATA_DIR)/multilingual-overfit
+
+# Default manifest paths for multilingual targets
+MS_MANIFEST ?= $(MALAYSIAN_STT_DIR)/data/manifests/train_manifest.json
+ZH_MANIFEST ?= $(KESPEECH_DIR)/data/manifests/train_manifest.json
 TOKENIZER_DIR := $(COMMON_DIR)/tokenizers
 KESPEECH_FULL_DIR := $(TRAINING_DATA_DIR)/kespeech-full
 
@@ -477,6 +483,16 @@ expand-tdt-tokenizer: _setup-common
 
 prepare-multilingual:
 	@echo "Creating combined multilingual manifests..."
+	@if [ ! -f "$(MS_MANIFEST)" ]; then \
+		echo "Error: Malaysian manifest not found: $(MS_MANIFEST)"; \
+		echo "Run 'make prepare-malaysian-stt' first."; \
+		exit 1; \
+	fi
+	@if [ ! -f "$(ZH_MANIFEST)" ]; then \
+		echo "Error: Chinese manifest not found: $(ZH_MANIFEST)"; \
+		echo "Run 'make prepare-kespeech' first."; \
+		exit 1; \
+	fi
 	@mkdir -p $(MULTILINGUAL_DIR)/manifests
 	@echo "Combining train manifests..."
 	@cat $(MS_MANIFEST) $(ZH_MANIFEST) > $(MULTILINGUAL_DIR)/manifests/train_manifest.json
@@ -494,11 +510,10 @@ prepare-multilingual:
 	@echo ""
 	@echo "Done: multilingual manifests at $(MULTILINGUAL_DIR)/manifests/"
 
-OVERFIT_TRAIN_SAMPLES ?= 64
-OVERFIT_VAL_SAMPLES ?= 16
+OVERFIT_SAMPLES ?= 100
 
-# Python script for reservoir sampling (train manifest)
-define OVERFIT_TRAIN_SCRIPT
+# Python script for balanced sampling (half from each manifest)
+define OVERFIT_SAMPLE_SCRIPT
 import random
 from pathlib import Path
 import sys
@@ -510,82 +525,62 @@ target = int(sys.argv[4])
 
 random.seed(42)
 
-def reservoir_sample(paths, k):
+def reservoir_sample(path, k):
+    """Reservoir sample k lines from a single file."""
     sample = []
     n = 0
-    for p in paths:
-        with p.open("r", encoding="utf-8") as f:
-            for line in f:
-                n += 1
-                if len(sample) < k:
-                    sample.append(line)
-                else:
-                    j = random.randrange(n)
-                    if j < k:
-                        sample[j] = line
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            n += 1
+            if len(sample) < k:
+                sample.append(line)
+            else:
+                j = random.randrange(n)
+                if j < k:
+                    sample[j] = line
     return sample
 
-lines = reservoir_sample([ms_manifest, zh_manifest], target)
+# Sample half from each manifest
+half = target // 2
+ms_lines = reservoir_sample(ms_manifest, half)
+zh_lines = reservoir_sample(zh_manifest, target - half)  # handles odd numbers
+
+lines = ms_lines + zh_lines
+random.shuffle(lines)
+
 out_path.parent.mkdir(parents=True, exist_ok=True)
 out_path.write_text("".join(lines), encoding="utf-8")
-print(f"  Wrote {len(lines)} samples to {out_path}")
+print(f"  Wrote {len(lines)} samples ({len(ms_lines)} MS + {len(zh_lines)} ZH) to {out_path}")
 endef
-export OVERFIT_TRAIN_SCRIPT
-
-# Python script for reservoir sampling (val manifest)
-define OVERFIT_VAL_SCRIPT
-import random
-from pathlib import Path
-import sys
-
-ms_val = Path(sys.argv[1]).parent / "val_manifest.json"
-zh_val = Path(sys.argv[2]).parent / "val_manifest.json"
-out_path = Path(sys.argv[3])
-target = int(sys.argv[4])
-
-random.seed(123)
-
-def reservoir_sample(paths, k):
-    sample = []
-    n = 0
-    for p in paths:
-        with p.open("r", encoding="utf-8") as f:
-            for line in f:
-                n += 1
-                if len(sample) < k:
-                    sample.append(line)
-                else:
-                    j = random.randrange(n)
-                    if j < k:
-                        sample[j] = line
-    return sample
-
-lines = reservoir_sample([ms_val, zh_val], target)
-out_path.parent.mkdir(parents=True, exist_ok=True)
-out_path.write_text("".join(lines), encoding="utf-8")
-print(f"  Wrote {len(lines)} samples to {out_path}")
-endef
-export OVERFIT_VAL_SCRIPT
+export OVERFIT_SAMPLE_SCRIPT
 
 prepare-multilingual-overfit:
 	@echo "Creating small multilingual manifests for overfit..."
+	@echo "Note: Train and val use IDENTICAL samples for true overfit testing."
+	@if [ ! -f "$(MS_MANIFEST)" ]; then \
+		echo "Error: Malaysian manifest not found: $(MS_MANIFEST)"; \
+		echo "Run 'make prepare-malaysian-stt' first."; \
+		exit 1; \
+	fi
+	@if [ ! -f "$(ZH_MANIFEST)" ]; then \
+		echo "Error: Chinese manifest not found: $(ZH_MANIFEST)"; \
+		echo "Run 'make prepare-kespeech' first."; \
+		exit 1; \
+	fi
 	@mkdir -p $(MULTILINGUAL_OVERFIT_DIR)/manifests
-	@echo "Building overfit train manifest ($(OVERFIT_TRAIN_SAMPLES) samples)..."
-	@echo "$$OVERFIT_TRAIN_SCRIPT" | $(PYTHON) - \
+	@echo "Building overfit manifest ($(OVERFIT_SAMPLES) samples)..."
+	@echo "$$OVERFIT_SAMPLE_SCRIPT" | $(PYTHON) - \
 		"$(MS_MANIFEST)" \
 		"$(ZH_MANIFEST)" \
 		"$(MULTILINGUAL_OVERFIT_DIR)/manifests/train_manifest.json" \
-		"$(OVERFIT_TRAIN_SAMPLES)"
-	@echo "Building overfit val manifest ($(OVERFIT_VAL_SAMPLES) samples)..."
-	@echo "$$OVERFIT_VAL_SCRIPT" | $(PYTHON) - \
-		"$(MS_MANIFEST)" \
-		"$(ZH_MANIFEST)" \
-		"$(MULTILINGUAL_OVERFIT_DIR)/manifests/val_manifest.json" \
-		"$(OVERFIT_VAL_SAMPLES)"
+		"$(OVERFIT_SAMPLES)"
+	@echo "Copying train manifest to val (identical samples for overfit)..."
+	@cp $(MULTILINGUAL_OVERFIT_DIR)/manifests/train_manifest.json \
+		$(MULTILINGUAL_OVERFIT_DIR)/manifests/val_manifest.json
 	@echo ""
 	@echo "Overfit manifest stats:"
 	@echo "  Train: $$(wc -l < $(MULTILINGUAL_OVERFIT_DIR)/manifests/train_manifest.json) samples"
-	@echo "  Val: $$(wc -l < $(MULTILINGUAL_OVERFIT_DIR)/manifests/val_manifest.json) samples"
+	@echo "  Val: $$(wc -l < $(MULTILINGUAL_OVERFIT_DIR)/manifests/val_manifest.json) samples (IDENTICAL to train)"
 	@echo ""
 	@echo "Done: overfit manifests at $(MULTILINGUAL_OVERFIT_DIR)/manifests/"
 

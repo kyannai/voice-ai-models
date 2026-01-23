@@ -40,10 +40,11 @@ import re
 # Add common directory to path for text_normalizer
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "common"))
 try:
-    from text_normalizer import normalize_text
+    from text_normalizer import normalize_text, preprocess_chinese_text
     TEXT_NORMALIZER_AVAILABLE = True
 except ImportError:
     TEXT_NORMALIZER_AVAILABLE = False
+    preprocess_chinese_text = None
     print("Warning: text_normalizer not available. Install num2words, cn2an, langid")
 
 logging.basicConfig(
@@ -114,23 +115,37 @@ def extract_split_archives(splits_dir: Path, output_dir: Path) -> bool:
         return False
 
 
-def normalize_chinese_text(text: str) -> str:
+def normalize_chinese_text(text: str, remove_punctuation: bool = True) -> str:
     """
     Normalize Chinese text for ASR training.
     
-    - Remove <SPOKEN_NOISE> tokens
-    - Convert numbers to Chinese words
+    Uses comprehensive preprocessing:
+    - Remove noise markers (<SPOKEN_NOISE>, [noise], [laughter], etc.)
+    - Convert full-width to half-width characters
+    - Remove punctuation (Chinese and English)
     - Clean up whitespace
+    
+    Note: Numbers are kept as-is (not converted to Chinese words).
+    
+    Args:
+        text: Input Chinese text
+        remove_punctuation: Whether to remove punctuation marks (default: True)
     """
+    # Use the comprehensive Chinese preprocessor if available
+    if TEXT_NORMALIZER_AVAILABLE and preprocess_chinese_text is not None:
+        return preprocess_chinese_text(
+            text,
+            remove_punctuation=remove_punctuation,
+            convert_fullwidth=True,
+            remove_noise=True,
+        )
+    
+    # Fallback: basic preprocessing if text_normalizer not available
     # Remove spoken noise markers
     text = re.sub(r'<SPOKEN_NOISE>', '', text)
     text = re.sub(r'\[SPOKEN_NOISE\]', '', text)
     text = re.sub(r'\[noise\]', '', text)
     text = re.sub(r'\[laughter\]', '', text)
-    
-    # Apply number normalization if available
-    if TEXT_NORMALIZER_AVAILABLE:
-        text = normalize_text(text, language='zh')
     
     # Clean up whitespace
     text = re.sub(r'\s+', ' ', text).strip()

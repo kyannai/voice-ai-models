@@ -3,7 +3,7 @@
 
 model:
   # Fixed model with proper tokenizer configuration
-  name: "./models/parakeet-tdt-0.6b-multilingual-fixed.nemo"
+  name: "/home/kyan/voice-ai/asr/train/models/parakeet-tdt-multilingual-init.nemo"
   gradient_checkpointing: true
 
 data:
@@ -21,32 +21,28 @@ training:
   output_dir: "./outputs/parakeet-tdt-multilingual-overfit"
   run_name: "parakeet-tdt-multilingual-overfit"
 
-  # More epochs - with 85% random embeddings we need longer training
-  num_train_epochs: 500
+  # Epochs for overfit test
+  num_train_epochs: 100
   max_steps: -1
 
-  per_device_train_batch_size: 4
+  per_device_train_batch_size: 2  # Smaller batch for more gradient updates
   per_device_eval_batch_size: 4
   gradient_accumulation_steps: 1
 
-  # FREEZE encoder initially!
-  # The decoder/joint are 85% randomly initialized. We need to let them
-  # learn to interpret encoder features BEFORE unfreezing the encoder.
-  # Otherwise the encoder gets corrupted by random gradients from decoder.
-  freeze_encoder: true
+  # For overfit test: let entire model learn (encoder + decoder + joint)
+  # This allows the encoder to adapt to new languages
+  freeze_encoder: false
 
   optimizer: "adamw"
-  # MUCH lower LR - 85% of embeddings are random, need gentle updates
-  # to avoid collapsing to degenerate solutions
-  learning_rate: 1.0e-5
+  # Higher LR for overfit test - new tokens need stronger gradients
+  learning_rate: 5.0e-4
   weight_decay: 0.0
-  # Tighter gradient clipping to prevent explosions
-  max_grad_norm: 0.5
+  max_grad_norm: 1.0  # Allow larger gradients for new token learning
 
+  # Learning rate scheduler
   scheduler: "CosineAnnealing"
-  # Very long warmup - let embeddings stabilize before full LR
-  warmup_steps: 200
-  min_learning_rate: 1.0e-8
+  warmup_steps: 10  # Very short warmup for overfit test
+  min_learning_rate: 1.0e-6
 
   fp16: false
   bf16: true
@@ -54,8 +50,8 @@ training:
   logging_steps: 10
   # Eval once per epoch (8 steps) - don't waste time on frequent validation
   eval_steps: 8
-  save_steps: 8
-  save_total_limit: 3
+  save_steps: 0
+  save_total_limit: 0
   load_best_model_at_end: false
   disable_checkpointing: true
   disable_spec_augment: true

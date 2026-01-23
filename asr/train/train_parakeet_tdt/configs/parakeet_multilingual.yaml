@@ -1,0 +1,69 @@
+# NVIDIA Parakeet TDT 0.6B Multilingual Fine-tuning Configuration
+# Fine-tune expanded model on Chinese + Malay + English data
+
+model:
+  # Use the expanded multilingual model (from tokenizer expansion)
+  name: "/home/kyan/voice-ai/asr/train/models/parakeet-tdt-multilingual-init.nemo"
+  gradient_checkpointing: true
+
+data:
+  # Multilingual manifests (Chinese + Malay + English)
+  train_manifest: "../training_data/multilingual/manifests/train_manifest.json"
+  val_manifest: "../training_data/multilingual/manifests/val_manifest.json"
+  
+  max_samples: -1  # Use full dataset
+  max_val_samples: 1000  # Limit validation for faster eval
+  
+  sampling_rate: 16000
+  max_audio_length: 30.0
+  min_audio_length: 0.1
+
+training:
+  output_dir: "./outputs/parakeet-tdt-multilingual"
+  run_name: "parakeet-tdt-multilingual-v1"
+  
+  num_train_epochs: 1  # 1 epoch if dataset > 500K, increase to 2-3 for smaller datasets
+  max_steps: -1
+  
+  per_device_train_batch_size: 8    # Reduced for full dataset OOM prevention
+  per_device_eval_batch_size: 4     # Reduced to avoid OOM during evaluation
+  gradient_accumulation_steps: 16   # Increased to maintain effective batch size of 128
+  
+  # Full model training (encoder + decoder + joint)
+  # New languages need encoder adaptation
+  freeze_encoder: false
+  
+  optimizer: "adamw_8bit"
+  # Slightly higher LR for new token learning (proven in overfit test)
+  learning_rate: 3.0e-4
+  weight_decay: 0.0001
+  max_grad_norm: 1.0
+  
+  scheduler: "CosineAnnealing"
+  warmup_steps: 500  # Longer warmup for stability
+  min_learning_rate: 1.0e-6
+  
+  fp16: false
+  bf16: true
+  
+  logging_steps: 100
+  eval_steps: 41000      # Validate every 41k steps (~4x per day, ~6 hours)
+  save_steps: 41000      # Save every 41k steps (~4x per day, ~6 hours)
+  save_total_limit: 5
+  load_best_model_at_end: true
+  
+  # Enable SpecAugment for regularization (important for real training)
+  disable_spec_augment: false
+  
+  dataloader_num_workers: 8
+  dataloader_pin_memory: true
+  
+  resume_from_checkpoint: true
+  num_gpus: 1
+
+# Notes:
+# 1. Uses expanded model with Chinese + Malay tokens
+# 2. Learning rate 3e-4 proven effective in overfit test
+# 3. freeze_encoder: false allows encoder to adapt to new languages
+# 4. 3 epochs recommended for new language acquisition
+# 5. SpecAugment enabled for regularization (prevents overfitting)

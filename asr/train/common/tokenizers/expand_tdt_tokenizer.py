@@ -321,17 +321,40 @@ Examples:
                     joint_params[name].copy_(ori_param)
             logger.info(f"  ✓ Restored {len(ori_joint_state)} other joint parameters")
             
-            # ===== CRITICAL: INITIALIZE NEW TOKEN WEIGHTS TO VERY NEGATIVE OUTPUT =====
-            # New tokens (8192 to new_vocab_size-1) have random weights that produce
-            # higher logits than original vocab, causing them to be selected during decoding.
-            # Set their weights to zero and bias to very negative so they never get selected.
-            new_joint.weight[old_vocab_size:new_vocab_size].zero_()
-            new_joint.bias[old_vocab_size:new_vocab_size].fill_(-1000.0)
+            # ===== INITIALIZE NEW TOKEN WEIGHTS =====
+            # New tokens (8192 to new_vocab_size-1) need special initialization:
+            # - For INFERENCE: We want them never selected (so English works identically)
+            # - For TRAINING: We need gradients to flow, so can't be too negative
+            #
+            # Strategy: Initialize embeddings with small random values (for learning),
+            # and set joint output weights to match the average of existing vocab tokens.
+            # This allows gradients to flow during training.
             
-            # Similarly for embedding, set new embeddings to zero (they need fine-tuning anyway)
-            new_embed.weight[old_vocab_size:new_vocab_size].zero_()
+            # Get statistics from existing vocab tokens for smart initialization
+            existing_weight_mean = ori_joint_weight[:old_vocab_size].mean()
+            existing_weight_std = ori_joint_weight[:old_vocab_size].std()
+            existing_bias_mean = ori_joint_bias[:old_vocab_size].mean()
             
-            logger.info(f"  ✓ Initialized {new_vocab_size - old_vocab_size} new tokens with zero weights/neg bias")
+            # Initialize new joint weights with small random values (scaled down)
+            new_joint.weight[old_vocab_size:new_vocab_size].normal_(
+                mean=0.0, 
+                std=existing_weight_std * 0.01  # Small random init
+            )
+            # Initialize bias slightly below mean (so they don't dominate initially)
+            # But not so negative that gradients can't flow
+            new_joint.bias[old_vocab_size:new_vocab_size].fill_(existing_bias_mean - 5.0)
+            
+            # Initialize embeddings with small random values (for learning)
+            existing_embed_std = ori_embed_weight[:old_vocab_size].std()
+            new_embed.weight[old_vocab_size:new_vocab_size].normal_(
+                mean=0.0,
+                std=existing_embed_std * 0.01  # Small random init
+            )
+            
+            logger.info(f"  ✓ Initialized {new_vocab_size - old_vocab_size} new tokens:")
+            logger.info(f"    - Joint bias: {existing_bias_mean - 5.0:.2f} (existing mean: {existing_bias_mean:.2f})")
+            logger.info(f"    - Joint weight std: {existing_weight_std * 0.01:.4f}")
+            logger.info(f"    - Embed weight std: {existing_embed_std * 0.01:.4f}")
         
         # Step 6: Save model
         logger.info("[6/6] Saving expanded model...")

@@ -4,28 +4,14 @@
 #
 # Quick Start:
 #   make install        - Install dependencies
-#   make download       - Download Malaysian-STT dataset
-#   make unzip          - Extract zip files
-#   make prepare        - Prepare training data
-#   make train          - Train with stage1 config
+#   make train CONFIG=configs/parakeet_stage1.yaml
 #   make tensorboard    - Monitor training
 
 # ============================================================
 # Configuration
 # ============================================================
 
-MODEL_NAME := nvidia/parakeet-tdt-0.6b-v3
-DATASET_NAME := mesolitica/Malaysian-STT-Whisper
-TRAIN_SPLIT := 0.95
-
-# Config files
-STAGE1_CONFIG := configs/parakeet_stage1.yaml
-STAGE2_CONFIG := configs/parakeet_stage2.yaml
-
 # Directories
-DATA_DIR := data
-RAW_DIR := $(DATA_DIR)/raw
-MANIFEST_DIR := $(DATA_DIR)/manifests
 MODELS_DIR := models
 OUTPUTS_DIR := outputs
 SRC_DIR := src
@@ -39,10 +25,9 @@ PYTHON := $(VENV_DIR)/bin/python
 PIP := $(VENV_DIR)/bin/pip
 
 .PHONY: help setup install install-8bit check-gpu \
-        download unzip prepare prepare-small \
-        train train-stage1 train-stage2 train-kespeech train-custom train-resume \
-        tensorboard check-events test-kespeech check-tokenizer check-tokenizer-nemo upload \
-        clean clean-outputs clean-data clean-all
+        train tensorboard check-events check-tokenizer upload \
+        inference inference-ckpt \
+        clean clean-outputs clean-all
 
 # ============================================================
 # Help
@@ -56,39 +41,23 @@ help:
 	@echo "  make setup         - Create venv and install all dependencies"
 	@echo "  make check-gpu     - Check GPU availability"
 	@echo ""
-	@echo "=== Data Management (Step 2) ==="
-	@echo "  make download      - Download Malaysian-STT dataset from HuggingFace"
-	@echo "  make unzip         - Extract downloaded zip files"
-	@echo "  make prepare       - Prepare full dataset (create NeMo manifests)"
-	@echo "  make prepare-small - Prepare small subset (10k samples) for testing"
+	@echo "=== Training ==="
+	@echo "  make train CONFIG=path/to/config.yaml"
 	@echo ""
-	@echo "=== Training (Step 3) ==="
-	@echo "  make train         - Train with stage1 config (default)"
-	@echo "  make train-stage1  - Train on Malaysian-STT dataset (stage 1)"
-	@echo "  make train-stage2  - Continued training (stage 2)"
-	@echo "  make train-kespeech - Train on KeSpeech (from checkpoint)"
-	@echo "  make train-custom CONFIG=path/to/config.yaml"
-	@echo "  make train-resume CONFIG=... CHECKPOINT=..."
+	@echo "=== Inference ==="
+	@echo "  make inference MODEL=model.nemo AUDIO=audio.wav"
+	@echo "  make inference-ckpt CKPT=checkpoint.ckpt BASE=base.nemo AUDIO=audio.wav"
 	@echo ""
 	@echo "=== Monitoring & Testing ==="
 	@echo "  make tensorboard   - Start TensorBoard (http://localhost:6006)"
 	@echo "  make check-events  - Check TensorBoard event files"
-	@echo "  make test-kespeech - Test KeSpeech model on sample audio"
-	@echo "  make check-tokenizer - Check tokenizer language support"
+	@echo "  make check-tokenizer MODEL=path/to/model"
 	@echo ""
 	@echo "=== Model Upload ==="
 	@echo "  make upload MODEL=path/to/model.nemo REPO=repo-name"
 	@echo ""
 	@echo "=== Cleanup ==="
-	@echo "  make clean-outputs - Remove training outputs"
-	@echo "  make clean-data    - Remove downloaded data"
-	@echo "  make clean-all     - Remove all generated files"
-	@echo ""
-	@echo "Configuration:"
-	@echo "  MODEL_NAME   = $(MODEL_NAME)"
-	@echo "  DATASET_NAME = $(DATASET_NAME)"
-	@echo "  STAGE1_CONFIG = $(STAGE1_CONFIG)"
-	@echo "  STAGE2_CONFIG = $(STAGE2_CONFIG)"
+	@echo "  make clean         - Remove training outputs"
 
 # ============================================================
 # Installation (Step 1)
@@ -124,131 +93,26 @@ check-gpu: setup
 			for i in range(torch.cuda.device_count())] if torch.cuda.is_available() else None"
 
 # ============================================================
-# Data Management (Step 2)
+# Training
 # ============================================================
 
-download: setup
-	@echo "Downloading Malaysian-STT dataset from HuggingFace..."
-	@echo "Dataset: $(DATASET_NAME)"
-	@echo ""
-	@mkdir -p $(RAW_DIR)
-	$(VENV_DIR)/bin/huggingface-cli download --repo-type dataset \
-		--local-dir '$(RAW_DIR)' \
-		--max-workers 20 \
-		$(DATASET_NAME)
-	@echo ""
-	@echo "Download complete! Files saved to $(RAW_DIR)"
-	@echo "Next step: make unzip"
-
-unzip: setup
-	@echo "Unzipping all .zip files in data/raw..."
-	cd $(RAW_DIR) && $(abspath $(PYTHON)) ../../$(SRC_DIR)/unzip_data.py
-	@echo ""
-	@echo "Unzip complete!"
-	@echo "Next step: make prepare"
-
-prepare: setup
-	@echo "Preparing full dataset..."
-	@mkdir -p $(MANIFEST_DIR)
-	$(PYTHON) $(SRC_DIR)/prepare_data.py \
-		--data-dir $(RAW_DIR)/data \
-		--audio-base-dir $(RAW_DIR) \
-		--output-dir $(MANIFEST_DIR) \
-		--train-split $(TRAIN_SPLIT) \
-		--datasets malaysian_context_v2 extra
-	@echo ""
-	@echo "Data preparation complete!"
-	@echo "Train manifest: $(MANIFEST_DIR)/train_manifest.json"
-	@echo "Val manifest: $(MANIFEST_DIR)/val_manifest.json"
-	@echo ""
-	@echo "Next step: make train"
-
-prepare-small: setup
-	@echo "Preparing small subset (10k samples) for testing..."
-	@mkdir -p $(MANIFEST_DIR)
-	$(PYTHON) $(SRC_DIR)/prepare_data.py \
-		--data-dir $(RAW_DIR)/data \
-		--audio-base-dir $(RAW_DIR) \
-		--output-dir $(MANIFEST_DIR) \
-		--train-split $(TRAIN_SPLIT) \
-		--datasets malaysian_context_v2 extra \
-		--max-samples 10000 \
-		--validate-audio
-	@echo ""
-	@echo "Small subset preparation complete!"
-
-# ============================================================
-# Training (Step 3)
-# ============================================================
-
-train: train-stage1
-
-train-stage1: setup
-	@echo ""
-	@echo "========================================"
-	@echo "Parakeet TDT Training - Stage 1"
-	@echo "========================================"
-	@echo "Config: $(STAGE1_CONFIG)"
-	@echo ""
-	@echo "TIP: Monitor training in another terminal:"
-	@echo "  make tensorboard"
-	@echo "  Open: http://localhost:6006"
-	@echo "========================================"
-	@echo ""
-	$(PYTHON) $(SRC_DIR)/train.py --config $(STAGE1_CONFIG)
-
-train-stage2: setup
-	@echo ""
-	@echo "========================================"
-	@echo "Parakeet TDT Training - Stage 2"
-	@echo "========================================"
-	@echo "Config: $(STAGE2_CONFIG)"
-	@echo "========================================"
-	@echo ""
-	$(PYTHON) $(SRC_DIR)/train.py --config $(STAGE2_CONFIG)
-
-train-kespeech: setup
-	@echo ""
-	@echo "========================================"
-	@echo "Parakeet TDT Training - KeSpeech (Mandarin)"
-	@echo "========================================"
-	@echo "Config: configs/parakeet_kespeech.yaml"
-	@echo "Checkpoint: /home/kyan/voice-ai/asr/train/train_parakeet_tdt/models/parakeet-tdt--epoch=01-step=41220-val_wer=0.2038-last.ckpt"
-	@echo ""
-	@echo "TIP: Monitor training in another terminal:"
-	@echo "  make tensorboard"
-	@echo "  Open: http://localhost:6006"
-	@echo "========================================"
-	@echo ""
-	@if [ ! -f "../training_data/kespeech/data/manifests/train_manifest.json" ]; then \
-		echo "ERROR: KeSpeech data not prepared!"; \
-		echo "Run first: cd .. && make prepare-kespeech"; \
-		exit 1; \
-	fi
-	$(PYTHON) $(SRC_DIR)/train.py --config configs/parakeet_kespeech.yaml
-
-train-custom: setup
+train: setup
 ifndef CONFIG
 	@echo "Error: CONFIG is required."
-	@echo "Usage: make train-custom CONFIG=path/to/config.yaml"
+	@echo "Usage: make train CONFIG=configs/parakeet_stage1.yaml"
 	@exit 1
 endif
-	@echo "Starting training with custom config..."
+	@echo ""
+	@echo "========================================"
+	@echo "Parakeet TDT Training"
+	@echo "========================================"
 	@echo "Config: $(CONFIG)"
-	$(PYTHON) $(SRC_DIR)/train.py --config $(CONFIG)
-
-train-resume: setup
-ifndef CHECKPOINT
-	@echo "Error: CHECKPOINT is required."
-	@echo "Usage: make train-resume CONFIG=configs/parakeet_stage1.yaml CHECKPOINT=path/to/checkpoint.ckpt"
-	@exit 1
-endif
-ifndef CONFIG
-	$(eval CONFIG := $(STAGE1_CONFIG))
-endif
-	@echo "Resuming training from checkpoint..."
-	@echo "Config: $(CONFIG)"
-	@echo "Checkpoint: $(CHECKPOINT)"
+	@echo ""
+	@echo "TIP: Monitor training in another terminal:"
+	@echo "  make tensorboard"
+	@echo "  Open: http://localhost:6006"
+	@echo "========================================"
+	@echo ""
 	$(PYTHON) $(SRC_DIR)/train.py --config $(CONFIG)
 
 # ============================================================
@@ -271,28 +135,58 @@ check-events: setup
 	@echo "Checking TensorBoard event files..."
 	$(PYTHON) $(SRC_DIR)/check_tensorboard.py
 
-# Quick inference test
-test-kespeech: setup
-	@echo "Testing KeSpeech model on sample audio..."
-	$(PYTHON) $(SRC_DIR)/test_inference.py \
-		--model outputs/parakeet-tdt-kespeech/final_model.nemo \
-		--manifest ../training_data/kespeech/data/manifests/val_manifest.json \
-		--num-samples 5
-
 # Check tokenizer language support
 TOKENIZER_TOOL := tools/check_tokenizer/check_tokenizer.py
 TOKENIZER_RESULTS := tools/check_tokenizer/results
 
 check-tokenizer: setup
-	@echo "Checking tokenizer language support..."
-	$(PYTHON) $(TOKENIZER_TOOL) --model $(MODEL_NAME) --show-vocab 20 --output-dir $(TOKENIZER_RESULTS)
-
-check-tokenizer-nemo: setup
-ifndef NEMO_MODEL
-	@echo "Usage: make check-tokenizer-nemo NEMO_MODEL=path/to/model.nemo"
+ifndef MODEL
+	@echo "Error: MODEL is required."
+	@echo "Usage: make check-tokenizer MODEL=nvidia/parakeet-tdt-0.6b-v3"
+	@echo "       make check-tokenizer MODEL=path/to/model.nemo"
 	@exit 1
 endif
-	$(PYTHON) $(TOKENIZER_TOOL) --model $(NEMO_MODEL) --show-vocab 20 --output-dir $(TOKENIZER_RESULTS)
+	@echo "Checking tokenizer language support..."
+	$(PYTHON) $(TOKENIZER_TOOL) --model $(MODEL) --show-vocab 20 --output-dir $(TOKENIZER_RESULTS)
+
+# ============================================================
+# Inference
+# ============================================================
+
+# Inference with .nemo model
+# Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav
+inference: setup
+ifndef MODEL
+	@echo "Error: MODEL is required."
+	@echo "Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav"
+	@exit 1
+endif
+ifndef AUDIO
+	@echo "Error: AUDIO is required."
+	@echo "Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav"
+	@exit 1
+endif
+	$(PYTHON) $(SRC_DIR)/inference.py --model $(MODEL) --audio $(AUDIO)
+
+# Inference with .ckpt checkpoint
+# Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav
+inference-ckpt: setup
+ifndef CKPT
+	@echo "Error: CKPT is required."
+	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@exit 1
+endif
+ifndef BASE
+	@echo "Error: BASE is required (the base .nemo model for architecture)."
+	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@exit 1
+endif
+ifndef AUDIO
+	@echo "Error: AUDIO is required."
+	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@exit 1
+endif
+	$(PYTHON) $(SRC_DIR)/inference.py --checkpoint $(CKPT) --base-model $(BASE) --audio $(AUDIO)
 
 # ============================================================
 # Model Upload
@@ -321,14 +215,6 @@ clean-outputs:
 	rm -rf $(OUTPUTS_DIR)/*
 	@echo "Cleaned training outputs."
 
-clean-data:
-	@echo "Removing downloaded data..."
-	rm -rf $(RAW_DIR)/*
-	rm -rf $(MANIFEST_DIR)/*
-	@echo "Cleaned data files."
-
 clean: clean-outputs
-	@echo "Cleaning complete (outputs removed, data preserved)."
 
-clean-all: clean-outputs clean-data
-	@echo "Cleaned all generated files."
+clean-all: clean-outputs

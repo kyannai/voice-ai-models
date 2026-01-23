@@ -595,28 +595,47 @@ Original [8198 rows]:              Expanded [13198 rows]:
 #### Initialize New Tokens (Critical!)
 
 ```python
-# Set new token weights to zero
-new_joint.weight[old_vocab_size:new_vocab_size].zero_()
-# Set new token bias to very negative value
-new_joint.bias[old_vocab_size:new_vocab_size].fill_(-1000.0)
-# Set new embeddings to zero
-new_embed.weight[old_vocab_size:new_vocab_size].zero_()
+# Get statistics from existing tokens for smart initialization
+existing_weight_std = ori_joint_weight[:old_vocab_size].std()
+existing_bias_mean = ori_joint_bias[:old_vocab_size].mean()
+existing_embed_std = ori_embed_weight[:old_vocab_size].std()
+
+# Initialize new joint weights with small random values
+new_joint.weight[old_vocab_size:new_vocab_size].normal_(
+    mean=0.0,
+    std=existing_weight_std * 0.01  # Small random init
+)
+# Initialize bias slightly below mean (not extreme)
+new_joint.bias[old_vocab_size:new_vocab_size].fill_(
+    existing_bias_mean - 5.0  # Slightly negative, but trainable
+)
+
+# Initialize new embeddings with small random values
+new_embed.weight[old_vocab_size:new_vocab_size].normal_(
+    mean=0.0,
+    std=existing_embed_std * 0.01  # Small random init
+)
 ```
 
 **Why this initialization is critical**:
 
-Without explicit initialization, new tokens have random (Xavier) weights. During inference:
-1. Joint network computes logits for all tokens
-2. Random weights for new tokens produce non-zero logits
-3. These random logits may be **higher** than learned English token logits
-4. Decoding selects Chinese characters instead of English tokens!
+The initialization must balance two requirements:
 
-**Our solution**:
-- **Zero weights**: New tokens produce zero pre-activation
-- **-1000 bias**: Adds -1000 to the logit, making it effectively negative infinity
-- **Result**: New tokens have ~zero probability, never selected during decoding
+1. **Inference**: New tokens shouldn't interfere with English transcription
+2. **Training**: Gradients must flow to enable learning of new tokens
 
-After fine-tuning on Chinese data, these weights will be learned properly.
+**The Problem with Extreme Initialization**:
+
+An earlier approach used `-1000` bias, which:
+- ✅ Preserved English perfectly (new tokens never selected)
+- ❌ Blocked gradients during training (new tokens couldn't learn!)
+
+**Our Balanced Solution**:
+- **Small random weights**: Non-zero but small, allows gradients to flow
+- **Slightly negative bias (mean - 5)**: Low probability during inference, but gradients can still update the weights
+- **Result**: English is preserved AND new tokens can be learned during fine-tuning
+
+The key insight is that the softmax gradient is essentially zero when logits are at `-1000`, creating a "gradient desert" that prevents learning.
 
 ### Step 6: Save the Expanded Model
 
@@ -644,18 +663,27 @@ Understanding the layout transformation is crucial:
 
 ### New Token Initialization
 
-The initialization strategy is critical for preserving English performance:
+The initialization strategy must balance inference correctness AND training capability:
 
-| Layer | New Token Init | Reason |
-|-------|----------------|--------|
-| Decoder Embed | Zero | No contribution to LSTM input |
-| Joint Weight | Zero | No contribution to output logit (before bias) |
-| Joint Bias | -1000 | Makes logit extremely negative → ~0 probability |
+| Layer | New Token Init | Value | Reason |
+|-------|----------------|-------|--------|
+| Decoder Embed | Normal | std * 0.01 | Small random values, allows gradient flow |
+| Joint Weight | Normal | std * 0.01 | Small random values, allows gradient flow |
+| Joint Bias | Fill | mean - 5.0 | Slightly negative, but gradients can still flow |
 
 This ensures:
-1. Softmax(logits) for new tokens ≈ 0
-2. Decoding never selects new tokens
-3. English transcription is unchanged
+1. Softmax(logits) for new tokens is low (English preserved)
+2. Gradients can flow during training (new tokens can learn)
+3. English transcription is unchanged during inference
+
+**Why Not -1000 Bias?**
+
+An extreme `-1000` bias was tried initially, but it blocked gradient flow completely:
+- The softmax derivative approaches zero for extreme logits
+- New tokens could never be updated during training
+- Chinese characters would output repetitive patterns like `的的的的的的`
+
+The balanced initialization (`mean - 5.0`) provides enough suppression for inference while allowing learning during fine-tuning.
 
 ---
 
@@ -734,8 +762,13 @@ The fine-tuning process will:
 The `expand_tdt_tokenizer.py` script successfully expands the Parakeet TDT model vocabulary by:
 
 1. **Carefully preserving** all original model weights
-2. **Strategically initializing** new tokens to not interfere with decoding
+2. **Strategically initializing** new tokens with a balanced approach:
+   - Small random weights for gradient flow during training
+   - Slightly negative bias (mean - 5) for low probability during inference
 3. **Maintaining exact** English transcription performance
-4. **Enabling future** Chinese capability through fine-tuning
+4. **Enabling** new language learning through fine-tuning
 
-The key insight is that NeMo's `change_vocabulary()` reinitializes too many weights, so we must manually save and restore the trained weights while carefully handling the token index shifts for blank and duration tokens.
+The key insights are:
+- NeMo's `change_vocabulary()` reinitializes too many weights, requiring manual save/restore
+- Token index shifts for blank and duration tokens must be handled carefully
+- **Initialization must balance inference AND training needs** — extreme values (-1000 bias) block gradient flow

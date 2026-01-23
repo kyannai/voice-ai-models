@@ -1,0 +1,16 @@
+{
+  "base_model": "nvidia/parakeet-tdt-0.6b-v3",
+  "old_vocab_size": 8192,
+  "new_vocab_size": 12196,
+  "num_chars_added": 4004,
+  "manifests": [
+    {
+      "path": "/home/kyan/voice-ai/asr/train/training_data/malaysian-stt/data/manifests/train_manifest.json",
+      "max_tokens": 1500
+    },
+    {
+      "path": "/home/kyan/voice-ai/asr/train/training_data/KeSpeech/data/manifests/train_manifest.json",
+      "max_tokens": 4000
+    }
+  ]
+}

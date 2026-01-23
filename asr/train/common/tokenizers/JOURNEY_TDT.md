@@ -407,6 +407,159 @@ new_vocab to end       | Restored    | Restored  | Shifted duration/blank tokens
 
 ---
 
+## Chapter 9: The Training Surprise
+
+### The Setup
+
+With English transcription working perfectly, it was time to fine-tune on Chinese data. We ran an overfitting test on a small dataset (32 samples) with Chinese, Malay, and English.
+
+### Expected Result
+
+After 100 epochs of overfitting:
+- English: Perfect (overfit) ✅
+- Malay: Perfect (overfit) ✅
+- Chinese: Perfect (overfit) ❓
+
+### Actual Result (First Attempt)
+
+```
+Epoch 50:
+WER reference: 最糟的老婆很可能是很好的女人
+WER predicted: 的的的的的的的的的的的的的的
+
+Epoch 99:
+WER reference: 最糟的老婆很可能是很好的女人  
+WER predicted: 使了的的的的的的的的的的的的
+```
+
+**Problem**: Chinese was outputting repetitive characters like `的的的的的` instead of learning the correct transcriptions!
+
+Malay and English were overfitting correctly, but Chinese was stuck in a loop.
+
+### Investigation: Why Was Chinese Not Learning?
+
+Looking back at our initialization:
+
+```python
+# Our "solution" for inference
+new_joint.bias[old_vocab_size:new_vocab_size].fill_(-1000.0)
+```
+
+**The problem**: A bias of `-1000` makes the logit so negative that:
+1. The token has ~zero probability during inference ✅ (this was intentional)
+2. The gradient is essentially **zero** during training ❌ (this was NOT intended!)
+
+**The math**:
+```
+logit = weight · input + (-1000)
+probability = softmax(logit) ≈ 0
+
+gradient = target_prob - predicted_prob
+         ≈ target_prob - 0
+         = target_prob
+
+But the gradient for the bias is multiplied by the softmax derivative,
+which is essentially 0 when the logit is at -1000!
+```
+
+This created a **gradient desert** — the new tokens couldn't learn because no gradients were flowing to them.
+
+### Why Malay Worked But Chinese Didn't
+
+**Malay** uses Latin script with many overlapping characters with English:
+- `a`, `e`, `i`, `o`, `u`, `k`, `s`, `t`, etc. already existed in vocab
+- The model could use existing English tokens for most Malay words
+- Only a few new characters needed to be learned
+
+**Chinese** uses entirely new characters (CJK ideographs):
+- All 5000+ Chinese tokens were NEW (positions 8192+)
+- Every character had a `-1000` bias
+- The model **couldn't produce any Chinese output**
+
+### The Fix: Balanced Initialization
+
+The solution was to initialize new tokens in a way that:
+1. **Doesn't interfere with English inference** (slightly negative)
+2. **Allows gradients to flow during training** (not too negative)
+
+```python
+# Get statistics from existing tokens
+existing_weight_std = ori_joint_weight[:old_vocab_size].std()
+existing_bias_mean = ori_joint_bias[:old_vocab_size].mean()
+
+# Initialize new tokens with small random weights
+new_joint.weight[old_vocab_size:new_vocab_size].normal_(
+    mean=0.0, 
+    std=existing_weight_std * 0.01  # Small but non-zero
+)
+
+# Initialize bias to slightly below average (not extreme)
+new_joint.bias[old_vocab_size:new_vocab_size].fill_(
+    existing_bias_mean - 5.0  # About -5 below mean, not -1000!
+)
+
+# Same for decoder embeddings
+existing_embed_std = ori_embed_weight[:old_vocab_size].std()
+new_embed.weight[old_vocab_size:new_vocab_size].normal_(
+    mean=0.0,
+    std=existing_embed_std * 0.01
+)
+```
+
+### The Training Config Adjustments
+
+We also increased the learning rate for the overfit test:
+
+| Parameter | Before | After | Reason |
+|-----------|--------|-------|--------|
+| `learning_rate` | `1e-4` | `5e-4` | Stronger gradients for new tokens |
+| `batch_size` | `4` | `2` | More gradient updates |
+| `warmup_steps` | `50` | `10` | Reach full LR faster |
+
+### Result After Fix
+
+```
+Epoch 31:
+WER reference: 最糟的老婆很可能是很好的女人
+WER predicted: 最糟的老婆很可能是很好的女人  ✅ PERFECT!
+
+WER reference: 中牧总公司拟延期履行相关承诺
+WER predicted: 中牧总公司拟延期履行相关承诺  ✅ PERFECT!
+
+WER reference: 尽管乐视电动车未能现身舞台
+WER predicted: 尽管乐视电动车未能现身舞台  ✅ PERFECT!
+```
+
+**Chinese was now learning correctly!** 🎉
+
+---
+
+## The Complete Picture (Updated)
+
+### Summary of All Issues Found
+
+| Issue | Symptom | Root Cause | Fix |
+|-------|---------|------------|-----|
+| #1 | Complete garbage | Joint output not preserved | Save & restore joint weights |
+| #2 | Stuttering | Decoder embedding not preserved | Save & restore embedding |
+| #3 | Different garbage | LSTM weights reset | Save & restore all decoder params |
+| #4 | Mostly works | Joint projections reset | Save & restore all joint params |
+| #5 | Wrong special tokens | Blank/duration not shifted | Shift special tokens to new positions |
+| #6 | Random Chinese chars | New tokens have high logits | Zero weights, negative bias |
+| **#7** | **Chinese not training** | **Bias too negative (-1000)** | **Use mean-5.0 bias, small random weights** |
+
+### The Final Initialization Strategy (Updated)
+
+```
+Position Range           | Weight Init              | Bias Init           | Purpose
+------------------------|--------------------------|---------------------|--------
+0 to old_vocab-1        | Restored from original   | Restored            | English tokens (unchanged)
+old_vocab to new_vocab-1| Normal(0, std*0.01)      | existing_mean - 5.0 | New tokens (trainable)
+new_vocab to end        | Restored from original   | Restored            | Duration/blank (shifted)
+```
+
+---
+
 ## Lessons Learned
 
 ### 1. Never Trust Framework "Convenience" Methods
@@ -424,6 +577,12 @@ The decoder (prediction network) adds significant complexity. Every vocabulary-d
 ### 5. Special Tokens Are Easy to Forget
 Duration tokens and blank tokens exist at specific positions. When shifting the vocabulary, these must move too.
 
+### 6. Inference vs Training Requirements Differ
+What works for inference may break training! A `-1000` bias preserves English perfectly but prevents new tokens from ever learning. The initialization must balance both needs.
+
+### 7. Test Training, Not Just Inference
+Always run an overfitting test on a small dataset before full training. This catches issues like blocked gradients that wouldn't show up in inference testing.
+
 ---
 
 ## Timeline
@@ -436,25 +595,32 @@ Duration tokens and blank tokens exist at specific positions. When shifting the 
 | 4 | Found joint projection reset | 45 min | Mostly working |
 | 5 | Fixed special token positions | 30 min | Random Chinese chars |
 | 6 | Investigated logits | 2 hours | Found the real issue |
-| 7 | Implemented zero init + negative bias | 15 min | **SUCCESS!** |
+| 7 | Implemented zero init + negative bias | 15 min | **Inference works!** |
+| 8 | Ran overfitting test | 30 min | Chinese not learning |
+| 9 | Analyzed training dynamics | 1 hour | Found gradient blockage |
+| 10 | Implemented balanced initialization | 15 min | **Training works!** |
 
-**Total debugging time**: ~6 hours
+**Total debugging time**: ~8 hours
 
 ---
 
 ## The Moral of the Story
 
-What seemed like a simple vocabulary expansion turned into a deep dive into the TDT architecture. The key insight was that **preserving weights isn't enough** — new tokens must be initialized in a way that doesn't interfere with existing behavior.
+What seemed like a simple vocabulary expansion turned into a deep dive into the TDT architecture. The key insights were:
 
-The final solution is elegant:
-- Zero weights = no contribution to the logit
-- Very negative bias = approximately zero probability
-- Result = new tokens are invisible until fine-tuned
+1. **Preserving weights isn't enough** — new tokens must be initialized carefully
+2. **Inference and training have different requirements** — what works for one may break the other
 
-Sometimes the fix is simple, but finding it requires understanding the entire system.
+The final solution balances both needs:
+- Small random weights = gradients can flow during training
+- Slightly negative bias (mean - 5) = low probability but not blocked
+- Result = new tokens don't interfere with English AND can be learned
+
+Sometimes the fix is simple, but finding it requires understanding the entire system — including the training dynamics, not just inference behavior.
 
 ---
 
 *Document written: January 2026*
+*Updated: January 2026 (added training fix)*
 *Script: expand_tdt_tokenizer.py*
 *Model: nvidia/parakeet-tdt-0.6b-v3*
