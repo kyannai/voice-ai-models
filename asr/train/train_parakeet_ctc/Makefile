@@ -16,39 +16,46 @@ CHINESE_MANIFEST ?= ../training_data/KeSpeech/data/manifests/train_manifest.json
 # Default number of Chinese chars to add
 MAX_CHINESE_CHARS ?= 4000
 
-.PHONY: help setup expand-vocab train-overfit train clean
+# Default output path for expanded CTC model
+EXPANDED_CTC_OUTPUT ?= ./models/parakeet-ctc-1.1b-expanded.nemo
+
+.PHONY: help setup expand-vocab expand-ctc-tokenizer train-overfit train test-tokenizer-languages clean
 
 help:
 	@echo "Parakeet CTC Multilingual Training"
 	@echo "==================================="
+	@echo "Environment is auto-created on first run."
 	@echo ""
-	@echo "Setup:"
-	@echo "  make setup              - Create virtual environment and install dependencies"
+	@echo "expand-ctc-tokenizer - Expand vocabulary with new characters"
+	@echo "  MANIFESTS='path:max'           Manifest with optional char limit"
+	@echo "  EXPANDED_CTC_OUTPUT=path       Output .nemo (default: models/parakeet-ctc-1.1b-expanded.nemo)"
+	@echo "  Example: make expand-ctc-tokenizer MANIFESTS='zh.json:5000'"
+	@echo "  Example: make expand-ctc-tokenizer MANIFESTS='zh.json:5000' EXPANDED_CTC_OUTPUT=models/ctc-zh.nemo"
 	@echo ""
-	@echo "Vocabulary Expansion:"
-	@echo "  make expand-vocab       - Expand vocabulary with Chinese characters"
-	@echo "                            Options: CHINESE_MANIFEST=path MAX_CHINESE_CHARS=4000"
+	@echo "train - Full multilingual training"
+	@echo "  Example: make train"
 	@echo ""
-	@echo "Training:"
-	@echo "  make train-overfit      - Run overfit sanity check (tiny dataset)"
-	@echo "  make train              - Run full multilingual training"
+	@echo "train-overfit - Overfit sanity check (tiny dataset)"
+	@echo "  Example: make train-overfit"
 	@echo ""
-	@echo "Utilities:"
-	@echo "  make check-model        - Inspect model architecture"
-	@echo "  make clean              - Remove outputs and cache"
+	@echo "test-tokenizer-languages - Test language support"
+	@echo "  MODEL=path                     Model to test (required)"
+	@echo "  LANGUAGES=en,ms,cn             Languages to check (optional)"
+	@echo "  Example: make test-tokenizer-languages MODEL=models/model.nemo"
+	@echo ""
+	@echo "check-model    - Inspect model architecture"
+	@echo "clean          - Remove outputs and cache"
 
 # ============================================================
-# Setup
+# Setup (auto-runs as dependency)
 # ============================================================
 
 setup:
-	@echo "Creating virtual environment..."
-	@test -d $(VENV) || $(PYTHON) -m venv $(VENV)
-	@echo "Installing dependencies..."
-	. $(VENV)/bin/activate && pip install --upgrade pip
-	. $(VENV)/bin/activate && pip install uv
-	. $(VENV)/bin/activate && uv pip install -r requirements.txt
-	@echo "Setup complete!"
+	@if [ ! -d "$(VENV)" ]; then \
+		echo "Creating virtual environment..."; \
+		uv venv --python 3.10; \
+	fi
+	@. $(VENV)/bin/activate && uv pip install -q -r requirements.txt
 
 # ============================================================
 # Vocabulary Expansion
@@ -64,6 +71,47 @@ expand-vocab: setup
 		--manifest $(CHINESE_MANIFEST) \
 		--output $(MULTILINGUAL_MODEL) \
 		--max-chinese-chars $(MAX_CHINESE_CHARS)
+
+# ============================================================
+# Expand CTC Tokenizer (Multi-Manifest Support)
+# ============================================================
+# Supports multiple manifests with individual token limits.
+# Format: MANIFESTS="path1:max1 path2:max2 ..."
+
+expand-ctc-tokenizer: setup
+	@echo "============================================================"
+	@echo "Expanding nvidia/parakeet-ctc-1.1b Vocabulary"
+	@echo "============================================================"
+	@echo "CTC expansion parameters:"
+	@echo "  MANIFESTS=$(MANIFESTS)"
+	@echo "  EXPANDED_CTC_OUTPUT=$(EXPANDED_CTC_OUTPUT)"
+	@echo "  MAX_TOTAL_CHARS=$(MAX_TOTAL_CHARS) (optional, limits total chars)"
+	@echo "  TEST_AUDIO=$(TEST_AUDIO) (optional)"
+	@if [ -z "$(MANIFESTS)" ]; then \
+		echo ""; \
+		echo "Usage:"; \
+		echo "  # Single manifest:"; \
+		echo "  make expand-ctc-tokenizer \\"; \
+		echo "    MANIFESTS='chinese.json:5000' \\"; \
+		echo "    EXPANDED_CTC_OUTPUT=./models/parakeet-ctc-1.1b-zh.nemo"; \
+		echo ""; \
+		echo "  # Multiple manifests (Chinese + Malay):"; \
+		echo "  make expand-ctc-tokenizer \\"; \
+		echo "    MANIFESTS='chinese.json:5000 malay.json:3000' \\"; \
+		echo "    EXPANDED_CTC_OUTPUT=./models/parakeet-ctc-multilingual.nemo"; \
+		echo ""; \
+		echo "  Format: path:max_tokens (max_tokens is optional)"; \
+		exit 1; \
+	fi
+	@mkdir -p models
+	. $(VENV)/bin/activate && $(PYTHON) src/expand_ctc_tokenizer.py \
+		--manifests $(MANIFESTS) \
+		--output "$(EXPANDED_CTC_OUTPUT)" \
+		$(if $(MAX_TOTAL_CHARS),--max-total-chars $(MAX_TOTAL_CHARS),) \
+		$(if $(TEST_AUDIO),--test-audio "$(TEST_AUDIO)",)
+	@echo ""
+	@echo "Done: expanded CTC model saved to $(EXPANDED_CTC_OUTPUT)"
+	@echo "Note: Fine-tune this model on target language data to train the new embeddings."
 
 # ============================================================
 # Training
@@ -115,6 +163,32 @@ print(f'Vocab size: {model.tokenizer.vocab_size}'); \
 print(f'Decoder output: {model.decoder._num_classes}'); \
 print(f'Blank ID: {model.decoder._num_classes - 1}'); \
 " $(MODEL)
+
+# ============================================================
+# Test Tokenizer Language Support
+# ============================================================
+
+TOKENIZER_DIR := ../common/tokenizers
+
+test-tokenizer-languages: setup
+	@if [ -z "$(MODEL)" ]; then \
+		echo ""; \
+		echo "Test Tokenizer Language Support"; \
+		echo "================================"; \
+		echo "Usage: make test-tokenizer-languages MODEL=path/to/model.nemo"; \
+		echo "       make test-tokenizer-languages MODEL=nvidia/parakeet-ctc-1.1b"; \
+		echo ""; \
+		echo "Options:"; \
+		echo "  MODEL      - HuggingFace model name or path to .nemo file (required)"; \
+		echo "  LANGUAGES  - Comma-separated languages to test (default: en,ms,cn)"; \
+		echo "  VERBOSE    - Set to 1 for detailed output"; \
+		echo ""; \
+		exit 1; \
+	fi
+	. $(VENV)/bin/activate && python $(TOKENIZER_DIR)/test_tokenizer_languages.py \
+		"$(MODEL)" \
+		$(if $(filter 1,$(VERBOSE)),--verbose,) \
+		$(if $(LANGUAGES),--languages $(LANGUAGES),)
 
 clean:
 	rm -rf outputs/

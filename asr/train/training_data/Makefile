@@ -1,6 +1,6 @@
-# ASR Training Data Management
-# =============================
-# Centralized dataset preparation for ASR model training
+# ASR Training Data Preparation
+# ==============================
+# Dataset preparation for ASR model training
 #
 # Usage:
 #   make list-datasets         - List all available datasets with status
@@ -16,28 +16,26 @@ PYTHON := python3
 # Configuration
 # =============================================================================
 
-# Directories
-TRAINING_DATA_DIR := training_data
-COMMON_DIR := common
+# Directories (relative to training_data/)
+COMMON_DIR := ../common
 
-# Dataset directories
-MALAYSIAN_STT_DIR := $(TRAINING_DATA_DIR)/malaysian-stt
-MALAYSIAN_STT_STAGE2_DIR := $(TRAINING_DATA_DIR)/malaysian-stt-stage2
-CHINESE_MANDARIN_DIR := $(TRAINING_DATA_DIR)/chinese-mandarin
-KESPEECH_DIR := $(TRAINING_DATA_DIR)/KeSpeech
-SYNTHETIC_5K_DIR := $(TRAINING_DATA_DIR)/5k_v3
+# Dataset directories (relative to training_data/)
+MALAYSIAN_STT_DIR := malaysian-stt
+MALAYSIAN_STT_STAGE2_DIR := malaysian-stt-stage2
+CHINESE_MANDARIN_DIR := chinese-mandarin
+KESPEECH_DIR := KeSpeech
+SYNTHETIC_5K_DIR := 5k_v3
 
 # Virtual environment
 COMMON_VENV := $(COMMON_DIR)/.venv
 COMMON_PYTHON := $(COMMON_VENV)/bin/python
 
 # Stamp files (tracks prepared state)
-STAMP_DIR := $(TRAINING_DATA_DIR)
-STAMP_MALAYSIAN_STT := $(STAMP_DIR)/.malaysian-stt_prepared
-STAMP_MALAYSIAN_STT_STAGE2 := $(STAMP_DIR)/.malaysian-stt-stage2_prepared
-STAMP_CHINESE_MANDARIN := $(STAMP_DIR)/.chinese-mandarin_prepared
-STAMP_KESPEECH := $(STAMP_DIR)/.kespeech_prepared
-STAMP_SYNTHETIC_5K := $(STAMP_DIR)/.synthetic-5k_prepared
+STAMP_MALAYSIAN_STT := .malaysian-stt_prepared
+STAMP_MALAYSIAN_STT_STAGE2 := .malaysian-stt-stage2_prepared
+STAMP_CHINESE_MANDARIN := .chinese-mandarin_prepared
+STAMP_KESPEECH := .kespeech_prepared
+STAMP_SYNTHETIC_5K := .synthetic-5k_prepared
 
 # Optional parameters
 MAX_SAMPLES ?=
@@ -49,63 +47,48 @@ else
 MAX_SAMPLES_ARG :=
 endif
 
+# Multilingual directories
+MULTILINGUAL_DIR := multilingual
+MULTILINGUAL_OVERFIT_DIR := multilingual-overfit
+
+# Default manifest paths for multilingual targets
+MS_MANIFEST ?= $(MALAYSIAN_STT_DIR)/data/manifests/train_manifest.json
+ZH_MANIFEST ?= $(KESPEECH_DIR)/data/manifests/train_manifest.json
+
 # =============================================================================
 # Help
 # =============================================================================
 
 .PHONY: help
 help:
-	@echo "ASR Training Data Management"
-	@echo "============================"
+	@echo "ASR Training Data Preparation"
+	@echo "============================="
 	@echo ""
-	@echo "Dataset Management:"
-	@echo "  make list-datasets           - List all datasets with status"
-	@echo "  make prepare-all             - Prepare ALL datasets"
+	@echo "list-datasets / status - Show all datasets with preparation status"
+	@echo "info                   - Show training data overview"
 	@echo ""
-	@echo "Individual Dataset Preparation (auto-downloads if needed):"
-	@echo "  make prepare-malaysian-stt       - Malaysian STT (Stage 1, ~1000h, ASR preprocessed)"
-	@echo "  make prepare-malaysian-stt-stage2 - Malaysian STT Stage 2 (~500h)"
-	@echo "  make prepare-chinese-mandarin    - Chinese LiPS (~100h)"
-	@echo "  make prepare-kespeech            - KeSpeech Mandarin (~1500h local)"
-	@echo "  make prepare-synthetic-5k        - Synthetic Malay data (~1.5h)"
+	@echo "prepare-all - Prepare ALL datasets"
 	@echo ""
-	@echo "Multilingual Training Data (EN/MS/ZH):"
-	@echo "  make prepare-kespeech-full             - Alias for prepare-kespeech"
-	@echo "  make expand-ctc-tokenizer              - Expand parakeet-ctc-1.1b vocabulary"
-	@echo "  make expand-tdt-tokenizer              - Expand parakeet-tdt-0.6b-v3 vocabulary"
-	@echo "  make prepare-multilingual              - Combine manifests for multilingual training"
-	@echo "  make prepare-multilingual-overfit      - Small manifests for overfit sanity check"
+	@echo "prepare-malaysian-stt - Malaysian STT Stage 1 (~1000h)"
+	@echo "  MAX_SAMPLES=N                  Limit samples (optional)"
+	@echo "  Example: make prepare-malaysian-stt MAX_SAMPLES=1000"
 	@echo ""
-	@echo "Tokenizer Testing:"
-	@echo "  make test-tokenizer-languages          - Test if model supports cn/ms/en"
+	@echo "prepare-malaysian-stt-stage2 - Malaysian STT Stage 2 (~500h)"
 	@echo ""
-	@echo "Training (use separate packages):"
-	@echo "  cd train_parakeet_tdt && make train"
-	@echo "  cd train_parakeet_tdt_with_new_tokenizer && make train"
+	@echo "prepare-chinese-mandarin - Chinese LiPS (~100h)"
 	@echo ""
-	@echo "Utilities:"
-	@echo "  make clean                   - Remove prepared data (keep raw)"
-	@echo "  make clean-all               - Remove all data (including raw)"
-	@echo "  make status                  - Show dataset status summary"
+	@echo "prepare-kespeech - KeSpeech Mandarin (~1500h)"
 	@echo ""
-	@echo "Parameters:"
-	@echo "  MAX_SAMPLES            - Limit samples for testing (e.g., MAX_SAMPLES=1000)"
-	@echo "  MANIFESTS              - Manifest specs: 'path:max path2:max2' (for expand-*-chinese)"
-	@echo "  MAX_TOTAL_CHARS        - Optional total char limit across all manifests"
-	@echo "  EXPANDED_CTC_OUTPUT    - Output path for expanded CTC model"
-	@echo "  EXPANDED_TDT_OUTPUT    - Output path for expanded TDT model"
-	@echo "  TEST_AUDIO             - Audio file to test before/after vocab expansion"
-	@echo "  OVERFIT_SAMPLES        - Samples for overfit manifests (default: 100, same for train/val)"
-	@echo "  MODEL                  - HuggingFace model or .nemo path (for test-tokenizer-languages)"
-	@echo "  LANGUAGES              - Comma-separated languages to test (default: en,ms,cn)"
-	@echo "  VERBOSE                - Set to 1 for detailed tokenizer test output"
+	@echo "prepare-synthetic-5k - Synthetic Malay (~1.5h)"
 	@echo ""
-	@echo "Examples:"
-	@echo "  make prepare-chinese-mandarin MAX_SAMPLES=1000  # Small test"
-	@echo "  make prepare-malaysian-stt                      # Full dataset"
-	@echo "  make expand-ctc-tokenizer MANIFESTS='chinese.json:5000 malay.json:3000'"
-	@echo "  make expand-tdt-tokenizer MANIFESTS='chinese.json:5000 malay.json:3000' \\"
-	@echo "       EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-multilingual.nemo"
+	@echo "prepare-multilingual - Combine MS + ZH manifests for training"
+	@echo ""
+	@echo "prepare-multilingual-overfit - Small manifests for overfit test"
+	@echo "  OVERFIT_SAMPLES=N              Samples to use (default: 100)"
+	@echo "  Example: make prepare-multilingual-overfit OVERFIT_SAMPLES=50"
+	@echo ""
+	@echo "clean      - Remove prepared data (keep raw)"
+	@echo "clean-all  - Remove all data (including raw)"
 	@echo ""
 
 # =============================================================================
@@ -153,7 +136,7 @@ _setup-synthetic-5k:
 .PHONY: list-datasets status
 
 list-datasets: _setup-common
-	@cd $(COMMON_DIR) && . .venv/bin/activate && $(PYTHON) datasets.py --training-data-dir ../$(TRAINING_DATA_DIR)
+	@cd $(COMMON_DIR) && . .venv/bin/activate && $(PYTHON) datasets.py --training-data-dir ../training_data
 
 status: list-datasets
 
@@ -191,7 +174,7 @@ prepare-malaysian-stt: _setup-common
 	cd $(MALAYSIAN_STT_DIR)/data/raw && \
 		for f in *.zip; do [ -f "$$f" ] && unzip -o -q "$$f" || true; done
 	@echo "Creating manifests (EN/MS only, with ASR preprocessing)..."
-	cd $(MALAYSIAN_STT_DIR) && ../../$(COMMON_DIR)/.venv/bin/python src/prepare_data.py \
+	cd $(MALAYSIAN_STT_DIR) && ../$(COMMON_DIR)/.venv/bin/python src/prepare_data.py \
 		--data-dir data/raw/data \
 		--audio-base-dir data/raw \
 		--output-dir data/manifests \
@@ -290,196 +273,10 @@ prepare-synthetic-5k: _setup-synthetic-5k
 	@echo "Done: synthetic-5k prepared!"
 
 # =============================================================================
-# Utilities
-# =============================================================================
-
-.PHONY: clean clean-stamps clean-manifests clean-all
-
-clean-stamps:
-	@echo "Removing stamp files..."
-	@rm -f $(STAMP_MALAYSIAN_STT) $(STAMP_MALAYSIAN_STT_STAGE2) $(STAMP_CHINESE_MANDARIN) $(STAMP_KESPEECH) $(STAMP_SYNTHETIC_5K)
-	@echo "Done."
-
-clean-manifests:
-	@echo "Removing manifest files..."
-	@rm -rf $(MALAYSIAN_STT_DIR)/data/manifests
-	@rm -rf $(MALAYSIAN_STT_STAGE2_DIR)/data/manifests
-	@rm -rf $(CHINESE_MANDARIN_DIR)/data/processed/manifests
-	@rm -rf $(KESPEECH_DIR)/data/manifests
-	@rm -rf $(SYNTHETIC_5K_DIR)/data/manifests
-	@echo "Done."
-
-clean: clean-stamps clean-manifests
-	@echo "Cleaned prepared data (raw data preserved)."
-
-clean-all: clean
-	@echo "Removing all data (including raw downloads)..."
-	@rm -rf $(MALAYSIAN_STT_DIR)/data
-	@rm -rf $(MALAYSIAN_STT_STAGE2_DIR)/data
-	cd $(CHINESE_MANDARIN_DIR) && $(MAKE) clean-all 2>/dev/null || true
-	@echo "Done. All data removed."
-
-# =============================================================================
 # Multilingual Training Data Preparation
 # =============================================================================
 
-# Paths for multilingual data
-MULTILINGUAL_DIR := $(TRAINING_DATA_DIR)/multilingual
-MULTILINGUAL_OVERFIT_DIR := $(TRAINING_DATA_DIR)/multilingual-overfit
-
-# Default manifest paths for multilingual targets
-MS_MANIFEST ?= $(MALAYSIAN_STT_DIR)/data/manifests/train_manifest.json
-ZH_MANIFEST ?= $(KESPEECH_DIR)/data/manifests/train_manifest.json
-TOKENIZER_DIR := $(COMMON_DIR)/tokenizers
-KESPEECH_FULL_DIR := $(TRAINING_DATA_DIR)/kespeech-full
-
-.PHONY: prepare-kespeech-full prepare-multilingual prepare-multilingual-overfit
-
-prepare-kespeech-full: prepare-kespeech
-	@echo "prepare-kespeech-full is now an alias for prepare-kespeech"
-	@echo "The KeSpeech data is processed from $(KESPEECH_DIR)"
-
-# Default max Chinese characters for vocabulary expansion
-MAX_CHINESE_CHARS ?= 5000
-
-# =============================================================================
-# Test Tokenizer Language Support
-# =============================================================================
-
-.PHONY: test-tokenizer-languages
-
-# Test if a model's tokenizer supports cn, ms, en
-# Usage: make test-tokenizer-languages MODEL=nvidia/parakeet-tdt-0.6b-v3
-#        make test-tokenizer-languages MODEL=/path/to/model.nemo
-MODEL ?=
-
-test-tokenizer-languages: _setup-common
-	@if [ -z "$(MODEL)" ]; then \
-		echo ""; \
-		echo "Test Tokenizer Language Support"; \
-		echo "================================"; \
-		echo ""; \
-		echo "Usage:"; \
-		echo "  make test-tokenizer-languages MODEL=nvidia/parakeet-tdt-0.6b-v3"; \
-		echo "  make test-tokenizer-languages MODEL=/path/to/model.nemo"; \
-		echo ""; \
-		echo "Options:"; \
-		echo "  MODEL            HuggingFace model name or path to .nemo file (required)"; \
-		echo "  LANGUAGES        Comma-separated languages to test (default: en,ms,cn)"; \
-		echo "  VERBOSE          Set to 1 for detailed output"; \
-		echo ""; \
-		echo "Examples:"; \
-		echo "  make test-tokenizer-languages MODEL=nvidia/parakeet-tdt-0.6b-v3"; \
-		echo "  make test-tokenizer-languages MODEL=./models/my-model.nemo VERBOSE=1"; \
-		echo "  make test-tokenizer-languages MODEL=nvidia/parakeet-tdt-0.6b-v3 LANGUAGES=en,cn"; \
-		echo ""; \
-		exit 1; \
-	fi
-	@if [ ! -d "$(TOKENIZER_DIR)/.venv" ]; then \
-		echo "Creating tokenizer venv..."; \
-		cd $(TOKENIZER_DIR) && uv venv --python 3.10; \
-	fi
-	@cd $(TOKENIZER_DIR) && . .venv/bin/activate && uv pip install -q sentencepiece huggingface_hub
-	cd $(TOKENIZER_DIR) && . .venv/bin/activate && $(PYTHON) test_tokenizer_languages.py \
-		"$(MODEL)" \
-		$(if $(filter 1,$(VERBOSE)),--verbose,) \
-		$(if $(LANGUAGES),--languages $(LANGUAGES),)
-
-# =============================================================================
-# Expand CTC Model Vocabulary (for parakeet-ctc-1.1b)
-# =============================================================================
-# Supports multiple manifests with individual token limits.
-# Format: MANIFESTS="path1:max1 path2:max2 ..."
-
-.PHONY: expand-ctc-tokenizer
-
-# Default output path for expanded CTC model
-EXPANDED_CTC_OUTPUT ?= $(TOKENIZER_DIR)/parakeet-ctc-1.1b-expanded.nemo
-
-expand-ctc-tokenizer: _setup-common
-	@echo "Expanding nvidia/parakeet-ctc-1.1b vocabulary..."
-	@mkdir -p $(TOKENIZER_DIR)
-	@if [ ! -d "$(TOKENIZER_DIR)/.venv" ]; then \
-		echo "Creating tokenizer venv..."; \
-		cd $(TOKENIZER_DIR) && uv venv --python 3.10; \
-	fi
-	@cd $(TOKENIZER_DIR) && . .venv/bin/activate && uv pip install -q "nemo_toolkit[asr]" sentencepiece tqdm pyyaml
-	@echo "CTC expansion parameters:"
-	@echo "  MANIFESTS=$(MANIFESTS)"
-	@echo "  EXPANDED_CTC_OUTPUT=$(EXPANDED_CTC_OUTPUT)"
-	@echo "  MAX_TOTAL_CHARS=$(MAX_TOTAL_CHARS) (optional, limits total chars)"
-	@echo "  TEST_AUDIO=$(TEST_AUDIO) (optional)"
-	@if [ -z "$(MANIFESTS)" ]; then \
-		echo ""; \
-		echo "Usage:"; \
-		echo "  # Single manifest:"; \
-		echo "  make expand-ctc-tokenizer \\"; \
-		echo "    MANIFESTS='chinese.json:5000' \\"; \
-		echo "    EXPANDED_CTC_OUTPUT=./models/parakeet-ctc-1.1b-zh.nemo"; \
-		echo ""; \
-		echo "  # Multiple manifests (Chinese + Malay):"; \
-		echo "  make expand-ctc-tokenizer \\"; \
-		echo "    MANIFESTS='chinese.json:5000 malay.json:3000' \\"; \
-		echo "    EXPANDED_CTC_OUTPUT=./models/parakeet-ctc-multilingual.nemo"; \
-		echo ""; \
-		echo "  Format: path:max_tokens (max_tokens is optional)"; \
-		exit 1; \
-	fi
-	cd $(TOKENIZER_DIR) && . .venv/bin/activate && $(PYTHON) expand_ctc_tokenizer.py \
-		--manifests $(MANIFESTS) \
-		--output "$(CURDIR)/$(EXPANDED_CTC_OUTPUT)" \
-		$(if $(MAX_TOTAL_CHARS),--max-total-chars $(MAX_TOTAL_CHARS),) \
-		$(if $(TEST_AUDIO),--test-audio "$(TEST_AUDIO)",)
-	@echo ""
-	@echo "Done: expanded CTC model saved to $(EXPANDED_CTC_OUTPUT)"
-	@echo "Note: Fine-tune this model on target language data to train the new embeddings."
-
-# ===== TDT Model Vocabulary Expansion =====
-# Supports multiple manifests with individual token limits.
-# Format: MANIFESTS="path1:max1 path2:max2 ..."
-
-.PHONY: expand-tdt-tokenizer
-
-# Default output path for expanded TDT model
-EXPANDED_TDT_OUTPUT ?= $(TOKENIZER_DIR)/parakeet-tdt-0.6b-v3-expanded.nemo
-
-expand-tdt-tokenizer: _setup-common
-	@echo "Expanding nvidia/parakeet-tdt-0.6b-v3 vocabulary..."
-	@mkdir -p $(TOKENIZER_DIR)
-	@if [ ! -d "$(TOKENIZER_DIR)/.venv" ]; then \
-		echo "Creating tokenizer venv..."; \
-		cd $(TOKENIZER_DIR) && uv venv --python 3.10; \
-	fi
-	@cd $(TOKENIZER_DIR) && . .venv/bin/activate && uv pip install -q "nemo_toolkit[asr]" sentencepiece tqdm pyyaml librosa
-	@echo "TDT expansion parameters:"
-	@echo "  MANIFESTS=$(MANIFESTS)"
-	@echo "  EXPANDED_TDT_OUTPUT=$(EXPANDED_TDT_OUTPUT)"
-	@echo "  MAX_TOTAL_CHARS=$(MAX_TOTAL_CHARS) (optional, limits total chars)"
-	@echo "  TEST_AUDIO=$(TEST_AUDIO) (optional)"
-	@if [ -z "$(MANIFESTS)" ]; then \
-		echo ""; \
-		echo "Usage:"; \
-		echo "  # Single manifest:"; \
-		echo "  make expand-tdt-tokenizer \\"; \
-		echo "    MANIFESTS='chinese.json:5000' \\"; \
-		echo "    EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-0.6b-v3-zh.nemo"; \
-		echo ""; \
-		echo "  # Multiple manifests (Chinese + Malay):"; \
-		echo "  make expand-tdt-tokenizer \\"; \
-		echo "    MANIFESTS='chinese.json:5000 malay.json:3000' \\"; \
-		echo "    EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-multilingual.nemo"; \
-		echo ""; \
-		echo "  Format: path:max_tokens (max_tokens is optional)"; \
-		exit 1; \
-	fi
-	cd $(TOKENIZER_DIR) && . .venv/bin/activate && $(PYTHON) expand_tdt_tokenizer.py \
-		--manifests $(MANIFESTS) \
-		--output "$(CURDIR)/$(EXPANDED_TDT_OUTPUT)" \
-		$(if $(MAX_TOTAL_CHARS),--max-total-chars $(MAX_TOTAL_CHARS),) \
-		$(if $(TEST_AUDIO),--test-audio "$(TEST_AUDIO)",)
-	@echo ""
-	@echo "Done: expanded TDT model saved to $(EXPANDED_TDT_OUTPUT)"
-	@echo "Note: Fine-tune this model on target language data to train the new embeddings."
+.PHONY: prepare-multilingual prepare-multilingual-overfit
 
 prepare-multilingual:
 	@echo "Creating combined multilingual manifests..."
@@ -585,6 +382,38 @@ prepare-multilingual-overfit:
 	@echo "Done: overfit manifests at $(MULTILINGUAL_OVERFIT_DIR)/manifests/"
 
 # =============================================================================
+# Utilities
+# =============================================================================
+
+.PHONY: clean clean-stamps clean-manifests clean-all
+
+clean-stamps:
+	@echo "Removing stamp files..."
+	@rm -f $(STAMP_MALAYSIAN_STT) $(STAMP_MALAYSIAN_STT_STAGE2) $(STAMP_CHINESE_MANDARIN) $(STAMP_KESPEECH) $(STAMP_SYNTHETIC_5K)
+	@echo "Done."
+
+clean-manifests:
+	@echo "Removing manifest files..."
+	@rm -rf $(MALAYSIAN_STT_DIR)/data/manifests
+	@rm -rf $(MALAYSIAN_STT_STAGE2_DIR)/data/manifests
+	@rm -rf $(CHINESE_MANDARIN_DIR)/data/processed/manifests
+	@rm -rf $(KESPEECH_DIR)/data/manifests
+	@rm -rf $(SYNTHETIC_5K_DIR)/data/manifests
+	@rm -rf $(MULTILINGUAL_DIR)/manifests
+	@rm -rf $(MULTILINGUAL_OVERFIT_DIR)/manifests
+	@echo "Done."
+
+clean: clean-stamps clean-manifests
+	@echo "Cleaned prepared data (raw data preserved)."
+
+clean-all: clean
+	@echo "Removing all data (including raw downloads)..."
+	@rm -rf $(MALAYSIAN_STT_DIR)/data
+	@rm -rf $(MALAYSIAN_STT_STAGE2_DIR)/data
+	cd $(CHINESE_MANDARIN_DIR) && $(MAKE) clean-all 2>/dev/null || true
+	@echo "Done. All data removed."
+
+# =============================================================================
 # Info
 # =============================================================================
 
@@ -608,8 +437,10 @@ info:
 	@echo "    ├── malaysian-stt/"
 	@echo "    ├── malaysian-stt-stage2/"
 	@echo "    ├── chinese-mandarin/"
-	@echo "    ├── kespeech/"
-	@echo "    └── 5k_v3/  (synthetic)"
+	@echo "    ├── KeSpeech/"
+	@echo "    ├── 5k_v3/  (synthetic)"
+	@echo "    ├── multilingual/"
+	@echo "    └── multilingual-overfit/"
 	@echo ""
 	@echo "Manifest Output:"
 	@echo "  Each dataset produces train_manifest.json and val_manifest.json"

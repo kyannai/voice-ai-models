@@ -16,6 +16,9 @@ MODELS_DIR := models
 OUTPUTS_DIR := outputs
 SRC_DIR := src
 
+# Default output path for expanded TDT model
+EXPANDED_TDT_OUTPUT ?= $(MODELS_DIR)/parakeet-tdt-0.6b-v3-expanded.nemo
+
 # CUDA settings for memory optimization
 export PYTORCH_CUDA_ALLOC_CONF := expandable_segments:True
 
@@ -24,46 +27,54 @@ VENV_DIR := .venv
 PYTHON := $(VENV_DIR)/bin/python
 PIP := $(VENV_DIR)/bin/pip
 
-.PHONY: help setup install install-8bit check-gpu \
-        train tensorboard check-events check-tokenizer upload \
-        inference inference-ckpt \
-        clean clean-outputs clean-all
+.PHONY: help setup check-gpu train tensorboard check-events upload \
+        inference inference-ckpt expand-tdt-tokenizer \
+        test-tokenizer-languages clean clean-outputs clean-all
 
 # ============================================================
 # Help
 # ============================================================
 
 help:
-	@echo "Parakeet TDT ASR Training Pipeline"
-	@echo "==================================="
+	@echo "Parakeet TDT ASR Training"
+	@echo "========================="
+	@echo "Environment is auto-created on first run."
 	@echo ""
-	@echo "=== Environment (auto-runs when needed) ==="
-	@echo "  make setup         - Create venv and install all dependencies"
-	@echo "  make check-gpu     - Check GPU availability"
+	@echo "expand-tdt-tokenizer - Expand vocabulary with new characters"
+	@echo "  MANIFESTS='path:max'           Manifest with optional char limit"
+	@echo "  EXPANDED_TDT_OUTPUT=path       Output .nemo (default: models/parakeet-tdt-0.6b-v3-expanded.nemo)"
+	@echo "  Example: make expand-tdt-tokenizer MANIFESTS='zh.json:5000'"
+	@echo "  Example: make expand-tdt-tokenizer MANIFESTS='zh.json:5000' EXPANDED_TDT_OUTPUT=models/tdt-zh.nemo"
 	@echo ""
-	@echo "=== Training ==="
-	@echo "  make train CONFIG=path/to/config.yaml"
+	@echo "train - Fine-tune model"
+	@echo "  CONFIG=path                    Training config yaml (required)"
+	@echo "  Example: make train CONFIG=configs/parakeet_stage1.yaml"
 	@echo ""
-	@echo "=== Inference ==="
-	@echo "  make inference MODEL=model.nemo AUDIO=audio.wav"
-	@echo "  make inference-ckpt CKPT=checkpoint.ckpt BASE=base.nemo AUDIO=audio.wav"
+	@echo "inference - Run inference with .nemo model"
+	@echo "  MODEL=path  AUDIO=path         Model and audio file (required)"
+	@echo "  Example: make inference MODEL=models/model.nemo AUDIO=test.wav"
 	@echo ""
-	@echo "=== Monitoring & Testing ==="
-	@echo "  make tensorboard   - Start TensorBoard (http://localhost:6006)"
-	@echo "  make check-events  - Check TensorBoard event files"
-	@echo "  make check-tokenizer MODEL=path/to/model"
+	@echo "inference-ckpt - Run inference with checkpoint"
+	@echo "  CKPT=path  BASE=path  AUDIO=path"
+	@echo "  Example: make inference-ckpt CKPT=outputs/ckpt.ckpt BASE=models/base.nemo AUDIO=test.wav"
 	@echo ""
-	@echo "=== Model Upload ==="
-	@echo "  make upload MODEL=path/to/model.nemo REPO=repo-name"
+	@echo "test-tokenizer-languages - Test language support"
+	@echo "  MODEL=path                     Model to test (required)"
+	@echo "  LANGUAGES=en,ms,cn             Languages to check (optional)"
+	@echo "  Example: make test-tokenizer-languages MODEL=models/model.nemo"
 	@echo ""
-	@echo "=== Cleanup ==="
-	@echo "  make clean         - Remove training outputs"
+	@echo "upload - Upload model to HuggingFace"
+	@echo "  MODEL=path  REPO=name          Model path and repo name (required)"
+	@echo "  Example: make upload MODEL=models/model.nemo REPO=parakeet-tdt-malay"
+	@echo ""
+	@echo "tensorboard    - Start TensorBoard (http://localhost:6006)"
+	@echo "check-events   - Check TensorBoard event files"
+	@echo "clean          - Remove training outputs"
 
 # ============================================================
-# Installation (Step 1)
+# Setup (auto-runs as dependency)
 # ============================================================
 
-# Setup venv and install all dependencies (called automatically by train targets)
 setup:
 	@if [ ! -d "$(VENV_DIR)" ]; then \
 		echo "Creating virtual environment..."; \
@@ -75,15 +86,6 @@ setup:
 	@. $(VENV_DIR)/bin/activate && uv pip install -q bitsandbytes
 	@echo "Environment ready!"
 
-install: setup
-	@echo ""
-	@echo "Dependencies installed successfully!"
-	@echo ""
-	@echo "Note: 8-bit optimizer (bitsandbytes) is included by default."
-
-install-8bit: setup
-	@echo "8-bit optimizer already installed via setup."
-
 check-gpu: setup
 	@echo "Checking GPU availability..."
 	@$(PYTHON) -c "import torch; \
@@ -91,6 +93,47 @@ check-gpu: setup
 		print(f'GPU count: {torch.cuda.device_count()}'); \
 		[print(f'  GPU {i}: {torch.cuda.get_device_name(i)} ({torch.cuda.get_device_properties(i).total_memory / 1e9:.1f}GB)') \
 			for i in range(torch.cuda.device_count())] if torch.cuda.is_available() else None"
+
+# ============================================================
+# Vocabulary Expansion
+# ============================================================
+# Supports multiple manifests with individual token limits.
+# Format: MANIFESTS="path1:max1 path2:max2 ..."
+
+expand-tdt-tokenizer: setup
+	@echo "============================================================"
+	@echo "Expanding nvidia/parakeet-tdt-0.6b-v3 Vocabulary"
+	@echo "============================================================"
+	@echo "TDT expansion parameters:"
+	@echo "  MANIFESTS=$(MANIFESTS)"
+	@echo "  EXPANDED_TDT_OUTPUT=$(EXPANDED_TDT_OUTPUT)"
+	@echo "  MAX_TOTAL_CHARS=$(MAX_TOTAL_CHARS) (optional, limits total chars)"
+	@echo "  TEST_AUDIO=$(TEST_AUDIO) (optional)"
+	@if [ -z "$(MANIFESTS)" ]; then \
+		echo ""; \
+		echo "Usage:"; \
+		echo "  # Single manifest:"; \
+		echo "  make expand-tdt-tokenizer \\"; \
+		echo "    MANIFESTS='chinese.json:5000' \\"; \
+		echo "    EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-0.6b-v3-zh.nemo"; \
+		echo ""; \
+		echo "  # Multiple manifests (Chinese + Malay):"; \
+		echo "  make expand-tdt-tokenizer \\"; \
+		echo "    MANIFESTS='chinese.json:5000 malay.json:3000' \\"; \
+		echo "    EXPANDED_TDT_OUTPUT=./models/parakeet-tdt-multilingual.nemo"; \
+		echo ""; \
+		echo "  Format: path:max_tokens (max_tokens is optional)"; \
+		exit 1; \
+	fi
+	@mkdir -p $(MODELS_DIR)
+	$(PYTHON) $(SRC_DIR)/expand_tdt_tokenizer.py \
+		--manifests $(MANIFESTS) \
+		--output "$(EXPANDED_TDT_OUTPUT)" \
+		$(if $(MAX_TOTAL_CHARS),--max-total-chars $(MAX_TOTAL_CHARS),) \
+		$(if $(TEST_AUDIO),--test-audio "$(TEST_AUDIO)",)
+	@echo ""
+	@echo "Done: expanded TDT model saved to $(EXPANDED_TDT_OUTPUT)"
+	@echo "Note: Fine-tune this model on target language data to train the new embeddings."
 
 # ============================================================
 # Training
@@ -134,20 +177,6 @@ tensorboard: setup
 check-events: setup
 	@echo "Checking TensorBoard event files..."
 	$(PYTHON) $(SRC_DIR)/check_tensorboard.py
-
-# Check tokenizer language support
-TOKENIZER_TOOL := tools/check_tokenizer/check_tokenizer.py
-TOKENIZER_RESULTS := tools/check_tokenizer/results
-
-check-tokenizer: setup
-ifndef MODEL
-	@echo "Error: MODEL is required."
-	@echo "Usage: make check-tokenizer MODEL=nvidia/parakeet-tdt-0.6b-v3"
-	@echo "       make check-tokenizer MODEL=path/to/model.nemo"
-	@exit 1
-endif
-	@echo "Checking tokenizer language support..."
-	$(PYTHON) $(TOKENIZER_TOOL) --model $(MODEL) --show-vocab 20 --output-dir $(TOKENIZER_RESULTS)
 
 # ============================================================
 # Inference
@@ -205,6 +234,32 @@ ifndef REPO
 endif
 	@echo "Uploading model to HuggingFace..."
 	$(PYTHON) $(SRC_DIR)/upload_model.py --model $(MODEL) --repo-name $(REPO)
+
+# ============================================================
+# Test Tokenizer Language Support
+# ============================================================
+
+TOKENIZER_DIR := ../common/tokenizers
+
+test-tokenizer-languages: setup
+	@if [ -z "$(MODEL)" ]; then \
+		echo ""; \
+		echo "Test Tokenizer Language Support"; \
+		echo "================================"; \
+		echo "Usage: make test-tokenizer-languages MODEL=path/to/model.nemo"; \
+		echo "       make test-tokenizer-languages MODEL=nvidia/parakeet-tdt-0.6b-v3"; \
+		echo ""; \
+		echo "Options:"; \
+		echo "  MODEL      - HuggingFace model name or path to .nemo file (required)"; \
+		echo "  LANGUAGES  - Comma-separated languages to test (default: en,ms,cn)"; \
+		echo "  VERBOSE    - Set to 1 for detailed output"; \
+		echo ""; \
+		exit 1; \
+	fi
+	$(PYTHON) $(TOKENIZER_DIR)/test_tokenizer_languages.py \
+		"$(MODEL)" \
+		$(if $(filter 1,$(VERBOSE)),--verbose,) \
+		$(if $(LANGUAGES),--languages $(LANGUAGES),)
 
 # ============================================================
 # Cleanup

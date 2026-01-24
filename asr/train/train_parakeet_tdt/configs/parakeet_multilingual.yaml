@@ -15,7 +15,7 @@ data:
   max_val_samples: 1000  # Limit validation for faster eval
   
   sampling_rate: 16000
-  max_audio_length: 30.0
+  max_audio_length: 20.0  # Reduced from 30s - RNNT loss memory scales with audio length
   min_audio_length: 0.1
 
 training:
@@ -25,9 +25,11 @@ training:
   num_train_epochs: 1  # 1 epoch if dataset > 500K, increase to 2-3 for smaller datasets
   max_steps: -1
   
-  per_device_train_batch_size: 8    # Reduced for full dataset OOM prevention
-  per_device_eval_batch_size: 4     # Reduced to avoid OOM during evaluation
-  gradient_accumulation_steps: 16   # Increased to maintain effective batch size of 128
+  # RNNT loss is O(T*U*V) - memory intensive with expanded vocab
+  # Optimized for 80GB GPU with expanded vocab (~55GB usage expected)
+  per_device_train_batch_size: 8    # Increased from 6 (was only using 50% memory)
+  per_device_eval_batch_size: 4     # Increased from 3
+  gradient_accumulation_steps: 16   # Adjusted to keep effective batch 128
   
   # Full model training (encoder + decoder + joint)
   # New languages need encoder adaptation

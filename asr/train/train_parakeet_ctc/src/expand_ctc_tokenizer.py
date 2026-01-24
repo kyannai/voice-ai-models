@@ -15,12 +15,12 @@ Process:
 
 Usage:
     # Single manifest with max tokens
-    python expand_ctc_with_chinese.py \\
+    python expand_ctc_tokenizer.py \\
         --manifests /path/to/chinese.json:5000 \\
         --output ./models/parakeet-ctc-1.1b-zh.nemo
 
     # Multiple manifests with different limits
-    python expand_ctc_with_chinese.py \\
+    python expand_ctc_tokenizer.py \\
         --manifests /path/to/chinese.json:5000 /path/to/malay.json:3000 \\
         --output ./models/parakeet-ctc-1.1b-multilingual.nemo
 
@@ -34,13 +34,18 @@ Dependencies:
 import argparse
 import json
 import logging
+import sys
 import tarfile
 import tempfile
 from pathlib import Path
 
 import torch
 
-# Import shared tokenizer expansion utilities
+# Add tokenizers directory to path for shared utilities
+SCRIPT_DIR = Path(__file__).resolve().parent
+TOKENIZERS_DIR = SCRIPT_DIR.parent.parent / "common" / "tokenizers"
+sys.path.insert(0, str(TOKENIZERS_DIR))
+
 from tokenizer_expansion import (
     extract_chars_from_manifests,
     expand_sentencepiece_model,
@@ -61,13 +66,13 @@ def main():
         epilog="""
 Examples:
   # Single Chinese manifest
-  python expand_ctc_with_chinese.py --manifests chinese.json:5000 --output model-zh.nemo
+  python expand_ctc_tokenizer.py --manifests chinese.json:5000 --output model-zh.nemo
 
   # Multiple manifests (Chinese + Malay)
-  python expand_ctc_with_chinese.py --manifests zh.json:5000 malay.json:3000 --output model-multi.nemo
+  python expand_ctc_tokenizer.py --manifests zh.json:5000 malay.json:3000 --output model-multi.nemo
 
   # No max limit (use all unique characters)
-  python expand_ctc_with_chinese.py --manifests chinese.json --output model-zh.nemo
+  python expand_ctc_tokenizer.py --manifests chinese.json --output model-zh.nemo
         """
     )
     parser.add_argument(
