@@ -4,63 +4,10 @@
 SHELL := /bin/bash
 PYTHON := python
 
-# Default target
-.PHONY: help
-help:
-	@echo "ASR Benchmark - Available targets:"
-	@echo ""
-	@echo "Dataset Preparation:"
-	@echo "  make list-datasets         - List all available test datasets"
-	@echo "  make prepare-test-data-all - Download and prepare ALL datasets"
-	@echo "  make prepare-ytl-testsets  - Prepare YTL Malay testsets (from tar)"
-	@echo "  make prepare-kespeech      - Download and prepare KeSpeech (zh)"
-	@echo "  make prepare-aishell2      - Prepare AISHELL-2 (zh) (Not available yet)"
-	@echo "  make prepare-childmandarin - Prepare ChildMandarin (zh)"
-	@echo "  make prepare-chinese-lips  - Prepare Chinese-LiPS (zh)"
-	@echo ""
-	@echo "Run Benchmarks:"
-	@echo "  make run-all               - Run all benchmarks on all datasets"
-	@echo "  make run-api               - Run YTL API benchmark"
-	@echo "  make run-whisper           - Run both Whisper benchmarks"
-	@echo "  make run-whisper-faster    - Run Faster Whisper benchmark"
-	@echo "  make run-whisper-mesolitica - Run Mesolitica Whisper benchmark"
-	@echo "  make run-parakeet          - Run Parakeet benchmark"
-	@echo ""
-	@echo "Single File Tests:"
-	@echo "  make run-api-single AUDIO=/path/to/audio.wav"
-	@echo "  make run-parakeet-single AUDIO=/path/to/audio.wav"
-	@echo ""
-	@echo "Utilities:"
-	@echo "  make clean                 - Clean output directories"
-	@echo "  make clean-venvs           - Remove virtual environments"
-	@echo "  make clean-test-data       - Remove prepared test data"
-	@echo ""
-	@echo "Parameters:"
-	@echo "  MODEL          - API model name (default: bukit-tinggi-v2)"
-	@echo "  PARAKEET_MODEL - Parakeet model (default: nvidia/parakeet-tdt-0.6b-v2)"
-	@echo "  ENV            - API environment: staging|production (default: production)"
-	@echo "  DATASET        - Run specific dataset only (see 'make list-datasets')"
-	@echo "  MAX_SAMPLES    - Limit samples for prepare/run (optional)"
-	@echo "  BATCH_SIZE     - Batch size for Parakeet (default: 16)"
-	@echo "  WORKERS        - Number of workers (default: 1)"
-	@echo ""
-	@echo "Examples:"
-	@echo "  # Prepare datasets"
-	@echo "  make prepare-test-data-all"
-	@echo "  make prepare-kespeech MAX_SAMPLES=1000"
-	@echo ""
-	@echo "  # Run benchmarks"
-	@echo "  make run-api MODEL=bukit-tinggi-v2 DATASET=fleurs_test"
-	@echo "  make run-api MODEL=ilmu-preview-asr DATASET=kespeech MAX_SAMPLES=100"
-	@echo "  make run-parakeet PARAKEET_MODEL=nvidia/parakeet-tdt-0.6b-v2 DATASET=kespeech"
-	@echo "  make run-whisper-faster DATASET=malay_scripted"
-	@echo ""
-
 # =============================================================================
-# Configuration
+# Configuration (Default values)
 # =============================================================================
 
-# Configurable parameters
 MODEL ?= bukit-tinggi-v2
 PARAKEET_MODEL ?= nvidia/parakeet-tdt-0.6b-v3
 ENV ?= production
@@ -68,7 +15,6 @@ BATCH_SIZE ?= 16
 WORKERS ?= 1
 DATASET ?=
 MAX_SAMPLES ?=
-AISHELL2_DATA_DIR ?=
 
 # Build optional arguments
 ifdef DATASET
@@ -83,12 +29,6 @@ else
 MAX_SAMPLES_ARG :=
 endif
 
-ifdef AISHELL2_DATA_DIR
-AISHELL2_DATA_ARG := --data-dir $(AISHELL2_DATA_DIR)
-else
-AISHELL2_DATA_ARG :=
-endif
-
 # Paths
 TEST_DATA_DIR := test_data
 TEST_DATA_VENV := $(TEST_DATA_DIR)/.venv
@@ -98,11 +38,166 @@ TEST_DATA_TAR := $(TEST_DATA_DIR)/YTL_testsets.tar
 # Stamp files to track prepared state
 STAMP_YTL := $(TEST_DATA_DIR)/.ytl_testsets_prepared
 STAMP_KESPEECH := $(TEST_DATA_DIR)/.kespeech_prepared
-STAMP_AISHELL2 := $(TEST_DATA_DIR)/.aishell2_prepared
+
+# =============================================================================
+# Help
+# =============================================================================
+
+.PHONY: help
+help:
+	@echo "ASR Benchmark Makefile"
+	@echo "======================"
+	@echo ""
+	@echo "==============================================================================="
+	@echo "DATASET PREPARATION"
+	@echo "==============================================================================="
+	@echo ""
+	@echo "list-datasets"
+	@echo "  List all available test datasets."
+	@echo "  Example: make list-datasets"
+	@echo ""
+	@echo "prepare-test-data-all"
+	@echo "  Download and prepare ALL datasets."
+	@echo "  Parameters:"
+	@echo "    MAX_SAMPLES - Limit samples per dataset (optional)"
+	@echo "  Examples:"
+	@echo "    make prepare-test-data-all"
+	@echo "    make prepare-test-data-all MAX_SAMPLES=500"
+	@echo ""
+	@echo "prepare-ytl-testsets"
+	@echo "  Prepare YTL Malay testsets (fleurs_test, malay_conversational, malay_scripted)."
+	@echo "  Requires: YTL_testsets.tar in test_data/"
+	@echo "  Example: make prepare-ytl-testsets"
+	@echo ""
+	@echo "prepare-kespeech"
+	@echo "  Download and prepare KeSpeech dataset (Chinese Mandarin)."
+	@echo "  Parameters:"
+	@echo "    MAX_SAMPLES - Limit number of samples (optional)"
+	@echo "  Examples:"
+	@echo "    make prepare-kespeech"
+	@echo "    make prepare-kespeech MAX_SAMPLES=1000"
+	@echo ""
+	@echo "prepare-chinese-lips"
+	@echo "  Download Chinese-LiPS dataset (Chinese Mandarin)."
+	@echo "  Parameters:"
+	@echo "    MAX_SAMPLES - Limit number of samples (optional)"
+	@echo "  Examples:"
+	@echo "    make prepare-chinese-lips"
+	@echo "    make prepare-chinese-lips MAX_SAMPLES=300"
+	@echo ""
+	@echo "prepare-supa"
+	@echo "  Prepare SUPA banking voice assistant dataset (Malay/English)."
+	@echo "  Requires: supa/BenchmarkPOC_ASR_20251223/ in test_data/"
+	@echo "  Example: make prepare-supa"
+	@echo ""
+	@echo "==============================================================================="
+	@echo "RUN BENCHMARKS"
+	@echo "==============================================================================="
+	@echo ""
+	@echo "run-all"
+	@echo "  Run ALL models on a dataset with WER results."
+	@echo "  Models: faster-whisper, whisper-openai, whisper-mesolitica, whisper-finetuned,"
+	@echo "          parakeet-v3, parakeet-5k, parakeet-multilingual, parakeet-malay"
+	@echo "  Parameters:"
+	@echo "    DATASET     - Dataset to run (required)"
+	@echo "    MAX_SAMPLES - Limit samples (optional)"
+	@echo "  Examples:"
+	@echo "    make run-all DATASET=supa"
+	@echo "    make run-all DATASET=fleurs_test MAX_SAMPLES=100"
+	@echo "  Output: benchmark_results/<timestamp>/wer_results.csv"
+	@echo ""
+	@echo "run-api"
+	@echo "  Run YTL API benchmark."
+	@echo "  Parameters:"
+	@echo "    MODEL       - API model (default: bukit-tinggi-v2)"
+	@echo "                  Options: bukit-tinggi-v2, ilmu-preview-asr"
+	@echo "    ENV         - Environment (default: production)"
+	@echo "                  Options: staging, production"
+	@echo "    DATASET     - Specific dataset to run (optional)"
+	@echo "    MAX_SAMPLES - Limit samples (optional)"
+	@echo "  Examples:"
+	@echo "    make run-api"
+	@echo "    make run-api MODEL=bukit-tinggi-v2 DATASET=fleurs_test"
+	@echo "    make run-api MODEL=ilmu-preview-asr DATASET=kespeech MAX_SAMPLES=100"
+	@echo "    make run-api ENV=staging DATASET=malay_scripted"
+	@echo ""
+	@echo "run-api-single"
+	@echo "  Run YTL API on a single audio file."
+	@echo "  Parameters:"
+	@echo "    AUDIO - Path to audio file (required)"
+	@echo "    MODEL - API model (default: bukit-tinggi-v2)"
+	@echo "    ENV   - Environment (default: production)"
+	@echo "  Examples:"
+	@echo "    make run-api-single AUDIO=/path/to/audio.wav"
+	@echo "    make run-api-single AUDIO=test.mp3 MODEL=ilmu-preview-asr"
+	@echo "    make run-api-single AUDIO=sample.wav ENV=staging"
+	@echo ""
+	@echo "run-whisper"
+	@echo "  Run both Whisper benchmarks (Faster Whisper + Mesolitica)."
+	@echo "  Parameters:"
+	@echo "    DATASET - Specific dataset to run (optional)"
+	@echo "  Examples:"
+	@echo "    make run-whisper"
+	@echo "    make run-whisper DATASET=malay_scripted"
+	@echo ""
+	@echo "run-whisper-faster"
+	@echo "  Run Faster Whisper benchmark."
+	@echo "  Parameters:"
+	@echo "    DATASET - Specific dataset to run (optional)"
+	@echo "  Examples:"
+	@echo "    make run-whisper-faster"
+	@echo "    make run-whisper-faster DATASET=fleurs_test"
+	@echo ""
+	@echo "run-whisper-mesolitica"
+	@echo "  Run Mesolitica Whisper benchmark."
+	@echo "  Parameters:"
+	@echo "    DATASET - Specific dataset to run (optional)"
+	@echo "  Examples:"
+	@echo "    make run-whisper-mesolitica"
+	@echo "    make run-whisper-mesolitica DATASET=malay_scripted"
+	@echo ""
+	@echo "run-parakeet"
+	@echo "  Run NVIDIA Parakeet ASR benchmark."
+	@echo "  Parameters:"
+	@echo "    PARAKEET_MODEL - Model name or .nemo path (default: nvidia/parakeet-tdt-0.6b-v3)"
+	@echo "    BATCH_SIZE     - Batch size (default: 16)"
+	@echo "    WORKERS        - Data loader workers (default: 1)"
+	@echo "    DATASET        - Specific dataset to run (optional)"
+	@echo "    MAX_SAMPLES    - Limit samples (optional)"
+	@echo "  Examples:"
+	@echo "    make run-parakeet"
+	@echo "    make run-parakeet PARAKEET_MODEL=nvidia/parakeet-tdt-0.6b-v2"
+	@echo "    make run-parakeet DATASET=kespeech BATCH_SIZE=32"
+	@echo "    make run-parakeet PARAKEET_MODEL=./models/custom.nemo MAX_SAMPLES=100"
+	@echo ""
+	@echo "run-parakeet-single"
+	@echo "  Run Parakeet on a single audio file."
+	@echo "  Parameters:"
+	@echo "    AUDIO          - Path to audio file (required)"
+	@echo "    PARAKEET_MODEL - Model name or .nemo path (default: nvidia/parakeet-tdt-0.6b-v3)"
+	@echo "  Examples:"
+	@echo "    make run-parakeet-single AUDIO=/path/to/audio.wav"
+	@echo "    make run-parakeet-single AUDIO=test.mp3 PARAKEET_MODEL=nvidia/parakeet-tdt-0.6b-v2"
+	@echo ""
+	@echo "==============================================================================="
+	@echo "UTILITIES"
+	@echo "==============================================================================="
+	@echo ""
+	@echo "clean"
+	@echo "  Remove all benchmark output directories."
+	@echo "  Example: make clean"
+	@echo ""
+	@echo "clean-venvs"
+	@echo "  Remove all Python virtual environments."
+	@echo "  Example: make clean-venvs"
+	@echo ""
+	@echo "clean-test-data"
+	@echo "  Remove all prepared/downloaded test datasets."
+	@echo "  Example: make clean-test-data"
+	@echo ""
 
 # =============================================================================
 # Internal: Environment Setup (called automatically by other targets)
-# These are PHONY so they always run and check dependencies
 # =============================================================================
 
 .PHONY: _setup-common _setup-api _setup-whisper _setup-parakeet _setup-test-data
@@ -136,14 +231,13 @@ list-datasets: _setup-common
 	@cd common && . .venv/bin/activate && $(PYTHON) datasets.py
 
 .PHONY: prepare-test-data-all
-prepare-test-data-all: prepare-ytl-testsets prepare-kespeech prepare-aishell2 prepare-childmandarin prepare-chinese-lips
+prepare-test-data-all: prepare-ytl-testsets prepare-kespeech prepare-chinese-lips prepare-supa
 	@echo ""
 	@echo "============================================================"
 	@echo "All datasets prepared!"
 	@echo "============================================================"
 	@$(MAKE) list-datasets
 
-# YTL Testsets (Malay: fleurs_test, malay_conversational, malay_scripted)
 .PHONY: prepare-ytl-testsets
 prepare-ytl-testsets: _setup-test-data
 	@echo "Preparing YTL testsets (Malay)..."
@@ -161,7 +255,6 @@ prepare-ytl-testsets: _setup-test-data
 .PHONY: prepare-test-data
 prepare-test-data: prepare-ytl-testsets
 
-# KeSpeech (Chinese Mandarin from HuggingFace)
 .PHONY: prepare-kespeech
 prepare-kespeech: _setup-test-data
 	@echo "Preparing KeSpeech dataset (Chinese)..."
@@ -171,26 +264,6 @@ prepare-kespeech: _setup-test-data
 	@touch $(STAMP_KESPEECH)
 	@echo "Done: kespeech"
 
-# AISHELL-2 (Chinese Mandarin)
-.PHONY: prepare-aishell2
-prepare-aishell2: _setup-test-data
-	@echo "Preparing AISHELL-2 dataset (Chinese)..."
-	@cd $(TEST_DATA_DIR) && . .venv/bin/activate && $(PYTHON) ../scripts/prepare_aishell2.py \
-		--output-dir aishell2 $(AISHELL2_DATA_ARG) $(MAX_SAMPLES_ARG)
-	@touch $(STAMP_AISHELL2)
-	@echo "Done: aishell2"
-
-# ChildMandarin (Chinese Mandarin - Children aged 3-5, from HuggingFace)
-.PHONY: prepare-childmandarin
-prepare-childmandarin: _setup-test-data
-	@echo "Preparing ChildMandarin dataset (Chinese - Children)..."
-	@echo "Note: Requires HF_TOKEN and accepting terms at https://huggingface.co/datasets/BAAI/ChildMandarin"
-	@echo "Downloading from HuggingFace: BAAI/ChildMandarin"
-	@cd $(TEST_DATA_DIR) && . .venv/bin/activate && $(PYTHON) ../scripts/prepare_childmandarin.py \
-		--output-dir childmandarin $(MAX_SAMPLES_ARG)
-	@echo "Done: childmandarin"
-
-# Chinese-LiPS (Chinese Mandarin, from HuggingFace)
 .PHONY: prepare-chinese-lips
 prepare-chinese-lips: _setup-test-data
 	@echo "Preparing Chinese-LiPS dataset (Chinese)..."
@@ -199,13 +272,42 @@ prepare-chinese-lips: _setup-test-data
 		--output-dir chinese_lips $(MAX_SAMPLES_ARG)
 	@echo "Done: chinese_lips"
 
+.PHONY: prepare-supa
+prepare-supa: _setup-test-data
+	@echo "Preparing SUPA banking voice assistant dataset..."
+	@cd $(TEST_DATA_DIR) && . .venv/bin/activate && $(PYTHON) ../scripts/prepare_supa.py \
+		--output-dir supa
+	@echo "Done: supa"
+
 # =============================================================================
 # Run Benchmarks
 # =============================================================================
 
 .PHONY: run-all
-run-all: run-api run-whisper run-parakeet
-	@echo "All benchmarks complete."
+run-all: _setup-parakeet
+	@if [ -z "$(DATASET)" ]; then \
+		echo "ERROR: DATASET parameter is required"; \
+		echo ""; \
+		echo "Usage: make run-all DATASET=<dataset_name>"; \
+		echo ""; \
+		echo "Available datasets:"; \
+		echo "  Malay: fleurs_test, malay_conversational, malay_scripted, supa"; \
+		echo "  Chinese: kespeech, chinese_lips"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make run-all DATASET=supa"; \
+		echo "  make run-all DATASET=fleurs_test MAX_SAMPLES=100"; \
+		exit 1; \
+	fi
+	@echo "Running ALL models on dataset: $(DATASET)"
+	@echo "  Models: faster-whisper, whisper-openai, whisper-mesolitica,"
+	@echo "          whisper-finetuned, parakeet-v3, parakeet-5k, parakeet-multilingual, parakeet-malay"
+ifdef MAX_SAMPLES
+	@echo "  Max samples: $(MAX_SAMPLES)"
+endif
+	@cd parakeet && . .venv/bin/activate && uv pip install -q peft malaya faster-whisper && \
+		$(PYTHON) ../scripts/run_all_benchmarks.py --output-dir ../benchmark_results --datasets $(DATASET) $(MAX_SAMPLES_ARG)
+	@echo "Benchmark complete. Results in benchmark_results/"
 
 .PHONY: run-api
 run-api: _setup-api
@@ -225,7 +327,21 @@ endif
 
 .PHONY: run-api-single
 run-api-single: _setup-api
-	@if [ -z "$(AUDIO)" ]; then echo "Usage: make run-api-single AUDIO=/path/to/audio.wav"; exit 1; fi
+	@if [ -z "$(AUDIO)" ]; then \
+		echo "ERROR: AUDIO parameter is required"; \
+		echo ""; \
+		echo "Usage: make run-api-single AUDIO=/path/to/audio.wav"; \
+		echo ""; \
+		echo "Parameters:"; \
+		echo "  AUDIO - Path to audio file (required)"; \
+		echo "  MODEL - API model (default: bukit-tinggi-v2)"; \
+		echo "  ENV   - Environment (default: production)"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make run-api-single AUDIO=/path/to/audio.wav"; \
+		echo "  make run-api-single AUDIO=test.mp3 MODEL=ilmu-preview-asr"; \
+		exit 1; \
+	fi
 	@cd api && . .venv/bin/activate && $(PYTHON) ytl_api_test_single.py -a $(AUDIO) -m $(MODEL) --env $(ENV)
 
 .PHONY: run-whisper
@@ -268,7 +384,20 @@ endif
 
 .PHONY: run-parakeet-single
 run-parakeet-single: _setup-parakeet
-	@if [ -z "$(AUDIO)" ]; then echo "Usage: make run-parakeet-single AUDIO=/path/to/audio.wav"; exit 1; fi
+	@if [ -z "$(AUDIO)" ]; then \
+		echo "ERROR: AUDIO parameter is required"; \
+		echo ""; \
+		echo "Usage: make run-parakeet-single AUDIO=/path/to/audio.wav"; \
+		echo ""; \
+		echo "Parameters:"; \
+		echo "  AUDIO          - Path to audio file (required)"; \
+		echo "  PARAKEET_MODEL - Model name or .nemo path (default: nvidia/parakeet-tdt-0.6b-v3)"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make run-parakeet-single AUDIO=/path/to/audio.wav"; \
+		echo "  make run-parakeet-single AUDIO=test.mp3 PARAKEET_MODEL=nvidia/parakeet-tdt-0.6b-v2"; \
+		exit 1; \
+	fi
 	$(eval PARAKEET_MODEL_ABS := $(shell if echo "$(PARAKEET_MODEL)" | grep -q '\.nemo$$' && [ -f "$(PARAKEET_MODEL)" ]; then realpath "$(PARAKEET_MODEL)"; else echo "$(PARAKEET_MODEL)"; fi))
 	@cd parakeet && . .venv/bin/activate && $(PYTHON) ytl_parakeet_test_single.py -a $(AUDIO) -m $(PARAKEET_MODEL_ABS)
 
@@ -291,7 +420,7 @@ clean-venvs:
 .PHONY: clean-test-data
 clean-test-data:
 	@echo "Removing prepared test data..."
-	@rm -rf $(TEST_DATA_DIR)/YTL_testsets $(TEST_DATA_DIR)/kespeech $(TEST_DATA_DIR)/aishell2 \
-		$(TEST_DATA_DIR)/childmandarin $(TEST_DATA_DIR)/chinese_lips
-	@rm -f $(STAMP_YTL) $(STAMP_KESPEECH) $(STAMP_AISHELL2)
+	@rm -rf $(TEST_DATA_DIR)/YTL_testsets $(TEST_DATA_DIR)/kespeech \
+		$(TEST_DATA_DIR)/chinese_lips $(TEST_DATA_DIR)/supa
+	@rm -f $(STAMP_YTL) $(STAMP_KESPEECH)
 	@echo "Done."

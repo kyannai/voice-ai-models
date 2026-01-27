@@ -1,0 +1,211 @@
+utterance_id	path	sentence	duration
+BANK_PROXY_UNIQUE_003712	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003712.wav	saya ingin memautkan nombor tentera atau polis saya untuk DuitNow.	5.29
+BANK_PROXY_UNIQUE_002069	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002069.wav	saya ingin menyahpaut nombor mudah alih DuitNow saya.	4.97
+BANK_PROXY_UNIQUE_002875	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002875.wav	boleh tak saya nak unlink nombor tentera saya ni? sebab tak pakai dah.	5.92
+BANK_PROXY_UNIQUE_002675	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002675.wav	can i link my mobile number, please?	3.25
+BANK_PROXY_UNIQUE_002164	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002164.wav	i nak temporarily disable my mobile number DuitNow proxy can ah?	6.41
+BANK_PROXY_UNIQUE_003299	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003299.wav	can i link my DuitNow pakai army atau police ID? i nak activate this one lah.	8.73
+BANK_PROXY_UNIQUE_000972	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000972.wav	eh can i link my passport to DuitNow ah? is it possible?	4.07
+BANK_PROXY_UNIQUE_003275	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003275.wav	saya nak link DuitNow.	2.73
+BANK_PROXY_UNIQUE_003419	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003419.wav	can i link my DuitNow ID?	2.56
+BANK_PROXY_UNIQUE_002063	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002063.wav	hai, saya nak link DuitNow pakai nombor pendaftaran perniagaan saya boleh tak? macam mana nak buat ni?	11.09
+BANK_PROXY_UNIQUE_002808	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002808.wav	nak link DuitNow guna pasport saya boleh ke?	4.37
+BANK_PROXY_UNIQUE_002311	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002311.wav	can i link my company registration number to my bank account? i nak buat DuitNow guna ni.	6.93
+BANK_PROXY_UNIQUE_002230	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002230.wav	uh, i nak unlink my business registration number. boleh ke?	5.95
+BANK_PROXY_UNIQUE_001811	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_001811.wav	hey, can i link my NRIC?	4.46
+BANK_PROXY_UNIQUE_003284	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003284.wav	i'm so fed up with this. can you link my mobile number to DuitNow already? why is this process so frustrating?	7.85
+BANK_PROXY_UNIQUE_001323	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_001323.wav	can i link my phone number for DuitNow boss?	4.67
+BANK_PROXY_UNIQUE_001883	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_001883.wav	i wanna link my mobile number for DuitNow.	3.41
+BANK_PROXY_UNIQUE_002800	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002800.wav	why is my NRIC number suspended for DuitNow? i've been registered for ages. i need to reactivate it immediately.	13.46
+BANK_PROXY_UNIQUE_003271	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003271.wav	boleh tak i nak link my NRIC ni?	3.61
+BANK_PROXY_UNIQUE_003073	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003073.wav	i need to link my DuitNow account right now. this is getting ridiculous. just get it done.	11.11
+BANK_PROXY_UNIQUE_002630	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002630.wav	err, nak matikan sementara pendaftaran NRIC DuitNow saya boleh?	6.14
+BANK_PROXY_UNIQUE_001969	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_001969.wav	can i, uh, unlink my business registration number, ah?	5.95
+BANK_PAYMENT_UNIQUE_002026	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002026.wav	i would like to indicate my choice on the payment can you help me? and previously you had listed all my DuitNow transactions, namely: 1) rm25 to uncle muthu curry head using registered mobile number +6735089447; 2) rm52 to tan mee goreng on +60143369596; yes, 3) rm19 to ah beng tyre shop using +60110342828 mobile number; 4) rm27 to kak ma nasi lemak's mobile number 60184300335. and i have thought it through, and the first one to uncle muthu looks like a great place to start, so go ahead and charge that one for now, please.	51.64
+BANK_PAYMENT_UNIQUE_002085	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002085.wav	okay, let's confirm. it's RHB bank for 62809249. and which bank again is 83259308701?	15.91
+BANK_PAYMENT_UNIQUE_002574	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002574.wav	aa, pindah rm230 dari, aa, dana tech ke akaun utama.	7.23
+BANK_PAYMENT_UNIQUE_002087	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002087.wav	how much time does it take to process a DuitNow transfer?	3.80
+BANK_PAYMENT_UNIQUE_001891	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001891.wav	aa, saya lupa beritahu berapa banyak tadi.	4.44
+BANK_PROXY_UNIQUE_000470	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000470.wav	can i temporarily disable my NRIC for DuitNow?	5.89
+BANK_PROXY_UNIQUE_000568	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000568.wav	hey, i want to temporarily disable my NRIC for DuitNow.	7.21
+BANK_PAYMENT_UNIQUE_002141	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002141.wav	any pocket.	2.09
+BANK_PAYMENT_UNIQUE_002042	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002042.wav	assalamualaikum. saya ingin membuat transaksi ke nombor pasport g2062050 dan f5697701.	20.29
+BANK_PAYMENT_UNIQUE_001905	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001905.wav	saya ingin pindahkan rm5 ke perniagaan yang berdaftar dengan nombor pendaftaran 202306973614. terima kasih.	14.21
+BANK_PAYMENT_UNIQUE_002252	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002252.wav	uh, transfer rm180 from tech fund to main account.	10.77
+BANK_PAYMENT_UNIQUE_002084	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002084.wav	no problem. for account 83259308701, the bank is maybank. now, how do i move on?	11.82
+BANK_PAYMENT_UNIQUE_001866	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001866.wav	okay, transfer the amount into savings.	3.32
+BANK_PAYMENT_UNIQUE_002801	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002801.wav	saya cadang nak transfer rm50 kepada tan sri ali. beliau menggunakan nombor j8153577. dan satu lagi, kak rose, kedai kek, dengan jumlah yang sama ya.	16.79
+BANK_PAYMENT_UNIQUE_002213	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002213.wav	send rm350 from main account to tech fund for shopping.	7.51
+BANK_PAYMENT_UNIQUE_002453	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002453.wav	put fifty ringgit into gifts for birthday.	4.42
+BANK_PAYMENT_UNIQUE_002325	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002325.wav	uh, can you please transfer fifty ringgit from tech fund to main account for tpt?	8.43
+BANK_PAYMENT_UNIQUE_002717	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002717.wav	uh, please transfer rm90 dari vacation fund ke, uh, emergency fund untuk dinner.	8.19
+BANK_PAYMENT_UNIQUE_002692	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002692.wav	payment rm75 dari edu fund ke emerg fund untuk groceries.	5.44
+BANK_PAYMENT_UNIQUE_002120	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002120.wav	erm, saya nak teruskan dengan transfer rm250 tu ke boost bank 80299557161, dan lagi rm380 ke 6014 204 2639.	25.43
+BANK_PROXY_UNIQUE_000824	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000824.wav	nak link NRIC saya.	2.77
+BANK_PAYMENT_UNIQUE_002099	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002099.wav	uh, saya nak teruskan transaksi pembayaran yang dinyatakan sebelum ni. uh, maklumat transaksi tersebut adalah rm100 dengan aa menggunakan nombor kad pengenalan 500911061727. uh, boleh tak anda awak sahkan dan proses transaksi tersebut aa secepat mungkin?	28.48
+BANK_PAYMENT_UNIQUE_001048	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001048.wav	list three recent transactions received from mobile: +65 1 8594 8506.	11.73
+BANK_PAYMENT_UNIQUE_000127	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000127.wav	wei, sorry kacau. semalam kawan i pinjam duit i. sekarang dia nak transfer rm100 dari akaun dia to akaun i. akaun i ryt bank 7697-5905.	18.56
+BANK_PAYMENT_UNIQUE_001206	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001206.wav	saya ingin mengesahkan pembayaran terbaru yang saya buat.	3.46
+BANK_PAYMENT_UNIQUE_001367	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001367.wav	tolong paparkan tiga dana terakhir yang didepositkan oleh yusof.	6.76
+BANK_INTENT_UNIQUE_005093	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005093.wav	bolehkah anda tunjukkan tugas pembayaran terakhir saya?	7.57
+BANK_INTENT_UNIQUE_005177	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005177.wav	hantar rm100 dari edu fund ke emerg fund untuk utiliti.	5.08
+BANK_PAYMENT_UNIQUE_001756	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001756.wav	weh, i nak pindahkan duit sikit daripada satu tabung ke tabung yang lain, boleh tak? i ada banyak sangat tabung kat sini, macam nak pindah daripada tabung car service tu ke family holiday fund, sebab nak book tiket flight awal. urgent ni, weh. kau cepat sikit, boleh tak? i dah penat nak taip panjang-panjang ni. buat cepatlah. kalau boleh, sekarang juga ah. rm200, okay tak?	39.87
+BANK_INTENT_UNIQUE_005168	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005168.wav	bagaimana nak semak status pemindahan?	4.11
+BANK_PAYMENT_UNIQUE_000678	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000678.wav	review my latest set of transfers, will you?	4.03
+BANK_PAYMENT_UNIQUE_000152	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000152.wav	i would like to initiate two transfers from my main saving account. the first is to a police id of 750171-60-7175, amount negative 50 ringgit. the second transfer will be to a mobile number with a format of +6012 7047 945 for the amount of 10 ringgit. please proceed.	30.08
+BANK_PAYMENT_UNIQUE_000151	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000151.wav	i'm writing to confirm that i would like to proceed with the transaction.	6.89
+BANK_INTENT_UNIQUE_005174	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005174.wav	hantar rm120 darab 2 untuk charity, dan rm150 darab 1.5 untuk hadiah penaja ke 950101141234.	16.21
+BANK_PAYMENT_UNIQUE_000011	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000011.wav	adoi, semua tak boleh. hmm, boleh tak cerita pasal sejarah malaysia je? hmm, hmm, hmm.	6.04
+BANK_PAYMENT_UNIQUE_000528	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000528.wav	baik, memandang saya ingin meneruskan urusan ini, saya memilih untuk mendahulukan pindaan yang kedua, iaitu rm200 ke akaun 67782 90066 8178 054. sila teruskan. tapi jangan lupa tanya nama bank ya, takut salah pula.	18.71
+BANK_PAYMENT_UNIQUE_001714	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001714.wav	boleh proceeding with the transfer to business registration number yang last? but i want to rectify it. 32b-742-948-08. pastu payment satu lagi is to number pendaftaran perniagaan 080s20.	33.62
+BANK_PAYMENT_UNIQUE_000128	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000128.wav	hey, boleh tak transfer duit member aku masuk akaun aku? dia pinjam, pastu tak bayar balik kat aku. nak transfer rm100? seratus...	8.30
+BANK_PAYMENT_UNIQUE_001400	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001400.wav	adakah saya menerima pemindahan baru-baru ini daripada julian?	7.99
+BANK_PAYMENT_UNIQUE_000612	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000612.wav	okay boss, can i transfer money now or not? need to settle this quickly. eh, i need to bayar some amount of duit tau this to this nombor polis: 6416 34649 +345. hope the format betul lah ya. alamak, tertekan enter pula. okay, sambung. just transfer, cepat sikit okay? my friend's police id is 6416 34649 345, by the way.	37.59
+BANK_PAYMENT_UNIQUE_000253	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000253.wav	ke poket rumah idaman...	5.69
+BANK_PAYMENT_UNIQUE_000726	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000726.wav	how do i find my latest payment actions, ah?	4.59
+BANK_PAYMENT_UNIQUE_001818	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001818.wav	greetings. i'd like to initiate a transaction amounting to 90 to police 176156601953. additionally, process 120 to lee chong wei for house utilities.	17.73
+BANK_INTENT_UNIQUE_004424	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004424.wav	matikan kad saya sementara, please.	3.34
+BANK_INTENT_UNIQUE_005017	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005017.wav	saya nak tukar akaun tertaut dengan kad kredit.	5.80
+BANK_INTENT_UNIQUE_005036	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005036.wav	periksa sebarang pembayaran yang saya hantar kepada grace.	3.93
+BANK_INTENT_UNIQUE_004960	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004960.wav	tolong bekukan kad aku untuk keselamatan?	3.61
+BANK_INTENT_UNIQUE_004336	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004336.wav	ryt pocket exists right?	1.81
+BANK_INTENT_UNIQUE_003878	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003878.wav	bolehkah saya namakan waris untuk akaun saya?	3.05
+BANK_INTENT_UNIQUE_002069	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_002069.wav	get me the seven latest credits from army number 123456789012 in december.	15.32
+BANK_INTENT_UNIQUE_005052	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005052.wav	please remit rm500 untuk furniture dan rm100 untuk delivery ke 202312045678. jadi keseluruhan rm600.	21.92
+BANK_INTENT_UNIQUE_003769	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003769.wav	nak sekat kad saya.	3.31
+BANK_INTENT_UNIQUE_003470	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003470.wav	saya nak ubah jumlah pindaan bulanan saya kepada rm350.	6.06
+BANK_INTENT_UNIQUE_002423	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_002423.wav	can i see my spending trends for this year?	2.67
+BANK_INTENT_UNIQUE_004065	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004065.wav	mm, mind giving me some money?	3.74
+BANK_INTENT_UNIQUE_003490	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003490.wav	nak batalkan pindahan bulanan saya.	2.88
+BANK_INTENT_UNIQUE_004765	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004765.wav	transfer rm120 ke Siti untuk brunch.	6.70
+BANK_INTENT_UNIQUE_004066	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004066.wav	bro, got extra duit tak? kasi sikit boleh?	3.97
+BANK_INTENT_UNIQUE_004778	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004778.wav	aku nak hubungkan ID DuitNow saya untuk bayaran lebih cepat.	5.46
+BANK_INTENT_UNIQUE_004399	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004399.wav	please la cepat sikit transfer rm320 ke 0194455667, balik kampung fund.	11.35
+BANK_INTENT_UNIQUE_002244	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_002244.wav	list my latest 10 money transfers as of mm february 27, 2023.	11.66
+BANK_INTENT_UNIQUE_004840	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004840.wav	please pindah rm200 dari akaun utama ke dana kereta untuk bil.	7.38
+BANK_INTENT_UNIQUE_003240	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003240.wav	take out rm15 from belanja pocket.	3.25
+BANK_INTENT_UNIQUE_001918	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001918.wav	can i invest directly in stock through ryt bank?	4.46
+BANK_FAQ_MESSAGES_001460	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001460.wav	how does the government use ASNB funds for national development, if at all?	8.29
+BANK_FAQ_MESSAGES_003173	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_003173.wav	how does a fixed deposit actually work? i put my money in, then just wait for it to grow? huh?	6.29
+BANK_INTENT_UNIQUE_001370	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001370.wav	please remit 300 to alia for groceries.	4.35
+BANK_FAQ_MESSAGES_001630	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001630.wav	what is moral suasion by a central bank?	5.55
+BANK_FAQ_MESSAGES_001059	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001059.wav	how does factoring, um, help businesses with cash flow?	5.16
+BANK_FAQ_MESSAGES_001937	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001937.wav	how do i actually buy ASNB units? can i do it online, or must i go to a branch?	9.03
+BANK_FAQ_MESSAGES_001611	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001611.wav	actually, what is uh venture capital investment ah?	4.84
+BANK_INTENT_UNIQUE_000502	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000502.wav	i want to know the status of my NRIC for DuitNow.	7.06
+BANK_FAQ_MESSAGES_003386	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_003386.wav	apakah implikasi kewangan yang berkaitan dengan keibubapaan tertangguh?	4.16
+BANK_FAQ_MESSAGES_002804	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_002804.wav	okay, but if i take a break from work to study, how to manage my money?	6.76
+BANK_FAQ_MESSAGES_001495	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001495.wav	what is loan tenure, and how does a longer or shorter tenure affect my monthly payments and total interest?	8.31
+BANK_FAQ_MESSAGES_001446	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001446.wav	how can i diversify my investment portfolio if i only have a small amount to invest?	11.54
+BANK_INTENT_UNIQUE_000798	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000798.wav	please send rm150.10 to Maybank 9012345678 for phone bill.	10.26
+BANK_FAQ_MESSAGES_001569	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001569.wav	how do credentials staffing attacks work, and how can i protect my financial accounts?	9.22
+BANK_INTENT_UNIQUE_000854	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000854.wav	okay, transfer six hundred to Finexus with account number 3344556677 for bills.	11.18
+BANK_FAQ_MESSAGES_003046	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_003046.wav	if i suddenly unemployed for a long time, what financial things to consider?	6.04
+BANK_FAQ_MESSAGES_001727	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001727.wav	what are the financial aspects of starting a family from pregnancy, hmm, to the child's early years?	9.78
+BANK_INTENT_UNIQUE_000899	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000899.wav	transfer rm1,540.75 minus rm240.75 divide by 2 to Ray's Bank of China account 0001112223 for laptop repair.	29.33
+BANK_FAQ_MESSAGES_003309	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_003309.wav	adakah terdapat keperluan perancangan kewangan khusus untuk wanita?	5.18
+BANK_FAQ_MESSAGES_001737	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001737.wav	what is market efficiency? example: efficient market hypothesis.	9.30
+BANK_FAQ_MESSAGES_001849	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001849.wav	what are tokenized assets beyond just cryptocurrencies?	8.55
+BANK_FAQ_MESSAGES_001452	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001452.wav	how can i check if an investment company is licensed by the Securities Commission Malaysia?	9.17
+BANK_INTENT_UNIQUE_001156	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001156.wav	payment rm50 ke Raj for car loan.	4.52
+BANK_DEPOSIT_UNIQUE_001307	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001307.wav	got any pocket call piggy bank in my account, ah?	5.50
+BANK_FAQ_MESSAGES_000750	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000750.wav	undang-undang langit biru, blue sky laws tu apa? dan macam mana dia lindungi pelabur dari sekuriti tipu?	8.13
+BANK_DEPOSIT_UNIQUE_001346	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001346.wav	can you give me the status of my main account?	2.82
+BANK_FAQ_MESSAGES_000459	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000459.wav	duit menang judi atau loteri kena cukai tak kat malaysia?	7.17
+BANK_FAQ_MESSAGES_000712	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000712.wav	apa faedah asas medical card takaful banding insurans perubatan konvensional?	7.94
+BANK_FAQ_MESSAGES_000771	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000771.wav	aa, boleh ke aku uh set bayaran berulang dari akaun semasa aku untuk benda macam sewa atau langganan?	10.15
+BANK_DEPOSIT_UNIQUE_001393	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001393.wav	can you send the account statement for my main account?	4.99
+BANK_DEPOSIT_UNIQUE_001438	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001438.wav	maybe you'll tell me how many of these silly pockets i got.	4.05
+BANK_FAQ_MESSAGES_000850	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000850.wav	mm, how does Bank Negara Malaysia influence interest rates?	6.46
+BANK_FAQ_MESSAGES_000104	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000104.wav	apa peranan Suruhanjaya Sekuriti Malaysia dalam melindungi pelabur, ya?	6.98
+BANK_FAQ_MESSAGES_000411	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000411.wav	pensijilan halal untuk produk kewangan tu meliputi apa je?	5.27
+BANK_FAQ_MESSAGES_000567	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000567.wav	hmm, zakat ternakan, zakat ar-anam, itu apa?	8.31
+BANK_DEPOSIT_UNIQUE_001327	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001327.wav	uh, i request the account statement for my Ryt pocket, please.	5.06
+BANK_FAQ_MESSAGES_000815	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000815.wav	CCRIS, sistem maklumat rujukan kredit pusat tu apa? dan maklumat apa yang ada pasal aku dalam tu?	11.05
+BANK_FAQ_MESSAGES_000514	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000514.wav	Secure Socket Layer (SSL) uh atau Transport Layer Security (TLS) tu apa? kenapa penting untuk website?	10.01
+BANK_FAQ_MESSAGES_000177	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000177.wav	saham keutamaan, preference shares tu apa, dan apa beza dia dengan saham biasa?	9.86
+BANK_DEPOSIT_UNIQUE_001384	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001384.wav	what eff la, any credit block exists is it?	4.52
+BANK_DEPOSIT_UNIQUE_001278	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001278.wav	please send my current account balance.	5.21
+BANK_DEPOSIT_UNIQUE_001491	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001491.wav	i'll check now. my movie pocket balance got how much?	5.97
+BANK_DEPOSIT_UNIQUE_000925	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000925.wav	bolehkah anda membuka penyata untuk akaun simpanan saya?	7.02
+BANK_DEPOSIT_UNIQUE_000667	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000667.wav	"bolehkah saya menamakan poket saya, contohnya, ""can i name my left pocket as lefty"" dan ""right pocket as righty""?"	10.50
+BANK_DEPOSIT_UNIQUE_000658	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000658.wav	bagaimana cara saya membuat deposit ke pockets?	3.14
+BANK_DEPOSIT_UNIQUE_000273	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000273.wav	transfer 50 ringgit to 8623456789, CIMB bank.	10.66
+BANK_DEPOSIT_UNIQUE_000957	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000957.wav	bolehkah anda beritahu saya jika kredit saya disekat untuk akaun?	6.66
+BANK_DEPOSIT_UNIQUE_000498	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000498.wav	yo, hantar +60 16 889 8197, mobile underscore number, rm10 untuk makan tengah hari.	13.89
+BANK_DEPOSIT_UNIQUE_000466	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000466.wav	jadi, berapakah baki semasa dalam poket itu?	5.62
+BANK_DEPOSIT_UNIQUE_000303	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000303.wav	whatcha mean by pockets?	3.90
+BANK_DEPOSIT_UNIQUE_000423	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000423.wav	how are pockets different from main account?	3.20
+BANK_DEPOSIT_UNIQUE_000125	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000125.wav	how many pockets i have?	3.84
+BANK_DEPOSIT_UNIQUE_000381	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000381.wav	can see balance in detail ah?	3.84
+BANK_DEPOSIT_UNIQUE_000041	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000041.wav	yo. send 016 8898 197 mobile number rm10 for lunch.	11.63
+BANK_DEPOSIT_UNIQUE_000165	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000165.wav	hello, can you help?	3.51
+BANK_DEPOSIT_UNIQUE_000762	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000762.wav	cari saya pocket piggy-save, ada tak?	3.99
+BANK_DEPOSIT_UNIQUE_000541	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000541.wav	pindahkan lagi rm20 ke 8660801637 DEFAULT SCCHMYKL	11.14
+BANK_DEPOSIT_UNIQUE_000521	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000521.wav	pindahkan uh rm38 kepada 8670605009 DEFAULT SCCHMYKL	14.08
+BANK_DEPOSIT_UNIQUE_000456	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000456.wav	move rm100 to the kitchen fund.	4.03
+BANK_DEPOSIT_UNIQUE_001177	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001177.wav	dana emergency pocket.	4.52
+BANK_DEPOSIT_UNIQUE_001175	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001175.wav	adakah wang tunai dalam akaun utama saya masih terjejas oleh sekatan kredit?	5.14
+BANK_DEPOSIT_UNIQUE_000738	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000738.wav	apakah baki maksimum yang boleh saya simpan dalam poket?	7.51
+BANK_DEPOSIT_UNIQUE_000754	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000754.wav	apa maksud save pocket?	4.01
+BANK_DEPOSIT_UNIQUE_000627	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000627.wav	boleh saya semak baki dalam akaun house account, ya?	6.46
+BANK_PROXY_UNIQUE_001629	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_001629.wav	saya nak sambungkan nombor id tentera polis saya ni. kenapa susah sangat nak buat? tolong cepat.	8.46
+BANK_PAYMENT_UNIQUE_002796	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002796.wav	okeylah, first duit tu my friend lah. aku pilih yang ic 700313783942. yang RM55 tu dulu boss. itu nombor ic dia kan? confirm	13.56
+BANK_PROXY_UNIQUE_000176	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000176.wav	i would like to link my business registration number to my DuitNow account. could you please assist me with this?	7.07
+BANK_PROXY_UNIQUE_000483	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000483.wav	bos, nok link my passport untuk DuitNow boleh dok?	5.10
+BANK_PROXY_UNIQUE_002884	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002884.wav	can i link my business registration number?	5.83
+BANK_PAYMENT_UNIQUE_002143	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002143.wav	change the amount to half of the original bill.	5.90
+BANK_PROXY_UNIQUE_003736	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003736.wav	saya dah cuba nak putuskan pautan nombor telefon bimbit DuitNow saya berkali-kali, tapi tak boleh. kenapa ni? saya nak unlink nombor telefon saya sekarang.	10.73
+BANK_PAYMENT_UNIQUE_000278	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000278.wav	alright, confirm sahaja. next, i nak buat kiriman wang untuk ah chong hardware dan juga lim trading. setiap satu nak transfer rm10, tetapi dikenakan caj perkhidmatan 6%. kira betul-betul tau, and do it only lepas tu.	15.51
+BANK_PROXY_UNIQUE_000048	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000048.wav	boleh tak saya nak unlink my army ID for DuitNow?	4.55
+BANK_PAYMENT_UNIQUE_001747	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001747.wav	i would like to choose ah, Syarikat Jaya Bersama.	6.50
+BANK_PROXY_UNIQUE_000484	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000484.wav	i want to link my business registration number.	6.06
+BANK_PROXY_UNIQUE_002421	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_002421.wav	nak linkkan IC saya ni boleh tak?	4.11
+BANK_PAYMENT_UNIQUE_000100	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000100.wav	okeylah, saya nak teruskan dengan polis ahmad. tapi tadi kan rm100 je, sekarang nak tukar amaun jadi rm200 sekaranglah. nama 566442476054. untuk makcik kiah, saya nak rm155 ringgit lah. okey, thank you banyak-banyak.	21.65
+BANK_PROXY_UNIQUE_003065	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003065.wav	hei, geramnya! saya nak link DuitNow guna pasport saya ni. kenapa tak boleh? apa masalah bank ni?	9.19
+BANK_PAYMENT_UNIQUE_002147	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002147.wav	um, can you transfer five hundred ringgit from Ryt pocket to my main account?	7.15
+BANK_PAYMENT_UNIQUE_001012	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001012.wav	um, okay. find out if any recent payments were sent to 8309 1205 3210 over the past week.	11.41
+BANK_INTENT_UNIQUE_005085	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_005085.wav	pindah rm420 dari dana kereta ke akaun utama.	4.83
+BANK_INTENT_UNIQUE_004993	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004993.wav	boleh dok tunjuk kat saya transaksi terbaru untuk nombor 2947581234?	8.48
+BANK_PAYMENT_UNIQUE_002268	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002268.wav	move rm120 from emergency fund to main account.	6.29
+BANK_PAYMENT_UNIQUE_002827	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002827.wav	saya bercadang untuk, uh, membuat pemindahan dana sebanyak uh rm350. walau bagaimanapun, saya menghadapi masalah. uh, saya ingin mengirim ke akaun yang didaftarkan kepada restoran mamak maju sendirian berhad, atau, uh, nombor tentera milik leftenan adnan dengan nombor 5541 0951 8861. apa yang harus saya lakukan?	36.39
+BANK_PROXY_UNIQUE_003583	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_003583.wav	can i link my business registration number for DuitNow, or tak boleh?	6.12
+BANK_PAYMENT_UNIQUE_002855	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_002855.wav	haa, okay lah. proceed kat 820516098718 tu lah. yang IC 700924038620 tu, 50 tu later je la eh. thank you.	17.18
+BANK_PAYMENT_UNIQUE_001341	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001341.wav	bolehkah anda semak jika saya telah menghantar sebarang transaksi baru kepada Ella?	5.34
+BANK_FAQ_MESSAGES_002680	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_002680.wav	those digital tokens or security tokens for online banking, how they work to keep me safe?	9.64
+BANK_INTENT_UNIQUE_001975	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001975.wav	display every transaction detail relate to Lily.	3.69
+BANK_DEPOSIT_UNIQUE_000546	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000546.wav	apakah yang menyebabkan akaun disekat atau ditutup?	3.74
+BANK_FAQ_MESSAGES_002819	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_002819.wav	aa, green bonds or sustainability linked bonds tu, what are these? for good cause ah?	7.78
+BANK_DEPOSIT_UNIQUE_000582	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000582.wav	hmm, boleh dok saya nak semak baki akaun?	4.26
+BANK_DEPOSIT_UNIQUE_001114	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001114.wav	bolehkah saya mendapatkan penyata poket saya untuk Sports ah?	4.31
+BANK_INTENT_UNIQUE_001024	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001024.wav	send rm dua ratus lima puluh to kosong satu dua enam lima empat tiga dua satu kosong for househost item.	9.76
+BANK_INTENT_UNIQUE_003087	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003087.wav	please set my FPX transfer ceiling to rm7000.	6.72
+BANK_FAQ_MESSAGES_000504	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000504.wav	macam mana gangguan rantaian bekalan efek harga barang?	4.11
+BANK_FAQ_MESSAGES_002818	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_002818.wav	uh, indemnity in insurance, takaful contract, what does that mean?	4.92
+BANK_INTENT_UNIQUE_003604	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003604.wav	remove side hustle income pocket in consolidating.	4.82
+BANK_FAQ_MESSAGES_000677	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000677.wav	takaful insurans peralatan elektronik untuk bisnes tu apa?	4.96
+BANK_FAQ_MESSAGES_000440	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000440.wav	macam mana scam loteri atau cabutan bertuah berfungsi?	6.60
+BANK_INTENT_UNIQUE_004314	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004314.wav	boleh settle bil kat dua lapan lapan satu? tiga satu kosong titik tujuh enam je. rujukan satu satu dua dua tiga tiga lima empat empat lima lima.	14.00
+BANK_FAQ_MESSAGES_000068	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000068.wav	macam mana nak kesan skim cepat kaya?	3.15
+BANK_FAQ_MESSAGES_000548	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000548.wav	macam mana nak guna app atau website cashback untuk jimat duit bila shopping online?	8.52
+BANK_FAQ_MESSAGES_001540	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_001540.wav	um, can i know what is Fiqh Muamalat?	4.50
+BANK_DEPOSIT_UNIQUE_000141	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000141.wav	okay, transfer rm300 dekat akaun John tu eh. nombor dia 8701239876.	10.82
+BANK_FAQ_MESSAGES_000010	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000010.wav	selamat ke join group kutu ni?	3.48
+BANK_INTENT_UNIQUE_001651	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001651.wav	hantar rm100 kat Chen, birthday gift dia.	4.34
+BANK_INTENT_UNIQUE_001752	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_001752.wav	mm, where can i see my account number eh?	4.20
+BANK_FAQ_MESSAGES_000692	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_000692.wav	apa syarat-syarat kelayakan umum untuk pinjaman pelajaran PTPTN?	7.76
+BANK_INTENT_UNIQUE_003192	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_003192.wav	haa, upkanlah transfer limit ke 5000.	3.50
+BANK_INTENT_UNIQUE_004610	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_004610.wav	kirim rm80 ke a1234567 untuk brunch.	8.43
+BANK_DEPOSIT_UNIQUE_001137	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_001137.wav	haa, nape akaun saya tak boleh nak guna eh?	4.30
+BANK_DEPOSIT_UNIQUE_000085	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000085.wav	transfer another rm20 to 8660801637 DEFAULT SCCHMYKL	14.00
+BANK_DEPOSIT_UNIQUE_000113	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000113.wav	um, what are my pocket balances now, yeah?	5.53
+BANK_PROXY_UNIQUE_000541	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000541.wav	i would like to uh respectfully request to unlink my DuitNow mobile number. is this action permissible?	10.67
+BANK_DEPOSIT_UNIQUE_000620	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_DEPOSIT_UNIQUE_000620.wav	hello, bolehkah anda membantu?	4.61
+BANK_PAYMENT_UNIQUE_000510	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000510.wav	please uh confirm that the details provided are correct. my next request is to transfer rm500 to Goh Hock Seng at PBB 13313108511. kindly proceed accordingly.	22.02
+BANK_PAYMENT_UNIQUE_001649	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_001649.wav	saya ingin memindahkan sejumlah wang dari akaun simpanan utama saya.	8.66
+BANK_PROXY_UNIQUE_000481	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000481.wav	uh, i would like to request to unlink my mobile number from my DuitNow settings, please.	8.90
+BANK_PAYMENT_UNIQUE_000598	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PAYMENT_UNIQUE_000598.wav	do 30 ringgit from the honda pocket to the emergency, and, uh, 5 ringgit to my asb account. okay, thanks.	12.50
+BANK_PROXY_UNIQUE_000341	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_PROXY_UNIQUE_000341.wav	saya ingin menyahpautkan nombor pasport saya daripada DuitNow.	7.36
+BANK_FAQ_MESSAGES_003092	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_FAQ_MESSAGES_003092.wav	Secular stagnation in economics, and what is that?	8.49
+BANK_INTENT_UNIQUE_000170	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000170.wav	send me my account statement for household pocket.	5.70
+BANK_INTENT_UNIQUE_000560	../supa/BenchmarkPOC_ASR_20251223/audio/BANK_INTENT_UNIQUE_000560.wav	my phone number dah link ke akaun mana eh?	4.78

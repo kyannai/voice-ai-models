@@ -50,6 +50,7 @@ endif
 # Multilingual directories
 MULTILINGUAL_DIR := multilingual
 MULTILINGUAL_OVERFIT_DIR := multilingual-overfit
+MALAY_DIR := malay
 
 # Default manifest paths for multilingual targets
 MS_MANIFEST ?= $(MALAYSIAN_STT_DIR)/data/manifests/train_manifest.json
@@ -83,9 +84,15 @@ help:
 	@echo ""
 	@echo "prepare-multilingual - Combine MS + ZH manifests for training"
 	@echo ""
+	@echo "prepare-malay - Combine MS + EN manifests (NO Chinese)"
+	@echo ""
 	@echo "prepare-multilingual-overfit - Small manifests for overfit test"
 	@echo "  OVERFIT_SAMPLES=N              Samples to use (default: 100)"
 	@echo "  Example: make prepare-multilingual-overfit OVERFIT_SAMPLES=50"
+	@echo ""
+	@echo "record     - Record audio from microphone (mono MP3)"
+	@echo "  RECORD_DIR=path                Output folder (default: recordings)"
+	@echo "  Example: make record RECORD_DIR=my_recordings"
 	@echo ""
 	@echo "clean      - Remove prepared data (keep raw)"
 	@echo "clean-all  - Remove all data (including raw)"
@@ -276,7 +283,50 @@ prepare-synthetic-5k: _setup-synthetic-5k
 # Multilingual Training Data Preparation
 # =============================================================================
 
-.PHONY: prepare-multilingual prepare-multilingual-overfit
+.PHONY: prepare-multilingual prepare-multilingual-overfit prepare-malay
+
+prepare-malay:
+	@echo "Creating Malay-only manifests (EN/MS, no Chinese)..."
+	@if [ ! -f "$(MS_MANIFEST)" ]; then \
+		echo "Error: Malaysian manifest not found: $(MS_MANIFEST)"; \
+		echo "Run 'make prepare-malaysian-stt' first."; \
+		exit 1; \
+	fi
+	@mkdir -p $(MALAY_DIR)/manifests
+	@echo "Copying train manifest..."
+	@cp $(MS_MANIFEST) $(MALAY_DIR)/manifests/train_manifest.json
+	@echo "Copying val manifest..."
+	@MS_VAL=$$(dirname $(MS_MANIFEST))/val_manifest.json; \
+	 cp "$$MS_VAL" $(MALAY_DIR)/manifests/val_manifest.json
+	@# Optionally add stage2 if available
+	@MS_STAGE2=$(MALAYSIAN_STT_STAGE2_DIR)/data/manifests/train_manifest.json; \
+	 if [ -f "$$MS_STAGE2" ]; then \
+		echo "Adding stage2 data..."; \
+		cat "$$MS_STAGE2" >> $(MALAY_DIR)/manifests/train_manifest.json; \
+		MS_STAGE2_VAL=$$(dirname $$MS_STAGE2)/val_manifest.json; \
+		if [ -f "$$MS_STAGE2_VAL" ]; then \
+			cat "$$MS_STAGE2_VAL" >> $(MALAY_DIR)/manifests/val_manifest.json; \
+		fi; \
+	 fi
+	@# Optionally add synthetic-5k if available
+	@SYNTH=$(SYNTHETIC_5K_DIR)/data/manifests/train_manifest.json; \
+	 if [ -f "$$SYNTH" ]; then \
+		echo "Adding synthetic-5k data..."; \
+		cat "$$SYNTH" >> $(MALAY_DIR)/manifests/train_manifest.json; \
+		SYNTH_VAL=$$(dirname $$SYNTH)/val_manifest.json; \
+		if [ -f "$$SYNTH_VAL" ]; then \
+			cat "$$SYNTH_VAL" >> $(MALAY_DIR)/manifests/val_manifest.json; \
+		fi; \
+	 fi
+	@echo "Shuffling train manifest..."
+	@shuf $(MALAY_DIR)/manifests/train_manifest.json -o $(MALAY_DIR)/manifests/train_manifest.json.tmp && \
+		mv $(MALAY_DIR)/manifests/train_manifest.json.tmp $(MALAY_DIR)/manifests/train_manifest.json
+	@echo ""
+	@echo "Malay manifest stats:"
+	@echo "  Train: $$(wc -l < $(MALAY_DIR)/manifests/train_manifest.json) samples"
+	@echo "  Val: $$(wc -l < $(MALAY_DIR)/manifests/val_manifest.json) samples"
+	@echo ""
+	@echo "Done: Malay manifests at $(MALAY_DIR)/manifests/"
 
 prepare-multilingual:
 	@echo "Creating combined multilingual manifests..."
@@ -382,6 +432,45 @@ prepare-multilingual-overfit:
 	@echo "Done: overfit manifests at $(MULTILINGUAL_OVERFIT_DIR)/manifests/"
 
 # =============================================================================
+# Audio Recording
+# =============================================================================
+
+# Default recording directory
+RECORD_DIR ?= recordings
+
+.PHONY: record
+
+record:
+	@echo "============================================================"
+	@echo "Audio Recording (mono MP3)"
+	@echo "============================================================"
+	@echo ""
+	@# Check for sox (rec command)
+	@if ! command -v rec &> /dev/null; then \
+		echo "Error: 'sox' is not installed."; \
+		echo "Install with: brew install sox"; \
+		exit 1; \
+	fi
+	@# Check for lame encoder (for mp3)
+	@if ! sox --help 2>&1 | grep -q "mp3"; then \
+		echo "Warning: MP3 support may not be available."; \
+		echo "Install with: brew install sox --with-lame"; \
+		echo "Or: brew install lame"; \
+	fi
+	@mkdir -p $(RECORD_DIR)
+	@FILENAME=$$(uuidgen | tr '[:upper:]' '[:lower:]').mp3; \
+	FILEPATH="$(RECORD_DIR)/$$FILENAME"; \
+	echo "Output: $$FILEPATH"; \
+	echo ""; \
+	echo "Press Ctrl+C to stop recording..."; \
+	echo ""; \
+	rec -c 1 -r 16000 "$$FILEPATH"; \
+	echo ""; \
+	echo "============================================================"; \
+	echo "Saved: $$FILEPATH"; \
+	echo "============================================================"
+
+# =============================================================================
 # Utilities
 # =============================================================================
 
@@ -401,6 +490,7 @@ clean-manifests:
 	@rm -rf $(SYNTHETIC_5K_DIR)/data/manifests
 	@rm -rf $(MULTILINGUAL_DIR)/manifests
 	@rm -rf $(MULTILINGUAL_OVERFIT_DIR)/manifests
+	@rm -rf $(MALAY_DIR)/manifests
 	@echo "Done."
 
 clean: clean-stamps clean-manifests
@@ -439,6 +529,7 @@ info:
 	@echo "    ├── chinese-mandarin/"
 	@echo "    ├── KeSpeech/"
 	@echo "    ├── 5k_v3/  (synthetic)"
+	@echo "    ├── malay/  (EN/MS combined, no Chinese)"
 	@echo "    ├── multilingual/"
 	@echo "    └── multilingual-overfit/"
 	@echo ""

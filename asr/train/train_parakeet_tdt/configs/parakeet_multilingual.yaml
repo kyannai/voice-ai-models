@@ -52,7 +52,7 @@ training:
   eval_steps: 41000      # Validate every 41k steps (~4x per day, ~6 hours)
   save_steps: 41000      # Save every 41k steps (~4x per day, ~6 hours)
   save_total_limit: 5
-  load_best_model_at_end: true
+  load_best_model_at_end: false
   
   # Enable SpecAugment for regularization (important for real training)
   disable_spec_augment: false

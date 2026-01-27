@@ -1,0 +1,43 @@
+# Whisper Fine-tuning Dependencies
+# =================================
+
+# HuggingFace Transformers (Whisper model)
+transformers>=4.40.0
+
+# HuggingFace Datasets
+datasets>=2.18.0
+
+# Accelerate for distributed training
+accelerate>=0.29.0
+
+# PyTorch (CUDA version recommended)
+torch>=2.0.0
+
+# Audio Processing
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# Evaluation metrics
+jiwer>=3.0.0
+evaluate>=0.4.0
+
+# Training utilities
+tensorboard>=2.15.0
+pyyaml>=6.0.0
+tqdm>=4.65.0
+
+# Data processing
+pandas>=2.0.0
+pyarrow>=14.0.0
+
+# HuggingFace Hub for model upload
+huggingface-hub>=0.21.0
+
+# PEFT for LoRA/adapter training
+peft>=0.10.0
+
+# Optional: 8-bit optimizer (memory reduction)
+# bitsandbytes>=0.43.0
+
+# Optional: Weights & Biases logging
+# wandb>=0.16.0

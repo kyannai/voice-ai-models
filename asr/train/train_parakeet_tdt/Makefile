@@ -29,7 +29,7 @@ PIP := $(VENV_DIR)/bin/pip
 
 .PHONY: help setup check-gpu train tensorboard check-events upload \
         inference inference-ckpt expand-tdt-tokenizer \
-        test-tokenizer-languages clean clean-outputs clean-all
+        test-tokenizer-languages add-language-tags clean clean-outputs clean-all
 
 # ============================================================
 # Help
@@ -52,11 +52,28 @@ help:
 	@echo ""
 	@echo "inference - Run inference with .nemo model"
 	@echo "  MODEL=path  AUDIO=path         Model and audio file (required)"
-	@echo "  Example: make inference MODEL=models/model.nemo AUDIO=test.wav"
+	@echo "  LANGUAGE=en|ms|zh              Language mode (optional, applies soft bias)"
+	@echo "  LANGUAGE_DETECTION=true        Auto-detect language using Whisper tiny (~10ms)"
+	@echo "  BIAS_STRENGTH=float            Custom bias (e.g., -5.0 to suppress, +5.0 to boost)"
+	@echo "  HARD_SUPPRESSION=true          Block Chinese completely (old behavior)"
+	@echo ""
+	@echo "  Soft Bias Presets: zh=+3.0 (boost Chinese), ms/en=-3.0 (prefer Latin)"
+	@echo ""
+	@echo "  Example: make inference MODEL=model.nemo AUDIO=test.wav LANGUAGE_DETECTION=true"
+	@echo "  Example: make inference MODEL=model.nemo AUDIO=test.wav LANGUAGE=ms"
+	@echo "  Example: make inference MODEL=model.nemo AUDIO=test.wav LANGUAGE=ms BIAS_STRENGTH=-5.0"
+	@echo "  Example: make inference MODEL=model.nemo AUDIO=test.wav LANGUAGE=ms HARD_SUPPRESSION=true"
 	@echo ""
 	@echo "inference-ckpt - Run inference with checkpoint"
 	@echo "  CKPT=path  BASE=path  AUDIO=path"
-	@echo "  Example: make inference-ckpt CKPT=outputs/ckpt.ckpt BASE=models/base.nemo AUDIO=test.wav"
+	@echo "  LANGUAGE=en|ms|zh              Language mode (optional, applies soft bias)"
+	@echo "  LANGUAGE_DETECTION=true        Auto-detect language using Whisper tiny (~10ms)"
+	@echo "  BIAS_STRENGTH=float            Custom bias (e.g., -5.0 to suppress, +5.0 to boost)"
+	@echo "  HARD_SUPPRESSION=true          Block Chinese completely (old behavior)"
+	@echo "  BASE can be a .nemo file or HuggingFace model ID (e.g., nvidia/parakeet-tdt-0.6b)"
+	@echo ""
+	@echo "  Example: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav LANGUAGE_DETECTION=true"
+	@echo "  Example: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav LANGUAGE=ms BIAS_STRENGTH=-5.0"
 	@echo ""
 	@echo "test-tokenizer-languages - Test language support"
 	@echo "  MODEL=path                     Model to test (required)"
@@ -66,6 +83,10 @@ help:
 	@echo "upload - Upload model to HuggingFace"
 	@echo "  MODEL=path  REPO=name          Model path and repo name (required)"
 	@echo "  Example: make upload MODEL=models/model.nemo REPO=parakeet-tdt-malay"
+	@echo ""
+	@echo "add-language-tags - Add language tags to manifests (fix language confusion)"
+	@echo "  MANIFEST=path  OUTPUT=path  LANG=auto|en|ms|zh"
+	@echo "  Example: make add-language-tags MANIFEST=train.json OUTPUT=train_tagged.json LANG=ms"
 	@echo ""
 	@echo "tensorboard    - Start TensorBoard (http://localhost:6006)"
 	@echo "check-events   - Check TensorBoard event files"
@@ -183,39 +204,47 @@ check-events: setup
 # ============================================================
 
 # Inference with .nemo model
-# Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav
+# Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav [LANGUAGE=en|ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]
 inference: setup
 ifndef MODEL
 	@echo "Error: MODEL is required."
-	@echo "Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav"
+	@echo "Usage: make inference MODEL=model.nemo AUDIO=test.wav [LANGUAGE=ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]"
 	@exit 1
 endif
 ifndef AUDIO
 	@echo "Error: AUDIO is required."
-	@echo "Usage: make inference MODEL=path/to/model.nemo AUDIO=path/to/audio.wav"
+	@echo "Usage: make inference MODEL=model.nemo AUDIO=test.wav [LANGUAGE=ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]"
 	@exit 1
 endif
-	$(PYTHON) $(SRC_DIR)/inference.py --model $(MODEL) --audio $(AUDIO)
+	$(PYTHON) $(SRC_DIR)/inference.py --model $(MODEL) --audio $(AUDIO) \
+		$(if $(LANGUAGE),--language $(LANGUAGE),) \
+		$(if $(filter true,$(LANGUAGE_DETECTION)),--language-detection,) \
+		$(if $(BIAS_STRENGTH),--bias-strength $(BIAS_STRENGTH),) \
+		$(if $(filter true,$(HARD_SUPPRESSION)),--hard-suppression,)
 
 # Inference with .ckpt checkpoint
-# Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav
+# Usage: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav [LANGUAGE=en|ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]
 inference-ckpt: setup
 ifndef CKPT
 	@echo "Error: CKPT is required."
-	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@echo "Usage: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav [LANGUAGE=ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]"
 	@exit 1
 endif
 ifndef BASE
 	@echo "Error: BASE is required (the base .nemo model for architecture)."
-	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@echo "Usage: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav [LANGUAGE=ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]"
 	@exit 1
 endif
 ifndef AUDIO
 	@echo "Error: AUDIO is required."
-	@echo "Usage: make inference-ckpt CKPT=path/to/checkpoint.ckpt BASE=path/to/base.nemo AUDIO=path/to/audio.wav"
+	@echo "Usage: make inference-ckpt CKPT=ckpt.ckpt BASE=base.nemo AUDIO=test.wav [LANGUAGE=ms|zh] [LANGUAGE_DETECTION=true] [BIAS_STRENGTH=-3.0] [HARD_SUPPRESSION=true]"
 	@exit 1
 endif
-	$(PYTHON) $(SRC_DIR)/inference.py --checkpoint $(CKPT) --base-model $(BASE) --audio $(AUDIO)
+	$(PYTHON) $(SRC_DIR)/inference.py --checkpoint $(CKPT) --base-model $(BASE) --audio $(AUDIO) \
+		$(if $(LANGUAGE),--language $(LANGUAGE),) \
+		$(if $(filter true,$(LANGUAGE_DETECTION)),--language-detection,) \
+		$(if $(BIAS_STRENGTH),--bias-strength $(BIAS_STRENGTH),) \
+		$(if $(filter true,$(HARD_SUPPRESSION)),--hard-suppression,)
 
 # ============================================================
 # Model Upload
@@ -260,6 +289,58 @@ test-tokenizer-languages: setup
 		"$(MODEL)" \
 		$(if $(filter 1,$(VERBOSE)),--verbose,) \
 		$(if $(LANGUAGES),--languages $(LANGUAGES),)
+
+# ============================================================
+# Language Tagging (Multilingual Training)
+# ============================================================
+# Add language tags to manifests for language-conditioned ASR.
+# This solves the language confusion problem (e.g., Malay → Chinese).
+
+add-language-tags: setup
+	@if [ -z "$(MANIFEST)" ]; then \
+		echo ""; \
+		echo "Add Language Tags to Manifest"; \
+		echo "=============================="; \
+		echo "Solves: Language confusion in multilingual models"; \
+		echo ""; \
+		echo "Usage:"; \
+		echo "  make add-language-tags MANIFEST=train.json OUTPUT=train_tagged.json LANG=auto"; \
+		echo ""; \
+		echo "Options:"; \
+		echo "  MANIFEST  - Input manifest file (required)"; \
+		echo "  OUTPUT    - Output manifest file (required)"; \
+		echo "  LANG      - Language: auto, en, ms, zh (default: auto)"; \
+		echo ""; \
+		echo "Example workflow:"; \
+		echo "  1. Tag Malay manifest:"; \
+		echo "     make add-language-tags MANIFEST=malay.json OUTPUT=malay_tagged.json LANG=ms"; \
+		echo "  2. Tag Chinese manifest:"; \
+		echo "     make add-language-tags MANIFEST=chinese.json OUTPUT=chinese_tagged.json LANG=zh"; \
+		echo "  3. Combine: cat malay_tagged.json chinese_tagged.json > train_multilingual.json"; \
+		echo "  4. Retrain model with tagged data"; \
+		echo "  5. At inference, prepend '<|ms|>' for Malay or '<|zh|>' for Chinese"; \
+		echo ""; \
+		exit 1; \
+	fi
+ifndef OUTPUT
+	@echo "Error: OUTPUT is required."
+	@echo "Usage: make add-language-tags MANIFEST=train.json OUTPUT=train_tagged.json LANG=auto"
+	@exit 1
+endif
+	$(PYTHON) $(SRC_DIR)/add_language_tags.py \
+		--manifest "$(MANIFEST)" \
+		--output "$(OUTPUT)" \
+		--lang $(or $(LANG),auto)
+	@echo ""
+	@echo "Tagged manifest saved to: $(OUTPUT)"
+	@echo ""
+	@echo "Next steps:"
+	@echo "1. Update training config to use tagged manifest"
+	@echo "2. Retrain model"
+	@echo "3. At inference, prepend language tag to condition output:"
+	@echo "   - Malay:   '<|ms|>'"
+	@echo "   - Chinese: '<|zh|>'"
+	@echo "   - English: '<|en|>'"
 
 # ============================================================
 # Cleanup

@@ -42,20 +42,16 @@ DATASETS = {
         language="zh",
         description="KeSpeech Mandarin (HuggingFace: TwinkStart/KeSpeech)",
     ),
-    "aishell2": DatasetConfig(
-        path="../test_data/aishell2/aishell2_test.tsv",
-        language="zh",
-        description="AISHELL-2 Mandarin (Kaldi)",
-    ),
-    "childmandarin": DatasetConfig(
-        path="../test_data/childmandarin/childmandarin_test.tsv",
-        language="zh",
-        description="ChildMandarin - Children aged 3-5 (HuggingFace: BAAI/ChildMandarin)",
-    ),
     "chinese_lips": DatasetConfig(
         path="../test_data/chinese_lips/chinese_lips_test.tsv",
         language="zh",
         description="Chinese-LiPS (HuggingFace: BAAI/Chinese-LiPS)",
+    ),
+    # Banking voice assistant dataset
+    "supa": DatasetConfig(
+        path="../test_data/supa/supa_test.tsv",
+        language="ms",
+        description="SUPA Banking Voice Assistant (Malay/English code-switching)",
     ),
 }
 
